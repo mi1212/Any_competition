@@ -24,6 +24,7 @@
 		FD27FF3128D9D27100D2A405 /* 04B_30__.TTF in Resources */ = {isa = PBXBuildFile; fileRef = FD27FF2C28D9D27100D2A405 /* 04B_30__.TTF */; };
 		FD27FF3428D9DFAF00D2A405 /* AnyCompUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF3328D9DFAF00D2A405 /* AnyCompUILabel.swift */; };
 		FD27FF3628D9E85900D2A405 /* AnyCompUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */; };
+		FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA29F28DADA7F00709E80 /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		FD27FF2C28D9D27100D2A405 /* 04B_30__.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = 04B_30__.TTF; sourceTree = "<group>"; };
 		FD27FF3328D9DFAF00D2A405 /* AnyCompUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUILabel.swift; sourceTree = "<group>"; };
 		FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUIButton.swift; sourceTree = "<group>"; };
+		FDCCA29F28DADA7F00709E80 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,7 +126,6 @@
 				FD27FEF828D9A63F00D2A405 /* LaunchScreen.storyboard */,
 				FD27FEFB28D9A63F00D2A405 /* Info.plist */,
 				FD27FEF328D9A63E00D2A405 /* Any_competition.xcdatamodeld */,
-				FD27FF2628D9C8B100D2A405 /* Fonts.swift */,
 			);
 			path = Any_competition;
 			sourceTree = "<group>";
@@ -149,6 +150,7 @@
 		FD27FF1D28D9AA2300D2A405 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				FD27FF2628D9C8B100D2A405 /* Fonts.swift */,
 				FD27FF2C28D9D27100D2A405 /* 04B_30__.TTF */,
 				FD27FF2828D9D27100D2A405 /* 8-BIT WONDER.ttf */,
 				FD27FF2B28D9D27100D2A405 /* Pixel LCD-7.ttf */,
@@ -170,6 +172,7 @@
 		FD27FF3728D9EEF000D2A405 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FDCCA29F28DADA7F00709E80 /* TabBarController.swift */,
 				FD27FEEE28D9A63E00D2A405 /* ViewController.swift */,
 			);
 			path = Controllers;
@@ -311,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD27FEEF28D9A63E00D2A405 /* ViewController.swift in Sources */,
+				FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */,
 				FD27FF2728D9C8B100D2A405 /* Fonts.swift in Sources */,
 				FD27FEEB28D9A63E00D2A405 /* AppDelegate.swift in Sources */,
 				FD27FEF528D9A63E00D2A405 /* Any_competition.xcdatamodeld in Sources */,

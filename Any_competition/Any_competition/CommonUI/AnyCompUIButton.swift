@@ -41,7 +41,9 @@ class AnyCompUIButton: UIButton {
             print("Something wrong with font")
             return
         }
-        self.backgroundColor = .link
+
+        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderWidth = 3
         self.titleLabel?.font =  font
         self.setTitleColor(.black, for: .normal)
         translatesAutoresizingMaskIntoConstraints = false
