@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  StartViewController.swift
 //  Any_competition
 //
 //  Created by Mikhail Chuparnov on 20.09.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class StartViewController: UIViewController {
     
     var labelView = AnyCompUILabel(title: "Во что будем играть?")
     
@@ -35,13 +35,14 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate([
             buttonView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
             buttonView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
-            buttonView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor)
+            buttonView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor),
+            buttonView.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
     @objc func tapButton() {
-        let vc = UIViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = AddCompetitionViewController()
+        self.navigationController?.present(vc, animated: true)
     }
 }
 

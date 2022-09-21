@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD20D63328DB082B007F5F8F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD20D63228DB082B007F5F8F /* GoogleService-Info.plist */; };
+		FD20D63628DB0898007F5F8F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FD20D63528DB0898007F5F8F /* FirebaseAuth */; };
+		FD20D63828DB0898007F5F8F /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = FD20D63728DB0898007F5F8F /* FirebaseDatabase */; };
 		FD27FEEB28D9A63E00D2A405 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FEEA28D9A63E00D2A405 /* AppDelegate.swift */; };
 		FD27FEED28D9A63E00D2A405 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FEEC28D9A63E00D2A405 /* SceneDelegate.swift */; };
-		FD27FEEF28D9A63E00D2A405 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FEEE28D9A63E00D2A405 /* ViewController.swift */; };
+		FD27FEEF28D9A63E00D2A405 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FEEE28D9A63E00D2A405 /* StartViewController.swift */; };
 		FD27FEF528D9A63E00D2A405 /* Any_competition.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FD27FEF328D9A63E00D2A405 /* Any_competition.xcdatamodeld */; };
 		FD27FEF728D9A63F00D2A405 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD27FEF628D9A63F00D2A405 /* Assets.xcassets */; };
 		FD27FEFA28D9A63F00D2A405 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD27FEF828D9A63F00D2A405 /* LaunchScreen.storyboard */; };
@@ -24,6 +27,8 @@
 		FD27FF3428D9DFAF00D2A405 /* AnyCompUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF3328D9DFAF00D2A405 /* AnyCompUILabel.swift */; };
 		FD27FF3628D9E85900D2A405 /* AnyCompUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */; };
 		FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA29F28DADA7F00709E80 /* TabBarController.swift */; };
+		FDCCA2A228DAF97700709E80 /* AddCompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */; };
+		FDCCA2A428DAFA4600709E80 /* AnyCompUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA2A328DAFA4600709E80 /* AnyCompUITextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,10 +49,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD20D63228DB082B007F5F8F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FD27FEE728D9A63E00D2A405 /* Any_competition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Any_competition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD27FEEA28D9A63E00D2A405 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD27FEEC28D9A63E00D2A405 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FD27FEEE28D9A63E00D2A405 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FD27FEEE28D9A63E00D2A405 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		FD27FEF428D9A63E00D2A405 /* Any_competition.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Any_competition.xcdatamodel; sourceTree = "<group>"; };
 		FD27FEF628D9A63F00D2A405 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD27FEF928D9A63F00D2A405 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -65,6 +71,8 @@
 		FD27FF3328D9DFAF00D2A405 /* AnyCompUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUILabel.swift; sourceTree = "<group>"; };
 		FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUIButton.swift; sourceTree = "<group>"; };
 		FDCCA29F28DADA7F00709E80 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompetitionViewController.swift; sourceTree = "<group>"; };
+		FDCCA2A328DAFA4600709E80 /* AnyCompUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUITextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +80,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD20D63828DB0898007F5F8F /* FirebaseDatabase in Frameworks */,
+				FD20D63628DB0898007F5F8F /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,14 +125,15 @@
 		FD27FEE928D9A63E00D2A405 /* Any_competition */ = {
 			isa = PBXGroup;
 			children = (
+				FD27FF1D28D9AA2300D2A405 /* Fonts */,
 				FD27FF3728D9EEF000D2A405 /* Controllers */,
 				FD27FF3228D9DF7F00D2A405 /* CommonUI */,
-				FD27FF1D28D9AA2300D2A405 /* Fonts */,
 				FD27FEEA28D9A63E00D2A405 /* AppDelegate.swift */,
 				FD27FEEC28D9A63E00D2A405 /* SceneDelegate.swift */,
 				FD27FEF628D9A63F00D2A405 /* Assets.xcassets */,
 				FD27FEF828D9A63F00D2A405 /* LaunchScreen.storyboard */,
 				FD27FEFB28D9A63F00D2A405 /* Info.plist */,
+				FD20D63228DB082B007F5F8F /* GoogleService-Info.plist */,
 				FD27FEF328D9A63E00D2A405 /* Any_competition.xcdatamodeld */,
 			);
 			path = Any_competition;
@@ -162,6 +173,7 @@
 			children = (
 				FD27FF3328D9DFAF00D2A405 /* AnyCompUILabel.swift */,
 				FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */,
+				FDCCA2A328DAFA4600709E80 /* AnyCompUITextField.swift */,
 			);
 			path = CommonUI;
 			sourceTree = "<group>";
@@ -170,7 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				FDCCA29F28DADA7F00709E80 /* TabBarController.swift */,
-				FD27FEEE28D9A63E00D2A405 /* ViewController.swift */,
+				FD27FEEE28D9A63E00D2A405 /* StartViewController.swift */,
+				FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -191,6 +204,10 @@
 			dependencies = (
 			);
 			name = Any_competition;
+			packageProductDependencies = (
+				FD20D63528DB0898007F5F8F /* FirebaseAuth */,
+				FD20D63728DB0898007F5F8F /* FirebaseDatabase */,
+			);
 			productName = Any_competition;
 			productReference = FD27FEE728D9A63E00D2A405 /* Any_competition.app */;
 			productType = "com.apple.product-type.application";
@@ -263,6 +280,9 @@
 				Base,
 			);
 			mainGroup = FD27FEDE28D9A63E00D2A405;
+			packageReferences = (
+				FD20D63428DB0898007F5F8F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = FD27FEE828D9A63E00D2A405 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -280,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD27FF3028D9D27100D2A405 /* Pixel LCD-7.ttf in Resources */,
+				FD20D63328DB082B007F5F8F /* GoogleService-Info.plist in Resources */,
 				FD27FF3128D9D27100D2A405 /* 04B_30__.TTF in Resources */,
 				FD27FF2E28D9D27100D2A405 /* tight_pixel.ttf in Resources */,
 				FD27FEFA28D9A63F00D2A405 /* LaunchScreen.storyboard in Resources */,
@@ -310,7 +331,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD27FEEF28D9A63E00D2A405 /* ViewController.swift in Sources */,
+				FDCCA2A228DAF97700709E80 /* AddCompetitionViewController.swift in Sources */,
+				FD27FEEF28D9A63E00D2A405 /* StartViewController.swift in Sources */,
+				FDCCA2A428DAFA4600709E80 /* AnyCompUITextField.swift in Sources */,
 				FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */,
 				FD27FEEB28D9A63E00D2A405 /* AppDelegate.swift in Sources */,
 				FD27FEF528D9A63E00D2A405 /* Any_competition.xcdatamodeld in Sources */,
@@ -660,6 +683,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FD20D63428DB0898007F5F8F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FD20D63528DB0898007F5F8F /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FD20D63428DB0898007F5F8F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		FD20D63728DB0898007F5F8F /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FD20D63428DB0898007F5F8F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		FD27FEF328D9A63E00D2A405 /* Any_competition.xcdatamodeld */ = {

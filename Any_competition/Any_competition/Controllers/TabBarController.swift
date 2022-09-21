@@ -11,13 +11,13 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray2
+        view.backgroundColor = .white
         configurateTabBar()
       
         viewControllers = [
-            setupTabBar(viewController: ViewController(), title: "add competition", image: "plus"),
-            setupTabBar(viewController: ViewController(), title: "competitions", image: "competition") ,
-            setupTabBar(viewController: ViewController(), title: "profile", image: "profile")
+            setupTabBar(viewController: StartViewController(), title: "add competition", image: "plus"),
+            setupTabBar(viewController: UIViewController(), title: "competitions", image: "competition") ,
+            setupTabBar(viewController: UIViewController(), title: "profile", image: "profile")
         ]
         
     }
