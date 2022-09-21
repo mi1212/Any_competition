@@ -8,15 +8,15 @@
 import UIKit
 
 class TabBarController: UITabBarController {
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         configurateTabBar()
-      
+        tabBar.backgroundColor = .white
         viewControllers = [
             setupTabBar(viewController: StartViewController(), title: "add competition", image: "plus"),
-            setupTabBar(viewController: UIViewController(), title: "competitions", image: "competition") ,
+            setupTabBar(viewController: CompetitionsCollectionViewController(collectionViewLayout: setupflowLayout()), title: "competitions", image: "competition") ,
             setupTabBar(viewController: UIViewController(), title: "profile", image: "profile")
         ]
         
@@ -49,5 +49,20 @@ class TabBarController: UITabBarController {
         return vc
     }
 
+    private func setupflowLayout() -> UICollectionViewFlowLayout {
+        let inset: CGFloat = 10
+        
+        let collectionViewlowFLayout: UICollectionViewFlowLayout = {
+            let flowLayout = UICollectionViewFlowLayout()
+            let width = (self.view.bounds.width - inset*2)/1
+            flowLayout.itemSize = CGSize(width: width, height: width/4)
+            flowLayout.minimumInteritemSpacing = inset
+            flowLayout.minimumLineSpacing = inset
+            flowLayout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+            return flowLayout
+        }()
+        
+        return collectionViewlowFLayout
+    }
     
 }
