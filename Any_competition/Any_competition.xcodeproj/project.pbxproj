@@ -16,7 +16,6 @@
 		FD27FF0528D9A63F00D2A405 /* Any_competitionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF0428D9A63F00D2A405 /* Any_competitionTests.swift */; };
 		FD27FF0F28D9A63F00D2A405 /* Any_competitionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF0E28D9A63F00D2A405 /* Any_competitionUITests.swift */; };
 		FD27FF1128D9A63F00D2A405 /* Any_competitionUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF1028D9A63F00D2A405 /* Any_competitionUITestsLaunchTests.swift */; };
-		FD27FF2728D9C8B100D2A405 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF2628D9C8B100D2A405 /* Fonts.swift */; };
 		FD27FF2D28D9D27100D2A405 /* 8-BIT WONDER.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD27FF2828D9D27100D2A405 /* 8-BIT WONDER.ttf */; };
 		FD27FF2E28D9D27100D2A405 /* tight_pixel.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD27FF2928D9D27100D2A405 /* tight_pixel.ttf */; };
 		FD27FF2F28D9D27100D2A405 /* PressStart2P-vaV7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD27FF2A28D9D27100D2A405 /* PressStart2P-vaV7.ttf */; };
@@ -58,7 +57,6 @@
 		FD27FF0A28D9A63F00D2A405 /* Any_competitionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Any_competitionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD27FF0E28D9A63F00D2A405 /* Any_competitionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Any_competitionUITests.swift; sourceTree = "<group>"; };
 		FD27FF1028D9A63F00D2A405 /* Any_competitionUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Any_competitionUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		FD27FF2628D9C8B100D2A405 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		FD27FF2828D9D27100D2A405 /* 8-BIT WONDER.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "8-BIT WONDER.ttf"; sourceTree = "<group>"; };
 		FD27FF2928D9D27100D2A405 /* tight_pixel.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = tight_pixel.ttf; sourceTree = "<group>"; };
 		FD27FF2A28D9D27100D2A405 /* PressStart2P-vaV7.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PressStart2P-vaV7.ttf"; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 		FD27FF1D28D9AA2300D2A405 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				FD27FF2628D9C8B100D2A405 /* Fonts.swift */,
 				FD27FF2C28D9D27100D2A405 /* 04B_30__.TTF */,
 				FD27FF2828D9D27100D2A405 /* 8-BIT WONDER.ttf */,
 				FD27FF2B28D9D27100D2A405 /* Pixel LCD-7.ttf */,
@@ -315,7 +312,6 @@
 			files = (
 				FD27FEEF28D9A63E00D2A405 /* ViewController.swift in Sources */,
 				FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */,
-				FD27FF2728D9C8B100D2A405 /* Fonts.swift in Sources */,
 				FD27FEEB28D9A63E00D2A405 /* AppDelegate.swift in Sources */,
 				FD27FEF528D9A63E00D2A405 /* Any_competition.xcdatamodeld in Sources */,
 				FD27FF3628D9E85900D2A405 /* AnyCompUIButton.swift in Sources */,
