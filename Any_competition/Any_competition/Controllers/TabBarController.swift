@@ -13,33 +13,16 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         view.backgroundColor = .white
         configurateTabBar()
-        tabBar.backgroundColor = .white
-        viewControllers = [
+    }
+
+    private func configurateTabBar() {
+        self.tabBar.backgroundColor = .white
+        self.tabBar.tintColor = .black
+        self.viewControllers = [
             setupTabBar(viewController: StartViewController(), title: "add competition", image: "plus"),
             setupTabBar(viewController: CompetitionsCollectionViewController(collectionViewLayout: setupflowLayout()), title: "competitions", image: "competition") ,
             setupTabBar(viewController: UIViewController(), title: "profile", image: "profile")
         ]
-        
-    }
-    
-    // сделать табБар прозрачным при скроллинге
-    private func configurateTabBar() {
-                
-        let tabBarAppearance = UITabBarAppearance()
-
-        tabBarAppearance.configureWithTransparentBackground()
-
-        self.tabBar.standardAppearance = tabBarAppearance
-        self.tabBar.tintColor = .black
-//        self.tabBar.scrollEdgeAppearance = tabBarAppearance // доступен только на ios 15
-        
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithTransparentBackground()
-
-        self.navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
-        self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
-        self.navigationController?.navigationBar.compactAppearance = navigationBarAppearance
-  
     }
     
     private func setupTabBar(viewController: UIViewController, title: String, image: String) -> UIViewController {
@@ -55,10 +38,11 @@ class TabBarController: UITabBarController {
         let collectionViewlowFLayout: UICollectionViewFlowLayout = {
             let flowLayout = UICollectionViewFlowLayout()
             let width = (self.view.bounds.width - inset*2)/1
-            flowLayout.itemSize = CGSize(width: width, height: width/4)
-            flowLayout.minimumInteritemSpacing = inset
+            flowLayout.itemSize = CGSize(width: width, height: width/6)
+            
             flowLayout.minimumLineSpacing = inset
-            flowLayout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+            
+            flowLayout.sectionInset = UIEdgeInsets(top: inset*2, left: inset, bottom: inset*2, right: inset)
             return flowLayout
         }()
         

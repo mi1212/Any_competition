@@ -6,10 +6,31 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
 
 class AddCompetitionViewController: UIViewController {
 
-    let competitionNameTextField = AnyCompUITextField(placeholder: "Название соревнования")
+    private let encoder = JSONEncoder()
+    
+    private let decoder = JSONDecoder()
+    
+    let dataFetcher = CompetitionFetch()
+    
+    var database: Database?
+    
+    private lazy var databasePath: DatabaseReference? = {
+      
+        let ref = Database.database().reference().child("competition/")
+        
+        let autoId = DatabaseReference.childByAutoId(ref)
+        
+        let refComp = autoId()
+ 
+      return refComp
+    }()
+    
+    let competitionTitleTextField = AnyCompUITextField(placeholder: "Название соревнования")
     
     let playerQtyTextField = AnyCompUITextField(placeholder: "Количество участников")
     
@@ -25,7 +46,7 @@ class AddCompetitionViewController: UIViewController {
     }
     
     private func setupController() {
-        self.view.addSubview(competitionNameTextField)
+        self.view.addSubview(competitionTitleTextField)
         self.view.addSubview(playerQtyTextField)
         self.view.addSubview(typeTextField)
         self.view.addSubview(addButton)
@@ -34,16 +55,16 @@ class AddCompetitionViewController: UIViewController {
     let inset: CGFloat = 60
         
         NSLayoutConstraint.activate([
-            competitionNameTextField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
-            competitionNameTextField.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
-            competitionNameTextField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: inset),
-            competitionNameTextField.heightAnchor.constraint(equalToConstant: 40)
+            competitionTitleTextField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
+            competitionTitleTextField.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
+            competitionTitleTextField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: inset),
+            competitionTitleTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         NSLayoutConstraint.activate([
             playerQtyTextField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
             playerQtyTextField.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
-            playerQtyTextField.topAnchor.constraint(equalTo: self.competitionNameTextField.bottomAnchor, constant: inset/2),
+            playerQtyTextField.topAnchor.constraint(equalTo: self.competitionTitleTextField.bottomAnchor, constant: inset/2),
             playerQtyTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
         
@@ -63,8 +84,32 @@ class AddCompetitionViewController: UIViewController {
     }
 
     @objc func tapAddButton() {
-        print("add competition")
-        dismiss(animated: true, completion: nil)
+   
+            // Возвращает ранее определенный путь к базе данных.
+            guard let databasePath = databasePath else {
+                return
+            }
+        print(databasePath)
+            // Создает объект Модели user из текста.
+        let competition = Competition(id: nil, title: competitionTitleTextField.text!, qtyPlayers: Int(playerQtyTextField.text!)!, sportType: typeTextField.text!)
+
+            do {
+                // Кодирует модель user в данные JSON
+                let data = try encoder.encode(competition)
+
+                // Преобразует данные JSON в словарь JSON
+                let json = try JSONSerialization.jsonObject(with: data)
+
+                //  Записывает словарь в путь к базе данных как дочерний узел с автоматически сгенерированным идентификатором.
+                databasePath.setValue(json)
+                print(json)
+            } catch {
+                print("an error occurred", error)
+
+            }
+        
+        dataFetcher.getData()
+//        dismiss(animated: true, completion: nil)
     }
 
 }
