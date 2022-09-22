@@ -8,13 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		FD20D63628DB0898007F5F8F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FD20D63528DB0898007F5F8F /* FirebaseAuth */; };
-		FD20D63828DB0898007F5F8F /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = FD20D63728DB0898007F5F8F /* FirebaseDatabase */; };
 		FD20D63A28DB0B19007F5F8F /* CompetitionsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20D63928DB0B19007F5F8F /* CompetitionsCollectionViewController.swift */; };
 		FD20D63D28DB0DE9007F5F8F /* CompetitionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20D63C28DB0DE9007F5F8F /* CompetitionCollectionViewCell.swift */; };
 		FD20D64028DB0E97007F5F8F /* UIView+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20D63F28DB0E97007F5F8F /* UIView+Extention.swift */; };
 		FD20D64328DB258C007F5F8F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20D64228DB258C007F5F8F /* UserModel.swift */; };
 		FD20D64528DB3AA0007F5F8F /* CompetitionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20D64428DB3AA0007F5F8F /* CompetitionModel.swift */; };
-		FD20D64728DB4437007F5F8F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD20D64628DB4437007F5F8F /* GoogleService-Info.plist */; };
 		FD20D64928DB4FF1007F5F8F /* CompetitionFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20D64828DB4FF1007F5F8F /* CompetitionFetch.swift */; };
 		FD27FEEB28D9A63E00D2A405 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FEEA28D9A63E00D2A405 /* AppDelegate.swift */; };
 		FD27FEED28D9A63E00D2A405 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FEEC28D9A63E00D2A405 /* SceneDelegate.swift */; };
@@ -35,6 +33,9 @@
 		FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA29F28DADA7F00709E80 /* TabBarController.swift */; };
 		FDCCA2A228DAF97700709E80 /* AddCompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */; };
 		FDCCA2A428DAFA4600709E80 /* AnyCompUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA2A328DAFA4600709E80 /* AnyCompUITextField.swift */; };
+		FDE720DD28DC8F9400FAF811 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FDE720DC28DC8F9400FAF811 /* GoogleService-Info.plist */; };
+		FDE720E028DC90D700FAF811 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FDE720DF28DC90D700FAF811 /* FirebaseFirestoreSwift */; };
+		FDE720E228DC915C00FAF811 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FDE720E128DC915C00FAF811 /* FirebaseDatabaseSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +61,6 @@
 		FD20D63F28DB0E97007F5F8F /* UIView+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extention.swift"; sourceTree = "<group>"; };
 		FD20D64228DB258C007F5F8F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		FD20D64428DB3AA0007F5F8F /* CompetitionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionModel.swift; sourceTree = "<group>"; };
-		FD20D64628DB4437007F5F8F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FD20D64828DB4FF1007F5F8F /* CompetitionFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionFetch.swift; sourceTree = "<group>"; };
 		FD27FEE728D9A63E00D2A405 /* Any_competition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Any_competition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD27FEEA28D9A63E00D2A405 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +85,7 @@
 		FDCCA29F28DADA7F00709E80 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompetitionViewController.swift; sourceTree = "<group>"; };
 		FDCCA2A328DAFA4600709E80 /* AnyCompUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUITextField.swift; sourceTree = "<group>"; };
+		FDE720DC28DC8F9400FAF811 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,8 +93,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD20D63828DB0898007F5F8F /* FirebaseDatabase in Frameworks */,
+				FDE720E228DC915C00FAF811 /* FirebaseDatabaseSwift in Frameworks */,
 				FD20D63628DB0898007F5F8F /* FirebaseAuth in Frameworks */,
+				FDE720E028DC90D700FAF811 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +148,7 @@
 				FD27FF0328D9A63F00D2A405 /* Any_competitionTests */,
 				FD27FF0D28D9A63F00D2A405 /* Any_competitionUITests */,
 				FD27FEE828D9A63E00D2A405 /* Products */,
+				FDE720DE28DC90D700FAF811 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -173,8 +176,8 @@
 				FD27FEF628D9A63F00D2A405 /* Assets.xcassets */,
 				FD20D64828DB4FF1007F5F8F /* CompetitionFetch.swift */,
 				FD27FEF828D9A63F00D2A405 /* LaunchScreen.storyboard */,
-				FD20D64628DB4437007F5F8F /* GoogleService-Info.plist */,
 				FD27FEFB28D9A63F00D2A405 /* Info.plist */,
+				FDE720DC28DC8F9400FAF811 /* GoogleService-Info.plist */,
 				FD27FEF328D9A63E00D2A405 /* Any_competition.xcdatamodeld */,
 			);
 			path = Any_competition;
@@ -230,6 +233,13 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		FDE720DE28DC90D700FAF811 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -248,7 +258,8 @@
 			name = Any_competition;
 			packageProductDependencies = (
 				FD20D63528DB0898007F5F8F /* FirebaseAuth */,
-				FD20D63728DB0898007F5F8F /* FirebaseDatabase */,
+				FDE720DF28DC90D700FAF811 /* FirebaseFirestoreSwift */,
+				FDE720E128DC915C00FAF811 /* FirebaseDatabaseSwift */,
 			);
 			productName = Any_competition;
 			productReference = FD27FEE728D9A63E00D2A405 /* Any_competition.app */;
@@ -342,7 +353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD27FF3028D9D27100D2A405 /* Pixel LCD-7.ttf in Resources */,
-				FD20D64728DB4437007F5F8F /* GoogleService-Info.plist in Resources */,
+				FDE720DD28DC8F9400FAF811 /* GoogleService-Info.plist in Resources */,
 				FD27FF3128D9D27100D2A405 /* 04B_30__.TTF in Resources */,
 				FD27FF2E28D9D27100D2A405 /* tight_pixel.ttf in Resources */,
 				FD27FEFA28D9A63F00D2A405 /* LaunchScreen.storyboard in Resources */,
@@ -749,10 +760,15 @@
 			package = FD20D63428DB0898007F5F8F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		FD20D63728DB0898007F5F8F /* FirebaseDatabase */ = {
+		FDE720DF28DC90D700FAF811 /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FD20D63428DB0898007F5F8F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseDatabase;
+			productName = FirebaseFirestoreSwift;
+		};
+		FDE720E128DC915C00FAF811 /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FD20D63428DB0898007F5F8F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 

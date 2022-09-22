@@ -6,30 +6,19 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseDatabase
+//import FirebaseAuth
+import FirebaseFirestore
 
 class AddCompetitionViewController: UIViewController {
+    
+//    private let encoder = JSONEncoder()
+    
+//    private let decoder = JSONDecoder()
+    
+//    let dataFetcher = CompetitionFetch()
+    
+    var db = Firestore.firestore()
 
-    private let encoder = JSONEncoder()
-    
-    private let decoder = JSONDecoder()
-    
-    let dataFetcher = CompetitionFetch()
-    
-    var database: Database?
-    
-    private lazy var databasePath: DatabaseReference? = {
-      
-        let ref = Database.database().reference().child("competition/")
-        
-        let autoId = DatabaseReference.childByAutoId(ref)
-        
-        let refComp = autoId()
- 
-      return refComp
-    }()
-    
     let competitionTitleTextField = AnyCompUITextField(placeholder: "Название соревнования")
     
     let playerQtyTextField = AnyCompUITextField(placeholder: "Количество участников")
@@ -52,7 +41,7 @@ class AddCompetitionViewController: UIViewController {
         self.view.addSubview(addButton)
         
         
-    let inset: CGFloat = 60
+        let inset: CGFloat = 60
         
         NSLayoutConstraint.activate([
             competitionTitleTextField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
@@ -82,34 +71,25 @@ class AddCompetitionViewController: UIViewController {
             addButton.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
-
+    
     @objc func tapAddButton() {
-   
-            // Возвращает ранее определенный путь к базе данных.
-            guard let databasePath = databasePath else {
-                return
-            }
-        print(databasePath)
-            // Создает объект Модели user из текста.
-        let competition = Competition(id: nil, title: competitionTitleTextField.text!, qtyPlayers: Int(playerQtyTextField.text!)!, sportType: typeTextField.text!)
-
-            do {
-                // Кодирует модель user в данные JSON
-                let data = try encoder.encode(competition)
-
-                // Преобразует данные JSON в словарь JSON
-                let json = try JSONSerialization.jsonObject(with: data)
-
-                //  Записывает словарь в путь к базе данных как дочерний узел с автоматически сгенерированным идентификатором.
-                databasePath.setValue(json)
-                print(json)
-            } catch {
-                print("an error occurred", error)
-
-            }
         
-        dataFetcher.getData()
-//        dismiss(animated: true, completion: nil)
+        var ref: DocumentReference? = nil
+        ref = db.collection("competitions").addDocument(data: [
+            "title" : competitionTitleTextField.text,
+            "qtyPlayers": playerQtyTextField.text,
+            "sportType": typeTextField.text
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+        
+        print("\(db.collection("competitions"))")
+        
+        dismiss(animated: true, completion: nil)
     }
-
+    
 }

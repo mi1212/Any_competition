@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct Competition: Identifiable, Codable  {
-    let id: String?
+struct Competition: Codable {
     let title: String
     let qtyPlayers: Int
     let sportType: String
-//    let players: [Player]
+    let players: [Player]
+    let date: Date
 }
