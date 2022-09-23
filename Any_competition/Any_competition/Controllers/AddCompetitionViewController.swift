@@ -6,26 +6,19 @@
 //
 
 import UIKit
-//import FirebaseAuth
 import FirebaseFirestore
 
 class AddCompetitionViewController: UIViewController {
     
-//    private let encoder = JSONEncoder()
-    
-//    private let decoder = JSONDecoder()
-    
-//    let dataFetcher = CompetitionFetch()
-    
     var db = Firestore.firestore()
 
-    let competitionTitleTextField = AnyCompUITextField(placeholder: "Название соревнования")
+    let competitionTitleTextField = AnyCompUITextField(placeholder: "Название соревнования", isSecure: false)
     
-    let playerQtyTextField = AnyCompUITextField(placeholder: "Количество участников")
+    let playerQtyTextField = AnyCompUITextField(placeholder: "Количество участников", isSecure: false)
     
-    let typeTextField = AnyCompUITextField(placeholder: "Вид спорта")
+    let typeTextField = AnyCompUITextField(placeholder: "Вид спорта", isSecure: false)
     
-    @objc let addButton = AnyCompUIButton(title: "Создать соревнование")
+    let addButton = AnyCompUIButton(title: "Продолжить создание")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,22 +67,41 @@ class AddCompetitionViewController: UIViewController {
     
     @objc func tapAddButton() {
         
-        var ref: DocumentReference? = nil
-        ref = db.collection("competitions").addDocument(data: [
-            "title" : competitionTitleTextField.text,
-            "qtyPlayers": playerQtyTextField.text,
-            "sportType": typeTextField.text
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(ref!.documentID)")
-            }
-        }
+        let vc = ConfigurateCompetitionViewController()
+        vc.competitionTitle = competitionTitleTextField.text
+        vc.playerQty = Int(playerQtyTextField.text!)
+        vc.type = typeTextField.text
+        vc.delegate = self
+        self.present(vc, animated: true)
+        print(playerQtyTextField.text!)
+        print(vc.playerQty)
         
-        print("\(db.collection("competitions"))")
         
-        dismiss(animated: true, completion: nil)
+//        var ref: DocumentReference? = nil
+        
+        
+        
+        
+        
+//        ref = db.collection("competitions").addDocument(data: [
+//            "title" : competitionTitleTextField.text as Any,
+//            "qtyPlayers": Int(playerQtyTextField.text!) as Any,
+//            "sportType": typeTextField.text as Any,
+//        ]) { err in
+//            if let err = err {
+//                print("Error adding document: \(err)")
+//            } else {
+//                vc.id = ref!.documentID
+//                print("Document added with ID: \(ref!.documentID)")
+//            }
+//        }
+        
     }
     
+}
+
+extension AddCompetitionViewController: ConfigurateCompetitionViewControllerDelegate {
+    func dismissController() {
+        dismiss(animated: true, completion: nil)
+    }
 }

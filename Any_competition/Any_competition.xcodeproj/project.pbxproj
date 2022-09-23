@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD0D008828DDA29B00C47570 /* ConfigurateCompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0D008728DDA29B00C47570 /* ConfigurateCompetitionViewController.swift */; };
+		FD0D008A28DDBF0200C47570 /* PlayersInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0D008928DDBF0200C47570 /* PlayersInfoTableViewCell.swift */; };
 		FD20D63628DB0898007F5F8F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FD20D63528DB0898007F5F8F /* FirebaseAuth */; };
 		FD20D63A28DB0B19007F5F8F /* CompetitionsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20D63928DB0B19007F5F8F /* CompetitionsCollectionViewController.swift */; };
 		FD20D63D28DB0DE9007F5F8F /* CompetitionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20D63C28DB0DE9007F5F8F /* CompetitionCollectionViewCell.swift */; };
@@ -56,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD0D008728DDA29B00C47570 /* ConfigurateCompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurateCompetitionViewController.swift; sourceTree = "<group>"; };
+		FD0D008928DDBF0200C47570 /* PlayersInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersInfoTableViewCell.swift; sourceTree = "<group>"; };
 		FD20D63928DB0B19007F5F8F /* CompetitionsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsCollectionViewController.swift; sourceTree = "<group>"; };
 		FD20D63C28DB0DE9007F5F8F /* CompetitionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionCollectionViewCell.swift; sourceTree = "<group>"; };
 		FD20D63F28DB0E97007F5F8F /* UIView+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extention.swift"; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				FD20D63C28DB0DE9007F5F8F /* CompetitionCollectionViewCell.swift */,
+				FD0D008928DDBF0200C47570 /* PlayersInfoTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -229,6 +234,7 @@
 				FD20D63928DB0B19007F5F8F /* CompetitionsCollectionViewController.swift */,
 				FD27FEEE28D9A63E00D2A405 /* StartViewController.swift */,
 				FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */,
+				FD0D008728DDA29B00C47570 /* ConfigurateCompetitionViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -388,8 +394,10 @@
 				FD27FEEF28D9A63E00D2A405 /* StartViewController.swift in Sources */,
 				FDCCA2A428DAFA4600709E80 /* AnyCompUITextField.swift in Sources */,
 				FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */,
+				FD0D008A28DDBF0200C47570 /* PlayersInfoTableViewCell.swift in Sources */,
 				FD27FEEB28D9A63E00D2A405 /* AppDelegate.swift in Sources */,
 				FD20D64528DB3AA0007F5F8F /* CompetitionModel.swift in Sources */,
+				FD0D008828DDA29B00C47570 /* ConfigurateCompetitionViewController.swift in Sources */,
 				FD20D64328DB258C007F5F8F /* UserModel.swift in Sources */,
 				FD27FEF528D9A63E00D2A405 /* Any_competition.xcdatamodeld in Sources */,
 				FD20D63A28DB0B19007F5F8F /* CompetitionsCollectionViewController.swift in Sources */,

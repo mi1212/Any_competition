@@ -7,9 +7,8 @@
 
 import Foundation
 
-struct Player: Identifiable, Codable {
-    var id: String?
+struct Player: Codable {
     var name: String
     var secondName: String
-    var email: String?
+//    var email: String?
   }

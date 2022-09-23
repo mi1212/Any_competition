@@ -7,17 +7,16 @@
 
 import UIKit
 
-import UIKit
-
 class AnyCompUITextField: UITextField {
    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public init(placeholder: String) {
+    public init(placeholder: String, isSecure: Bool) {
         super.init(frame: .zero)
         self.placeholder = placeholder
+        self.isSecureTextEntry = isSecure
         configure()
     }
     
@@ -27,17 +26,11 @@ class AnyCompUITextField: UITextField {
     }
     
     private func configure() {
-//        guard let font = UIFont(name: "Press Start 2P", size: 12) else {
-//            print("Something wrong with font")
-//            return
-//        }
-//        self.font = font
         let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 2))
         self.leftView = leftView
         self.leftViewMode = .always
         self.autocapitalizationType = .none
         self.tintColor = .black
-//        self.isSecureTextEntry = true
         self.textColor = .black
         self.adjustsFontForContentSizeCategory = true
         self.layer.borderColor = UIColor.black.cgColor

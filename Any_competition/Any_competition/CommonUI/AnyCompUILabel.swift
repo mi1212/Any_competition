@@ -25,7 +25,7 @@ class AnyCompUILabel: UILabel {
     }
     
     private func configure() {
-        guard let font = UIFont(name: "Press Start 2P", size: 20) else {
+        guard let font = UIFont(name: "Press Start 2P", size: UIFont.systemFontSize.nextDown) else {
             print("Something wrong with font")
             return
         }
