@@ -20,9 +20,9 @@ class ConfigurateCompetitionViewController: UIViewController {
     
     var playerQty: Int?
     
-    var type: String?
+    var sportType: String?
     
-    var playersArray: [String] = []
+    var playersArray: [Player] = []
     
     var id = ""
     
@@ -88,11 +88,16 @@ class ConfigurateCompetitionViewController: UIViewController {
     @objc func tapAddButton() {
         
         var ref: DocumentReference? = nil
-             
+        
+        let players = playersArray.map{ $0.dictionary }
+        
+        let competition = Competition(title: competitionTitle!, qtyPlayers: playerQty!, sportType: sportType!, date: Date.now)
+        print("competition - \(competition)")
+        
+        
         ref = db.collection("competitions").addDocument(data: [
-            "title" : competitionTitle as Any,
-            "qtyPlayers": playerQty as Any,
-            "sportType": type as Any,
+            "competition" : competition.dictionary,
+            "players" : players
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
@@ -145,7 +150,9 @@ extension ConfigurateCompetitionViewController: UITableViewDataSource {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [self, weak alert] (_) in
             cell.nameLabel.text = alert?.textFields![0].text
             cell.secondNameLabel.text = alert?.textFields![1].text
-            playersArray.insert(cell.nameLabel.text!, at: indexPath.row)
+            
+            
+            playersArray.insert(Player(name: cell.nameLabel.text!, secondName: cell.secondNameLabel.text!), at: indexPath.row)
             
         }))
         

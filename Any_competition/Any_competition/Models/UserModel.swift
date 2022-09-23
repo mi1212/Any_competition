@@ -10,5 +10,9 @@ import Foundation
 struct Player: Codable {
     var name: String
     var secondName: String
-//    var email: String?
+    
+    var dictionary: [String: Any] {
+            return["name": name,
+                   "secondName": secondName]
+        }
   }

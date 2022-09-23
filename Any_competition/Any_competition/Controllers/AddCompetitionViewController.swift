@@ -70,11 +70,10 @@ class AddCompetitionViewController: UIViewController {
         let vc = ConfigurateCompetitionViewController()
         vc.competitionTitle = competitionTitleTextField.text
         vc.playerQty = Int(playerQtyTextField.text!)
-        vc.type = typeTextField.text
+        vc.sportType = typeTextField.text
         vc.delegate = self
         self.present(vc, animated: true)
-        print(playerQtyTextField.text!)
-        print(vc.playerQty)
+
         
         
 //        var ref: DocumentReference? = nil

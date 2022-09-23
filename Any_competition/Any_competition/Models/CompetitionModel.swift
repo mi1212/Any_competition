@@ -11,6 +11,14 @@ struct Competition: Codable {
     let title: String
     let qtyPlayers: Int
     let sportType: String
-    let players: [Player]
+//    let players: [Player]
     let date: Date
+    
+    var dictionary: [String: Any] {
+            return["title": title,
+                   "qtyPlayers": qtyPlayers,
+                   "sportType": sportType,
+//                   "players": players,
+                   "date": date]
+        }
 }
