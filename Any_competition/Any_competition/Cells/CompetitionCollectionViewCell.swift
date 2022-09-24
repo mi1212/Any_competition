@@ -13,9 +13,9 @@ class CompetitionCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .purple
+        contentView.layer.borderColor = UIColor.black.cgColor
+        contentView.layer.borderWidth = 2
         setupCell()
-        
     }
 
     

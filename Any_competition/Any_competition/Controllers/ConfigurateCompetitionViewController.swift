@@ -54,21 +54,7 @@ class ConfigurateCompetitionViewController: UIViewController {
         self.view.addSubview(addButton)
         
         let inset: CGFloat = 30
-        //
-        //        NSLayoutConstraint.activate([
-        //            competitionTitleTextField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
-        //            competitionTitleTextField.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
-        //            competitionTitleTextField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: inset),
-        //            competitionTitleTextField.heightAnchor.constraint(equalToConstant: 40)
-        //        ])
-        //
-        //        NSLayoutConstraint.activate([
-        //            playerQtyTextField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
-        //            playerQtyTextField.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
-        //            playerQtyTextField.topAnchor.constraint(equalTo: self.competitionTitleTextField.bottomAnchor, constant: inset/2),
-        //            playerQtyTextField.heightAnchor.constraint(equalToConstant: 40)
-        //        ])
-        
+
         NSLayoutConstraint.activate([
             playersTableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: inset/2),
             playersTableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
@@ -91,12 +77,10 @@ class ConfigurateCompetitionViewController: UIViewController {
         
         let players = playersArray.map{ $0.dictionary }
         
-        let competition = Competition(title: competitionTitle!, qtyPlayers: playerQty!, sportType: sportType!, date: Date.now)
-        print("competition - \(competition)")
-        
-        
+        let info = Info(title: competitionTitle!, qtyPlayers: playerQty!, sportType: sportType!, date: Date.now.description)
+ 
         ref = db.collection("competitions").addDocument(data: [
-            "competition" : competition.dictionary,
+            "info" : info.dictionary,
             "players" : players
         ]) { err in
             if let err = err {
@@ -113,8 +97,7 @@ class ConfigurateCompetitionViewController: UIViewController {
         print("\(db.collection("competitions"))")
         
         dismiss(animated: true, completion: nil)
-        
-        
+
         dismiss(animated: true, completion: nil)
         delegate?.dismissController()
     }

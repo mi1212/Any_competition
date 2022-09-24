@@ -26,10 +26,12 @@ class TabBarController: UITabBarController {
     }
     
     private func setupTabBar(viewController: UIViewController, title: String, image: String) -> UIViewController {
-        let vc = UINavigationController(rootViewController: viewController)
-        vc.tabBarItem.title = title
-        vc.tabBarItem.image = UIImage(named: image)
-        return vc
+        let navigationVC = UINavigationController(rootViewController: viewController)
+        navigationVC.tabBarItem.title = title
+        navigationVC.tabBarItem.image = UIImage(named: image)
+        self.navigationController?.isNavigationBarHidden = false
+        
+        return navigationVC
     }
 
     private func setupflowLayout() -> UICollectionViewFlowLayout {

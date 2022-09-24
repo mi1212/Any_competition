@@ -6,28 +6,97 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class CompetitionsCollectionViewController: UICollectionViewController {
+    
+    var db = Firestore.firestore()
+    
+    private let decoder = JSONDecoder()
+
+    var datarequest = [Competition]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = true
         self.collectionView.register(CompetitionCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionCollectionViewCell.identifire)
+        getData()
+        self.collectionView.reloadData()
+    }
+    
+    func getData() {
+        
+        let docRef = db.collection("competitions")
+
+        docRef.getDocuments() { snapshotData, error in
+            
+            if snapshotData != nil {
+
+                for i in 0...(snapshotData?.documents.count)!-1 {
+                    
+                    let json = snapshotData?.documents[i].data()
+                    
+                    do {
+                        
+                        let data = try JSONSerialization.data(withJSONObject: json! as Any)
+                        //
+                        let competition = try self.decoder.decode(Competition.self, from: data)
+                        
+//                        if let timestamp = competition["date"] as? Timestamp {
+//                            let date = timestamp.dateValue()
+//                            dateFormatter.dateStyle = .medium
+//                            dateFormatter.timeStyle = .none
+//                            strDate = "\(dateFormatter.string(from: date))"
+//                        }
+                        
+                        self.datarequest.append(competition)
+                        //
+                        print("competition - \(competition as Any)")
+                        
+                        
+                        
+                    } catch {
+                        
+                        print("an error occurred", error)
+                    }
+                    
+                }
+                
+                self.collectionView.reloadData()
+                
+            } else {
+
+                print("error - \(error as Any)")
+            }
+
+        }
+        
+
+
     }
    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return datarequest.count 
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath) as! CompetitionCollectionViewCell
-        cell.label.text = "\(indexPath)"
+        cell.label.text = datarequest[indexPath.row].info.title
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        let vc = CompetitionViewController()
+        vc.competitionCell = datarequest[indexPath.row]
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     
 }
