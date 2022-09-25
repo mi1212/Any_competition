@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD08C7D528DF448B00C18CD1 /* KRTournamentView in Frameworks */ = {isa = PBXBuildFile; productRef = FD08C7D428DF448B00C18CD1 /* KRTournamentView */; };
+		FD08C7D728DF511E00C18CD1 /* MyMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD08C7D628DF511E00C18CD1 /* MyMatch.swift */; };
 		FD0D008828DDA29B00C47570 /* ConfigurateCompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0D008728DDA29B00C47570 /* ConfigurateCompetitionViewController.swift */; };
 		FD0D008A28DDBF0200C47570 /* PlayersInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0D008928DDBF0200C47570 /* PlayersInfoTableViewCell.swift */; };
 		FD20D63628DB0898007F5F8F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FD20D63528DB0898007F5F8F /* FirebaseAuth */; };
@@ -59,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD08C7D628DF511E00C18CD1 /* MyMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMatch.swift; sourceTree = "<group>"; };
 		FD0D008728DDA29B00C47570 /* ConfigurateCompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurateCompetitionViewController.swift; sourceTree = "<group>"; };
 		FD0D008928DDBF0200C47570 /* PlayersInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersInfoTableViewCell.swift; sourceTree = "<group>"; };
 		FD20D63928DB0B19007F5F8F /* CompetitionsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsCollectionViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +103,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDE720E228DC915C00FAF811 /* FirebaseDatabaseSwift in Frameworks */,
+				FD08C7D528DF448B00C18CD1 /* KRTournamentView in Frameworks */,
 				FD20D63628DB0898007F5F8F /* FirebaseAuth in Frameworks */,
 				FDE720E028DC90D700FAF811 /* FirebaseFirestoreSwift in Frameworks */,
 			);
@@ -186,6 +190,7 @@
 				FD27FEFB28D9A63F00D2A405 /* Info.plist */,
 				FDE720DC28DC8F9400FAF811 /* GoogleService-Info.plist */,
 				FD27FEF328D9A63E00D2A405 /* Any_competition.xcdatamodeld */,
+				FD08C7D628DF511E00C18CD1 /* MyMatch.swift */,
 			);
 			path = Any_competition;
 			sourceTree = "<group>";
@@ -277,6 +282,7 @@
 				FD20D63528DB0898007F5F8F /* FirebaseAuth */,
 				FDE720DF28DC90D700FAF811 /* FirebaseFirestoreSwift */,
 				FDE720E128DC915C00FAF811 /* FirebaseDatabaseSwift */,
+				FD08C7D428DF448B00C18CD1 /* KRTournamentView */,
 			);
 			productName = Any_competition;
 			productReference = FD27FEE728D9A63E00D2A405 /* Any_competition.app */;
@@ -352,6 +358,7 @@
 			mainGroup = FD27FEDE28D9A63E00D2A405;
 			packageReferences = (
 				FD20D63428DB0898007F5F8F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				FD08C7D328DF448B00C18CD1 /* XCRemoteSwiftPackageReference "KRTournamentView" */,
 			);
 			productRefGroup = FD27FEE828D9A63E00D2A405 /* Products */;
 			projectDirPath = "";
@@ -410,6 +417,7 @@
 				FD27FEEB28D9A63E00D2A405 /* AppDelegate.swift in Sources */,
 				FD20D64528DB3AA0007F5F8F /* CompetitionModel.swift in Sources */,
 				FD0D008828DDA29B00C47570 /* ConfigurateCompetitionViewController.swift in Sources */,
+				FD08C7D728DF511E00C18CD1 /* MyMatch.swift in Sources */,
 				FD27FEF528D9A63E00D2A405 /* Any_competition.xcdatamodeld in Sources */,
 				FDE14E2228DF15AB00005B51 /* CompetitionViewController.swift in Sources */,
 				FD20D63A28DB0B19007F5F8F /* CompetitionsCollectionViewController.swift in Sources */,
@@ -764,6 +772,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FD08C7D328DF448B00C18CD1 /* XCRemoteSwiftPackageReference "KRTournamentView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krimpedance/KRTournamentView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		FD20D63428DB0898007F5F8F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -775,6 +791,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FD08C7D428DF448B00C18CD1 /* KRTournamentView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FD08C7D328DF448B00C18CD1 /* XCRemoteSwiftPackageReference "KRTournamentView" */;
+			productName = KRTournamentView;
+		};
 		FD20D63528DB0898007F5F8F /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FD20D63428DB0898007F5F8F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
