@@ -93,7 +93,7 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         let vc = CompetitionViewController()
-        vc.competitionCell = datarequest[indexPath.row]
+        CompetitionViewController.competitionCell = datarequest[indexPath.row]
         
         self.navigationController?.pushViewController(vc, animated: true)
         
