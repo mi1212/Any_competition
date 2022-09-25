@@ -33,6 +33,7 @@
 		FD27FF3128D9D27100D2A405 /* 04B_30__.TTF in Resources */ = {isa = PBXBuildFile; fileRef = FD27FF2C28D9D27100D2A405 /* 04B_30__.TTF */; };
 		FD27FF3428D9DFAF00D2A405 /* AnyCompUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF3328D9DFAF00D2A405 /* AnyCompUILabel.swift */; };
 		FD27FF3628D9E85900D2A405 /* AnyCompUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */; };
+		FD29C22528E040EF00C3B7EB /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD29C22428E040EF00C3B7EB /* MatchViewController.swift */; };
 		FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA29F28DADA7F00709E80 /* TabBarController.swift */; };
 		FDCCA2A228DAF97700709E80 /* AddCompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */; };
 		FDCCA2A428DAFA4600709E80 /* AnyCompUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA2A328DAFA4600709E80 /* AnyCompUITextField.swift */; };
@@ -89,6 +90,7 @@
 		FD27FF2C28D9D27100D2A405 /* 04B_30__.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = 04B_30__.TTF; sourceTree = "<group>"; };
 		FD27FF3328D9DFAF00D2A405 /* AnyCompUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUILabel.swift; sourceTree = "<group>"; };
 		FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUIButton.swift; sourceTree = "<group>"; };
+		FD29C22428E040EF00C3B7EB /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
 		FDCCA29F28DADA7F00709E80 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompetitionViewController.swift; sourceTree = "<group>"; };
 		FDCCA2A328DAFA4600709E80 /* AnyCompUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUITextField.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				FDCCA29F28DADA7F00709E80 /* TabBarController.swift */,
 				FD20D63928DB0B19007F5F8F /* CompetitionsCollectionViewController.swift */,
 				FDE14E2128DF15AB00005B51 /* CompetitionViewController.swift */,
+				FD29C22428E040EF00C3B7EB /* MatchViewController.swift */,
 				FD27FEEE28D9A63E00D2A405 /* StartViewController.swift */,
 				FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */,
 				FD0D008728DDA29B00C47570 /* ConfigurateCompetitionViewController.swift */,
@@ -412,6 +415,7 @@
 				FD27FEEF28D9A63E00D2A405 /* StartViewController.swift in Sources */,
 				FDCCA2A428DAFA4600709E80 /* AnyCompUITextField.swift in Sources */,
 				FDE14E2028DEDC0A00005B51 /* DatabaseGetData.swift in Sources */,
+				FD29C22528E040EF00C3B7EB /* MatchViewController.swift in Sources */,
 				FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */,
 				FD0D008A28DDBF0200C47570 /* PlayersInfoTableViewCell.swift in Sources */,
 				FD27FEEB28D9A63E00D2A405 /* AppDelegate.swift in Sources */,
@@ -602,8 +606,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -635,8 +638,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

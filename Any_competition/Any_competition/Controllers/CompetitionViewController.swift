@@ -12,6 +12,21 @@ class CompetitionViewController: UIViewController{
    
     var competitionCell: Competition?
     
+    private lazy var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.backgroundColor = .cyan
+        return scroll
+    }()
+    
+    private lazy var contentView: UIView = {
+        let content = UIView()
+        content.translatesAutoresizingMaskIntoConstraints = false
+        content.backgroundColor = .orange
+        content.isExclusiveTouch = true
+        return content
+    }()
+    
     let titleLabel = AnyCompUILabel(title: "Title: ")
     
     let qtyPlayersLabel = AnyCompUILabel(title: "qtyPlayers: ")
@@ -20,7 +35,14 @@ class CompetitionViewController: UIViewController{
     
     let dateLabel = AnyCompUILabel(title: "date: ")
     
-    var winnerIndexes = [Int]()
+    private lazy var competitionTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .blue
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
     
     private lazy var tournamentView: KRTournamentView = {
         let tournamentView = KRTournamentView()
@@ -29,13 +51,17 @@ class CompetitionViewController: UIViewController{
         tournamentView.delegate = self
         tournamentView.lineColor = .black
         tournamentView.style = KRTournamentViewStyle.left
-        tournamentView.lineWidth = 2
+        tournamentView.lineWidth = 4
+        tournamentView.lineColor = UIColor.darkGray
+        tournamentView.winnerLineColor = UIColor.orange
+        tournamentView.winnerLineWidth = 5
+        tournamentView.isMultipleTouchEnabled = true
         tournamentView.translatesAutoresizingMaskIntoConstraints = false
         return tournamentView
     }()
     
     private var builder: TournamentBuilder = .init(numberOfLayers: 2)
-
+    
     private var entryNames = [Int: String]()
     
     override func viewDidLoad() {
@@ -46,50 +72,77 @@ class CompetitionViewController: UIViewController{
     }
     
     private func setupController() {
-        self.view.addSubview(titleLabel)
-        self.view.addSubview(qtyPlayersLabel)
-        self.view.addSubview(typeSportLabel)
-        self.view.addSubview(dateLabel)
-        self.view.addSubview(tournamentView)
+        self.view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(qtyPlayersLabel)
+        contentView.addSubview(typeSportLabel)
+        contentView.addSubview(dateLabel)
+        contentView.addSubview(competitionTableView)
+//        contentView.addSubview(tournamentView)
         
         let inset: CGFloat = 12
         
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
-            titleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
+
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
+            titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor),
             titleLabel.heightAnchor.constraint(equalToConstant: inset)
         ])
         
         NSLayoutConstraint.activate([
-            qtyPlayersLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
+            qtyPlayersLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
             qtyPlayersLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: inset/2),
             qtyPlayersLabel.heightAnchor.constraint(equalToConstant: inset)
         ])
         
         NSLayoutConstraint.activate([
-            typeSportLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
+            typeSportLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
             typeSportLabel.topAnchor.constraint(equalTo: self.qtyPlayersLabel.bottomAnchor, constant: inset/2),
             typeSportLabel.heightAnchor.constraint(equalToConstant: inset)
         ])
         
         NSLayoutConstraint.activate([
-            dateLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
+            dateLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
             dateLabel.topAnchor.constraint(equalTo: self.typeSportLabel.bottomAnchor, constant: inset/2),
             dateLabel.heightAnchor.constraint(equalToConstant: inset)
         ])
         
         NSLayoutConstraint.activate([
-            tournamentView.topAnchor.constraint(equalTo: self.dateLabel.bottomAnchor, constant: inset/2),
-            tournamentView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
-            tournamentView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
-            tournamentView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -inset)
+            competitionTableView.topAnchor.constraint(equalTo: self.dateLabel.bottomAnchor, constant: inset/2),
+            competitionTableView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
+            competitionTableView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -inset),
+            competitionTableView.heightAnchor.constraint(equalToConstant: 200),
+//            competitionTableView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -inset)
         ])
+        
+//        NSLayoutConstraint.activate([
+//            tournamentView.topAnchor.constraint(equalTo: self.competitionTableView.bottomAnchor, constant: inset/2),
+//            tournamentView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
+//            tournamentView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -inset),
+//            tournamentView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -inset),
+//            tournamentView.heightAnchor.constraint(equalToConstant: inset*CGFloat((competitionCell?.players.count)!*4))
+//        ])
     }
     
     private func setupLabel() {
-        titleLabel.text! += (competitionCell?.info.title)!
+        titleLabel.text! = (competitionCell?.info.title)!
         qtyPlayersLabel.text! += "\((competitionCell?.info.qtyPlayers)!)"
-        typeSportLabel.text! += (competitionCell?.info.sportType)!
+        typeSportLabel.text! = (competitionCell?.info.sportType)!
         
         if let stringDate = (competitionCell?.info.date) {
             let dateFormatter = DateFormatter()
@@ -107,21 +160,21 @@ class CompetitionViewController: UIViewController{
 
 extension CompetitionViewController: KRTournamentViewDataSource {
     func entrySize(in tournamentView: KRTournamentView) -> CGSize {
-        CGSize(width: 80, height: 40)
+        CGSize(width: self.view.layer.bounds.width/6, height: self.view.layer.bounds.height/10)
     }
     
     func structure(of tournamentView: KRTournamentView) -> Bracket {
-        return builder.build(format: true)
+        builder.build(format: true)
     }
     
     func tournamentView(_ tournamentView: KRTournamentView, entryAt index: Int) -> KRTournamentViewEntry {
         let entry = KRTournamentViewEntry()
         
-//        entry.textLabel.text = (competitionCell?.players[index].name)! + " " + (competitionCell?.players[index].secondName)!
+        entry.textLabel.text = (competitionCell?.players[index].name)! + " " + (competitionCell?.players[index].secondName)!
         
-        entry.textLabel.text = "player \(index)"
+//        entry.textLabel.text = "player \(index)"
         
-        let font = UIFont(name: "Press Start 2P", size: UIFont.systemFontSize.nextDown)
+        let font = UIFont(name: "Press Start 2P", size: 8)
         
         entry.textLabel.font = font
      
@@ -136,12 +189,55 @@ extension CompetitionViewController: KRTournamentViewDataSource {
 extension CompetitionViewController: KRTournamentViewDelegate {
     
     func tournamentView(_ tournamentView: KRTournamentView, didSelectEntryAt index: Int) {
-        winnerIndexes.append(index)
-        builder.setWinnerIndexes(winnerIndexes)
+        
         tournamentView.reloadData()
     }
     
     func tournamentView(_ tournamentView: KRTournamentView, didSelectMatchAt matchPath: MatchPath) {
+        let players = builder.getChildBuilder(for: matchPath)?.children
+        tournamentView.reloadData()
+        let vc = MatchViewController(matchPath: matchPath) as MatchViewController
+        vc.delegate = self
+//        for i in 0...(competitionCell?.players.count)!-1 {
+//            if i == matchPath.item*2 {
+//                vc.firstPlayerLabel.text = (competitionCell?.players[i].name)! + " " + (competitionCell?.players[i].secondName)!
+//                vc.secondPlayerLabel.text = (competitionCell?.players[i+1].name)! + " " + (competitionCell?.players[i+1].secondName)!
+//            }
+//        }
+        
+        
+        
+        self.present(vc, animated: true)
         print("didSelectMatchAt\(matchPath)")
     }
+}
+
+extension CompetitionViewController: MatchViewControllerDelegate {
+    func firstPlayerWin(matchPath: MatchPath) {
+        builder.getChildBuilder(for: matchPath)?.setWinnerIndexes([0])
+        print("firstPlayerWin")
+        self.tournamentView.reloadData()
+    }
+    
+    func secondPlayerWin(matchPath: MatchPath) {
+        builder.getChildBuilder(for: matchPath)?.setWinnerIndexes([1])
+        print("secondPlayerWin")
+        self.tournamentView.reloadData()
+    }
+}
+
+extension CompetitionViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        (competitionCell?.players.count)!
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        UITableViewCell()
+    }
+    
+    
+}
+
+extension CompetitionViewController: UITableViewDelegate {
+    
 }
