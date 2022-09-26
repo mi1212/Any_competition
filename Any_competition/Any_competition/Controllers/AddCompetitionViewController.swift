@@ -74,14 +74,8 @@ class AddCompetitionViewController: UIViewController {
         vc.delegate = self
         self.present(vc, animated: true)
 
-        
-        
 //        var ref: DocumentReference? = nil
-        
-        
-        
-        
-        
+   
 //        ref = db.collection("competitions").addDocument(data: [
 //            "title" : competitionTitleTextField.text as Any,
 //            "qtyPlayers": Int(playerQtyTextField.text!) as Any,

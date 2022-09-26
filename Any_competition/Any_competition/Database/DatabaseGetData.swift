@@ -34,9 +34,6 @@ class DatabaseGetData {
                     let data = try JSONSerialization.data(withJSONObject: json! as Any)
 //
                     self.datarequest = try self.decoder.decode(Competition.self, from: data)
-//
-                    print("datarequest - \(self.datarequest as Any)")
-                    
 
                 } catch {
 

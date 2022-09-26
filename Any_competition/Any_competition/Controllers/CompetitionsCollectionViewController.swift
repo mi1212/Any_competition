@@ -51,10 +51,6 @@ class CompetitionsCollectionViewController: UICollectionViewController {
 //                        }
                         
                         self.datarequest.append(competition)
-                        //
-                        print("competition - \(competition as Any)")
-                        
-                        
                         
                     } catch {
                         
@@ -94,7 +90,7 @@ class CompetitionsCollectionViewController: UICollectionViewController {
         let cell = collectionView.cellForItem(at: indexPath)
         let vc = CompetitionViewController()
         CompetitionViewController.competitionCell = datarequest[indexPath.row]
-        
+        vc.qtyPlayers = datarequest[indexPath.row].players.count
         self.navigationController?.pushViewController(vc, animated: true)
         
     }

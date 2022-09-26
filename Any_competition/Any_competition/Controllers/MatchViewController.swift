@@ -96,8 +96,8 @@ class MatchViewController: UIViewController {
     }
     
     private func setupLabels() {
-        print(firstPlayerLabel.text)
-        print(secondPlayerLabel.text)
+//        print(firstPlayerLabel.text)
+//        print(secondPlayerLabel.text)
     }
     
     @objc func tapFirstPlayerWin() {

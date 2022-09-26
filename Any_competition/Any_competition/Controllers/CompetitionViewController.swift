@@ -34,6 +34,28 @@ class CompetitionViewController: UIViewController{
 
     let dateLabel = AnyCompUILabel(title: "date: ")
     
+    var qtyPlayers: Int?
+    
+//    private var flowLayout: UICollectionViewFlowLayout {
+//        let flow = UICollectionViewFlowLayout()
+//        let inset: CGFloat = 10
+//        let width = (self.view.bounds.width - inset*(CGFloat(qtyPlayers!)+3))/(CGFloat(qtyPlayers!)+2)
+//        let itemSize = CGSize(width: width, height: 100-inset)
+//        flow.estimatedItemSize = itemSize
+//        print(qtyPlayers)
+//        return flow
+//    }
+    
+    private lazy var tableCollectionView: UICollectionView = {
+        let table = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        table.delegate = self
+        table.dataSource = self
+        table.backgroundColor = .black
+        table.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        table.translatesAutoresizingMaskIntoConstraints = false
+        return table
+    }()
+    
     private lazy var tournamentView: KRTournamentView = {
         let tournamentView = KRTournamentView()
         tournamentView.backgroundColor = .white
@@ -50,7 +72,7 @@ class CompetitionViewController: UIViewController{
         return tournamentView
     }()
     
-    private var builder: TournamentBuilder = .init(numberOfLayers: 2)
+    private var builder: TournamentBuilder = .init(numberOfLayers: 3)
     
     private var entryNames = [Int: String]()
     
@@ -68,6 +90,7 @@ class CompetitionViewController: UIViewController{
         contentView.addSubview(qtyPlayersLabel)
         contentView.addSubview(typeSportLabel)
         contentView.addSubview(dateLabel)
+        contentView.addSubview(tableCollectionView)
         contentView.addSubview(tournamentView)
         
         let inset: CGFloat = 12
@@ -112,12 +135,21 @@ class CompetitionViewController: UIViewController{
         ])
         
         NSLayoutConstraint.activate([
-            tournamentView.topAnchor.constraint(equalTo: self.dateLabel.bottomAnchor, constant: inset/2),
+            tableCollectionView.topAnchor.constraint(equalTo: self.dateLabel.bottomAnchor, constant: inset/2),
+            tableCollectionView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            tableCollectionView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            tableCollectionView.heightAnchor.constraint(equalToConstant: 300)
+        ])
+        
+        NSLayoutConstraint.activate([
+            tournamentView.topAnchor.constraint(equalTo: self.tableCollectionView.bottomAnchor, constant: inset/2),
             tournamentView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
             tournamentView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -inset),
             tournamentView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -inset),
             tournamentView.heightAnchor.constraint(equalToConstant: inset*CGFloat((CompetitionViewController.competitionCell?.players.count)!*4))
         ])
+        
+
     }
     
     private func setupLabel() {
@@ -136,7 +168,6 @@ class CompetitionViewController: UIViewController{
 
         }
     }
-    
 }
 
 extension CompetitionViewController: KRTournamentViewDataSource {
@@ -151,9 +182,9 @@ extension CompetitionViewController: KRTournamentViewDataSource {
     func tournamentView(_ tournamentView: KRTournamentView, entryAt index: Int) -> KRTournamentViewEntry {
         let entry = KRTournamentViewEntry()
 
-        entry.textLabel.text = (CompetitionViewController.competitionCell!.players[index].name) + " " + (CompetitionViewController.competitionCell!.players[index].secondName)
+//        entry.textLabel.text = (CompetitionViewController.competitionCell!.players[index].name) + " " + (CompetitionViewController.competitionCell!.players[index].secondName)
 
-//        entry.textLabel.text = "player \(index)"
+        entry.textLabel.text = "player \(index)"
 
         let font = UIFont(name: "Press Start 2P", size: 8)
 
@@ -205,4 +236,44 @@ extension CompetitionViewController: MatchViewControllerDelegate {
         print("secondPlayerWin")
         self.tournamentView.reloadData()
     }
+}
+
+extension CompetitionViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let i = qtyPlayers!*qtyPlayers! + qtyPlayers!*2
+        return i
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        cell.backgroundColor = .white
+        cell.layer.borderWidth = 2
+//        cell.layer.borderColor = UIColor.purple.cgColor
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("tapDidSelectItemAt")
+    }
+    
+    
+}
+
+extension CompetitionViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+            return UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 2)
+        }
+
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            let size = collectionView.frame.size
+            return CGSize(width: (size.width-14)/6, height: (size.height-10)/4)
+        }
+
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+            return 2
+        }
+
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+            return 2
+        }
 }
