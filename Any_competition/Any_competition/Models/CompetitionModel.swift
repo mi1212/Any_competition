@@ -11,6 +11,7 @@ import FirebaseFirestore
 struct Competition: Codable {
     let info: Info
     let players: [Player]
+    
 }
 
 struct Info: Codable {
@@ -38,5 +39,3 @@ struct Player: Codable {
                "secondName": secondName]
     }
 }
-
-

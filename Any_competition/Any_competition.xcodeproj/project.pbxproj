@@ -34,6 +34,7 @@
 		FD27FF3428D9DFAF00D2A405 /* AnyCompUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF3328D9DFAF00D2A405 /* AnyCompUILabel.swift */; };
 		FD27FF3628D9E85900D2A405 /* AnyCompUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */; };
 		FD29C22528E040EF00C3B7EB /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD29C22428E040EF00C3B7EB /* MatchViewController.swift */; };
+		FD68DC4628E2D61A00FE0E64 /* UsersTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD68DC4528E2D61A00FE0E64 /* UsersTable.swift */; };
 		FDB3FFE828E2180C000D6DDC /* CompetitionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB3FFE728E2180C000D6DDC /* CompetitionTableView.swift */; };
 		FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA29F28DADA7F00709E80 /* TabBarController.swift */; };
 		FDCCA2A228DAF97700709E80 /* AddCompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */; };
@@ -92,6 +93,7 @@
 		FD27FF3328D9DFAF00D2A405 /* AnyCompUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUILabel.swift; sourceTree = "<group>"; };
 		FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUIButton.swift; sourceTree = "<group>"; };
 		FD29C22428E040EF00C3B7EB /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
+		FD68DC4528E2D61A00FE0E64 /* UsersTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTable.swift; sourceTree = "<group>"; };
 		FDB3FFE728E2180C000D6DDC /* CompetitionTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionTableView.swift; sourceTree = "<group>"; };
 		FDCCA29F28DADA7F00709E80 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompetitionViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				FD20D64428DB3AA0007F5F8F /* CompetitionModel.swift */,
+				FD68DC4528E2D61A00FE0E64 /* UsersTable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				FD29C22528E040EF00C3B7EB /* MatchViewController.swift in Sources */,
 				FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */,
 				FD0D008A28DDBF0200C47570 /* PlayersInfoTableViewCell.swift in Sources */,
+				FD68DC4628E2D61A00FE0E64 /* UsersTable.swift in Sources */,
 				FD27FEEB28D9A63E00D2A405 /* AppDelegate.swift in Sources */,
 				FD20D64528DB3AA0007F5F8F /* CompetitionModel.swift in Sources */,
 				FD0D008828DDA29B00C47570 /* ConfigurateCompetitionViewController.swift in Sources */,

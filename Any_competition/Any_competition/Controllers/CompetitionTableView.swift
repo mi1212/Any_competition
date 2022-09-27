@@ -21,7 +21,7 @@ class CompetitionTableView: UIView {
     
     private lazy var playersNamesTableView: UICollectionView = {
         let table = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        table.backgroundColor = .cyan
+        table.backgroundColor = .black
         table.delegate = self
         table.dataSource = self
         table.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
@@ -31,7 +31,7 @@ class CompetitionTableView: UIView {
     
     private lazy var playersScoreTableView: UICollectionView = {
         let table = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        table.backgroundColor = .green
+        table.backgroundColor = .black
         table.delegate = self
         table.dataSource = self
         table.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
@@ -79,7 +79,6 @@ class CompetitionTableView: UIView {
     }
 }
 
-//extension CompetitionTableView
 extension CompetitionTableView: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -101,22 +100,22 @@ extension CompetitionTableView: UICollectionViewDataSource {
         if collectionView == tableCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
             cell.backgroundColor = .white
-            cell.layer.borderWidth = 2
+            cell.layer.borderWidth = 0
             
             if indexPath.row == indexPath.section  {
-                cell.backgroundColor = .black
+                cell.backgroundColor = .darkGray
             }
             
             return cell
         } else if collectionView == playersNamesTableView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
             cell.backgroundColor = .green
-            cell.layer.borderWidth = 2
+            cell.layer.borderWidth = 0
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
             cell.backgroundColor = .yellow
-            cell.layer.borderWidth = 2
+            cell.layer.borderWidth = 0
             return cell
         }
         
@@ -134,25 +133,27 @@ extension CompetitionTableView: UICollectionViewDataSource {
 
 extension CompetitionTableView: UICollectionViewDelegateFlowLayout {
     
+    var insetSpaseBetween: CGFloat {1}
+        
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: insetSpaseBetween, left: 0, bottom: insetSpaseBetween, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if collectionView == tableCollectionView {
             let size = collectionView.frame.size
-            return CGSize(width: (size.width-5)/4, height: (size.height)/4)
+            return CGSize(width: (size.width-5*insetSpaseBetween)/4, height: (size.height-9*insetSpaseBetween)/4)
         } else {
             let size = collectionView.frame.size
-            return CGSize(width: size.width, height: size.height/4)
+            return CGSize(width: (size.width-5*insetSpaseBetween), height: (size.height-9*insetSpaseBetween)/4)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }

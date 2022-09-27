@@ -67,9 +67,7 @@ class CompetitionsCollectionViewController: UICollectionViewController {
             }
 
         }
-        
-
-
+  
     }
    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -91,6 +89,7 @@ class CompetitionsCollectionViewController: UICollectionViewController {
         let vc = CompetitionViewController()
         CompetitionViewController.competitionCell = datarequest[indexPath.row]
         vc.qtyPlayers = datarequest[indexPath.row].players.count
+        vc.userTable = UserTable(playersArray: datarequest[indexPath.row].players)
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
