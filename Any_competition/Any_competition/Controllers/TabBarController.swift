@@ -13,6 +13,8 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         view.backgroundColor = .white
         configurateTabBar()
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.tabBarController?.navigationItem.title = "Profile Settings"
     }
 
     private func configurateTabBar() {
@@ -29,7 +31,6 @@ class TabBarController: UITabBarController {
         let navigationVC = UINavigationController(rootViewController: viewController)
         navigationVC.tabBarItem.title = title
         navigationVC.tabBarItem.image = UIImage(named: image)
-        self.navigationController?.isNavigationBarHidden = false
         
         return navigationVC
     }

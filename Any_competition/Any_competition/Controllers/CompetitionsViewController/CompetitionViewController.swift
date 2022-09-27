@@ -28,14 +28,6 @@ class CompetitionViewController: UIViewController{
         return content
     }()
     
-    let titleLabel = AnyCompUILabel(title: "Title: ", fontSize: .medium)
-    
-//    let qtyPlayersLabel = AnyCompUILabel(title: "qtyPlayers: ", fontSize: .small)
-    
-//    let typeSportLabel = AnyCompUILabel(title: "typeSport: ", fontSize: .small)
-    
-    let dateLabel = AnyCompUILabel(title: "date: ", fontSize: .small)
-    
     var qtyPlayers: Int?
     
     private lazy var tableCollectionView = CompetitionTableView(usersTable: self.usersTable!)
@@ -64,26 +56,31 @@ class CompetitionViewController: UIViewController{
         super.viewDidLoad()
         self.view.backgroundColor = .white
         setupController()
-        setupLabel()
+        self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = true
+        
+
     }
     
     private func setupController() {
         self.view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubview(titleLabel)
-//        contentView.addSubview(qtyPlayersLabel)
-//        contentView.addSubview(typeSportLabel)
-        contentView.addSubview(dateLabel)
         contentView.addSubview(tableCollectionView)
         contentView.addSubview(tournamentView)
         
         let inset: CGFloat = 12
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -93,33 +90,9 @@ class CompetitionViewController: UIViewController{
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
-        
+            
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
-            titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            titleLabel.heightAnchor.constraint(equalToConstant: inset)
-        ])
-        
-//        NSLayoutConstraint.activate([
-//            qtyPlayersLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
-//            qtyPlayersLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: inset/2),
-//            qtyPlayersLabel.heightAnchor.constraint(equalToConstant: inset)
-//        ])
-//
-//        NSLayoutConstraint.activate([
-//            typeSportLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
-//            typeSportLabel.topAnchor.constraint(equalTo: self.qtyPlayersLabel.bottomAnchor, constant: inset/2),
-//            typeSportLabel.heightAnchor.constraint(equalToConstant: inset)
-//        ])
-        
-        NSLayoutConstraint.activate([
-            dateLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
-            dateLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: inset/2),
-            dateLabel.heightAnchor.constraint(equalToConstant: inset)
-        ])
-        
-        NSLayoutConstraint.activate([
-            tableCollectionView.topAnchor.constraint(equalTo: self.dateLabel.bottomAnchor, constant: inset/2),
+            tableCollectionView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: inset/2),
             tableCollectionView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             tableCollectionView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
             tableCollectionView.heightAnchor.constraint(equalToConstant: self.view.layer.bounds.width*2/3)
@@ -132,23 +105,6 @@ class CompetitionViewController: UIViewController{
             tournamentView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -inset),
             tournamentView.heightAnchor.constraint(equalToConstant: self.view.layer.bounds.width*2/3)
         ])
-    }
-    
-    private func setupLabel() {
-        titleLabel.text! = (CompetitionViewController.competitionCell?.info.title)!
-//        qtyPlayersLabel.text! += "\((CompetitionViewController.competitionCell?.info.qtyPlayers)!)"
-//        typeSportLabel.text! = (CompetitionViewController.competitionCell?.info.sportType)!
-        
-        if let stringDate = (CompetitionViewController.competitionCell?.info.date) {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
-            
-            if let date = dateFormatter.date(from: stringDate) {
-                
-                dateLabel.text? = date.formatted(date: .numeric, time: .omitted)
-            }
-            
-        }
     }
 }
 
