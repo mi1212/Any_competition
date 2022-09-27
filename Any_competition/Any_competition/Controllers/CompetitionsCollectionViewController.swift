@@ -85,11 +85,10 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
         let vc = CompetitionViewController()
         CompetitionViewController.competitionCell = datarequest[indexPath.row]
         vc.qtyPlayers = datarequest[indexPath.row].players.count
-        vc.userTable = UserTable(playersArray: datarequest[indexPath.row].players)
+        vc.usersTable = UsersTable(playersArray: datarequest[indexPath.row].players)
         self.navigationController?.pushViewController(vc, animated: true)
         
     }

@@ -8,73 +8,82 @@
 import UIKit
 
 class CompetitionTableView: UIView {
-
+    
+    var usersTable: UsersTable?
+    private lazy var qty = usersTable?.playersArray?.count
+    
     private lazy var tableCollectionView: UICollectionView = {
         let table = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         table.delegate = self
         table.dataSource = self
         table.backgroundColor = .black
-        table.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        table.register(CompetitionCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionCollectionViewCell.identifire)
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
     
-    private lazy var playersNamesTableView: UICollectionView = {
+    private lazy var playersNamesCollectionView: UICollectionView = {
         let table = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         table.backgroundColor = .black
         table.delegate = self
         table.dataSource = self
-        table.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        table.register(CompetitionCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionCollectionViewCell.identifire)
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
     
-    private lazy var playersScoreTableView: UICollectionView = {
+    private lazy var playersScoreCollectionView: UICollectionView = {
         let table = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         table.backgroundColor = .black
         table.delegate = self
         table.dataSource = self
-        table.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        table.register(CompetitionCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionCollectionViewCell.identifire)
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
+    
+    convenience init(usersTable: UsersTable) {
+        self.init()
+        self.usersTable = usersTable
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
         setupView()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     private func setupView() {
         self.addSubview(tableCollectionView)
-        self.addSubview(playersNamesTableView)
-        self.addSubview(playersScoreTableView)
+        self.addSubview(playersNamesCollectionView)
+        self.addSubview(playersScoreCollectionView)
+        print(usersTable)
         
         NSLayoutConstraint.activate([
             tableCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
-            tableCollectionView.leadingAnchor.constraint(equalTo: playersNamesTableView.trailingAnchor),
-            tableCollectionView.trailingAnchor.constraint(equalTo: playersScoreTableView.leadingAnchor),
+            tableCollectionView.leadingAnchor.constraint(equalTo: playersNamesCollectionView.trailingAnchor),
+            tableCollectionView.trailingAnchor.constraint(equalTo: playersScoreCollectionView.leadingAnchor),
             tableCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
         
         NSLayoutConstraint.activate([
-            playersNamesTableView.topAnchor.constraint(equalTo: self.topAnchor),
-            playersNamesTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            playersNamesTableView.trailingAnchor.constraint(equalTo: tableCollectionView.leadingAnchor),
-            playersNamesTableView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/6),
-            playersNamesTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            playersNamesCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
+            playersNamesCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            playersNamesCollectionView.trailingAnchor.constraint(equalTo: tableCollectionView.leadingAnchor),
+            playersNamesCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/6),
+            playersNamesCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
-
+        
         NSLayoutConstraint.activate([
-            playersScoreTableView.topAnchor.constraint(equalTo: self.topAnchor),
-            playersScoreTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            playersScoreTableView.leadingAnchor.constraint(equalTo: tableCollectionView.trailingAnchor),
-            playersScoreTableView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/6),
-            playersScoreTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            playersScoreCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
+            playersScoreCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            playersScoreCollectionView.leadingAnchor.constraint(equalTo: tableCollectionView.trailingAnchor),
+            playersScoreCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/6),
+            playersScoreCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
     }
 }
@@ -82,13 +91,13 @@ class CompetitionTableView: UIView {
 extension CompetitionTableView: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        4
+        qty!
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var numberOfItemsInSection = 0
         if collectionView == tableCollectionView {
-            numberOfItemsInSection = 4
+            numberOfItemsInSection = qty!
         } else {
             numberOfItemsInSection = 1
         }
@@ -98,7 +107,7 @@ extension CompetitionTableView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == tableCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath)
             cell.backgroundColor = .white
             cell.layer.borderWidth = 0
             
@@ -107,13 +116,17 @@ extension CompetitionTableView: UICollectionViewDataSource {
             }
             
             return cell
-        } else if collectionView == playersNamesTableView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-            cell.backgroundColor = .green
+            
+        } else if collectionView == playersNamesCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath) as! CompetitionCollectionViewCell
+            cell.backgroundColor = .white
+            cell.label.text = usersTable!.playersArray![indexPath.section].name + " " + usersTable!.playersArray![indexPath.section].secondName
+            cell.label.font = UIFont.systemFont(ofSize: 10)
+            //            print(indexPath.section)
             cell.layer.borderWidth = 0
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath) as! CompetitionCollectionViewCell
             cell.backgroundColor = .yellow
             cell.layer.borderWidth = 0
             return cell
@@ -133,28 +146,34 @@ extension CompetitionTableView: UICollectionViewDataSource {
 
 extension CompetitionTableView: UICollectionViewDelegateFlowLayout {
     
-    var insetSpaseBetween: CGFloat {1}
-        
+    var insetSpaseBetween: CGFloat {0.01}
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: insetSpaseBetween, left: 0, bottom: insetSpaseBetween, right: 0)
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if collectionView == tableCollectionView {
             let size = collectionView.frame.size
-            return CGSize(width: (size.width-5*insetSpaseBetween)/4, height: (size.height-9*insetSpaseBetween)/4)
-        } else {
-            let size = collectionView.frame.size
-            return CGSize(width: (size.width-5*insetSpaseBetween), height: (size.height-9*insetSpaseBetween)/4)
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-}
+            let width = (size.width-CGFloat((qty!+1))*insetSpaseBetween)/CGFloat(qty!)
+            let height = (size.height-CGFloat((qty!*2+1))*insetSpaseBetween)/CGFloat(qty!)
+            return CGSize(
+                width: width,
+                height: height
+            )
+                                                               
+                } else {
+                    let size = collectionView.frame.size
+                    return CGSize(width: (size.width-5*insetSpaseBetween), height: (size.height-9*insetSpaseBetween)/CGFloat((usersTable?.playersArray!.count)!))
+                }
+                }
+                
+                func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+                    return 0
+                }
+                
+                func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+                    return 0
+                }
+                }

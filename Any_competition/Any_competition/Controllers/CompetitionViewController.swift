@@ -12,7 +12,7 @@ class CompetitionViewController: UIViewController{
     
     static var competitionCell: Competition?
     
-    var userTable: UsersTable?
+    var usersTable: UsersTable?
     
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -38,7 +38,7 @@ class CompetitionViewController: UIViewController{
     
     var qtyPlayers: Int?
     
-    let tableCollectionView = CompetitionTableView()
+    private lazy var tableCollectionView = CompetitionTableView(usersTable: self.usersTable!)
     
     private lazy var tournamentView: KRTournamentView = {
         let tournamentView = KRTournamentView()

@@ -25,7 +25,7 @@ class CompetitionCollectionViewCell: UICollectionViewCell {
     
     private func setupCell() {
         contentView.addSubview(label)
-        
+        label.numberOfLines = 2
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: contentView.topAnchor),
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
