@@ -37,14 +37,9 @@ class AnyCompUIButton: UIButton {
     }
     
     private func configure() {
-        guard let font = UIFont(name: "Press Start 2P", size: 14) else {
-            print("Something wrong with font")
-            return
-        }
-
         self.layer.borderColor = UIColor.black.cgColor
         self.layer.borderWidth = 3
-        self.titleLabel?.font =  font
+        self.titleLabel?.font =  .anyCompMediumFont
         self.setTitleColor(.black, for: .normal)
         translatesAutoresizingMaskIntoConstraints = false
     }

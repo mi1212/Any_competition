@@ -9,27 +9,32 @@ import UIKit
 
 class AnyCompUILabel: UILabel {
    
+    
+    enum FontSize: CGFloat {
+        case large = 17
+        case medium = 13
+        case small = 9
+            }
+
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public init(title: String) {
+    public init(title: String, fontSize: AnyCompUILabel.FontSize) {
         super.init(frame: .zero)
         self.text = title
-        configure()
+        configure(fontSize: fontSize.rawValue)
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+//        configure()
     }
     
-    private func configure() {
-        guard let font = UIFont(name: "Press Start 2P", size: 10) else {
-            print("Something wrong with font")
-            return
-        }
-        self.font = font
+    private func configure(fontSize: AnyCompUILabel.FontSize.RawValue) {
+        
+        self.font = UIFont.anyCompLargeFont.withSize(fontSize)
         self.adjustsFontForContentSizeCategory = true
         self.numberOfLines = 0
         self.textAlignment = .center

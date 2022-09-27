@@ -34,6 +34,7 @@
 		FD27FF3428D9DFAF00D2A405 /* AnyCompUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF3328D9DFAF00D2A405 /* AnyCompUILabel.swift */; };
 		FD27FF3628D9E85900D2A405 /* AnyCompUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */; };
 		FD29C22528E040EF00C3B7EB /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD29C22428E040EF00C3B7EB /* MatchViewController.swift */; };
+		FD339E9928E34D6D000DD8F3 /* UIFont+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD339E9828E34D6D000DD8F3 /* UIFont+Extention.swift */; };
 		FD68DC4628E2D61A00FE0E64 /* UsersTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD68DC4528E2D61A00FE0E64 /* UsersTable.swift */; };
 		FD68DC4828E2F88900FE0E64 /* TableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD68DC4728E2F88900FE0E64 /* TableCollectionViewCell.swift */; };
 		FDB3FFE828E2180C000D6DDC /* CompetitionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB3FFE728E2180C000D6DDC /* CompetitionTableView.swift */; };
@@ -94,6 +95,7 @@
 		FD27FF3328D9DFAF00D2A405 /* AnyCompUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUILabel.swift; sourceTree = "<group>"; };
 		FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUIButton.swift; sourceTree = "<group>"; };
 		FD29C22428E040EF00C3B7EB /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
+		FD339E9828E34D6D000DD8F3 /* UIFont+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extention.swift"; sourceTree = "<group>"; };
 		FD68DC4528E2D61A00FE0E64 /* UsersTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTable.swift; sourceTree = "<group>"; };
 		FD68DC4728E2F88900FE0E64 /* TableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TableCollectionViewCell.swift; path = Any_competition/Cells/TableCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		FDB3FFE728E2180C000D6DDC /* CompetitionTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionTableView.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				FD20D63F28DB0E97007F5F8F /* UIView+Extention.swift */,
+				FD339E9828E34D6D000DD8F3 /* UIFont+Extention.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 		FD27FEE928D9A63E00D2A405 /* Any_competition */ = {
 			isa = PBXGroup;
 			children = (
+				FD339E9B28E363B2000DD8F3 /* Views */,
 				FDE14E1E28DEDBD600005B51 /* Database */,
 				FD20D64128DB1FA5007F5F8F /* Models */,
 				FD20D63E28DB0E6A007F5F8F /* Extention */,
@@ -248,15 +252,38 @@
 			isa = PBXGroup;
 			children = (
 				FDCCA29F28DADA7F00709E80 /* TabBarController.swift */,
-				FD20D63928DB0B19007F5F8F /* CompetitionsCollectionViewController.swift */,
-				FDE14E2128DF15AB00005B51 /* CompetitionViewController.swift */,
-				FDB3FFE728E2180C000D6DDC /* CompetitionTableView.swift */,
-				FD29C22428E040EF00C3B7EB /* MatchViewController.swift */,
-				FD27FEEE28D9A63E00D2A405 /* StartViewController.swift */,
-				FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */,
-				FD0D008728DDA29B00C47570 /* ConfigurateCompetitionViewController.swift */,
+				FD339E9C28E363C4000DD8F3 /* CompetitionsViewController */,
+				FD339E9A28E3637F000DD8F3 /* StartViewController */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FD339E9A28E3637F000DD8F3 /* StartViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FD0D008728DDA29B00C47570 /* ConfigurateCompetitionViewController.swift */,
+				FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */,
+				FD27FEEE28D9A63E00D2A405 /* StartViewController.swift */,
+			);
+			path = StartViewController;
+			sourceTree = "<group>";
+		};
+		FD339E9B28E363B2000DD8F3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FDB3FFE728E2180C000D6DDC /* CompetitionTableView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FD339E9C28E363C4000DD8F3 /* CompetitionsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FD20D63928DB0B19007F5F8F /* CompetitionsCollectionViewController.swift */,
+				FDE14E2128DF15AB00005B51 /* CompetitionViewController.swift */,
+				FD29C22428E040EF00C3B7EB /* MatchViewController.swift */,
+			);
+			path = CompetitionsViewController;
 			sourceTree = "<group>";
 		};
 		FDE14E1E28DEDBD600005B51 /* Database */ = {
@@ -435,6 +462,7 @@
 				FD27FEF528D9A63E00D2A405 /* Any_competition.xcdatamodeld in Sources */,
 				FDE14E2228DF15AB00005B51 /* CompetitionViewController.swift in Sources */,
 				FD20D63A28DB0B19007F5F8F /* CompetitionsCollectionViewController.swift in Sources */,
+				FD339E9928E34D6D000DD8F3 /* UIFont+Extention.swift in Sources */,
 				FD20D63D28DB0DE9007F5F8F /* CompetitionCollectionViewCell.swift in Sources */,
 				FD27FF3628D9E85900D2A405 /* AnyCompUIButton.swift in Sources */,
 				FD20D64928DB4FF1007F5F8F /* CompetitionFetch.swift in Sources */,

@@ -9,13 +9,13 @@ import UIKit
 
 class PlayersInfoTableViewCell: UITableViewCell {
     
-    let numberLabel = AnyCompUILabel(title: "#")
+    let numberLabel = AnyCompUILabel(title: "#", fontSize: .medium)
     
-    let nameLabel = AnyCompUILabel(title: "")
+    let nameLabel = AnyCompUILabel(title: "", fontSize: .medium)
     
-    let secondNameLabel = AnyCompUILabel(title: "")
+    let secondNameLabel = AnyCompUILabel(title: "", fontSize: .medium)
     
-    let emailLabel = AnyCompUILabel(title: "")
+    let emailLabel = AnyCompUILabel(title: "", fontSize: .medium)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: "cell")

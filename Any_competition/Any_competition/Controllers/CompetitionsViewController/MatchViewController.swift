@@ -20,9 +20,9 @@ class MatchViewController: UIViewController {
 
     var matchPath: MatchPath?
  
-    var firstPlayerLabel =  AnyCompUILabel(title: "firstPlayerLabel")
+    var firstPlayerLabel =  AnyCompUILabel(title: "firstPlayerLabel", fontSize: .small)
     
-    var secondPlayerLabel =  AnyCompUILabel(title: "secondPlayerLabel")
+    var secondPlayerLabel =  AnyCompUILabel(title: "secondPlayerLabel", fontSize: .small)
     
     var firstPlayerWinButton = AnyCompUIButton(title: "WinFirst")
     

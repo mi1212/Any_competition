@@ -9,7 +9,7 @@ import UIKit
 
 class CompetitionCollectionViewCell: UICollectionViewCell {
     
-    let label = AnyCompUILabel(title: "")
+    let label = AnyCompUILabel(title: "", fontSize: .small)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

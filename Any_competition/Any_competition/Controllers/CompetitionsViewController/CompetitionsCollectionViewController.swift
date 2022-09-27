@@ -81,6 +81,7 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath) as! CompetitionCollectionViewCell
         cell.label.text = datarequest[indexPath.row].info.title
+        cell.label.font = .anyCompMediumFont
         return cell
     }
     

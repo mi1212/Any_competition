@@ -121,9 +121,6 @@ extension CompetitionTableView: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath) as! CompetitionCollectionViewCell
             cell.backgroundColor = .white
             cell.label.text = usersTable!.playersArray[indexPath.section].name + " " + usersTable!.playersArray[indexPath.section].secondName
-            cell.label.font = UIFont.systemFont(ofSize: 10)
-            //            print(indexPath.section)
-            cell.layer.borderWidth = 0
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath) as! CompetitionCollectionViewCell

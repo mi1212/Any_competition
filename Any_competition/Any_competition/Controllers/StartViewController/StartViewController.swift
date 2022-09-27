@@ -9,7 +9,7 @@ import UIKit
 
 class StartViewController: UIViewController {
     
-    var labelView = AnyCompUILabel(title: "Во что будем играть?")
+    var labelView = AnyCompUILabel(title: "Во что будем играть?", fontSize: .large)
     
     var buttonView = AnyCompUIButton(title: "Начнем игру")
    
