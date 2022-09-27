@@ -10,7 +10,8 @@ import UIKit
 class CompetitionTableView: UIView {
     
     var usersTable: UsersTable?
-    private lazy var qty = usersTable?.playersArray?.count
+    
+    private lazy var qty = usersTable?.playersArray.count
     
     private lazy var tableCollectionView: UICollectionView = {
         let table = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -44,13 +45,13 @@ class CompetitionTableView: UIView {
     
     convenience init(usersTable: UsersTable) {
         self.init()
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.usersTable = usersTable
+        setupView()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.translatesAutoresizingMaskIntoConstraints = false
-        setupView()
     }
     
     required init?(coder: NSCoder) {
@@ -61,7 +62,6 @@ class CompetitionTableView: UIView {
         self.addSubview(tableCollectionView)
         self.addSubview(playersNamesCollectionView)
         self.addSubview(playersScoreCollectionView)
-        print(usersTable)
         
         NSLayoutConstraint.activate([
             tableCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
@@ -120,7 +120,7 @@ extension CompetitionTableView: UICollectionViewDataSource {
         } else if collectionView == playersNamesCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath) as! CompetitionCollectionViewCell
             cell.backgroundColor = .white
-            cell.label.text = usersTable!.playersArray![indexPath.section].name + " " + usersTable!.playersArray![indexPath.section].secondName
+            cell.label.text = usersTable!.playersArray[indexPath.section].name + " " + usersTable!.playersArray[indexPath.section].secondName
             cell.label.font = UIFont.systemFont(ofSize: 10)
             //            print(indexPath.section)
             cell.layer.borderWidth = 0
@@ -165,7 +165,7 @@ extension CompetitionTableView: UICollectionViewDelegateFlowLayout {
                                                                
                 } else {
                     let size = collectionView.frame.size
-                    return CGSize(width: (size.width-5*insetSpaseBetween), height: (size.height-9*insetSpaseBetween)/CGFloat((usersTable?.playersArray!.count)!))
+                    return CGSize(width: (size.width-5*insetSpaseBetween), height: (size.height-9*insetSpaseBetween)/CGFloat((usersTable?.playersArray.count)!))
                 }
                 }
                 

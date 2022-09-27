@@ -9,10 +9,10 @@ import Foundation
 
 class UsersTable {
     
-    var playersArray: [Player]?
+    var playersArray = [Player]()
     
     var competitionPlayersArray: [String: [Bool]] = [:]
-
+    
     init(playersArray: [Player]) {
         self.playersArray = playersArray
         createCompetitionPlayersArray()
@@ -20,8 +20,8 @@ class UsersTable {
     
     private func createCompetitionPlayersArray() {
    
-        for i in 0...playersArray!.count - 1 {
-            competitionPlayersArray[playersArray![i].name + " " + playersArray![i].secondName] = [Bool](repeating: false, count: playersArray!.count)
+        for i in 0...playersArray.count - 1 {
+            competitionPlayersArray[playersArray[i].name + " " + playersArray[i].secondName] = [Bool](repeating: false, count: playersArray.count)
         }
         
         print(competitionPlayersArray)
