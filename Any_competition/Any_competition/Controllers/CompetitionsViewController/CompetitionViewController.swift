@@ -32,25 +32,7 @@ class CompetitionViewController: UIViewController{
     
     private lazy var tableCollectionView = CompetitionTableView(usersTable: self.usersTable!)
     
-    private lazy var tournamentView: KRTournamentView = {
-        let tournamentView = KRTournamentView()
-        tournamentView.backgroundColor = .white
-        tournamentView.dataSource = self
-        tournamentView.delegate = self
-        tournamentView.lineColor = .black
-        tournamentView.style = KRTournamentViewStyle.left
-        tournamentView.lineWidth = 4
-        tournamentView.lineColor = UIColor.black
-        tournamentView.winnerLineColor = UIColor.orange
-        tournamentView.winnerLineWidth = 5
-        tournamentView.isMultipleTouchEnabled = true
-        tournamentView.translatesAutoresizingMaskIntoConstraints = false
-        return tournamentView
-    }()
-    
-    private var builder: TournamentBuilder = .init(numberOfLayers: 2)
-    
-    private var entryNames = [Int: String]()
+    private lazy var tournamentView = CompetitionNetView(usersTable: self.usersTable!)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +55,7 @@ class CompetitionViewController: UIViewController{
         scrollView.addSubview(contentView)
         contentView.addSubview(tableCollectionView)
         contentView.addSubview(tournamentView)
+        
         
         let inset: CGFloat = 12
         
@@ -108,67 +91,20 @@ class CompetitionViewController: UIViewController{
     }
 }
 
-extension CompetitionViewController: KRTournamentViewDataSource {
-    func entrySize(in tournamentView: KRTournamentView) -> CGSize {
-        CGSize(width: self.view.layer.bounds.width/6, height: self.view.layer.bounds.height/10)
-    }
-    
-    func structure(of tournamentView: KRTournamentView) -> Bracket {
-        builder.build(format: true)
-    }
-    
-    func tournamentView(_ tournamentView: KRTournamentView, entryAt index: Int) -> KRTournamentViewEntry {
-        let entry = KRTournamentViewEntry()
-        
-        //        entry.textLabel.text = (CompetitionViewController.competitionCell!.players[index].name) + " " + (CompetitionViewController.competitionCell!.players[index].secondName)
-        
-        entry.textLabel.text = "player \(index)"
-        
-        let font = UIFont(name: "Press Start 2P", size: 8)
-        
-        entry.textLabel.font = font
-        
-        return entry
-    }
-    
-    func tournamentView(_ tournamentView: KRTournamentView, matchAt matchPath: MatchPath) -> KRTournamentViewMatch {
-        MyMatch()
-    }
-}
 
-extension CompetitionViewController: KRTournamentViewDelegate {
-    
-    func tournamentView(_ tournamentView: KRTournamentView, didSelectEntryAt index: Int) {
-        tournamentView.reloadData()
-    }
-    
-    func tournamentView(_ tournamentView: KRTournamentView, didSelectMatchAt matchPath: MatchPath) {
-        tournamentView.reloadData()
-        let vc = MatchViewController(matchPath: matchPath) as MatchViewController
-        vc.delegate = self
-        //        for i in 0...(competitionCell?.players.count)!-1 {
-        //            if i == matchPath.item*2 {
-        //                vc.firstPlayerLabel.text = (competitionCell?.players[i].name)! + " " + (competitionCell?.players[i].secondName)!
-        //                vc.secondPlayerLabel.text = (competitionCell?.players[i+1].name)! + " " + (competitionCell?.players[i+1].secondName)!
-        //            }
-        //        }
-        self.present(vc, animated: true)
-        print("didSelectMatchAt\(matchPath)")
-    }
-}
 
 extension CompetitionViewController: MatchViewControllerDelegate {
     
     func firstPlayerWin(matchPath: MatchPath) {
-        builder.getChildBuilder(for: matchPath)?.setWinnerIndexes([0])
+        tournamentView.builder.getChildBuilder(for: matchPath)?.setWinnerIndexes([0])
         print("firstPlayerWin")
-        self.tournamentView.reloadData()
+        tournamentView.reloadData()
     }
     
     func secondPlayerWin(matchPath: MatchPath) {
-        builder.getChildBuilder(for: matchPath)?.setWinnerIndexes([1])
+        tournamentView.builder.getChildBuilder(for: matchPath)?.setWinnerIndexes([1])
         print("secondPlayerWin")
-        self.tournamentView.reloadData()
+        tournamentView.reloadData()
     }
     
 }

@@ -18,7 +18,6 @@ class CompetitionCollectionViewCell: UICollectionViewCell {
         setupCell()
     }
 
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -33,4 +32,5 @@ class CompetitionCollectionViewCell: UICollectionViewCell {
             label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
+    
 }

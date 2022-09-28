@@ -43,6 +43,7 @@
 		FDCCA2A428DAFA4600709E80 /* AnyCompUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA2A328DAFA4600709E80 /* AnyCompUITextField.swift */; };
 		FDE14E2028DEDC0A00005B51 /* DatabaseGetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE14E1F28DEDC0A00005B51 /* DatabaseGetData.swift */; };
 		FDE14E2228DF15AB00005B51 /* CompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE14E2128DF15AB00005B51 /* CompetitionViewController.swift */; };
+		FDE7036128E412B500FF4F06 /* CompetitionNetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE7036028E412B500FF4F06 /* CompetitionNetView.swift */; };
 		FDE720DD28DC8F9400FAF811 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FDE720DC28DC8F9400FAF811 /* GoogleService-Info.plist */; };
 		FDE720E028DC90D700FAF811 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FDE720DF28DC90D700FAF811 /* FirebaseFirestoreSwift */; };
 		FDE720E228DC915C00FAF811 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FDE720E128DC915C00FAF811 /* FirebaseDatabaseSwift */; };
@@ -104,6 +105,7 @@
 		FDCCA2A328DAFA4600709E80 /* AnyCompUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUITextField.swift; sourceTree = "<group>"; };
 		FDE14E1F28DEDC0A00005B51 /* DatabaseGetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseGetData.swift; sourceTree = "<group>"; };
 		FDE14E2128DF15AB00005B51 /* CompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionViewController.swift; sourceTree = "<group>"; };
+		FDE7036028E412B500FF4F06 /* CompetitionNetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionNetView.swift; sourceTree = "<group>"; };
 		FDE720DC28DC8F9400FAF811 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -272,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				FDB3FFE728E2180C000D6DDC /* CompetitionTableView.swift */,
+				FDE7036028E412B500FF4F06 /* CompetitionNetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 				FD68DC4628E2D61A00FE0E64 /* UsersTable.swift in Sources */,
 				FD27FEEB28D9A63E00D2A405 /* AppDelegate.swift in Sources */,
 				FD20D64528DB3AA0007F5F8F /* CompetitionModel.swift in Sources */,
+				FDE7036128E412B500FF4F06 /* CompetitionNetView.swift in Sources */,
 				FD0D008828DDA29B00C47570 /* ConfigurateCompetitionViewController.swift in Sources */,
 				FD08C7D728DF511E00C18CD1 /* MyMatch.swift in Sources */,
 				FD27FEF528D9A63E00D2A405 /* Any_competition.xcdatamodeld in Sources */,
