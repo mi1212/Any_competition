@@ -15,7 +15,7 @@ class StartViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .backgroundColor
         buttonView.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
         setupController()
     }

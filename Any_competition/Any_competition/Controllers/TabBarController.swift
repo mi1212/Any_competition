@@ -11,14 +11,14 @@ class TabBarController: UITabBarController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .backgroundColor
         configurateTabBar()
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.tabBarController?.navigationItem.title = "Profile Settings"
     }
 
     private func configurateTabBar() {
-        self.tabBar.backgroundColor = .white
+        self.tabBar.backgroundColor = .backgroundColor
         self.tabBar.tintColor = .black
         self.viewControllers = [
             setupTabBar(viewController: StartViewController(), title: "add competition", image: "plus"),

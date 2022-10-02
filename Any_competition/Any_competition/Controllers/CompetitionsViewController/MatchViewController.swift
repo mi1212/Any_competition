@@ -52,9 +52,8 @@ class MatchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .backgroundColor
         setupViewController()
-//        setupLabels()
     }
     
     init(matchPath: MatchPath) {

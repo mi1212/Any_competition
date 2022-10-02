@@ -18,7 +18,7 @@ class CompetitionTableView: UIView {
         table.delegate = self
         table.dataSource = self
         table.backgroundColor = .black
-        table.register(CompetitionCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionCollectionViewCell.identifire)
+        table.register(CompetitionTableCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionTableCollectionViewCell.identifire)
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
@@ -28,7 +28,7 @@ class CompetitionTableView: UIView {
         table.backgroundColor = .black
         table.delegate = self
         table.dataSource = self
-        table.register(CompetitionCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionCollectionViewCell.identifire)
+        table.register(CompetitionTableCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionTableCollectionViewCell.identifire)
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
@@ -38,7 +38,7 @@ class CompetitionTableView: UIView {
         table.backgroundColor = .black
         table.delegate = self
         table.dataSource = self
-        table.register(CompetitionCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionCollectionViewCell.identifire)
+        table.register(CompetitionTableCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionTableCollectionViewCell.identifire)
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
@@ -107,24 +107,24 @@ extension CompetitionTableView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == tableCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath)
-            cell.backgroundColor = .white
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath)
+            cell.backgroundColor = .backgroundColor
             cell.layer.borderWidth = 0
             
             if indexPath.row == indexPath.section  {
-                cell.backgroundColor = .darkGray
+                cell.backgroundColor = .anyDarckColor
             }
             
             return cell
             
         } else if collectionView == playersNamesCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath) as! CompetitionCollectionViewCell
-            cell.backgroundColor = .white
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
+            cell.backgroundColor = .backgroundColor
             cell.label.text = usersTable!.playersArray[indexPath.section].name + " " + usersTable!.playersArray[indexPath.section].secondName
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath) as! CompetitionCollectionViewCell
-            cell.backgroundColor = .yellow
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
+            cell.backgroundColor = .backgroundColor
             cell.layer.borderWidth = 0
             return cell
         }

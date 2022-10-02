@@ -1,13 +1,13 @@
 //
-//  CompetitionCollectionViewCell.swift
+//  CompetitionTableCollectionViewCell.swift
 //  Any_competition
 //
-//  Created by Mikhail Chuparnov on 21.09.2022.
+//  Created by Mikhail Chuparnov on 02.10.2022.
 //
 
 import UIKit
 
-class CompetitionCollectionViewCell: UICollectionViewCell {
+class CompetitionTableCollectionViewCell: UICollectionViewCell {
     
     let label = AnyCompUILabel(title: "", fontSize: .small)
     
@@ -16,9 +16,8 @@ class CompetitionCollectionViewCell: UICollectionViewCell {
         contentView.layer.borderColor = UIColor.black.cgColor
         contentView.layer.borderWidth = 2
         setupCell()
-        contentView.backgroundColor = .anyColor
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -34,3 +33,4 @@ class CompetitionCollectionViewCell: UICollectionViewCell {
         ])
     }
 }
+

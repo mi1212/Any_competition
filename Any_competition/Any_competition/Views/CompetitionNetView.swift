@@ -18,7 +18,6 @@ class CompetitionNetView: UIView {
     
     private lazy var tournamentView: KRTournamentView = {
         let tournamentView = KRTournamentView()
-        tournamentView.backgroundColor = .white
         tournamentView.dataSource = self
         tournamentView.delegate = self
         tournamentView.lineColor = .black
@@ -34,6 +33,7 @@ class CompetitionNetView: UIView {
    
     convenience init(usersTable: UsersTable) {
         self.init()
+        self.backgroundColor = .backgroundColor
         self.translatesAutoresizingMaskIntoConstraints = false
         self.usersTable = usersTable
         setupView()

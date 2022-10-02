@@ -17,14 +17,12 @@ class CompetitionViewController: UIViewController{
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
-        scroll.backgroundColor = .white
         return scroll
     }()
     
     private lazy var contentView: UIView = {
         let content = UIView()
         content.translatesAutoresizingMaskIntoConstraints = false
-        content.backgroundColor = .white
         return content
     }()
     
@@ -36,7 +34,7 @@ class CompetitionViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .backgroundColor
         setupController()
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = false
@@ -46,8 +44,6 @@ class CompetitionViewController: UIViewController{
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.navigationBar.isHidden = true
-        
-
     }
     
     private func setupController() {
@@ -76,13 +72,13 @@ class CompetitionViewController: UIViewController{
             
         NSLayoutConstraint.activate([
             tableCollectionView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: inset/2),
-            tableCollectionView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            tableCollectionView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            tableCollectionView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
+            tableCollectionView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -inset),
             tableCollectionView.heightAnchor.constraint(equalToConstant: self.view.layer.bounds.width*2/3)
         ])
         
         NSLayoutConstraint.activate([
-            tournamentView.topAnchor.constraint(equalTo: self.tableCollectionView.bottomAnchor, constant: inset/2),
+            tournamentView.topAnchor.constraint(equalTo: self.tableCollectionView.bottomAnchor, constant: inset),
             tournamentView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
             tournamentView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -inset),
             tournamentView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -inset),

@@ -15,6 +15,7 @@ class AnyCompUITextField: UITextField {
     
     public init(placeholder: String, isSecure: Bool) {
         super.init(frame: .zero)
+        self.backgroundColor = .white
         self.placeholder = placeholder
         self.isSecureTextEntry = isSecure
         configure()

@@ -44,7 +44,7 @@ class ConfigurateCompetitionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .backgroundColor
         setupController()
         addButton.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
     }
