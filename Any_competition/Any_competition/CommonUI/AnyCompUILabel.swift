@@ -13,7 +13,7 @@ class AnyCompUILabel: UILabel {
     enum FontSize: CGFloat {
         case large = 17
         case medium = 13
-        case small = 9
+        case small = 6
             }
 
     
@@ -29,7 +29,6 @@ class AnyCompUILabel: UILabel {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        configure()
     }
     
     private func configure(fontSize: AnyCompUILabel.FontSize.RawValue) {

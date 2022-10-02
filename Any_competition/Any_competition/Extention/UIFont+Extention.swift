@@ -19,7 +19,7 @@ extension UIFont {
         return font!
     }
     static var anyCompSmallFont: UIFont {
-        let font = UIFont(name: "Press Start 2P", size: 8)
+        let font = UIFont(name: "Press Start 2P", size: 6)
         return font!
     }
 

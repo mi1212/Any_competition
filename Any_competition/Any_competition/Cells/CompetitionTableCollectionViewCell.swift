@@ -13,8 +13,6 @@ class CompetitionTableCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.layer.borderColor = UIColor.black.cgColor
-        contentView.layer.borderWidth = 2
         setupCell()
     }
     
@@ -24,7 +22,7 @@ class CompetitionTableCollectionViewCell: UICollectionViewCell {
     
     private func setupCell() {
         contentView.addSubview(label)
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: contentView.topAnchor),
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

@@ -48,6 +48,7 @@ class CompetitionTableView: UIView {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.usersTable = usersTable
         setupView()
+        self.backgroundColor = .black
     }
     
     override init(frame: CGRect) {
@@ -74,7 +75,7 @@ class CompetitionTableView: UIView {
             playersNamesCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
             playersNamesCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             playersNamesCollectionView.trailingAnchor.constraint(equalTo: tableCollectionView.leadingAnchor),
-            playersNamesCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 2/(CGFloat(qty!)+3)),
+            playersNamesCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 2/(CGFloat(qty!+3))),
             playersNamesCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
         
@@ -82,7 +83,7 @@ class CompetitionTableView: UIView {
             playersScoreCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
             playersScoreCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             playersScoreCollectionView.leadingAnchor.constraint(equalTo: tableCollectionView.trailingAnchor),
-            playersScoreCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/(CGFloat(qty!)+3)),
+            playersScoreCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/CGFloat(qty!+3)),
             playersScoreCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
     }
@@ -109,7 +110,6 @@ extension CompetitionTableView: UICollectionViewDataSource {
         if collectionView == tableCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath)
             cell.backgroundColor = .backgroundColor
-            cell.layer.borderWidth = 0
             
             if indexPath.row == indexPath.section  {
                 cell.backgroundColor = .anyDarckColor
@@ -125,7 +125,6 @@ extension CompetitionTableView: UICollectionViewDataSource {
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
             cell.backgroundColor = .backgroundColor
-            cell.layer.borderWidth = 0
             return cell
         }
         
@@ -133,7 +132,7 @@ extension CompetitionTableView: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
-        if cell?.backgroundColor == .white {
+        if cell?.backgroundColor == .backgroundColor {
             print(indexPath)
         }
     }
@@ -143,11 +142,9 @@ extension CompetitionTableView: UICollectionViewDataSource {
 
 extension CompetitionTableView: UICollectionViewDelegateFlowLayout {
     
-    var insetSpaseBetween: CGFloat {0.01}
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -156,8 +153,8 @@ extension CompetitionTableView: UICollectionViewDelegateFlowLayout {
         switch collectionView {
             
         case tableCollectionView:
-            let width = (size.width-CGFloat((qty!+1))*insetSpaseBetween)/CGFloat(qty!)
-            let height = (size.height-CGFloat((qty!*2+1))*insetSpaseBetween)/CGFloat(qty!)
+            let width = (size.width)/CGFloat(qty!)
+            let height = (size.height)/CGFloat(qty!)
             
             return CGSize(
                 width: width,
