@@ -72,9 +72,9 @@ class CompetitionViewController: UIViewController{
             
         NSLayoutConstraint.activate([
             tableCollectionView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: inset/2),
-            tableCollectionView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
-            tableCollectionView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -inset),
-            tableCollectionView.heightAnchor.constraint(equalToConstant: self.view.layer.bounds.width*2/3)
+            tableCollectionView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+            tableCollectionView.widthAnchor.constraint(equalTo: tableCollectionView.heightAnchor, multiplier: (3+CGFloat(qtyPlayers!))/CGFloat(qtyPlayers!)),
+            tableCollectionView.heightAnchor.constraint(equalToConstant: self.view.layer.bounds.height*CGFloat(qtyPlayers!)/21)
         ])
         
         NSLayoutConstraint.activate([

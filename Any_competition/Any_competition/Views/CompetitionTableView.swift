@@ -74,7 +74,7 @@ class CompetitionTableView: UIView {
             playersNamesCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
             playersNamesCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             playersNamesCollectionView.trailingAnchor.constraint(equalTo: tableCollectionView.leadingAnchor),
-            playersNamesCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/6),
+            playersNamesCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 2/(CGFloat(qty!)+3)),
             playersNamesCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
         
@@ -82,7 +82,7 @@ class CompetitionTableView: UIView {
             playersScoreCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
             playersScoreCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             playersScoreCollectionView.leadingAnchor.constraint(equalTo: tableCollectionView.trailingAnchor),
-            playersScoreCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/6),
+            playersScoreCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/(CGFloat(qty!)+3)),
             playersScoreCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
     }
@@ -151,26 +151,35 @@ extension CompetitionTableView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if collectionView == tableCollectionView {
-            let size = collectionView.frame.size
+        let size = collectionView.frame.size
+        
+        switch collectionView {
+            
+        case tableCollectionView:
             let width = (size.width-CGFloat((qty!+1))*insetSpaseBetween)/CGFloat(qty!)
             let height = (size.height-CGFloat((qty!*2+1))*insetSpaseBetween)/CGFloat(qty!)
+            
             return CGSize(
                 width: width,
                 height: height
             )
-                                                               
-                } else {
-                    let size = collectionView.frame.size
-                    return CGSize(width: (size.width-5*insetSpaseBetween), height: (size.height-9*insetSpaseBetween)/CGFloat((usersTable?.playersArray.count)!))
-                }
-                }
-                
-                func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-                    return 0
-                }
-                
-                func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-                    return 0
-                }
-                }
+        default:
+            let width = (size.width)
+            let height = (size.height/CGFloat(qty!))
+            
+            return CGSize(
+                width: width,
+                height: height
+            )
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+}
