@@ -9,7 +9,13 @@ import UIKit
 
 class CompetitionTableCollectionViewCell: UICollectionViewCell {
     
-    let label = AnyCompUILabel(title: "", fontSize: .small)
+    let label: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: UIFont.systemFontSize)
+        return label
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,7 +28,7 @@ class CompetitionTableCollectionViewCell: UICollectionViewCell {
     
     private func setupCell() {
         contentView.addSubview(label)
-        label.numberOfLines = 0
+        
         contentView.layer.borderColor = UIColor.anyDarckColor.cgColor
         contentView.layer.borderWidth = 1
         NSLayoutConstraint.activate([

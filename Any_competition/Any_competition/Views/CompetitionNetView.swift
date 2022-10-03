@@ -78,7 +78,7 @@ extension CompetitionNetView: KRTournamentViewDataSource {
 
         entry.textLabel.text = "player \(index)"
 
-        entry.textLabel.font = UIFont.anyCompSmallFont
+        entry.textLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
 
         return entry
     }

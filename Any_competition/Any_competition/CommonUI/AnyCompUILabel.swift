@@ -33,7 +33,7 @@ class AnyCompUILabel: UILabel {
     
     private func configure(fontSize: AnyCompUILabel.FontSize.RawValue) {
         
-        self.font = UIFont.anyCompLargeFont.withSize(fontSize)
+        self.font = UIFont.anyCompFont.withSize(fontSize)
         self.adjustsFontForContentSizeCategory = true
         self.numberOfLines = 0
         self.textAlignment = .center
