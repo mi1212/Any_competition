@@ -23,10 +23,12 @@ class CompetitionTableCollectionViewCell: UICollectionViewCell {
     private func setupCell() {
         contentView.addSubview(label)
         label.numberOfLines = 0
+        contentView.layer.borderColor = UIColor.anyDarckColor.cgColor
+        contentView.layer.borderWidth = 1
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: contentView.topAnchor),
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant:  5),
+            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -5),
             label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }

@@ -13,7 +13,7 @@ class AnyCompUILabel: UILabel {
     enum FontSize: CGFloat {
         case large = 17
         case medium = 13
-        case small = 6
+        case small = 8
             }
 
     

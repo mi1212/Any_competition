@@ -13,7 +13,7 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     var db = Firestore.firestore()
     
     private let decoder = JSONDecoder()
-
+    
     var datarequest = [Competition]()
     
     override func viewDidLoad() {
@@ -25,57 +25,44 @@ class CompetitionsCollectionViewController: UICollectionViewController {
         self.collectionView.reloadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getData()
+    }
+    
     func getData() {
         
         let docRef = db.collection("competitions")
-
+        
         docRef.getDocuments() { snapshotData, error in
             
             if snapshotData != nil {
-
+                
+                self.datarequest.removeAll()
+                
                 for i in 0...(snapshotData?.documents.count)!-1 {
-                    
                     let json = snapshotData?.documents[i].data()
-                    
                     do {
-                        
                         let data = try JSONSerialization.data(withJSONObject: json! as Any)
-                        //
                         let competition = try self.decoder.decode(Competition.self, from: data)
-                        
-//                        if let timestamp = competition["date"] as? Timestamp {
-//                            let date = timestamp.dateValue()
-//                            dateFormatter.dateStyle = .medium
-//                            dateFormatter.timeStyle = .none
-//                            strDate = "\(dateFormatter.string(from: date))"
-//                        }
-                        
                         self.datarequest.append(competition)
-                        
                     } catch {
-                        
                         print("an error occurred", error)
                     }
-                    
                 }
-                
                 self.collectionView.reloadData()
-                
             } else {
-
                 print("error - \(error as Any)")
             }
-
         }
-  
     }
-   
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return datarequest.count 
+        return datarequest.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

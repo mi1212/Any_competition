@@ -90,7 +90,6 @@ class AddCompetitionViewController: UIViewController {
 //        }
         
     }
-    
 }
 
 extension AddCompetitionViewController: ConfigurateCompetitionViewControllerDelegate {

@@ -13,11 +13,26 @@ class CompetitionTableView: UIView {
     
     private lazy var qty = usersTable?.playersArray.count
     
+    private lazy var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.backgroundColor = .systemMint
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        return scroll
+    }()
+    
+    private lazy var contentView: UIView = {
+        let content = UIView()
+        content.backgroundColor = .systemYellow
+        content.translatesAutoresizingMaskIntoConstraints = false
+        return content
+    }()
+    
     private lazy var tableCollectionView: UICollectionView = {
         let table = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         table.delegate = self
         table.dataSource = self
-        table.backgroundColor = .black
+        table.layer.borderWidth = 1
+        table.layer.borderColor = UIColor.black.cgColor
         table.register(CompetitionTableCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionTableCollectionViewCell.identifire)
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
@@ -28,6 +43,8 @@ class CompetitionTableView: UIView {
         table.backgroundColor = .black
         table.delegate = self
         table.dataSource = self
+        table.layer.borderWidth = 1
+        table.layer.borderColor = UIColor.black.cgColor
         table.register(CompetitionTableCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionTableCollectionViewCell.identifire)
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
@@ -38,6 +55,8 @@ class CompetitionTableView: UIView {
         table.backgroundColor = .black
         table.delegate = self
         table.dataSource = self
+        table.layer.borderWidth = 1
+        table.layer.borderColor = UIColor.black.cgColor
         table.register(CompetitionTableCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionTableCollectionViewCell.identifire)
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
@@ -60,31 +79,51 @@ class CompetitionTableView: UIView {
     }
     
     private func setupView() {
-        self.addSubview(tableCollectionView)
-        self.addSubview(playersNamesCollectionView)
-        self.addSubview(playersScoreCollectionView)
+        self.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        contentView.addSubview(tableCollectionView)
+        contentView.addSubview(playersNamesCollectionView)
+        contentView.addSubview(playersScoreCollectionView)
         
         NSLayoutConstraint.activate([
-            tableCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: self.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
+//            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            playersNamesCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            playersNamesCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            playersNamesCollectionView.trailingAnchor.constraint(equalTo: tableCollectionView.leadingAnchor),
+            playersNamesCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 3/(CGFloat(qty!+4))),
+            playersNamesCollectionView.heightAnchor.constraint(equalTo: self.heightAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
+            tableCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
             tableCollectionView.leadingAnchor.constraint(equalTo: playersNamesCollectionView.trailingAnchor),
             tableCollectionView.trailingAnchor.constraint(equalTo: playersScoreCollectionView.leadingAnchor),
-            tableCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            tableCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: CGFloat(qty!)/(CGFloat(qty!+4))),
+            tableCollectionView.heightAnchor.constraint(equalTo: self.heightAnchor),
         ])
-        
+
         NSLayoutConstraint.activate([
-            playersNamesCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
-            playersNamesCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            playersNamesCollectionView.trailingAnchor.constraint(equalTo: tableCollectionView.leadingAnchor),
-            playersNamesCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 2/(CGFloat(qty!+3))),
-            playersNamesCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-        ])
-        
-        NSLayoutConstraint.activate([
-            playersScoreCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
-            playersScoreCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            playersScoreCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            playersScoreCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             playersScoreCollectionView.leadingAnchor.constraint(equalTo: tableCollectionView.trailingAnchor),
-            playersScoreCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/CGFloat(qty!+3)),
-            playersScoreCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            playersScoreCollectionView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 2/CGFloat(qty!+4)),
+            playersScoreCollectionView.heightAnchor.constraint(equalTo: self.heightAnchor),
         ])
     }
 }
@@ -120,7 +159,8 @@ extension CompetitionTableView: UICollectionViewDataSource {
         } else if collectionView == playersNamesCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
             cell.backgroundColor = .backgroundColor
-            cell.label.text = usersTable!.playersArray[indexPath.section].name + " " + usersTable!.playersArray[indexPath.section].secondName
+            cell.label.text = "#\(indexPath.section+1) \(usersTable!.playersArray[indexPath.section].name)\n\(usersTable!.playersArray[indexPath.section].secondName)"
+            cell.label.textAlignment = .left
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
@@ -142,9 +182,10 @@ extension CompetitionTableView: UICollectionViewDataSource {
 
 extension CompetitionTableView: UICollectionViewDelegateFlowLayout {
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         

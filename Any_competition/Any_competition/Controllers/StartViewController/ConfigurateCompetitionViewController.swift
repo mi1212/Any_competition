@@ -28,6 +28,18 @@ class ConfigurateCompetitionViewController: UIViewController {
     
     weak var delegate: ConfigurateCompetitionViewControllerDelegate?
     
+    private lazy var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        return scroll
+    }()
+    
+    private lazy var contentView: UIView = {
+        let content = UIView()
+        content.translatesAutoresizingMaskIntoConstraints = false
+        return content
+    }()
+    
     private lazy var playersTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,24 +62,43 @@ class ConfigurateCompetitionViewController: UIViewController {
     }
     
     private func setupController() {
-        self.view.addSubview(playersTableView)
-        self.view.addSubview(addButton)
+        
+        self.view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        contentView.addSubview(playersTableView)
+        contentView.addSubview(addButton)
         
         let inset: CGFloat = 30
-
+        
         NSLayoutConstraint.activate([
-            playersTableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: inset/2),
-            playersTableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
-            playersTableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
-            
+            scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+        ])
+ 
+        NSLayoutConstraint.activate([
+            playersTableView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset/2),
+            playersTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            playersTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             playersTableView.heightAnchor.constraint(equalToConstant: 60*CGFloat(playerQty!))
         ])
         
         NSLayoutConstraint.activate([
-            addButton.topAnchor.constraint(equalTo: self.playersTableView.bottomAnchor, constant: inset/2),
-            addButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
-            addButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
-            addButton.heightAnchor.constraint(equalToConstant: 40)
+            addButton.topAnchor.constraint(equalTo: playersTableView.bottomAnchor, constant: inset/2),
+            addButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            addButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            addButton.heightAnchor.constraint(equalToConstant: 40),
+            addButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     
