@@ -13,7 +13,7 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
         configurateTabBar()
-        fontFamilyName()
+//        fontFamilyName()
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.tabBarController?.navigationItem.title = "Profile Settings"
     }

@@ -34,7 +34,7 @@ class AddCompetitionViewController: UIViewController {
         self.view.addSubview(addButton)
         
         
-        let inset: CGFloat = 60
+        let inset: CGFloat = 30
         
         NSLayoutConstraint.activate([
             competitionTitleTextField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),

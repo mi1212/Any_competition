@@ -22,12 +22,14 @@ class CompetitionsCollectionViewController: UICollectionViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.collectionView.register(CompetitionCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionCollectionViewCell.identifire)
         getData()
-        self.collectionView.reloadData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getData()
+        self.collectionView.reloadData()
+        
     }
     
     func getData() {

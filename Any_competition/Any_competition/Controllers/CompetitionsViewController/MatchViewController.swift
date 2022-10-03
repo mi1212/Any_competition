@@ -77,7 +77,7 @@ class MatchViewController: UIViewController {
         firstPlayerWinButton.addTarget(self, action: #selector(tapFirstPlayerWin), for: .touchUpInside)
         secondlayerWinButton.addTarget(self, action: #selector(tapSecondPlayerWin), for: .touchUpInside)
         
-    let inset: CGFloat = 60
+    let inset: CGFloat = 30
         
         NSLayoutConstraint.activate([
             playerStack.topAnchor.constraint(equalTo: self.view.topAnchor, constant: inset),

@@ -10,8 +10,9 @@ import UIKit
 extension UIFont {
     
     static var anyCompFont: UIFont {
-//        let font = UIFont(name: "Diary-of-an-8-bit-mage", size: 24)
-        let font = UIFont(name: "Hardpixel", size: 24)
+        let font = UIFont(name: "Press Start 2P", size: 12)
         return font!
+//        let font = UIFont.systemFont(ofSize: 24)
+//        return font
     }
 }

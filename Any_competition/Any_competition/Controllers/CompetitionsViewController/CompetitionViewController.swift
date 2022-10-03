@@ -14,6 +14,8 @@ class CompetitionViewController: UIViewController{
     
     var usersTable: UsersTable?
     
+    let side = CGFloat(40)
+    
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
@@ -51,15 +53,14 @@ class CompetitionViewController: UIViewController{
         scrollView.addSubview(contentView)
         contentView.addSubview(tableCollectionView)
         contentView.addSubview(tournamentView)
-        
-        
-        let inset: CGFloat = 12
+  
+        let inset: CGFloat = 30
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -inset)
         ])
         
         NSLayoutConstraint.activate([
@@ -72,10 +73,9 @@ class CompetitionViewController: UIViewController{
             
         NSLayoutConstraint.activate([
             tableCollectionView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: inset/2),
-            tableCollectionView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
-            tableCollectionView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
-            tableCollectionView.widthAnchor.constraint(equalTo: tableCollectionView.heightAnchor, multiplier: (3+CGFloat(qtyPlayers!))/CGFloat(qtyPlayers!)),
-            tableCollectionView.heightAnchor.constraint(equalToConstant: self.view.layer.bounds.height*CGFloat(qtyPlayers!)/20)
+            tableCollectionView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
+            tableCollectionView.heightAnchor.constraint(equalToConstant: side*CGFloat(qtyPlayers!)),
+            tableCollectionView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor),
         ])
         
         NSLayoutConstraint.activate([
@@ -87,8 +87,6 @@ class CompetitionViewController: UIViewController{
         ])
     }
 }
-
-
 
 extension CompetitionViewController: MatchViewControllerDelegate {
     
