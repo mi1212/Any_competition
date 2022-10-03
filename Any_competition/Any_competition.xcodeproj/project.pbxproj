@@ -35,6 +35,8 @@
 		FD27FF3628D9E85900D2A405 /* AnyCompUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */; };
 		FD29C22528E040EF00C3B7EB /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD29C22428E040EF00C3B7EB /* MatchViewController.swift */; };
 		FD339E9928E34D6D000DD8F3 /* UIFont+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD339E9828E34D6D000DD8F3 /* UIFont+Extention.swift */; };
+		FD546BBB28EACFBE006B21B1 /* Hardpixel-nn51.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD91763F28EACD470017014B /* Hardpixel-nn51.otf */; };
+		FD546BBC28EACFBE006B21B1 /* DiaryOfAn8BitMage-lYDD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD91763D28EACD460017014B /* DiaryOfAn8BitMage-lYDD.ttf */; };
 		FD68DC4628E2D61A00FE0E64 /* UsersTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD68DC4528E2D61A00FE0E64 /* UsersTable.swift */; };
 		FDB3FFE828E2180C000D6DDC /* CompetitionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB3FFE728E2180C000D6DDC /* CompetitionTableView.swift */; };
 		FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA29F28DADA7F00709E80 /* TabBarController.swift */; };
@@ -99,6 +101,8 @@
 		FD29C22428E040EF00C3B7EB /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
 		FD339E9828E34D6D000DD8F3 /* UIFont+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extention.swift"; sourceTree = "<group>"; };
 		FD68DC4528E2D61A00FE0E64 /* UsersTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTable.swift; sourceTree = "<group>"; };
+		FD91763D28EACD460017014B /* DiaryOfAn8BitMage-lYDD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DiaryOfAn8BitMage-lYDD.ttf"; sourceTree = "<group>"; };
+		FD91763F28EACD470017014B /* Hardpixel-nn51.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hardpixel-nn51.otf"; sourceTree = "<group>"; };
 		FDB3FFE728E2180C000D6DDC /* CompetitionTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionTableView.swift; sourceTree = "<group>"; };
 		FDCCA29F28DADA7F00709E80 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompetitionViewController.swift; sourceTree = "<group>"; };
@@ -234,6 +238,8 @@
 		FD27FF1D28D9AA2300D2A405 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				FD91763D28EACD460017014B /* DiaryOfAn8BitMage-lYDD.ttf */,
+				FD91763F28EACD470017014B /* Hardpixel-nn51.otf */,
 				FD27FF2C28D9D27100D2A405 /* 04B_30__.TTF */,
 				FD27FF2828D9D27100D2A405 /* 8-BIT WONDER.ttf */,
 				FD27FF2B28D9D27100D2A405 /* Pixel LCD-7.ttf */,
@@ -424,6 +430,8 @@
 				FD27FF3028D9D27100D2A405 /* Pixel LCD-7.ttf in Resources */,
 				FDE720DD28DC8F9400FAF811 /* GoogleService-Info.plist in Resources */,
 				FD27FF3128D9D27100D2A405 /* 04B_30__.TTF in Resources */,
+				FD546BBB28EACFBE006B21B1 /* Hardpixel-nn51.otf in Resources */,
+				FD546BBC28EACFBE006B21B1 /* DiaryOfAn8BitMage-lYDD.ttf in Resources */,
 				FD27FF2E28D9D27100D2A405 /* tight_pixel.ttf in Resources */,
 				FD27FEFA28D9A63F00D2A405 /* LaunchScreen.storyboard in Resources */,
 				FD27FF2D28D9D27100D2A405 /* 8-BIT WONDER.ttf in Resources */,

@@ -13,6 +13,7 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
         configurateTabBar()
+        fontFamilyName()
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.tabBarController?.navigationItem.title = "Profile Settings"
     }
@@ -50,6 +51,17 @@ class TabBarController: UITabBarController {
         }()
         
         return collectionViewlowFLayout
+    }
+    
+    private func fontFamilyName() {
+        for family: String in UIFont.familyNames
+                {
+                    print(family)
+                    for names: String in UIFont.fontNames(forFamilyName: family)
+                    {
+                        print("== \(names)")
+                    }
+                }
     }
     
 }
