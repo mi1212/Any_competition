@@ -148,7 +148,7 @@ extension CompetitionTableView: UICollectionViewDataSource {
         
         if collectionView == tableCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath)
-            cell.backgroundColor = .backgroundColor
+            cell.backgroundColor = .white
             
             if indexPath.row == indexPath.section  {
                 cell.backgroundColor = .anyDarckColor
@@ -158,13 +158,13 @@ extension CompetitionTableView: UICollectionViewDataSource {
             
         } else if collectionView == playersNamesCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
-            cell.backgroundColor = .backgroundColor
+            cell.backgroundColor = .white
             cell.label.text = "#\(indexPath.section+1) \(usersTable!.playersArray[indexPath.section].name)\n\(usersTable!.playersArray[indexPath.section].secondName)"
             cell.label.textAlignment = .left
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
-            cell.backgroundColor = .backgroundColor
+            cell.backgroundColor = .white
             return cell
         }
         
@@ -172,7 +172,7 @@ extension CompetitionTableView: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
-        if cell?.backgroundColor == .backgroundColor {
+        if cell?.backgroundColor == .white {
             print(indexPath)
         }
     }

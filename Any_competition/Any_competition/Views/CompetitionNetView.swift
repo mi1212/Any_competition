@@ -12,7 +12,7 @@ class CompetitionNetView: UIView {
     
     var usersTable: UsersTable?
     
-    var builder: TournamentBuilder = .init(numberOfLayers: 2)
+    var builder: TournamentBuilder = .init(numberOfLayers: 3)
     
     var entryNames = [Int: String]()
     
@@ -21,7 +21,7 @@ class CompetitionNetView: UIView {
         tournamentView.dataSource = self
         tournamentView.delegate = self
         tournamentView.lineColor = .black
-        tournamentView.style = KRTournamentViewStyle.left
+        tournamentView.style = KRTournamentViewStyle.top
         tournamentView.lineWidth = 4
         tournamentView.lineColor = UIColor.black
         tournamentView.winnerLineColor = UIColor.orange

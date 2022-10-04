@@ -6,16 +6,38 @@
 //
 
 import UIKit
+import Lottie
 
 class TabBarController: UITabBarController {
  
+    var timer: Timer?
+
+    let animationView = AnimationView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
-        configurateTabBar()
-//        fontFamilyName()
+        setupAnimation()
+        setupTabBar()
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.tabBarController?.navigationItem.title = "Profile Settings"
+    }
+    
+    private func setupAnimation() {
+        animationView.animation = Animation.named("darts2")
+        animationView.frame = view.bounds
+        animationView.backgroundColor = .backgroundColor
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .playOnce
+        animationView.play()
+        self.view.addSubview(animationView)
+    }
+
+    private func setupTabBar() {
+        timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { _ in
+            self.configurateTabBar()
+            self.animationView.layer.opacity = 0
+        })
     }
 
     private func configurateTabBar() {
@@ -49,19 +71,24 @@ class TabBarController: UITabBarController {
             flowLayout.sectionInset = UIEdgeInsets(top: inset*2, left: inset, bottom: inset*2, right: inset)
             return flowLayout
         }()
-        
+
         return collectionViewlowFLayout
     }
-    
-    private func fontFamilyName() {
-        for family: String in UIFont.familyNames
-                {
-                    print(family)
-                    for names: String in UIFont.fontNames(forFamilyName: family)
-                    {
-                        print("== \(names)")
-                    }
-                }
-    }
+
+//    private func fontFamilyName() {
+//        for family: String in UIFont.familyNames
+//                {
+//                    print(family)
+//                    for names: String in UIFont.fontNames(forFamilyName: family)
+//                    {
+//                        print("== \(names)")
+//                    }
+//                }
+//    }
     
 }
+
+
+
+
+

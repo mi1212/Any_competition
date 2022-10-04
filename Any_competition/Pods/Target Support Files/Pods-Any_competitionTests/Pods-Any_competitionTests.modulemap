@@ -1,0 +1,6 @@
+framework module Pods_Any_competitionTests {
+  umbrella header "Pods-Any_competitionTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
