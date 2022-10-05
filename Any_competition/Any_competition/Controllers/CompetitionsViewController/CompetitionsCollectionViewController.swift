@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseFirestore
+import Lottie
 
 class CompetitionsCollectionViewController: UICollectionViewController {
     
@@ -16,6 +17,10 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     
     var datarequest = [Competition]()
     
+    var timer: Timer?
+    
+    let animationView = AnimationView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView.backgroundColor = .backgroundColor
@@ -23,6 +28,16 @@ class CompetitionsCollectionViewController: UICollectionViewController {
         self.collectionView.register(CompetitionCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionCollectionViewCell.identifire)
         getData()
         
+    }
+    
+    private func setupAnimation() {
+        animationView.animation = Animation.named("loading4")
+        animationView.frame = CGRect(origin: CGPoint(x: view.bounds.width/4, y: 0), size: CGSize(width: view.bounds.width/2, height: view.bounds.height/6))
+        animationView.backgroundColor = .backgroundColor
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .loop
+        animationView.play()
+        self.collectionView.addSubview(animationView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,10 +49,12 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     
     func getData() {
         
+        self.setupAnimation()
+        
         let docRef = db.collection("competitions")
         
         docRef.getDocuments() { snapshotData, error in
-            
+  
             if snapshotData != nil {
                 
                 self.datarequest.removeAll()
@@ -52,7 +69,11 @@ class CompetitionsCollectionViewController: UICollectionViewController {
                         print("an error occurred", error)
                     }
                 }
+                
+                self.animationView.layer.opacity = 0
+                self.animationView.stop()
                 self.collectionView.reloadData()
+
             } else {
                 print("error - \(error as Any)")
             }
@@ -70,7 +91,6 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath) as! CompetitionCollectionViewCell
         cell.label.text = datarequest[indexPath.row].info.title
-        cell.label.font = .anyCompFont
         return cell
     }
     

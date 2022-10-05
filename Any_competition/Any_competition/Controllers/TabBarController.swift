@@ -26,7 +26,7 @@ class TabBarController: UITabBarController {
     private func setupAnimation() {
         animationView.animation = Animation.named("darts2")
         animationView.frame = view.bounds
-        animationView.backgroundColor = .backgroundColor
+        animationView.backgroundColor = .white
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .playOnce
         animationView.play()
@@ -37,6 +37,7 @@ class TabBarController: UITabBarController {
         timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { _ in
             self.configurateTabBar()
             self.animationView.layer.opacity = 0
+            self.animationView.removeFromSuperview()
         })
     }
 

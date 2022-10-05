@@ -52,15 +52,15 @@ class CompetitionViewController: UIViewController{
         self.view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(tableCollectionView)
-        contentView.addSubview(tournamentView)
+//        contentView.addSubview(tournamentView)
   
         let inset: CGFloat = 30
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
-            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -inset)
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -73,33 +73,34 @@ class CompetitionViewController: UIViewController{
             
         NSLayoutConstraint.activate([
             tableCollectionView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: inset/2),
-            tableCollectionView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
+            tableCollectionView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             tableCollectionView.heightAnchor.constraint(equalToConstant: side*CGFloat(qtyPlayers!)),
             tableCollectionView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor),
+            tableCollectionView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -inset),
         ])
         
-        NSLayoutConstraint.activate([
-            tournamentView.topAnchor.constraint(equalTo: self.tableCollectionView.bottomAnchor, constant: inset),
-            tournamentView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
-            tournamentView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -inset),
-            tournamentView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -inset),
-            tournamentView.heightAnchor.constraint(equalToConstant: self.view.layer.bounds.width*2/3)
-        ])
+//        NSLayoutConstraint.activate([
+//            tournamentView.topAnchor.constraint(equalTo: self.tableCollectionView.bottomAnchor, constant: inset),
+//            tournamentView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
+//            tournamentView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -inset),
+//            tournamentView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -inset),
+//            tournamentView.heightAnchor.constraint(equalToConstant: self.view.layer.bounds.width*2/3)
+//        ])
     }
 }
 
 extension CompetitionViewController: MatchViewControllerDelegate {
-    
+
     func firstPlayerWin(matchPath: MatchPath) {
         tournamentView.builder.getChildBuilder(for: matchPath)?.setWinnerIndexes([0])
         print("firstPlayerWin")
         tournamentView.reloadData()
     }
-    
+
     func secondPlayerWin(matchPath: MatchPath) {
         tournamentView.builder.getChildBuilder(for: matchPath)?.setWinnerIndexes([1])
         print("secondPlayerWin")
         tournamentView.reloadData()
     }
-    
+
 }
