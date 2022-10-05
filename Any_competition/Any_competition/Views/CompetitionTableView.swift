@@ -9,15 +9,22 @@ import UIKit
 
 class CompetitionTableView: UIView {
     
+    var width: CGFloat = 140
+    
     var usersTable: UsersTable?
     
     let side = CGFloat(40)
     
     private lazy var qty = usersTable?.playersArray.count
     
+    private lazy var subView: UIView = {
+        let content = UIView()
+        content.translatesAutoresizingMaskIntoConstraints = false
+        return content
+    }()
+    
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
-        scroll.backgroundColor = .backgroundColor
         scroll.translatesAutoresizingMaskIntoConstraints = false
         return scroll
     }()
@@ -63,12 +70,12 @@ class CompetitionTableView: UIView {
         return table
     }()
     
-    convenience init(usersTable: UsersTable) {
+    convenience init(usersTable: UsersTable, width: CGFloat) {
         self.init()
         self.translatesAutoresizingMaskIntoConstraints = false
         self.usersTable = usersTable
+        self.width = width
         setupView()
-        self.backgroundColor = .black
     }
     
     override init(frame: CGRect) {
@@ -80,30 +87,39 @@ class CompetitionTableView: UIView {
     }
     
     private func setupView() {
-        self.addSubview(scrollView)
-        self.addSubview(playersNamesCollectionView)
+        self.addSubview(subView)
+        print(width)
+        subView.addSubview(scrollView)
+        subView.addSubview(playersNamesCollectionView)
         
         scrollView.addSubview(contentView)
-        
         
         contentView.addSubview(tableCollectionView)
         contentView.addSubview(playersScoreCollectionView)
         
         NSLayoutConstraint.activate([
-            playersNamesCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
-            playersNamesCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-//            playersNamesCollectionView.trailingAnchor.constraint(equalTo: tableCollectionView.leadingAnchor),
-            playersNamesCollectionView.widthAnchor.constraint(equalToConstant: 2.5*side),
-            playersNamesCollectionView.heightAnchor.constraint(equalToConstant: side*CGFloat(qty!)),
+            subView.topAnchor.constraint(equalTo: self.topAnchor),
+            subView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            subView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            subView.widthAnchor.constraint(equalToConstant: 2.5*side + side*CGFloat(qty!)),
+            subView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: self.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: playersNamesCollectionView.trailingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            playersNamesCollectionView.topAnchor.constraint(equalTo: subView.topAnchor),
+            playersNamesCollectionView.leadingAnchor.constraint(equalTo: subView.leadingAnchor),
+            playersNamesCollectionView.widthAnchor.constraint(equalToConstant: 2.5*side),
+            playersNamesCollectionView.heightAnchor.constraint(equalToConstant: side*CGFloat(qty!)),
+            playersNamesCollectionView.bottomAnchor.constraint(equalTo: subView.bottomAnchor)
         ])
         
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: subView.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: subView.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: playersNamesCollectionView.trailingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: subView.trailingAnchor),
+        ])
+
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
@@ -111,13 +127,12 @@ class CompetitionTableView: UIView {
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
         ])
- 
+
         NSLayoutConstraint.activate([
             tableCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
             tableCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            tableCollectionView.trailingAnchor.constraint(equalTo: playersScoreCollectionView.leadingAnchor),
             tableCollectionView.widthAnchor.constraint(equalToConstant: side*CGFloat(qty!)),
-            tableCollectionView.heightAnchor.constraint(equalTo: playersNamesCollectionView.heightAnchor),
+            tableCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
 
         NSLayoutConstraint.activate([
@@ -125,7 +140,7 @@ class CompetitionTableView: UIView {
             playersScoreCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             playersScoreCollectionView.leadingAnchor.constraint(equalTo: tableCollectionView.trailingAnchor),
             playersScoreCollectionView.widthAnchor.constraint(equalToConstant: side),
-            playersScoreCollectionView.heightAnchor.constraint(equalTo: playersNamesCollectionView.heightAnchor),
+            playersScoreCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }

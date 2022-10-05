@@ -30,7 +30,7 @@ class CompetitionViewController: UIViewController{
     
     var qtyPlayers: Int?
     
-    private lazy var tableCollectionView = CompetitionTableView(usersTable: self.usersTable!)
+    private lazy var tableCollectionView = CompetitionTableView(usersTable: self.usersTable!, width: self.view.bounds.width)
     
     private lazy var tournamentView = CompetitionNetView(usersTable: self.usersTable!)
     
@@ -73,9 +73,9 @@ class CompetitionViewController: UIViewController{
             
         NSLayoutConstraint.activate([
             tableCollectionView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: inset/2),
-            tableCollectionView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            tableCollectionView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
             tableCollectionView.heightAnchor.constraint(equalToConstant: side*CGFloat(qtyPlayers!)),
-            tableCollectionView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor),
+            tableCollectionView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             tableCollectionView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -inset),
         ])
         
