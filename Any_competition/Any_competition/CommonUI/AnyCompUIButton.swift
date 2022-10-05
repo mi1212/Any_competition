@@ -30,7 +30,7 @@ class AnyCompUIButton: UIButton {
         self.backgroundColor = .anyColor
         self.layer.borderColor = UIColor.black.cgColor
         self.layer.borderWidth = 3
-        self.titleLabel?.font =  .anyCompFont
+        self.titleLabel?.font =  UIFont.systemFont(ofSize: UIFont.buttonFontSize, weight: .regular)
         self.setTitleColor(.black, for: .normal)
         translatesAutoresizingMaskIntoConstraints = false
     }

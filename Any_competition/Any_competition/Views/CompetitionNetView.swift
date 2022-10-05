@@ -21,7 +21,7 @@ class CompetitionNetView: UIView {
         tournamentView.dataSource = self
         tournamentView.delegate = self
         tournamentView.lineColor = .black
-        tournamentView.style = KRTournamentViewStyle.top
+        tournamentView.style = KRTournamentViewStyle.left
         tournamentView.lineWidth = 4
         tournamentView.lineColor = UIColor.black
         tournamentView.winnerLineColor = UIColor.orange
@@ -93,23 +93,12 @@ extension CompetitionNetView: KRTournamentViewDelegate {
     func tournamentView(_ tournamentView: KRTournamentView, didSelectEntryAt index: Int) {
         
         print("didSelectEntryAt\(index)")
-        
         tournamentView.reloadData()
     }
 
     func tournamentView(_ tournamentView: KRTournamentView, didSelectMatchAt matchPath: MatchPath) {
         
-        tournamentView.reloadData()
-        
-//        let vc = MatchViewController(matchPath: matchPath) as MatchViewController
-//
-//        for i in 0...(usersTable?.playersArray.count)!-1 {
-//                    if i == matchPath.item*2 {
-//
-//                    }
-//                }
-        
         print("didSelectMatchAt\(matchPath)")
-        
+        tournamentView.reloadData()
     }
 }
