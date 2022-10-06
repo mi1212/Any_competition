@@ -31,7 +31,7 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     }
     
     private func setupAnimation() {
-        animationView.animation = Animation.named("loading4")
+        animationView.animation = Animation.named("loading")
         animationView.frame = CGRect(origin: CGPoint(x: view.bounds.width/4, y: 0), size: CGSize(width: view.bounds.width/2, height: view.bounds.height/6))
         animationView.backgroundColor = .backgroundColor
         animationView.contentMode = .scaleAspectFit
@@ -78,6 +78,7 @@ class CompetitionsCollectionViewController: UICollectionViewController {
                 print("error - \(error as Any)")
             }
         }
+        
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
