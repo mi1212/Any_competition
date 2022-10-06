@@ -19,6 +19,7 @@ class CompetitionTableView: UIView {
     
     private lazy var subView: UIView = {
         let content = UIView()
+        content.backgroundColor = .white
         content.translatesAutoresizingMaskIntoConstraints = false
         return content
     }()
@@ -101,7 +102,7 @@ class CompetitionTableView: UIView {
             subView.topAnchor.constraint(equalTo: self.topAnchor),
             subView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             subView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            subView.widthAnchor.constraint(equalToConstant: 2.5*side + side*CGFloat(qty!)),
+            subView.widthAnchor.constraint(equalToConstant: 2.5*side + side*CGFloat(qty!+1)),
             subView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
         
