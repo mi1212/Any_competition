@@ -8,9 +8,7 @@
 import UIKit
 
 class CompetitionTableView: UIView {
-    
-    var width: CGFloat = 140
-    
+ 
     var usersTable: UsersTable?
     
     let side = CGFloat(40)
@@ -71,11 +69,10 @@ class CompetitionTableView: UIView {
         return table
     }()
     
-    convenience init(usersTable: UsersTable, width: CGFloat) {
+    convenience init(usersTable: UsersTable) {
         self.init()
         self.translatesAutoresizingMaskIntoConstraints = false
         self.usersTable = usersTable
-        self.width = width
         setupView()
     }
     
@@ -89,7 +86,7 @@ class CompetitionTableView: UIView {
     
     private func setupView() {
         self.addSubview(subView)
-        print(width)
+        
         subView.addSubview(scrollView)
         subView.addSubview(playersNamesCollectionView)
         
