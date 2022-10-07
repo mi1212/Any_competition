@@ -14,6 +14,7 @@
 		FD0D008828DDA29B00C47570 /* ConfigurateCompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0D008728DDA29B00C47570 /* ConfigurateCompetitionViewController.swift */; };
 		FD0D008A28DDBF0200C47570 /* PlayersInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0D008928DDBF0200C47570 /* PlayersInfoTableViewCell.swift */; };
 		FD0FB29728ECBCE6000789CD /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0FB29628ECBCE6000789CD /* TestViewController.swift */; };
+		FD1E1FFE28F08ED1001CF0EA /* DateFormater.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1E1FFD28F08ED1001CF0EA /* DateFormater.swift */; };
 		FD20D63A28DB0B19007F5F8F /* CompetitionsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20D63928DB0B19007F5F8F /* CompetitionsCollectionViewController.swift */; };
 		FD20D63D28DB0DE9007F5F8F /* CompetitionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20D63C28DB0DE9007F5F8F /* CompetitionCollectionViewCell.swift */; };
 		FD20D64028DB0E97007F5F8F /* UIView+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20D63F28DB0E97007F5F8F /* UIView+Extention.swift */; };
@@ -39,11 +40,9 @@
 		FD339E9928E34D6D000DD8F3 /* UIFont+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD339E9828E34D6D000DD8F3 /* UIFont+Extention.swift */; };
 		FD546BBB28EACFBE006B21B1 /* Hardpixel-nn51.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD91763F28EACD470017014B /* Hardpixel-nn51.otf */; };
 		FD546BBC28EACFBE006B21B1 /* DiaryOfAn8BitMage-lYDD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD91763D28EACD460017014B /* DiaryOfAn8BitMage-lYDD.ttf */; };
+		FD59CC1128EEA2AB008818B1 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = FD59CC1028EEA2AB008818B1 /* loading.json */; };
 		FD68DC4628E2D61A00FE0E64 /* UsersTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD68DC4528E2D61A00FE0E64 /* UsersTable.swift */; };
-		FD7A38A728F088E70056A362 /* DateFormater.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7A38A628F088E70056A362 /* DateFormater.swift */; };
 		FD7C894A28ED55D100699A7E /* AnyCompLogoUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C894928ED55D100699A7E /* AnyCompLogoUILabel.swift */; };
-		FD833D5E28EDEA1E00AC3275 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = FD833D5D28EDEA1E00AC3275 /* loading.json */; };
-		FD833D6128EDEBA000AC3275 /* CompetitionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD833D6028EDEBA000AC3275 /* CompetitionData.swift */; };
 		FD9604F228ECC38B009C902E /* darts1.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9604F028ECC38A009C902E /* darts1.json */; };
 		FD9604F328ECC38B009C902E /* darts2.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9604F128ECC38B009C902E /* darts2.json */; };
 		FDB3FFE828E2180C000D6DDC /* CompetitionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB3FFE728E2180C000D6DDC /* CompetitionTableView.swift */; };
@@ -89,6 +88,7 @@
 		FD0D008728DDA29B00C47570 /* ConfigurateCompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurateCompetitionViewController.swift; sourceTree = "<group>"; };
 		FD0D008928DDBF0200C47570 /* PlayersInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersInfoTableViewCell.swift; sourceTree = "<group>"; };
 		FD0FB29628ECBCE6000789CD /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		FD1E1FFD28F08ED1001CF0EA /* DateFormater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormater.swift; sourceTree = "<group>"; };
 		FD20D63928DB0B19007F5F8F /* CompetitionsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsCollectionViewController.swift; sourceTree = "<group>"; };
 		FD20D63C28DB0DE9007F5F8F /* CompetitionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionCollectionViewCell.swift; sourceTree = "<group>"; };
 		FD20D63F28DB0E97007F5F8F /* UIView+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extention.swift"; sourceTree = "<group>"; };
@@ -116,11 +116,9 @@
 		FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUIButton.swift; sourceTree = "<group>"; };
 		FD29C22428E040EF00C3B7EB /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
 		FD339E9828E34D6D000DD8F3 /* UIFont+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extention.swift"; sourceTree = "<group>"; };
+		FD59CC1028EEA2AB008818B1 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		FD68DC4528E2D61A00FE0E64 /* UsersTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTable.swift; sourceTree = "<group>"; };
-		FD7A38A628F088E70056A362 /* DateFormater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormater.swift; sourceTree = "<group>"; };
 		FD7C894928ED55D100699A7E /* AnyCompLogoUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompLogoUILabel.swift; sourceTree = "<group>"; };
-		FD833D5D28EDEA1E00AC3275 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
-		FD833D6028EDEBA000AC3275 /* CompetitionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionData.swift; sourceTree = "<group>"; };
 		FD91763D28EACD460017014B /* DiaryOfAn8BitMage-lYDD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DiaryOfAn8BitMage-lYDD.ttf"; sourceTree = "<group>"; };
 		FD91763F28EACD470017014B /* Hardpixel-nn51.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hardpixel-nn51.otf"; sourceTree = "<group>"; };
 		FD9604F028ECC38A009C902E /* darts1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = darts1.json; sourceTree = "<group>"; };
@@ -201,9 +199,9 @@
 		FD20D64128DB1FA5007F5F8F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FD1E1FFD28F08ED1001CF0EA /* DateFormater.swift */,
 				FD20D64428DB3AA0007F5F8F /* CompetitionModel.swift */,
 				FD68DC4528E2D61A00FE0E64 /* UsersTable.swift */,
-				FD7A38A628F088E70056A362 /* DateFormater.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -233,7 +231,6 @@
 		FD27FEE928D9A63E00D2A405 /* Any_competition */ = {
 			isa = PBXGroup;
 			children = (
-				FD833D5F28EDEB8300AC3275 /* Data */,
 				FD9604EF28ECC364009C902E /* Animations */,
 				FD339E9B28E363B2000DD8F3 /* Views */,
 				FDE14E1E28DEDBD600005B51 /* Database */,
@@ -338,20 +335,12 @@
 			path = CompetitionsViewController;
 			sourceTree = "<group>";
 		};
-		FD833D5F28EDEB8300AC3275 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				FD833D6028EDEBA000AC3275 /* CompetitionData.swift */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		FD9604EF28ECC364009C902E /* Animations */ = {
 			isa = PBXGroup;
 			children = (
 				FD9604F028ECC38A009C902E /* darts1.json */,
 				FD9604F128ECC38B009C902E /* darts2.json */,
-				FD833D5D28EDEA1E00AC3275 /* loading.json */,
+				FD59CC1028EEA2AB008818B1 /* loading.json */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -493,7 +482,7 @@
 				FD546BBB28EACFBE006B21B1 /* Hardpixel-nn51.otf in Resources */,
 				FD9604F228ECC38B009C902E /* darts1.json in Resources */,
 				FD546BBC28EACFBE006B21B1 /* DiaryOfAn8BitMage-lYDD.ttf in Resources */,
-				FD833D5E28EDEA1E00AC3275 /* loading.json in Resources */,
+				FD59CC1128EEA2AB008818B1 /* loading.json in Resources */,
 				FD27FF2E28D9D27100D2A405 /* tight_pixel.ttf in Resources */,
 				FD9604F328ECC38B009C902E /* darts2.json in Resources */,
 				FD27FEFA28D9A63F00D2A405 /* LaunchScreen.storyboard in Resources */,
@@ -644,7 +633,6 @@
 				FD27FEF528D9A63E00D2A405 /* Any_competition.xcdatamodeld in Sources */,
 				FDE14E2228DF15AB00005B51 /* CompetitionViewController.swift in Sources */,
 				FD0FB29728ECBCE6000789CD /* TestViewController.swift in Sources */,
-				FD7A38A728F088E70056A362 /* DateFormater.swift in Sources */,
 				FD20D63A28DB0B19007F5F8F /* CompetitionsCollectionViewController.swift in Sources */,
 				FD339E9928E34D6D000DD8F3 /* UIFont+Extention.swift in Sources */,
 				FD20D63D28DB0DE9007F5F8F /* CompetitionCollectionViewCell.swift in Sources */,
@@ -652,8 +640,8 @@
 				FD7C894A28ED55D100699A7E /* AnyCompLogoUILabel.swift in Sources */,
 				FD20D64928DB4FF1007F5F8F /* CompetitionFetch.swift in Sources */,
 				FD27FF3428D9DFAF00D2A405 /* AnyCompUILabel.swift in Sources */,
+				FD1E1FFE28F08ED1001CF0EA /* DateFormater.swift in Sources */,
 				FD27FEED28D9A63E00D2A405 /* SceneDelegate.swift in Sources */,
-				FD833D6128EDEBA000AC3275 /* CompetitionData.swift in Sources */,
 				FDF7EDEB28E9E6EE00FAE28E /* UIColor+Extention.swift in Sources */,
 				FD20D64028DB0E97007F5F8F /* UIView+Extention.swift in Sources */,
 				FDB3FFE828E2180C000D6DDC /* CompetitionTableView.swift in Sources */,

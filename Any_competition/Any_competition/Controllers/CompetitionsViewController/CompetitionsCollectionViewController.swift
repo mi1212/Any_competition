@@ -78,6 +78,7 @@ class CompetitionsCollectionViewController: UICollectionViewController {
                 print("error - \(error as Any)")
             }
         }
+        
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
