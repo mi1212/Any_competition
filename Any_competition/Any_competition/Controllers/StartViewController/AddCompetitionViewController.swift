@@ -34,31 +34,31 @@ class AddCompetitionViewController: UIViewController {
         self.view.addSubview(addButton)
         
         
-        let inset: CGFloat = 30
+        let inset: CGFloat = 16
         
         NSLayoutConstraint.activate([
             competitionTitleTextField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
             competitionTitleTextField.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
-            competitionTitleTextField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: inset),
-            competitionTitleTextField.heightAnchor.constraint(equalToConstant: 40)
+            competitionTitleTextField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: inset*3),
+            competitionTitleTextField.heightAnchor.constraint(equalToConstant: 52)
         ])
         
         NSLayoutConstraint.activate([
             playerQtyTextField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
             playerQtyTextField.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
-            playerQtyTextField.topAnchor.constraint(equalTo: self.competitionTitleTextField.bottomAnchor, constant: inset/2),
-            playerQtyTextField.heightAnchor.constraint(equalToConstant: 40)
+            playerQtyTextField.topAnchor.constraint(equalTo: self.competitionTitleTextField.bottomAnchor, constant: inset),
+            playerQtyTextField.heightAnchor.constraint(equalToConstant: 52)
         ])
         
         NSLayoutConstraint.activate([
             typeTextField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
             typeTextField.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
-            typeTextField.topAnchor.constraint(equalTo: self.playerQtyTextField.bottomAnchor, constant: inset/2),
-            typeTextField.heightAnchor.constraint(equalToConstant: 40)
+            typeTextField.topAnchor.constraint(equalTo: self.playerQtyTextField.bottomAnchor, constant: inset),
+            typeTextField.heightAnchor.constraint(equalToConstant: 52)
         ])
         
         NSLayoutConstraint.activate([
-            addButton.topAnchor.constraint(equalTo: self.typeTextField.bottomAnchor, constant: inset/2),
+            addButton.topAnchor.constraint(equalTo: self.typeTextField.bottomAnchor, constant: inset*2),
             addButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
             addButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
             addButton.heightAnchor.constraint(equalToConstant: 64)

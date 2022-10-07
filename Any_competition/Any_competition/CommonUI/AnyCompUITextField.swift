@@ -34,8 +34,10 @@ class AnyCompUITextField: UITextField {
         self.tintColor = .black
         self.textColor = .black
         self.adjustsFontForContentSizeCategory = true
-        self.layer.borderColor = UIColor.black.cgColor
-        self.layer.borderWidth = 3
+        self.layer.cornerRadius = 8
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.borderWidth = 1
+        self.clipsToBounds = true
         translatesAutoresizingMaskIntoConstraints = false
     }
 }

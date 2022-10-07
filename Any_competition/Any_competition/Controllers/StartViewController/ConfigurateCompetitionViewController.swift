@@ -40,16 +40,16 @@ class ConfigurateCompetitionViewController: UIViewController {
         return content
     }()
     
-    private lazy var playersTableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.isScrollEnabled = false
-        tableView.backgroundColor = .purple
-        tableView.insetsContentViewsToSafeArea = true
-        tableView.register(PlayersInfoTableViewCell.self, forCellReuseIdentifier: "cell")
-        return tableView
+    let cellHeight: CGFloat = 52
+    
+    private lazy var playersTableView: UICollectionView = {
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collection.delegate = self
+        collection.dataSource = self
+        collection.backgroundColor = .clear
+        collection.register(PlayerNameCollectionViewCell.self, forCellWithReuseIdentifier: PlayerNameCollectionViewCell.identifire)
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        return collection
     }()
     
     let addButton = AnyCompUIButton(title: "Завершить создание")
@@ -90,7 +90,7 @@ class ConfigurateCompetitionViewController: UIViewController {
             playersTableView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset/2),
             playersTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             playersTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-            playersTableView.heightAnchor.constraint(equalToConstant: 60*CGFloat(playerQty!))
+            playersTableView.heightAnchor.constraint(equalToConstant: ((cellHeight+12)*CGFloat(playerQty!)-12))
         ])
         
         NSLayoutConstraint.activate([
@@ -134,56 +134,33 @@ class ConfigurateCompetitionViewController: UIViewController {
     }
 }
 
-extension ConfigurateCompetitionViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension ConfigurateCompetitionViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         playerQty!
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PlayersInfoTableViewCell
-        cell.numberLabel.text! += "\(indexPath.row+1)"
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlayerNameCollectionViewCell.identifire, for: indexPath)
+        
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        let cell = tableView.cellForRow(at: indexPath) as! PlayersInfoTableViewCell
-        
-        let alert = UIAlertController(title: "Введите данные игрока", message: nil, preferredStyle: .alert)
-        
-        alert.addTextField { (nameTextField) in
-            nameTextField.placeholder = "Имя"
-            nameTextField.text = cell.nameLabel.text
-        }
-        
-        alert.addTextField { (secondNameTextField) in
-            secondNameTextField.placeholder = "Фамилия"
-            secondNameTextField.text = cell.secondNameLabel.text
-        }
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [self, weak alert] (_) in
-            cell.nameLabel.text = alert?.textFields![0].text
-            cell.secondNameLabel.text = alert?.textFields![1].text
-            
-            
-            playersArray.insert(Player(name: cell.nameLabel.text!, secondName: cell.secondNameLabel.text!), at: indexPath.row)
-            
-        }))
-        
-        self.present(alert, animated: true, completion: nil)
-    }
     
 }
 
-extension ConfigurateCompetitionViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+extension ConfigurateCompetitionViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.layer.bounds.width
+        
+        let size = CGSize(width: width, height: cellHeight)
+        return size
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        12
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         0
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        60
-    }
-    
-    
-    
 }

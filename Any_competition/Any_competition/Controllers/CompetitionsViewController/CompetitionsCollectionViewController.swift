@@ -23,6 +23,7 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionView.delegate = self
         self.collectionView.backgroundColor = .backgroundColor
         self.navigationController?.navigationBar.isHidden = true
         self.collectionView.register(CompetitionCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionCollectionViewCell.identifire)
@@ -117,3 +118,7 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     }
     
 }
+
+
+
+
