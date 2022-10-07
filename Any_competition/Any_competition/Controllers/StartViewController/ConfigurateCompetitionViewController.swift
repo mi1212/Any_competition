@@ -97,7 +97,7 @@ class ConfigurateCompetitionViewController: UIViewController {
             addButton.topAnchor.constraint(equalTo: playersTableView.bottomAnchor, constant: inset/2),
             addButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             addButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-            addButton.heightAnchor.constraint(equalToConstant: 40),
+            addButton.heightAnchor.constraint(equalToConstant: 64),
             addButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }

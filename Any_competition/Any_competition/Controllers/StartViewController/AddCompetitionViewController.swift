@@ -61,7 +61,7 @@ class AddCompetitionViewController: UIViewController {
             addButton.topAnchor.constraint(equalTo: self.typeTextField.bottomAnchor, constant: inset/2),
             addButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
             addButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
-            addButton.heightAnchor.constraint(equalToConstant: 40)
+            addButton.heightAnchor.constraint(equalToConstant: 64)
         ])
     }
     

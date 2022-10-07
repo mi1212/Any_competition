@@ -65,7 +65,8 @@ class TabBarController: UITabBarController {
         let collectionViewlowFLayout: UICollectionViewFlowLayout = {
             let flowLayout = UICollectionViewFlowLayout()
             let width = (self.view.bounds.width - inset*2)/1
-            flowLayout.itemSize = CGSize(width: width, height: width/6)
+            let height = (self.view.bounds.height - inset*8)/7
+            flowLayout.itemSize = CGSize(width: width, height: height)
             
             flowLayout.minimumLineSpacing = inset
             

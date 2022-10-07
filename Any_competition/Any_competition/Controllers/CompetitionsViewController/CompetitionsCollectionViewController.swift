@@ -90,7 +90,17 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath) as! CompetitionCollectionViewCell
-        cell.label.text = datarequest[indexPath.row].info.title
+        
+        cell.nameLabel.text = datarequest[indexPath.row].info.title
+        cell.dateLabel.text = dateFormater(datarequest[indexPath.row].info.date)
+        
+        switch indexPath.row % 2 {
+        case 0: cell.contentView.backgroundColor = .anyColor
+        case 1: cell.contentView.backgroundColor = .anyColor1
+        default:
+            cell.backgroundColor = .anyColor
+        }
+        
         return cell
     }
     

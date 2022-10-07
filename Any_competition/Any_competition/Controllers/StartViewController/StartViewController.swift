@@ -24,7 +24,7 @@ class StartViewController: UIViewController {
         self.view.addSubview(labelView)
         self.view.addSubview(buttonView)
         
-    let inset: CGFloat = 30
+    let inset: CGFloat = 16
         
         NSLayoutConstraint.activate([
             labelView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
@@ -36,7 +36,7 @@ class StartViewController: UIViewController {
             buttonView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
             buttonView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
             buttonView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor),
-            buttonView.heightAnchor.constraint(equalToConstant: 40)
+            buttonView.heightAnchor.constraint(equalToConstant: 64)
         ])
     }
     

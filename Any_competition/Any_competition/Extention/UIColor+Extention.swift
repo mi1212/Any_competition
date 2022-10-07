@@ -9,13 +9,23 @@ import UIKit
 
 extension UIColor {
     
-    static var backgroundColor: UIColor{
-        #colorLiteral(red: 0.9882352941, green: 0.9215686275, blue: 0.7098039216, alpha: 1)
+    static var backgroundColor: UIColor? {
+        guard let color = UIColor(named: "backgroundColor") else {
+            print("Something wrong with color in Assets")
+            return nil
+        }
+        return color
     }
     
     static var anyColor: UIColor{
-        #colorLiteral(red: 0.8470588235, green: 0.7450980392, blue: 0.8784313725, alpha: 1)
+        #colorLiteral(red: 0.4745098039, green: 0.9215686275, blue: 0.4666666667, alpha: 1)
     }
+    
+    static var anyColor1: UIColor{
+        #colorLiteral(red: 0.8862745098, green: 0.8274509804, blue: 1, alpha: 1)
+    }
+    
+    
     
     static var anyDarckColor: UIColor{
         #colorLiteral(red: 0.1411764706, green: 0.1882352941, blue: 0.368627451, alpha: 1)

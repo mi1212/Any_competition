@@ -10,9 +10,9 @@ import UIKit
 class AnyCompUILabel: UILabel {
    
     enum FontSize: CGFloat {
-        case large = 18
-        case medium = 14
-        case small = 8
+        case large = 24
+        case medium = 18
+        case small = 12
     }
 
     required init?(coder: NSCoder) {
@@ -30,7 +30,7 @@ class AnyCompUILabel: UILabel {
     }
     
     private func configure(fontSize: AnyCompUILabel.FontSize.RawValue) {
-        
+        self.font = UIFont.systemFont(ofSize: fontSize)
         self.adjustsFontForContentSizeCategory = true
         self.numberOfLines = 0
         self.textAlignment = .center

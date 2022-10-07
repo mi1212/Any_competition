@@ -40,6 +40,7 @@
 		FD546BBB28EACFBE006B21B1 /* Hardpixel-nn51.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD91763F28EACD470017014B /* Hardpixel-nn51.otf */; };
 		FD546BBC28EACFBE006B21B1 /* DiaryOfAn8BitMage-lYDD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD91763D28EACD460017014B /* DiaryOfAn8BitMage-lYDD.ttf */; };
 		FD68DC4628E2D61A00FE0E64 /* UsersTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD68DC4528E2D61A00FE0E64 /* UsersTable.swift */; };
+		FD7A38A728F088E70056A362 /* DateFormater.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7A38A628F088E70056A362 /* DateFormater.swift */; };
 		FD7C894A28ED55D100699A7E /* AnyCompLogoUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C894928ED55D100699A7E /* AnyCompLogoUILabel.swift */; };
 		FD833D5E28EDEA1E00AC3275 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = FD833D5D28EDEA1E00AC3275 /* loading.json */; };
 		FD833D6128EDEBA000AC3275 /* CompetitionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD833D6028EDEBA000AC3275 /* CompetitionData.swift */; };
@@ -116,6 +117,7 @@
 		FD29C22428E040EF00C3B7EB /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
 		FD339E9828E34D6D000DD8F3 /* UIFont+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extention.swift"; sourceTree = "<group>"; };
 		FD68DC4528E2D61A00FE0E64 /* UsersTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTable.swift; sourceTree = "<group>"; };
+		FD7A38A628F088E70056A362 /* DateFormater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormater.swift; sourceTree = "<group>"; };
 		FD7C894928ED55D100699A7E /* AnyCompLogoUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompLogoUILabel.swift; sourceTree = "<group>"; };
 		FD833D5D28EDEA1E00AC3275 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		FD833D6028EDEBA000AC3275 /* CompetitionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionData.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			children = (
 				FD20D64428DB3AA0007F5F8F /* CompetitionModel.swift */,
 				FD68DC4528E2D61A00FE0E64 /* UsersTable.swift */,
+				FD7A38A628F088E70056A362 /* DateFormater.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -641,6 +644,7 @@
 				FD27FEF528D9A63E00D2A405 /* Any_competition.xcdatamodeld in Sources */,
 				FDE14E2228DF15AB00005B51 /* CompetitionViewController.swift in Sources */,
 				FD0FB29728ECBCE6000789CD /* TestViewController.swift in Sources */,
+				FD7A38A728F088E70056A362 /* DateFormater.swift in Sources */,
 				FD20D63A28DB0B19007F5F8F /* CompetitionsCollectionViewController.swift in Sources */,
 				FD339E9928E34D6D000DD8F3 /* UIFont+Extention.swift in Sources */,
 				FD20D63D28DB0DE9007F5F8F /* CompetitionCollectionViewCell.swift in Sources */,

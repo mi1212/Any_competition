@@ -9,14 +9,14 @@ import UIKit
 
 class CompetitionCollectionViewCell: UICollectionViewCell {
     
-    let label = AnyCompUILabel(title: "", fontSize: .small)
+    let nameLabel = AnyCompUILabel(title: "", fontSize: .medium)
+    let dateLabel = AnyCompUILabel(title: "", fontSize: .small)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.layer.borderColor = UIColor.black.cgColor
-        contentView.layer.borderWidth = 2
+        contentView.layer.cornerRadius = 24
+        contentView.clipsToBounds = true
         setupCell()
-        contentView.backgroundColor = .anyColor
     }
 
     required init?(coder: NSCoder) {
@@ -24,13 +24,23 @@ class CompetitionCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupCell() {
-        contentView.addSubview(label)
-        label.numberOfLines = 2
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(dateLabel)
+        
+        let inset: CGFloat = 10
+        
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: contentView.topAnchor),
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
+//            nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+//            nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset),
         ])
     }
 }
