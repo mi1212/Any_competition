@@ -30,6 +30,10 @@ class ConfigurateCompetitionViewController: UIViewController {
     
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
+        scroll.isExclusiveTouch = true
+        scroll.isUserInteractionEnabled = true
+        scroll.canCancelContentTouches = true
+        scroll.delaysContentTouches = true
         scroll.translatesAutoresizingMaskIntoConstraints = false
         return scroll
     }()
@@ -40,19 +44,19 @@ class ConfigurateCompetitionViewController: UIViewController {
         return content
     }()
     
-    let cellHeight: CGFloat = 52
+    let cellHeight: CGFloat = 52*3.8
     
     private lazy var playersTableView: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collection.delegate = self
         collection.dataSource = self
         collection.backgroundColor = .clear
-        collection.register(PlayerNameCollectionViewCell.self, forCellWithReuseIdentifier: PlayerNameCollectionViewCell.identifire)
+        collection.register(PlayerDataCollectionViewCell.self, forCellWithReuseIdentifier: PlayerDataCollectionViewCell.identifire)
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
     }()
     
-    let addButton = AnyCompUIButton(title: "Завершить создание")
+    let addButton = AnyCompUIButton(title: "Готово")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,7 +89,7 @@ class ConfigurateCompetitionViewController: UIViewController {
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
- 
+        
         NSLayoutConstraint.activate([
             playersTableView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset/2),
             playersTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
@@ -109,7 +113,7 @@ class ConfigurateCompetitionViewController: UIViewController {
         let players = playersArray.map{ $0.dictionary }
         
         let info = Info(title: competitionTitle!, qtyPlayers: playerQty!, sportType: sportType!, date: Date.now.description)
- 
+        
         ref = db.collection("competitions").addDocument(data: [
             "info" : info.dictionary,
             "players" : players
@@ -121,14 +125,11 @@ class ConfigurateCompetitionViewController: UIViewController {
                 print("Document added with ID: \(ref!.documentID)")
             }
         }
-
-        
-        //
         
         print("\(db.collection("competitions"))")
         
         dismiss(animated: true, completion: nil)
-
+        
         dismiss(animated: true, completion: nil)
         delegate?.dismissController()
     }
@@ -140,7 +141,8 @@ extension ConfigurateCompetitionViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlayerNameCollectionViewCell.identifire, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlayerDataCollectionViewCell.identifire, for: indexPath) as! PlayerDataCollectionViewCell
+        cell.label.text! += "\(indexPath.row+1)"
         
         return cell
     }
@@ -162,5 +164,38 @@ extension ConfigurateCompetitionViewController: UICollectionViewDelegateFlowLayo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! PlayerDataCollectionViewCell
+        
+        let alert = UIAlertController(title: "Введите данные игрока", message: nil, preferredStyle: .alert)
+        
+        alert.addTextField { (nameTextField) in
+            nameTextField.placeholder = "Имя"
+            nameTextField.text = cell.nameLabel.text
+        }
+        
+        alert.addTextField { (secondNameTextField) in
+            secondNameTextField.placeholder = "Фамилия"
+            secondNameTextField.text = cell.secondNameLabel.text
+        }
+        
+        alert.addTextField { (nickTextField) in
+            nickTextField.placeholder = "Ник"
+            nickTextField.text = cell.nickLabel.text
+        }
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [self, weak alert] (_) in
+            cell.nameLabel.text = alert?.textFields![0].text
+            cell.secondNameLabel.text = alert?.textFields![1].text
+            cell.nickLabel.text = alert?.textFields![2].text
+            
+            
+            playersArray.insert(Player(number: indexPath.row+1, name: cell.nameLabel.text!, secondName: cell.secondNameLabel.text!, nick: cell.nickLabel.text!), at: indexPath.row)
+            
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }

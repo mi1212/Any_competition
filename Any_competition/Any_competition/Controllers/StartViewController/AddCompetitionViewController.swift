@@ -18,7 +18,7 @@ class AddCompetitionViewController: UIViewController {
     
     let typeTextField = AnyCompUITextField(placeholder: "Вид спорта", isSecure: false)
     
-    let addButton = AnyCompUIButton(title: "Продолжить создание")
+    let addButton = AnyCompUIButton(title: "Добавить игроков")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,6 @@ class AddCompetitionViewController: UIViewController {
         self.view.addSubview(playerQtyTextField)
         self.view.addSubview(typeTextField)
         self.view.addSubview(addButton)
-        
         
         let inset: CGFloat = 16
         

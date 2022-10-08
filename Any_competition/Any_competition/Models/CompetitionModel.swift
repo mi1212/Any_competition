@@ -31,11 +31,15 @@ struct Info: Codable {
 }
 
 struct Player: Codable {
+    var number: Int
     var name: String
     var secondName: String
+    var nick: String?
     
     var dictionary: [String: Any] {
-        return["name": name,
-               "secondName": secondName]
+        return["number": number,
+            "name": name,
+               "secondName": secondName,
+               "nick": nick]
     }
 }
