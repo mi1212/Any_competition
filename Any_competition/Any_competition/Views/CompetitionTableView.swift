@@ -9,11 +9,11 @@ import UIKit
 
 class CompetitionTableView: UIView {
  
-    var usersTable: UsersTable?
+    var playersTable: PlayersTable?
     
     let side = CGFloat(40)
     
-    private lazy var qty = usersTable?.playersArray.count
+    private lazy var qty = playersTable?.playersArray.count
     
     private lazy var subView: UIView = {
         let content = UIView()
@@ -69,10 +69,10 @@ class CompetitionTableView: UIView {
         return table
     }()
     
-    convenience init(usersTable: UsersTable) {
+    convenience init(playersTable: PlayersTable) {
         self.init()
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.usersTable = usersTable
+        self.playersTable = playersTable
         setupView()
     }
     
@@ -174,7 +174,7 @@ extension CompetitionTableView: UICollectionViewDataSource {
         } else if collectionView == playersNamesCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
             cell.backgroundColor = .white
-            cell.label.text = "#\(indexPath.section+1) \(usersTable!.playersArray[indexPath.section].name)\n\(usersTable!.playersArray[indexPath.section].secondName)"
+            cell.label.text = "#\(indexPath.section+1) \(playersTable!.playersArray[indexPath.section].name)\n\(playersTable!.playersArray[indexPath.section].secondName)"
             cell.label.textAlignment = .left
             return cell
         } else {

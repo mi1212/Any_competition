@@ -12,7 +12,7 @@ class CompetitionViewController: UIViewController{
     
     static var competitionCell: Competition?
     
-    var usersTable: UsersTable?
+    var playersTable: PlayersTable?
     
     let side = CGFloat(40)
     
@@ -30,10 +30,9 @@ class CompetitionViewController: UIViewController{
     
     var qtyPlayers: Int?
     
-    private lazy var tableCollectionView = CompetitionTableView(usersTable: self.usersTable!)
+    private lazy var tableCollectionView = CompetitionTableView(playersTable: playersTable!)
     
-    private lazy var tournamentView = CompetitionNetView(usersTable: self.usersTable!)
-    
+    private lazy var tournamentView = CompetitionNetView(playersTable: playersTable!)
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
