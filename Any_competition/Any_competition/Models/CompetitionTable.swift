@@ -7,20 +7,20 @@
 
 import Foundation
 
-class PlayersTable {
+class CompetitionTable {
     
     var playersArray: [Player]
-    var matchesTable = [Player: [Match]]()
     
-    
+    var competitionTable = [Player: [Match]]()
+ 
     init(playersArray: [Player]) {
         self.playersArray = playersArray
-        createMatchesTable(playersArray)
+        createCompetitionTable(playersArray)
     }
     
-    private func createMatchesTable(_ playersArray: [Player]) -> [Player: [Match]] {
+    private func createCompetitionTable(_ playersArray: [Player]) -> [Player: [Match]] {
         
-        var matchesTable = [Player: [Match]]()
+        var competitionTable = [Player: [Match]]()
         
         var matchArray = [Match]()
         
@@ -33,9 +33,11 @@ class PlayersTable {
                 matchArray.append(match)
             }
             print(matchArray)
-            matchesTable[player] = matchArray
+            competitionTable[player] = matchArray
             matchArray = [Match]()
         }
-        return matchesTable
+        return competitionTable
     }
+    
+    public func finishMatch(match: Match, winningPlayer: Player, losedPlayer: Player) {}
 }

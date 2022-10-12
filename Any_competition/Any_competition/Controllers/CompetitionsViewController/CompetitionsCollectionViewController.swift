@@ -16,11 +16,9 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     private let decoder = JSONDecoder()
     
     var datarequest = [Competition]()
-    
-    var timer: Timer?
-    
+        
     let animationView = AnimationView()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView.delegate = self
@@ -111,7 +109,7 @@ class CompetitionsCollectionViewController: UICollectionViewController {
         
         CompetitionViewController.competitionCell = datarequest[indexPath.row]
         vc.qtyPlayers = datarequest[indexPath.row].players.count
-        vc.playersTable = PlayersTable(playersArray: datarequest[indexPath.row].players)
+        vc.competitionTable = CompetitionTable(playersArray: datarequest[indexPath.row].players)
         vc.navigationItem.title = CompetitionViewController.competitionCell?.info.title
         self.navigationController?.pushViewController(vc, animated: true)
         

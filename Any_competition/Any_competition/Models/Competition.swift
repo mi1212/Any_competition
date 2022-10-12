@@ -10,5 +10,6 @@ import Foundation
 struct Competition: Codable {
     let info: Info
     let players: [Player]
+//    let matchesTable: MatchesTable
     
 }
