@@ -12,7 +12,7 @@ class CompetitionViewController: UIViewController{
     
     static var competitionCell: Competition?
     
-    var playersTable: PlayersTable?
+    var competitionTable: CompetitionTable?
     
     let side = CGFloat(40)
     
@@ -30,15 +30,16 @@ class CompetitionViewController: UIViewController{
     
     var qtyPlayers: Int?
     
-    private lazy var tableCollectionView = CompetitionTableView(playersTable: playersTable!)
+    private lazy var tableCollectionView = CompetitionTableView(competitionTable: competitionTable!)
     
-    private lazy var tournamentView = CompetitionNetView(playersTable: playersTable!)
+//    private lazy var tournamentView = CompetitionNetView(competitionTable: competitionTable!)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .backgroundColor
-        setupController()
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = false
+        self.view.backgroundColor = .backgroundColor
+        setupController()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -51,6 +52,7 @@ class CompetitionViewController: UIViewController{
         self.view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(tableCollectionView)
+        tableCollectionView.delegate = self
 //        contentView.addSubview(tournamentView)
   
         let inset: CGFloat = 30
@@ -88,18 +90,29 @@ class CompetitionViewController: UIViewController{
     }
 }
 
-extension CompetitionViewController: MatchViewControllerDelegate {
+//extension CompetitionViewController: MatchViewControllerDelegate {
+//
+//    func firstPlayerWin(matchPath: MatchPath) {
+//        tournamentView.builder.getChildBuilder(for: matchPath)?.setWinnerIndexes([0])
+//        print("firstPlayerWin")
+//        tournamentView.reloadData()
+//    }
+//
+//    func secondPlayerWin(matchPath: MatchPath) {
+//        tournamentView.builder.getChildBuilder(for: matchPath)?.setWinnerIndexes([1])
+//        print("secondPlayerWin")
+//        tournamentView.reloadData()
+//    }
+//
+//}
 
-    func firstPlayerWin(matchPath: MatchPath) {
-        tournamentView.builder.getChildBuilder(for: matchPath)?.setWinnerIndexes([0])
-        print("firstPlayerWin")
-        tournamentView.reloadData()
+extension CompetitionViewController: CompetitionTableViewDelegate {
+    func chooseMatch(_ indexPathOfMatch: IndexPath) {
+        let player = competitionTable?.playersArray[indexPathOfMatch.section]
+        let match = competitionTable?.competitionTable
+        print(player) // player
+        print(match) // match
     }
-
-    func secondPlayerWin(matchPath: MatchPath) {
-        tournamentView.builder.getChildBuilder(for: matchPath)?.setWinnerIndexes([1])
-        print("secondPlayerWin")
-        tournamentView.reloadData()
-    }
-
+    
+    
 }

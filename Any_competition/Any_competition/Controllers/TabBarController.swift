@@ -60,7 +60,7 @@ class TabBarController: UITabBarController {
     }
     
         private func setupflowLayout() -> UICollectionViewFlowLayout {
-            let inset: CGFloat = 10
+            let inset: CGFloat = 16
     
             let collectionViewlowFLayout: UICollectionViewFlowLayout = {
                 let flowLayout = UICollectionViewFlowLayout()

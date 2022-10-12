@@ -10,7 +10,7 @@ import KRTournamentView
 
 class CompetitionNetView: UIView {
     
-    var playersTable: PlayersTable?
+    var competitionTable: CompetitionTable?
     
     var builder: TournamentBuilder = .init(numberOfLayers: 3)
     
@@ -31,11 +31,11 @@ class CompetitionNetView: UIView {
         return tournamentView
     }()
 
-    convenience init(playersTable: PlayersTable) {
+    convenience init(competitionTable: CompetitionTable) {
         self.init()
         self.backgroundColor = .backgroundColor
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.playersTable = playersTable
+        self.competitionTable = competitionTable
         setupView()
     }
     

@@ -7,13 +7,19 @@
 
 import UIKit
 
+protocol CompetitionTableViewDelegate: AnyObject {
+    func chooseMatch(_ indexPathOfMatch: IndexPath)
+}
+
 class CompetitionTableView: UIView {
  
-    var playersTable: PlayersTable?
+    var competitionTable: CompetitionTable?
     
     let side = CGFloat(40)
+        
+    var delegate: CompetitionTableViewDelegate?
     
-    private lazy var qty = playersTable?.playersArray.count
+    private lazy var qty = competitionTable?.playersArray.count
     
     private lazy var subView: UIView = {
         let content = UIView()
@@ -69,10 +75,10 @@ class CompetitionTableView: UIView {
         return table
     }()
     
-    convenience init(playersTable: PlayersTable) {
+    convenience init(competitionTable: CompetitionTable) {
         self.init()
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.playersTable = playersTable
+        self.competitionTable = competitionTable
         setupView()
     }
     
@@ -174,7 +180,7 @@ extension CompetitionTableView: UICollectionViewDataSource {
         } else if collectionView == playersNamesCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
             cell.backgroundColor = .white
-            cell.label.text = "#\(indexPath.section+1) \(playersTable!.playersArray[indexPath.section].name)\n\(playersTable!.playersArray[indexPath.section].secondName)"
+            cell.label.text = "#\(indexPath.section+1) \(competitionTable!.playersArray[indexPath.section].name)\n\(competitionTable!.playersArray[indexPath.section].secondName)"
             cell.label.textAlignment = .left
             return cell
         } else {
@@ -190,6 +196,7 @@ extension CompetitionTableView: UICollectionViewDataSource {
         if cell?.backgroundColor == .white {
             print(indexPath)
         }
+        delegate?.chooseMatch(indexPath)
     }
     
     
