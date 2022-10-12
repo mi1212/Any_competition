@@ -40,6 +40,7 @@ class CompetitionViewController: UIViewController{
         self.navigationController?.navigationBar.isHidden = false
         self.view.backgroundColor = .backgroundColor
         setupController()
+        print(competitionTable)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -108,8 +109,8 @@ class CompetitionViewController: UIViewController{
 
 extension CompetitionViewController: CompetitionTableViewDelegate {
     func chooseMatch(_ indexPathOfMatch: IndexPath) {
-        let player = competitionTable?.playersArray[indexPathOfMatch.section]
-        let match = competitionTable?.competitionTable
+        guard let player = competitionTable?.playersArray[indexPathOfMatch.section] else { return }
+        guard let match = competitionTable?.competitionTable[player]![indexPathOfMatch.row]  else { return }
         print(player) // player
         print(match) // match
     }

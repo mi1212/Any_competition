@@ -192,11 +192,10 @@ extension CompetitionTableView: UICollectionViewDataSource {
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        if cell?.backgroundColor == .white {
-            print(indexPath)
+        
+        if collectionView == tableCollectionView {
+            delegate?.chooseMatch(indexPath)
         }
-        delegate?.chooseMatch(indexPath)
     }
     
     

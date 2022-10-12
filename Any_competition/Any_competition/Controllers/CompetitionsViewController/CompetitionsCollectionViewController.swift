@@ -108,8 +108,10 @@ class CompetitionsCollectionViewController: UICollectionViewController {
         let vc = CompetitionViewController()
         
         CompetitionViewController.competitionCell = datarequest[indexPath.row]
+        
         vc.qtyPlayers = datarequest[indexPath.row].players.count
         vc.competitionTable = CompetitionTable(playersArray: datarequest[indexPath.row].players)
+        
         vc.navigationItem.title = CompetitionViewController.competitionCell?.info.title
         self.navigationController?.pushViewController(vc, animated: true)
         

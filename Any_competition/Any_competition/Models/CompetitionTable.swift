@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CompetitionTable {
+struct CompetitionTable {
     
     var playersArray: [Player]
     
@@ -15,7 +15,7 @@ class CompetitionTable {
  
     init(playersArray: [Player]) {
         self.playersArray = playersArray
-        createCompetitionTable(playersArray)
+        competitionTable = createCompetitionTable(playersArray)
     }
     
     private func createCompetitionTable(_ playersArray: [Player]) -> [Player: [Match]] {
@@ -32,12 +32,15 @@ class CompetitionTable {
                 let match = Match(player1: player, player2: playersArray[opponent], isDone: false)
                 matchArray.append(match)
             }
-            print(matchArray)
+            
             competitionTable[player] = matchArray
             matchArray = [Match]()
         }
+        print(competitionTable)
         return competitionTable
     }
     
-    public func finishMatch(match: Match, winningPlayer: Player, losedPlayer: Player) {}
+    public func finishMatch(match: Match, winningPlayer: Player, losedPlayer: Player) {
+        print("player \(winningPlayer.name) win")
+    }
 }
