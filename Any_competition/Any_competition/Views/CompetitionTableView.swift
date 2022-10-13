@@ -40,7 +40,7 @@ class CompetitionTableView: UIView {
         return content
     }()
     
-    private lazy var tableCollectionView: UICollectionView = {
+    lazy var tableCollectionView: UICollectionView = {
         let table = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         table.delegate = self
         table.dataSource = self
@@ -171,8 +171,15 @@ extension CompetitionTableView: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath)
             cell.backgroundColor = .white
             
-            if indexPath.row == indexPath.section  {
-                cell.backgroundColor = .anyDarckColor
+            
+            
+            let match = CompetitionViewController.competitionTable!.competitionTable[indexPath.section][indexPath.row]
+            if match.isDone != true {
+                if indexPath.row == indexPath.section  {
+                    cell.backgroundColor = .anyDarckColor
+                }
+            } else {
+                cell.backgroundColor = .green
             }
             
             return cell
@@ -186,6 +193,8 @@ extension CompetitionTableView: UICollectionViewDataSource {
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
             cell.backgroundColor = .white
+            
+            
             return cell
         }
         

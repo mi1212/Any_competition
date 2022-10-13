@@ -12,7 +12,7 @@ class CompetitionViewController: UIViewController{
     
     static var competitionCell: Competition?
     
-    var competitionTable: CompetitionTable?
+    static var competitionTable: CompetitionTable?
     
     let side = CGFloat(40)
     
@@ -30,7 +30,7 @@ class CompetitionViewController: UIViewController{
     
     var qtyPlayers: Int?
     
-    private lazy var tableCollectionView = CompetitionTableView(competitionTable: competitionTable!)
+    private lazy var tableCollectionView = CompetitionTableView(competitionTable: CompetitionViewController.competitionTable!)
     
 //    private lazy var tournamentView = CompetitionNetView(competitionTable: competitionTable!)
     
@@ -109,7 +109,7 @@ class CompetitionViewController: UIViewController{
 extension CompetitionViewController: CompetitionTableViewDelegate {
     func chooseMatch(_ indexPathOfMatch: IndexPath) {
 //        guard let player = competitionTable?.playersArray[indexPathOfMatch.section] else { return }
-        guard let match = competitionTable?.competitionTable[indexPathOfMatch.section][indexPathOfMatch.row]  else { return }
+        guard let match = CompetitionViewController.competitionTable?.competitionTable[indexPathOfMatch.section][indexPathOfMatch.row]  else { return }
         
         let vc = MatchViewController(match: match)
         vc.delegate = self
@@ -121,7 +121,8 @@ extension CompetitionViewController: CompetitionTableViewDelegate {
 
 extension CompetitionViewController: MatchViewControllerDelegate {
     func winning(_ match: Match) {
-        competitionTable?.finishMatch(match)
+        CompetitionViewController.competitionTable?.finishMatch(match)
+        self.tableCollectionView.tableCollectionView.reloadData()
     }
 
 }

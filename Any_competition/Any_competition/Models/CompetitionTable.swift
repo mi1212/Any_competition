@@ -49,6 +49,8 @@ struct CompetitionTable {
         let index = match.matchIndex
         
         competitionTable[index.indexOfPlayer][index.indexOfMatch] = match
-        print(match)
+        
+        print(competitionTable[index.indexOfPlayer][index.indexOfMatch])
+        
     }
 }
