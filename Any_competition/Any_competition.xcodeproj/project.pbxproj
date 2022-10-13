@@ -45,6 +45,11 @@
 		FD59CC1128EEA2AB008818B1 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = FD59CC1028EEA2AB008818B1 /* loading.json */; };
 		FD68DC4628E2D61A00FE0E64 /* CompetitionTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD68DC4528E2D61A00FE0E64 /* CompetitionTable.swift */; };
 		FD6E751628F6E63A005DB75F /* CompetitionsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6E751528F6E63A005DB75F /* CompetitionsData.swift */; };
+		FD6F05F928F7F1E500F0F718 /* congratulations.json in Resources */ = {isa = PBXBuildFile; fileRef = FD6F05F828F7F1E500F0F718 /* congratulations.json */; };
+		FD6F05FB28F7F34400F0F718 /* 78540-confetti-congratulation-sparkle.json in Resources */ = {isa = PBXBuildFile; fileRef = FD6F05FA28F7F34400F0F718 /* 78540-confetti-congratulation-sparkle.json */; };
+		FD6F05FD28F80E0900F0F718 /* lf30_editor_tibwdgvt.json in Resources */ = {isa = PBXBuildFile; fileRef = FD6F05FC28F80E0900F0F718 /* lf30_editor_tibwdgvt.json */; };
+		FD6F05FF28F80ECC00F0F718 /* 73966-confetti.json in Resources */ = {isa = PBXBuildFile; fileRef = FD6F05FE28F80ECC00F0F718 /* 73966-confetti.json */; };
+		FD6F060128F8247F00F0F718 /* MatchIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6F060028F8247F00F0F718 /* MatchIndex.swift */; };
 		FD7C894A28ED55D100699A7E /* AnyCompLogoUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C894928ED55D100699A7E /* AnyCompLogoUILabel.swift */; };
 		FD94809328F4697500B31A89 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94809228F4697500B31A89 /* Match.swift */; };
 		FD94809528F46C1700B31A89 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94809428F46C1700B31A89 /* Player.swift */; };
@@ -127,6 +132,11 @@
 		FD59CC1028EEA2AB008818B1 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		FD68DC4528E2D61A00FE0E64 /* CompetitionTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionTable.swift; sourceTree = "<group>"; };
 		FD6E751528F6E63A005DB75F /* CompetitionsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsData.swift; sourceTree = "<group>"; };
+		FD6F05F828F7F1E500F0F718 /* congratulations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = congratulations.json; sourceTree = "<group>"; };
+		FD6F05FA28F7F34400F0F718 /* 78540-confetti-congratulation-sparkle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "78540-confetti-congratulation-sparkle.json"; sourceTree = "<group>"; };
+		FD6F05FC28F80E0900F0F718 /* lf30_editor_tibwdgvt.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_tibwdgvt.json; sourceTree = "<group>"; };
+		FD6F05FE28F80ECC00F0F718 /* 73966-confetti.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "73966-confetti.json"; sourceTree = "<group>"; };
+		FD6F060028F8247F00F0F718 /* MatchIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchIndex.swift; sourceTree = "<group>"; };
 		FD7C894928ED55D100699A7E /* AnyCompLogoUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompLogoUILabel.swift; sourceTree = "<group>"; };
 		FD91763D28EACD460017014B /* DiaryOfAn8BitMage-lYDD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DiaryOfAn8BitMage-lYDD.ttf"; sourceTree = "<group>"; };
 		FD91763F28EACD470017014B /* Hardpixel-nn51.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hardpixel-nn51.otf"; sourceTree = "<group>"; };
@@ -216,6 +226,7 @@
 				FD20D64428DB3AA0007F5F8F /* Competition.swift */,
 				FD68DC4528E2D61A00FE0E64 /* CompetitionTable.swift */,
 				FD94809228F4697500B31A89 /* Match.swift */,
+				FD6F060028F8247F00F0F718 /* MatchIndex.swift */,
 				FD94809428F46C1700B31A89 /* Player.swift */,
 				FD94809628F46C4100B31A89 /* Info.swift */,
 			);
@@ -367,6 +378,10 @@
 				FD9604F028ECC38A009C902E /* darts1.json */,
 				FD9604F128ECC38B009C902E /* darts2.json */,
 				FD59CC1028EEA2AB008818B1 /* loading.json */,
+				FD6F05F828F7F1E500F0F718 /* congratulations.json */,
+				FD6F05FC28F80E0900F0F718 /* lf30_editor_tibwdgvt.json */,
+				FD6F05FE28F80ECC00F0F718 /* 73966-confetti.json */,
+				FD6F05FA28F7F34400F0F718 /* 78540-confetti-congratulation-sparkle.json */,
 				FD1E200128F1A7A5001CF0EA /* ShakeAnimation.swift */,
 			);
 			path = Animations;
@@ -505,14 +520,18 @@
 			files = (
 				FD27FF3028D9D27100D2A405 /* Pixel LCD-7.ttf in Resources */,
 				FDE720DD28DC8F9400FAF811 /* GoogleService-Info.plist in Resources */,
+				FD6F05F928F7F1E500F0F718 /* congratulations.json in Resources */,
 				FD27FF3128D9D27100D2A405 /* 04B_30__.TTF in Resources */,
 				FD546BBB28EACFBE006B21B1 /* Hardpixel-nn51.otf in Resources */,
 				FD9604F228ECC38B009C902E /* darts1.json in Resources */,
+				FD6F05FD28F80E0900F0F718 /* lf30_editor_tibwdgvt.json in Resources */,
 				FD546BBC28EACFBE006B21B1 /* DiaryOfAn8BitMage-lYDD.ttf in Resources */,
 				FD59CC1128EEA2AB008818B1 /* loading.json in Resources */,
 				FD27FF2E28D9D27100D2A405 /* tight_pixel.ttf in Resources */,
+				FD6F05FF28F80ECC00F0F718 /* 73966-confetti.json in Resources */,
 				FD9604F328ECC38B009C902E /* darts2.json in Resources */,
 				FD27FEFA28D9A63F00D2A405 /* LaunchScreen.storyboard in Resources */,
+				FD6F05FB28F7F34400F0F718 /* 78540-confetti-congratulation-sparkle.json in Resources */,
 				FD27FF2D28D9D27100D2A405 /* 8-BIT WONDER.ttf in Resources */,
 				FD27FEF728D9A63F00D2A405 /* Assets.xcassets in Resources */,
 				FD27FF2F28D9D27100D2A405 /* PressStart2P-vaV7.ttf in Resources */,
@@ -659,6 +678,7 @@
 				FDE7036128E412B500FF4F06 /* CompetitionNetView.swift in Sources */,
 				FD0D008828DDA29B00C47570 /* ConfigurateCompetitionViewController.swift in Sources */,
 				FD08C7D728DF511E00C18CD1 /* MyMatch.swift in Sources */,
+				FD6F060128F8247F00F0F718 /* MatchIndex.swift in Sources */,
 				FD27FEF528D9A63E00D2A405 /* Any_competition.xcdatamodeld in Sources */,
 				FDE14E2228DF15AB00005B51 /* CompetitionViewController.swift in Sources */,
 				FD0FB29728ECBCE6000789CD /* TestViewController.swift in Sources */,

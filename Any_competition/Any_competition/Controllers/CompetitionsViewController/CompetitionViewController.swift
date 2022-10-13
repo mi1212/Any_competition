@@ -40,7 +40,6 @@ class CompetitionViewController: UIViewController{
         self.navigationController?.navigationBar.isHidden = false
         self.view.backgroundColor = .backgroundColor
         setupController()
-        print(competitionTable)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -56,7 +55,7 @@ class CompetitionViewController: UIViewController{
         tableCollectionView.delegate = self
 //        contentView.addSubview(tournamentView)
   
-        let inset: CGFloat = 30
+        let inset: CGFloat = 16
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -109,11 +108,20 @@ class CompetitionViewController: UIViewController{
 
 extension CompetitionViewController: CompetitionTableViewDelegate {
     func chooseMatch(_ indexPathOfMatch: IndexPath) {
-        guard let player = competitionTable?.playersArray[indexPathOfMatch.section] else { return }
-        guard let match = competitionTable?.competitionTable[player]![indexPathOfMatch.row]  else { return }
-        print(player) // player
-        print(match) // match
+//        guard let player = competitionTable?.playersArray[indexPathOfMatch.section] else { return }
+        guard let match = competitionTable?.competitionTable[indexPathOfMatch.section][indexPathOfMatch.row]  else { return }
+        
+        let vc = MatchViewController(match: match)
+        vc.delegate = self
+        self.navigationController?.present(vc, animated: true)
     }
     
     
+}
+
+extension CompetitionViewController: MatchViewControllerDelegate {
+    func winning(_ match: Match) {
+        competitionTable?.finishMatch(match)
+    }
+
 }

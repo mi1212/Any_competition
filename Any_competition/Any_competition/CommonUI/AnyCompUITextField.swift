@@ -30,6 +30,8 @@ class AnyCompUITextField: UITextField {
         let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 2))
         self.leftView = leftView
         self.leftViewMode = .always
+        self.rightView = rightView
+        self.rightViewMode = .always
         self.autocapitalizationType = .none
         self.tintColor = .black
         self.textColor = .black

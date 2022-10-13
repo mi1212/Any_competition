@@ -11,16 +11,18 @@ struct Match {
     let player1: Player
     let player2: Player
     var isDone: Bool = false
-    var score = [Player: Int]()
+    var scorePlayer1: Int = 0
+    var scorePlayer2: Int = 0
+    var matchIndex: MatchIndex
     
-    init(player1: Player, player2: Player, isDone: Bool) {
+    init(player1: Player, player2: Player, matchIndex: MatchIndex) {
         self.player1 = player1
         self.player2 = player2
-        self.isDone = isDone
+        self.matchIndex = matchIndex
     }
     
-    private mutating func makeMatch(player1: Player, player2: Player) {
-        self.score[player1] = 0
-        self.score[player2] = 0
-    }
+//    private mutating func makeMatch(player1: Player, player2: Player) {
+//        self.score[player1] = 0
+//        self.score[player2] = 0
+//    }
 }
