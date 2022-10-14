@@ -214,6 +214,8 @@ extension CompetitionTableView: UICollectionViewDataSource {
         
         if collectionView == tableCollectionView {
             delegate?.chooseMatch(indexPath)
+            print("indexPath.section = \(indexPath.section)")
+            print("indexPath.row = \(indexPath.row)")
         }
         
     }

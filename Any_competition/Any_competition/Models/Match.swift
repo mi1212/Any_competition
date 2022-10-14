@@ -30,7 +30,9 @@ struct Match: Codable {
         self.isDone.toggle()
         self.isWinned = matchMirror.isWinned
         self.isWinned.toggle()
-        self.matchIndex = MatchIndex(matchMirror.matchIndex.indexOfPlayer, matchMirror.matchIndex.indexOfPlayer)
+        self.matchIndex = MatchIndex(matchMirror.matchIndex.indexOfMatch, matchMirror.matchIndex.indexOfPlayer)
+        print("normal index\(matchMirror.matchIndex)")
+        print("mirror index\(self.matchIndex)")
     }
     
     var dictionary: [String: Any] {

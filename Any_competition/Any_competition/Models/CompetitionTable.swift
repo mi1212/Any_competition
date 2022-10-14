@@ -58,16 +58,12 @@ struct CompetitionTable: Codable {
     }
     
     public mutating func finishMatch(_ match: Match) {
-        
-        let index = match.matchIndex
-        
-        let indexMirror = MatchIndex(index.indexOfMatch, index.indexOfPlayer)
-        
+
         let matchMirror = Match(match)
         
-        competitionTable[index.indexOfPlayer].matchesOfPlayer[index.indexOfMatch] = match
+        competitionTable[match.matchIndex.indexOfPlayer].matchesOfPlayer[match.matchIndex.indexOfMatch] = match
         
-        competitionTable[indexMirror.indexOfPlayer].matchesOfPlayer[index.indexOfMatch] = matchMirror
+        competitionTable[matchMirror.matchIndex.indexOfPlayer].matchesOfPlayer[matchMirror.matchIndex.indexOfMatch] = matchMirror
         
         qtyFinishedGames += 1
         
