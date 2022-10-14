@@ -19,7 +19,7 @@ class CompetitionTableView: UIView {
         
     var delegate: CompetitionTableViewDelegate?
     
-    private lazy var qty = competitionTable?.playersArray.count
+    private lazy var qty = competitionTable?.qtyPlayers
     
     private lazy var subView: UIView = {
         let content = UIView()
@@ -171,16 +171,16 @@ extension CompetitionTableView: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
             cell.backgroundColor = .white
  
-            let match = CompetitionViewController.competitionTable!.competitionTable[indexPath.section][indexPath.row]
+            let match = CompetitionViewController.competitionTable!.competitionTable[indexPath.section].matchesOfPlayer[indexPath.row]
             
             if match.isDone != true { // проверка, что матч не состоялся
-                
+
                 if indexPath.row == indexPath.section  {
                     cell.backgroundColor = .anyDarckColor
                 }
-                
+
             } else {
-            
+
                 if match.isWinned {
                     cell.label.text = "3"
                     cell.backgroundColor = .cyan
@@ -198,7 +198,7 @@ extension CompetitionTableView: UICollectionViewDataSource {
         } else if collectionView == playersNamesCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
             cell.backgroundColor = .white
-            cell.label.text = "#\(indexPath.section+1) \(competitionTable!.playersArray[indexPath.section].name)\n\(competitionTable!.playersArray[indexPath.section].secondName)"
+            cell.label.text = "#\(indexPath.section+1) \(competitionTable!.playersArray[indexPath.section].name)\n\(competitionTable!.playersArray[indexPath.section].nick)"
             cell.label.textAlignment = .left
             return cell
         } else {
@@ -212,16 +212,12 @@ extension CompetitionTableView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-       
-        
-        print(competitionTable?.competitionTable[indexPath.section][indexPath.row])
-        
         if collectionView == tableCollectionView {
             delegate?.chooseMatch(indexPath)
         }
+        
     }
-    
-    
+  
 }
 
 extension CompetitionTableView: UICollectionViewDelegateFlowLayout {

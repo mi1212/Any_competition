@@ -10,6 +10,20 @@ import Foundation
 struct Competition: Codable {
     let info: Info
     let players: [Player]
-//    let matchesTable: MatchesTable
+    var competitionTable: CompetitionTable?
+    
+    var dictionary: [String: Any] {
+        return [
+            "info": info.dictionary,
+            "players": players.map{ $0.dictionary },
+            "competitionTable": competitionTable!.dictionary
+        ]
+    }
+    
+    init(info: Info, players: [Player]) {
+        self.info = info
+        self.players = players
+        self.competitionTable = CompetitionTable(playersArray: self.players)
+    }
     
 }

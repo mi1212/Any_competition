@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct CompetitionTable {
+struct CompetitionTable: Codable {
     
     var playersArray: [Player]
     
-    var competitionTable = [[Match]]()
+    var competitionTable = [MatchesOfPlayer]()
  
     var qtyPlayers = 0
     
@@ -21,6 +21,17 @@ struct CompetitionTable {
     
     var isCompetitionFinished = false
     
+    var dictionary: [String: Any] {
+        return [
+            "playersArray": playersArray.map{ $0.dictionary },
+            "competitionTable": competitionTable.map { $0.dictionary},
+            "qtyPlayers": qtyPlayers,
+            "qtyGames": qtyGames,
+            "qtyFinishedGames": qtyFinishedGames,
+            "isCompetitionFinished": isCompetitionFinished
+        ]
+    }
+    
     init(playersArray: [Player]) {
         self.playersArray = playersArray
         competitionTable = createCompetitionTable(playersArray)
@@ -28,9 +39,9 @@ struct CompetitionTable {
         self.qtyGames = (qtyPlayers*qtyPlayers - qtyPlayers)/2
     }
     
-    private func createCompetitionTable(_ playersArray: [Player]) -> [[Match]] {
+    private func createCompetitionTable(_ playersArray: [Player]) -> [MatchesOfPlayer] {
         
-        var competitionTable = [[Match]]()
+        var competitionTable = [MatchesOfPlayer]()
         var matchArray = [Match]()
         
         for i in 0...playersArray.count - 1 {
@@ -39,7 +50,7 @@ struct CompetitionTable {
                 let match = Match(player1: player, player2: playersArray[j], matchIndex: MatchIndex(i, j))
                 matchArray.append(match)
             }
-            competitionTable.append(matchArray)
+            competitionTable.append(MatchesOfPlayer(matchesOfPlayer: matchArray))
             matchArray = [Match]()
         }
         
@@ -54,9 +65,9 @@ struct CompetitionTable {
         
         let matchMirror = Match(match)
         
-        competitionTable[index.indexOfPlayer][index.indexOfMatch] = match
+        competitionTable[index.indexOfPlayer].matchesOfPlayer[index.indexOfMatch] = match
         
-        competitionTable[indexMirror.indexOfPlayer][indexMirror.indexOfMatch] = matchMirror
+        competitionTable[indexMirror.indexOfPlayer].matchesOfPlayer[index.indexOfMatch] = matchMirror
         
         qtyFinishedGames += 1
         

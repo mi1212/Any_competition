@@ -56,6 +56,7 @@
 		FD94809728F46C4100B31A89 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94809628F46C4100B31A89 /* Info.swift */; };
 		FD9604F228ECC38B009C902E /* darts1.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9604F028ECC38A009C902E /* darts1.json */; };
 		FD9604F328ECC38B009C902E /* darts2.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9604F128ECC38B009C902E /* darts2.json */; };
+		FDA0381E28F983400040A782 /* MatchesOfPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA0381D28F983400040A782 /* MatchesOfPlayer.swift */; };
 		FDB3FFE828E2180C000D6DDC /* CompetitionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB3FFE728E2180C000D6DDC /* CompetitionTableView.swift */; };
 		FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA29F28DADA7F00709E80 /* TabBarController.swift */; };
 		FDCCA2A228DAF97700709E80 /* AddCompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */; };
@@ -145,6 +146,7 @@
 		FD94809628F46C4100B31A89 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		FD9604F028ECC38A009C902E /* darts1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = darts1.json; sourceTree = "<group>"; };
 		FD9604F128ECC38B009C902E /* darts2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = darts2.json; sourceTree = "<group>"; };
+		FDA0381D28F983400040A782 /* MatchesOfPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesOfPlayer.swift; sourceTree = "<group>"; };
 		FDB3FFE728E2180C000D6DDC /* CompetitionTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionTableView.swift; sourceTree = "<group>"; };
 		FDCCA29F28DADA7F00709E80 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompetitionViewController.swift; sourceTree = "<group>"; };
@@ -222,13 +224,14 @@
 		FD20D64128DB1FA5007F5F8F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FD1E1FFD28F08ED1001CF0EA /* DateFormater.swift */,
 				FD20D64428DB3AA0007F5F8F /* Competition.swift */,
+				FD94809628F46C4100B31A89 /* Info.swift */,
+				FD94809428F46C1700B31A89 /* Player.swift */,
 				FD68DC4528E2D61A00FE0E64 /* CompetitionTable.swift */,
 				FD94809228F4697500B31A89 /* Match.swift */,
 				FD6F060028F8247F00F0F718 /* MatchIndex.swift */,
-				FD94809428F46C1700B31A89 /* Player.swift */,
-				FD94809628F46C4100B31A89 /* Info.swift */,
+				FD1E1FFD28F08ED1001CF0EA /* DateFormater.swift */,
+				FDA0381D28F983400040A782 /* MatchesOfPlayer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 		FD27FEE928D9A63E00D2A405 /* Any_competition */ = {
 			isa = PBXGroup;
 			children = (
+				FD27FF1D28D9AA2300D2A405 /* Fonts */,
 				FD9604EF28ECC364009C902E /* Animations */,
 				FD339E9B28E363B2000DD8F3 /* Views */,
 				FDE14E1E28DEDBD600005B51 /* Database */,
@@ -265,7 +269,6 @@
 				FD20D64128DB1FA5007F5F8F /* Models */,
 				FD20D63E28DB0E6A007F5F8F /* Extention */,
 				FD20D63B28DB0DC9007F5F8F /* Cells */,
-				FD27FF1D28D9AA2300D2A405 /* Fonts */,
 				FD27FF3728D9EEF000D2A405 /* Controllers */,
 				FD27FF3228D9DF7F00D2A405 /* CommonUI */,
 				FD27FEEA28D9A63E00D2A405 /* AppDelegate.swift */,
@@ -677,6 +680,7 @@
 				FD20D64528DB3AA0007F5F8F /* Competition.swift in Sources */,
 				FDE7036128E412B500FF4F06 /* CompetitionNetView.swift in Sources */,
 				FD0D008828DDA29B00C47570 /* ConfigurateCompetitionViewController.swift in Sources */,
+				FDA0381E28F983400040A782 /* MatchesOfPlayer.swift in Sources */,
 				FD08C7D728DF511E00C18CD1 /* MyMatch.swift in Sources */,
 				FD6F060128F8247F00F0F718 /* MatchIndex.swift in Sources */,
 				FD27FEF528D9A63E00D2A405 /* Any_competition.xcdatamodeld in Sources */,

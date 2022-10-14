@@ -108,8 +108,7 @@ class CompetitionViewController: UIViewController{
 
 extension CompetitionViewController: CompetitionTableViewDelegate {
     func chooseMatch(_ indexPathOfMatch: IndexPath) {
-//        guard let player = competitionTable?.playersArray[indexPathOfMatch.section] else { return }
-        guard let match = CompetitionViewController.competitionTable?.competitionTable[indexPathOfMatch.section][indexPathOfMatch.row]  else { return }
+        guard let match = CompetitionViewController.competitionTable?.competitionTable[indexPathOfMatch.section].matchesOfPlayer[indexPathOfMatch.row]  else { return }
         
         let vc = MatchViewController(match: match)
         vc.delegate = self

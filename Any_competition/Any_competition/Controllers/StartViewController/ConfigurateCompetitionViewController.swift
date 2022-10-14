@@ -109,14 +109,15 @@ class ConfigurateCompetitionViewController: UIViewController {
     @objc func tapAddButton() {
         
         var ref: DocumentReference? = nil
-        
-        let players = playersArray.map{ $0.dictionary }
-        
+               
         let info = Info(title: competitionTitle!, qtyPlayers: playerQty!, sportType: sportType!, date: Date.now.description)
         
+        let competition = Competition(info: info, players: playersArray)
+        
         ref = db.collection("competitions").addDocument(data: [
-            "info" : info.dictionary,
-            "players" : players
+            "info": competition.info.dictionary,
+            "players": competition.players.map{ $0.dictionary },
+            "competitionTable": competition.competitionTable!.dictionary
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
@@ -143,7 +144,6 @@ extension ConfigurateCompetitionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlayerDataCollectionViewCell.identifire, for: indexPath) as! PlayerDataCollectionViewCell
         cell.label.text! += "\(indexPath.row+1)"
-        
         return cell
     }
     
@@ -167,6 +167,7 @@ extension ConfigurateCompetitionViewController: UICollectionViewDelegateFlowLayo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       
         let cell = collectionView.cellForItem(at: indexPath) as! PlayerDataCollectionViewCell
         
         let alert = UIAlertController(title: "Введите данные игрока", message: nil, preferredStyle: .alert)
@@ -186,15 +187,29 @@ extension ConfigurateCompetitionViewController: UICollectionViewDelegateFlowLayo
             nickTextField.text = cell.nickLabel.text
         }
         
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [self, weak alert] (_) in
-            cell.nameLabel.text = alert?.textFields![0].text
-            cell.secondNameLabel.text = alert?.textFields![1].text
-            cell.nickLabel.text = alert?.textFields![2].text
+        alert.addAction(UIAlertAction(title: "Выйти", style: .cancel))
+        
+        alert.addAction(UIAlertAction(title: "Применить", style: .default, handler: { [self] _ in
+            cell.nameLabel.text = alert.textFields![0].text
+            cell.secondNameLabel.text = alert.textFields![1].text
+            cell.nickLabel.text = alert.textFields![2].text
+
+            let player = Player(number: indexPath.row+1, name: cell.nameLabel.text!, secondName: cell.secondNameLabel.text!, nick: cell.nickLabel.text!)
+
+            let index = indexPath.row
             
-            
-            playersArray.insert(Player(number: indexPath.row+1, name: cell.nameLabel.text!, secondName: cell.secondNameLabel.text!, nick: cell.nickLabel.text!), at: indexPath.row)
-            
+            if playersArray.count - 1 < index {
+                playersArray.insert(player, at: indexPath.row)
+            } else {
+                playersArray[index] = player
+            }
+
+            print(indexPath.row)
+            print(playersArray)
+
         }))
+        
+        
         
         self.present(alert, animated: true, completion: nil)
     }

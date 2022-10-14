@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Match {
+struct Match: Codable {
     let player1: Player
     let player2: Player
     var isDone = false
@@ -31,6 +31,18 @@ struct Match {
         self.isWinned = matchMirror.isWinned
         self.isWinned.toggle()
         self.matchIndex = MatchIndex(matchMirror.matchIndex.indexOfPlayer, matchMirror.matchIndex.indexOfPlayer)
+    }
+    
+    var dictionary: [String: Any] {
+        return [
+            "player1": player1.dictionary,
+            "player2": player2.dictionary,
+            "isDone": isDone,
+            "isWinned": isDone,
+            "scorePlayer1": scorePlayer1,
+            "scorePlayer2": scorePlayer2,
+            "matchIndex": matchIndex.dictionary,
+        ]
     }
     
     mutating func makeMatch(_ scorePlayer1: Int,_ scorePlayer2: Int) {

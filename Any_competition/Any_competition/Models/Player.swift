@@ -11,13 +11,15 @@ struct Player: Codable, Hashable {
     var number: Int
     var name: String
     var secondName: String
-    var nick: String?
+    var nick: String
     
     var dictionary: [String: Any] {
-        return["number": number,
+        return [
+            "number": number,
             "name": name,
-               "secondName": secondName,
-               "nick": nick as Any]
+            "secondName": secondName,
+            "nick": nick
+        ]
     }
     
     static func == (lhs: Player, rhs: Player) -> Bool {
