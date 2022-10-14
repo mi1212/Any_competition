@@ -17,13 +17,15 @@ struct CompetitionTable {
     
     var qtyGames = 0
     
+    var qtyFinishedGames = 0
+    
     var isCompetitionFinished = false
     
     init(playersArray: [Player]) {
         self.playersArray = playersArray
         competitionTable = createCompetitionTable(playersArray)
         qtyPlayers = playersArray.count
-        qtyGames = qtyGames*qtyGames - qtyGames
+        self.qtyGames = (qtyPlayers*qtyPlayers - qtyPlayers)/2
     }
     
     private func createCompetitionTable(_ playersArray: [Player]) -> [[Match]] {
@@ -48,9 +50,26 @@ struct CompetitionTable {
         
         let index = match.matchIndex
         
+        let indexMirror = MatchIndex(index.indexOfMatch, index.indexOfPlayer)
+        
+        let matchMirror = Match(match)
+        
         competitionTable[index.indexOfPlayer][index.indexOfMatch] = match
         
-        print(competitionTable[index.indexOfPlayer][index.indexOfMatch])
+        competitionTable[indexMirror.indexOfPlayer][indexMirror.indexOfMatch] = matchMirror
         
+        qtyFinishedGames += 1
+        
+        print("qtyFinishedGames - \(qtyFinishedGames), qtyGames - \(qtyGames)")
+        
+        checkFinish(qtyFinishedGames: qtyFinishedGames)
+    }
+    
+    mutating func checkFinish(qtyFinishedGames: Int) {
+        
+        if qtyFinishedGames == qtyGames {
+            isCompetitionFinished = true
+            print("competition was finished")
+        }
     }
 }

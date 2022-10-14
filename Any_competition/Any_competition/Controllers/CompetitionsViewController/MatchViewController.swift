@@ -178,13 +178,11 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             winningAnimation(winnedPlayer: match!.player2)
         }
  
-        match?.isDone.toggle()
-        match?.scorePlayer1 = scorePlayer1
-        match?.scorePlayer2 = scorePlayer2
+        match?.makeMatch(scorePlayer1, scorePlayer2)
 
         delegate?.winning(match!)
     }
-
+    // проверка на количество элементов в текстовом поле "не больше 1 элемента"
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         let currentCharacterCount = textField.text?.count ?? 0

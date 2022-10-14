@@ -10,7 +10,8 @@ import Foundation
 struct Match {
     let player1: Player
     let player2: Player
-    var isDone: Bool = false
+    var isDone = false
+    var isWinned = false
     var scorePlayer1: Int = 0
     var scorePlayer2: Int = 0
     var matchIndex: MatchIndex
@@ -21,8 +22,29 @@ struct Match {
         self.matchIndex = matchIndex
     }
     
-//    private mutating func makeMatch(player1: Player, player2: Player) {
-//        self.score[player1] = 0
-//        self.score[player2] = 0
-//    }
+    init(_ matchMirror: Match) {
+        self.player1 = matchMirror.player2
+        self.player2 = matchMirror.player1
+        self.scorePlayer2 = self.scorePlayer1
+        self.scorePlayer1 = self.scorePlayer2
+        self.isDone.toggle()
+        self.isWinned = matchMirror.isWinned
+        self.isWinned.toggle()
+        self.matchIndex = MatchIndex(matchMirror.matchIndex.indexOfPlayer, matchMirror.matchIndex.indexOfPlayer)
+    }
+    
+    mutating func makeMatch(_ scorePlayer1: Int,_ scorePlayer2: Int) {
+        if !isDone {
+            self.scorePlayer1 = scorePlayer1
+            self.scorePlayer2 = scorePlayer2
+            
+            self.isDone.toggle()
+            
+            if scorePlayer1 > scorePlayer2 {
+                self.isWinned.toggle()
+            }
+        } else {
+            return
+        }
+    }
 }

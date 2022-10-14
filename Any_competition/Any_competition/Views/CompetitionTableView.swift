@@ -168,18 +168,29 @@ extension CompetitionTableView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == tableCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
             cell.backgroundColor = .white
-            
-            
-            
+ 
             let match = CompetitionViewController.competitionTable!.competitionTable[indexPath.section][indexPath.row]
-            if match.isDone != true {
+            
+            if match.isDone != true { // проверка, что матч не состоялся
+                
                 if indexPath.row == indexPath.section  {
                     cell.backgroundColor = .anyDarckColor
                 }
+                
             } else {
-                cell.backgroundColor = .green
+            
+                if match.isWinned {
+                    cell.label.text = "3"
+                    cell.backgroundColor = .cyan
+                } else {
+                    cell.label.text = "0"
+                    cell.backgroundColor = .cyan
+                }
+                
+                
+                
             }
             
             return cell
@@ -194,13 +205,16 @@ extension CompetitionTableView: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
             cell.backgroundColor = .white
             
-            
             return cell
         }
-        
-        
+  
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+       
+        
+        print(competitionTable?.competitionTable[indexPath.section][indexPath.row])
         
         if collectionView == tableCollectionView {
             delegate?.chooseMatch(indexPath)

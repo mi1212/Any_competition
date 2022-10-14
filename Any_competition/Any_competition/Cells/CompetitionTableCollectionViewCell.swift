@@ -9,7 +9,7 @@ import UIKit
 
 class CompetitionTableCollectionViewCell: UICollectionViewCell {
     
-    let label: UILabel = {
+    var label: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -20,10 +20,17 @@ class CompetitionTableCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupCell()
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.backgroundColor = .white
+        self.label.text = ""
     }
     
     private func setupCell() {
