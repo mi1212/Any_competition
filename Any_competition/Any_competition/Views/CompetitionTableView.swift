@@ -177,6 +177,7 @@ extension CompetitionTableView: UICollectionViewDataSource {
         if collectionView == tableCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
             cell.backgroundColor = .white
+            cell.label.textAlignment = .center
  
             let match = CompetitionViewController.competition?.competitionTable!.competitionTable[indexPath.section].matchesOfPlayer[indexPath.row]
             
@@ -208,8 +209,14 @@ extension CompetitionTableView: UICollectionViewDataSource {
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
-            cell.backgroundColor = .white
             
+            if let player = competitionTable?.playersArray[indexPath.section]  {
+                
+                cell.label.text = "\((competitionTable?.calculatePointsOfPlayer(player))!)"
+                
+            }
+            cell.backgroundColor = .white
+            cell.label.textAlignment = .center
             return cell
         }
   

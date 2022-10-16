@@ -71,10 +71,25 @@ struct CompetitionTable: Codable {
     }
     
     mutating func checkFinish(qtyFinishedGames: Int) {
-        
         if qtyFinishedGames == qtyGames {
             isCompetitionFinished = true
             print("--- competition was finished")
         }
+    }
+    
+    func calculatePointsOfPlayer(_ player: Player) -> Int {
+        var points = 0
+        let playerNumber = player.number-1
+        for i in 0...competitionTable[playerNumber].matchesOfPlayer.count-1 {
+            switch competitionTable[playerNumber].matchesOfPlayer[i].isWinned {
+            case true:
+                points += 3
+            case false:
+                points += 0
+            }
+        }
+        
+        
+        return points
     }
 }
