@@ -15,9 +15,9 @@ class CompetitionViewController: UIViewController{
     
     private let decoder = JSONDecoder()
     
-    static var competition: Competition?
+    let dataBase = Database()
     
-    static var competitionTable: CompetitionTable?
+    static var competition: Competition?
     
     let side = CGFloat(40)
     
@@ -35,7 +35,7 @@ class CompetitionViewController: UIViewController{
     
     var qtyPlayers: Int?
     
-    private lazy var tableCollectionView = CompetitionTableView(competitionTable: CompetitionViewController.competitionTable!)
+    private lazy var tableCollectionView = CompetitionTableView(competitionTable: (CompetitionViewController.competition?.competitionTable!)!)
     
 //    private lazy var tournamentView = CompetitionNetView(competitionTable: competitionTable!)
     
@@ -141,7 +141,7 @@ class CompetitionViewController: UIViewController{
 
 extension CompetitionViewController: CompetitionTableViewDelegate {
     func chooseMatch(_ indexPathOfMatch: IndexPath) {
-        guard let match = CompetitionViewController.competitionTable?.competitionTable[indexPathOfMatch.section].matchesOfPlayer[indexPathOfMatch.row]  else { return }
+        guard let match = CompetitionViewController.competition?.competitionTable?.competitionTable[indexPathOfMatch.section].matchesOfPlayer[indexPathOfMatch.row]  else { return }
         
         let vc = MatchViewController(match: match)
         vc.delegate = self
@@ -153,8 +153,11 @@ extension CompetitionViewController: CompetitionTableViewDelegate {
 
 extension CompetitionViewController: MatchViewControllerDelegate {
     func winning(_ match: Match) {
-        CompetitionViewController.competitionTable?.finishMatch(match)
+        CompetitionViewController.competition?.competitionTable?.finishMatch(match)
         self.tableCollectionView.tableCollectionView.reloadData()
+        dataBase.updateCompetitionDataToDataBase(CompetitionViewController.competition!, CompetitionViewController.competition!.id!)
+
+        
     }
 
 }

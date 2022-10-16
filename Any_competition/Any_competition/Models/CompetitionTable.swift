@@ -59,15 +59,13 @@ struct CompetitionTable: Codable {
     
     public mutating func finishMatch(_ match: Match) {
 
-        let matchMirror = Match(match)
+        let matchMirror = match.makeMirrorMatch(match: match)
         
         competitionTable[match.matchIndex.indexOfPlayer].matchesOfPlayer[match.matchIndex.indexOfMatch] = match
         
         competitionTable[matchMirror.matchIndex.indexOfPlayer].matchesOfPlayer[matchMirror.matchIndex.indexOfMatch] = matchMirror
         
         qtyFinishedGames += 1
-        
-        print("qtyFinishedGames - \(qtyFinishedGames), qtyGames - \(qtyGames)")
         
         checkFinish(qtyFinishedGames: qtyFinishedGames)
     }
@@ -76,7 +74,7 @@ struct CompetitionTable: Codable {
         
         if qtyFinishedGames == qtyGames {
             isCompetitionFinished = true
-            print("competition was finished")
+            print("--- competition was finished")
         }
     }
 }

@@ -178,9 +178,9 @@ extension CompetitionTableView: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
             cell.backgroundColor = .white
  
-            let match = CompetitionViewController.competitionTable!.competitionTable[indexPath.section].matchesOfPlayer[indexPath.row]
+            let match = CompetitionViewController.competition?.competitionTable!.competitionTable[indexPath.section].matchesOfPlayer[indexPath.row]
             
-            if match.isDone != true { // проверка, что матч не состоялся
+            if match!.isDone != true { // проверка, что матч не состоялся
 
                 if indexPath.row == indexPath.section  {
                     cell.backgroundColor = .anyDarckColor
@@ -188,7 +188,7 @@ extension CompetitionTableView: UICollectionViewDataSource {
 
             } else {
 
-                if match.isWinned {
+                if match!.isWinned {
                     cell.label.text = "3"
                     cell.backgroundColor = .anyColor
                 } else {

@@ -16,6 +16,8 @@ class ConfigurateCompetitionViewController: UIViewController {
     
     var db = Firestore.firestore()
     
+    let database = Database()
+    
     var competitionTitle: String?
     
     var playerQty: Int?
@@ -107,31 +109,15 @@ class ConfigurateCompetitionViewController: UIViewController {
     }
     
     @objc func tapAddButton() {
-        
-        var ref: DocumentReference? = nil
-               
+    
         let info = Info(title: competitionTitle!, qtyPlayers: playerQty!, sportType: sportType!, date: Date.now.description)
         
         let competition = Competition(info: info, players: playersArray)
         
-        ref = db.collection("competitions").addDocument(data: [
-            "info": competition.info.dictionary,
-            "players": competition.players.map{ $0.dictionary },
-            "competitionTable": competition.competitionTable!.dictionary
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                self.id = ref!.documentID
-                print("Document added with ID: \(ref!.documentID)")
-            }
-        }
-        
-        print("\(db.collection("competitions"))")
+        database.sendCompetitionToDatabase(competition: competition)
         
         dismiss(animated: true, completion: nil)
         
-        dismiss(animated: true, completion: nil)
         delegate?.dismissController()
     }
 }

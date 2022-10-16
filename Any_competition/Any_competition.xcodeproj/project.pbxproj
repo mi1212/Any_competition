@@ -37,6 +37,7 @@
 		FD27FF3428D9DFAF00D2A405 /* AnyCompUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF3328D9DFAF00D2A405 /* AnyCompUILabel.swift */; };
 		FD27FF3628D9E85900D2A405 /* AnyCompUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */; };
 		FD29C22528E040EF00C3B7EB /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD29C22428E040EF00C3B7EB /* MatchViewController.swift */; };
+		FD2D637C28FC0E02007C4D94 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2D637B28FC0E02007C4D94 /* Database.swift */; };
 		FD339E9928E34D6D000DD8F3 /* UIFont+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD339E9828E34D6D000DD8F3 /* UIFont+Extention.swift */; };
 		FD546BBB28EACFBE006B21B1 /* Hardpixel-nn51.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD91763F28EACD470017014B /* Hardpixel-nn51.otf */; };
 		FD546BBC28EACFBE006B21B1 /* DiaryOfAn8BitMage-lYDD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD91763D28EACD460017014B /* DiaryOfAn8BitMage-lYDD.ttf */; };
@@ -120,6 +121,7 @@
 		FD27FF3328D9DFAF00D2A405 /* AnyCompUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUILabel.swift; sourceTree = "<group>"; };
 		FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUIButton.swift; sourceTree = "<group>"; };
 		FD29C22428E040EF00C3B7EB /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
+		FD2D637B28FC0E02007C4D94 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		FD339E9828E34D6D000DD8F3 /* UIFont+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extention.swift"; sourceTree = "<group>"; };
 		FD59CC1028EEA2AB008818B1 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		FD68DC4528E2D61A00FE0E64 /* CompetitionTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionTable.swift; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 		FDE14E1E28DEDBD600005B51 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				FD2D637B28FC0E02007C4D94 /* Database.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				FD27FEEF28D9A63E00D2A405 /* StartViewController.swift in Sources */,
 				FDCCA2A428DAFA4600709E80 /* AnyCompUITextField.swift in Sources */,
 				FD1E200028F096C8001CF0EA /* PlayerDataCollectionViewCell.swift in Sources */,
+				FD2D637C28FC0E02007C4D94 /* Database.swift in Sources */,
 				FD29C22528E040EF00C3B7EB /* MatchViewController.swift in Sources */,
 				FD6E751628F6E63A005DB75F /* CompetitionsData.swift in Sources */,
 				FDF7EDED28E9EBC900FAE28E /* CompetitionTableCollectionViewCell.swift in Sources */,

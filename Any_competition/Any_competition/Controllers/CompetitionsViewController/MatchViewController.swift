@@ -167,11 +167,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         
         let scorePlayer1 = Int(scorePlayer1TextField.text!)!
         let scorePlayer2 = Int(scorePlayer2TextField.text!)!
-        
-        print(scorePlayer1)
-        
-        print(scorePlayer2)
-        
+
         if scorePlayer1 > scorePlayer2 {
             winningAnimation(winnedPlayer: match!.player1)
         } else {

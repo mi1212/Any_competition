@@ -6,11 +6,8 @@
 //
 
 import UIKit
-import FirebaseFirestore
 
 class AddCompetitionViewController: UIViewController {
-    
-    var db = Firestore.firestore()
 
     let competitionTitleTextField = AnyCompUITextField(placeholder: "Название соревнования", isSecure: false)
     
@@ -71,23 +68,7 @@ class AddCompetitionViewController: UIViewController {
         vc.playerQty = Int(playerQtyTextField.text!)
         vc.sportType = typeTextField.text
         vc.delegate = self
-        self.present(vc, animated: true)
-
-//        var ref: DocumentReference? = nil
-   
-//        ref = db.collection("competitions").addDocument(data: [
-//            "title" : competitionTitleTextField.text as Any,
-//            "qtyPlayers": Int(playerQtyTextField.text!) as Any,
-//            "sportType": typeTextField.text as Any,
-//        ]) { err in
-//            if let err = err {
-//                print("Error adding document: \(err)")
-//            } else {
-//                vc.id = ref!.documentID
-//                print("Document added with ID: \(ref!.documentID)")
-//            }
-//        }
-        
+        self.present(vc, animated: true)        
     }
 }
 
