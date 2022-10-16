@@ -147,6 +147,13 @@ class CompetitionTableView: UIView {
             playersScoreCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
+    
+    func reloadData(competitionTable: CompetitionTable) {
+        self.competitionTable = competitionTable
+        tableCollectionView.reloadData()
+        playersNamesCollectionView.reloadData()
+        playersScoreCollectionView.reloadData()
+    }
 }
 
 extension CompetitionTableView: UICollectionViewDataSource {
@@ -183,14 +190,12 @@ extension CompetitionTableView: UICollectionViewDataSource {
 
                 if match.isWinned {
                     cell.label.text = "3"
-                    cell.backgroundColor = .cyan
+                    cell.backgroundColor = .anyColor
                 } else {
                     cell.label.text = "0"
-                    cell.backgroundColor = .cyan
+                    cell.backgroundColor = .anyColor1
                 }
-                
-                
-                
+          
             }
             
             return cell

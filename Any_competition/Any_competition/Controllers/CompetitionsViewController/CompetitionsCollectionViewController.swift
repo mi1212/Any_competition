@@ -15,7 +15,7 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     
     private let decoder = JSONDecoder()
     
-    var datarequest = [Competition]()
+    var competitions = [Competition]()
         
     let animationView = AnimationView()
         
@@ -26,7 +26,6 @@ class CompetitionsCollectionViewController: UICollectionViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.collectionView.register(CompetitionCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionCollectionViewCell.identifire)
         getData()
-        
     }
     
     private func setupAnimation() {
@@ -41,29 +40,30 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getData()
+        
         self.collectionView.reloadData()
         
     }
-    
+    // запрос данных с Firebase Database
     func getData() {
-        
+        print("--- getData from Firestore DataBase")
         self.setupAnimation()
         
         let docRef = db.collection("competitions")
         
         docRef.getDocuments() { snapshotData, error in
-  
             if snapshotData != nil {
                 
-                self.datarequest.removeAll()
+                self.competitions.removeAll()
                 
                 for i in 0...(snapshotData?.documents.count)!-1 {
-                    let json = snapshotData?.documents[i].data()
+                    var json = snapshotData?.documents[i].data()
+                    json?["id"] = snapshotData?.documents[i].documentID
                     do {
                         let data = try JSONSerialization.data(withJSONObject: json! as Any)
+                        
                         let competition = try self.decoder.decode(Competition.self, from: data)
-                        self.datarequest.append(competition)
+                        self.competitions.append(competition)
                     } catch {
                         print("an error occurred", error)
                     }
@@ -79,20 +79,51 @@ class CompetitionsCollectionViewController: UICollectionViewController {
         }
         
     }
+//      метод, который добавляет слушателя для документа,
+//      чтобы отслеживать внешнние изменения в нем на сервере
+//      private func addListener(_ competitionId: String) {
+//
+//        db.collection("competitions").document(competitionId).addSnapshotListener { documentSnapshot, error in
+//            guard let document = documentSnapshot else {
+//              print("Error fetching document: \(error!)")
+//              return
+//            }
+//            guard var json = document.data() else {
+//              print("Document data was empty.")
+//              return
+//            }
+//
+//            json["id"] = document.documentID
+//            do {
+//
+//                self.competitions.removeAll()
+//
+//                let data = try JSONSerialization.data(withJSONObject: json as Any)
+//
+//                let competition = try self.decoder.decode(Competition.self, from: data)
+//                self.competitions.append(competition)
+//            } catch {
+//                print("an error occurred", error)
+//            }
+//            self.collectionView.reloadData()
+//
+//          }
+//
+//    }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return datarequest.count
+        return competitions.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath) as! CompetitionCollectionViewCell
         
-        cell.nameLabel.text = datarequest[indexPath.row].info.title
-        cell.dateLabel.text = dateFormater(datarequest[indexPath.row].info.date)
+        cell.nameLabel.text = competitions[indexPath.row].info.title
+        cell.dateLabel.text = dateFormater(competitions[indexPath.row].info.date)
         
         switch indexPath.row % 2 {
         case 0: cell.contentView.backgroundColor = .anyColor
@@ -107,12 +138,12 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = CompetitionViewController()
         
-        CompetitionViewController.competitionCell = datarequest[indexPath.row]
+        CompetitionViewController.competition = competitions[indexPath.row]
         
-        vc.qtyPlayers = datarequest[indexPath.row].players.count
-        CompetitionViewController.competitionTable = CompetitionTable(playersArray: datarequest[indexPath.row].players)
+        vc.qtyPlayers = competitions[indexPath.row].players.count
+        CompetitionViewController.competitionTable = CompetitionTable(playersArray: competitions[indexPath.row].players)
         
-        vc.navigationItem.title = CompetitionViewController.competitionCell?.info.title
+        vc.navigationItem.title = CompetitionViewController.competition?.info.title
         self.navigationController?.pushViewController(vc, animated: true)
         
     }

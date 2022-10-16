@@ -6,11 +6,16 @@
 //
 
 import UIKit
+import FirebaseFirestore
 import KRTournamentView
 
 class CompetitionViewController: UIViewController{
     
-    static var competitionCell: Competition?
+    var db = Firestore.firestore()
+    
+    private let decoder = JSONDecoder()
+    
+    static var competition: Competition?
     
     static var competitionTable: CompetitionTable?
     
@@ -40,6 +45,7 @@ class CompetitionViewController: UIViewController{
         self.navigationController?.navigationBar.isHidden = false
         self.view.backgroundColor = .backgroundColor
         setupController()
+        addListener((CompetitionViewController.competition?.id)!)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -87,6 +93,33 @@ class CompetitionViewController: UIViewController{
 //            tournamentView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -inset),
 //            tournamentView.heightAnchor.constraint(equalToConstant: self.view.layer.bounds.width*2/3)
 //        ])
+    }
+    // добавил слушателя данных с сервера
+    private func addListener(_ competitionId: String) {
+        print("--- added listener to competition")
+        db.collection("competitions").document(competitionId)
+            .addSnapshotListener { documentSnapshot, error in
+              guard let document = documentSnapshot else {
+                print("Error fetching document: \(error!)")
+                return
+              }
+              guard var json = document.data() else {
+                print("Document data was empty.")
+                return
+              }
+                json["id"] = document.documentID
+                do {
+                    let data = try JSONSerialization.data(withJSONObject: json as Any)
+                    
+                    let competition = try self.decoder.decode(Competition.self, from: data)
+                    CompetitionViewController.competition = competition
+                    self.tableCollectionView.reloadData(competitionTable: competition.competitionTable!)
+                } catch {
+                    print("an error occurred", error)
+                }
+                
+                
+            }
     }
 }
 

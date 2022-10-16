@@ -26,8 +26,6 @@ class AnyCompUIButton: UIButton {
     
     private func configure() {
         self.backgroundColor = .anyColor
-//        self.layer.borderColor = UIColor.black.cgColor
-//        self.layer.borderWidth = 3
         self.layer.cornerRadius = 24
         self.clipsToBounds = true
         self.titleLabel?.font =  UIFont.systemFont(ofSize: UIFont.buttonFontSize, weight: .regular)
