@@ -47,7 +47,7 @@ class TabBarController: UITabBarController {
         self.viewControllers = [
             setupTabBar(viewController: StartViewController(), title: "add competition", image: "plus"),
             setupTabBar(viewController: CompetitionsCollectionViewController(collectionViewLayout: setupflowLayout()), title: "competitions", image: "competition") ,
-            setupTabBar(viewController: UIViewController(), title: "profile", image: "profile")
+            setupTabBar(viewController: ProfileViewController(), title: "profile", image: "profile")
         ]
     }
     
@@ -75,19 +75,7 @@ class TabBarController: UITabBarController {
             }()
     
             return collectionViewlowFLayout
-        }
-
-//    private func fontFamilyName() {
-//        for family: String in UIFont.familyNames
-//                {
-//                    print(family)
-//                    for names: String in UIFont.fontNames(forFamilyName: family)
-//                    {
-//                        print("== \(names)")
-//                    }
-//                }
-//    }
-    
+        }    
 }
 
 
