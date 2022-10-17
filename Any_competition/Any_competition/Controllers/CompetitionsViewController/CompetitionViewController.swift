@@ -12,11 +12,11 @@ class CompetitionViewController: UIViewController{
     
     private let decoder = JSONDecoder()
     
-    let dataBase = Database()
+    let database = Database()
     
     static var competition: Competition?
     
-    let side = CGFloat(40)
+    var side = CGFloat(40)
     
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -32,17 +32,19 @@ class CompetitionViewController: UIViewController{
     
     var qtyPlayers: Int?
     
-    private lazy var tableCollectionView = CompetitionTableView(competitionTable: (CompetitionViewController.competition?.competitionTable!)!)
+    private lazy var tableCollectionView = CompetitionTableView(competitionTable: (CompetitionViewController.competition?.competitionTable!)!, side: self.view.layer.bounds.width/8)
     
 //    private lazy var tournamentView = CompetitionNetView(competitionTable: competitionTable!)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.database.delegate = self
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = false
         self.view.backgroundColor = .backgroundColor
+        self.side = self.view.layer.bounds.width/8
         setupController()
-//        addListener((CompetitionViewController.competition?.id)!)
+        database.addListener((CompetitionViewController.competition?.id)!)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -78,7 +80,7 @@ class CompetitionViewController: UIViewController{
         NSLayoutConstraint.activate([
             tableCollectionView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: inset/2),
             tableCollectionView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
-            tableCollectionView.heightAnchor.constraint(equalToConstant: side*CGFloat(qtyPlayers!)),
+            tableCollectionView.heightAnchor.constraint(equalToConstant: side*CGFloat(qtyPlayers!+1)),
             tableCollectionView.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor),
             tableCollectionView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -inset),
         ])
@@ -91,33 +93,7 @@ class CompetitionViewController: UIViewController{
 //            tournamentView.heightAnchor.constraint(equalToConstant: self.view.layer.bounds.width*2/3)
 //        ])
     }
-    // добавил слушателя данных с сервера
-//    private func addListener(_ competitionId: String) {
-//        print("--- added listener to competition")
-//        db.collection("competitions").document(competitionId)
-//            .addSnapshotListener { documentSnapshot, error in
-//              guard let document = documentSnapshot else {
-//                print("Error fetching document: \(error!)")
-//                return
-//              }
-//              guard var json = document.data() else {
-//                print("Document data was empty.")
-//                return
-//              }
-//                json["id"] = document.documentID
-//                do {
-//                    let data = try JSONSerialization.data(withJSONObject: json as Any)
-//
-//                    let competition = try self.decoder.decode(Competition.self, from: data)
-//                    CompetitionViewController.competition = competition
-//                    self.tableCollectionView.reloadData(competitionTable: competition.competitionTable!)
-//                } catch {
-//                    print("an error occurred", error)
-//                }
-//
-//
-//            }
-//    }
+
 }
 
 //extension CompetitionViewController: MatchViewControllerDelegate {
@@ -152,9 +128,20 @@ extension CompetitionViewController: MatchViewControllerDelegate {
     func winning(_ match: Match) {
         CompetitionViewController.competition?.competitionTable?.finishMatch(match)
         self.tableCollectionView.tableCollectionView.reloadData()
-        dataBase.updateCompetitionDataToDataBase(CompetitionViewController.competition!, CompetitionViewController.competition!.id!)
+        self.tableCollectionView.playersScoreCollectionView.reloadData()
+        database.updateCompetitionDataToDataBase(CompetitionViewController.competition!, CompetitionViewController.competition!.id!)
 
+    }
+}
+
+extension CompetitionViewController: DatabaseDelegate {
+    func reloadView(competitions: [Competition]) {
         
     }
-
+    
+    func reloadTableCollectionView() {
+        tableCollectionView.reloadData(competitionTable: (CompetitionViewController.competition?.competitionTable!)!)
+    }
+    
+    
 }

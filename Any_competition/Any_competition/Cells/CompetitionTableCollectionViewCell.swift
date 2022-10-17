@@ -19,6 +19,8 @@ class CompetitionTableCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+//        self.layer.borderColor = UIColor.black.cgColor
+//        self.layer.borderWidth = 1
         setupCell()
         
     }
@@ -35,9 +37,6 @@ class CompetitionTableCollectionViewCell: UICollectionViewCell {
     
     private func setupCell() {
         contentView.addSubview(label)
-        
-        contentView.layer.borderColor = UIColor.black.cgColor
-        contentView.layer.borderWidth = 1.5
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: contentView.topAnchor),
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant:  5),

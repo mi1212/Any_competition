@@ -23,6 +23,7 @@ class CompetitionsCollectionViewController: UICollectionViewController {
         self.collectionView.backgroundColor = .backgroundColor
         self.navigationController?.navigationBar.isHidden = true
         self.collectionView.register(CompetitionCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionCollectionViewCell.identifire)
+        self.database.addListenerToCollection()
     }
     
     private func setupAnimation() {
@@ -38,7 +39,6 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupAnimation()
-        self.database.getAllDocuments()
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -80,6 +80,8 @@ class CompetitionsCollectionViewController: UICollectionViewController {
 }
 
 extension CompetitionsCollectionViewController: DatabaseDelegate {
+    func reloadTableCollectionView() {}
+    
     func reloadView(competitions: [Competition]) {
         self.competitions = competitions
         self.collectionView.reloadData()

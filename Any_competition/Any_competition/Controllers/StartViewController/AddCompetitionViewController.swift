@@ -17,6 +17,8 @@ class AddCompetitionViewController: UIViewController {
     
     let addButton = AnyCompUIButton(title: "Добавить игроков")
     
+    var int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
@@ -63,12 +65,33 @@ class AddCompetitionViewController: UIViewController {
     
     @objc func tapAddButton() {
         
-        let vc = ConfigurateCompetitionViewController()
-        vc.competitionTitle = competitionTitleTextField.text
-        vc.playerQty = Int(playerQtyTextField.text!)
-        vc.sportType = typeTextField.text
-        vc.delegate = self
-        self.present(vc, animated: true)        
+        guard let playerQty = playerQtyTextField.text else { return }
+        
+        if Int(playerQty) != nil && Int(playerQty)! > 1 {
+            let vc = ConfigurateCompetitionViewController()
+            vc.competitionTitle = competitionTitleTextField.text
+            vc.playerQty = Int(playerQtyTextField.text!)
+            vc.sportType = typeTextField.text
+            vc.delegate = self
+            self.present(vc, animated: true)
+        } else {
+            int += 1
+            
+            if int < 4 {
+                alertMessage(message: "Количество игроков должно быть положительным числом и больше 2")
+            } else {
+                alertMessage(message: "Ярослав ты заебал")
+            }
+            
+        }
+        
+               
+    }
+    
+    private func alertMessage(message: String){
+        let alert = UIAlertController(title: "\(message)", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ок", style: .cancel))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

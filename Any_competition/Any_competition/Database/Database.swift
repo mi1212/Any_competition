@@ -10,6 +10,7 @@ import FirebaseFirestore
 
 protocol DatabaseDelegate: AnyObject {
     func reloadView(competitions: [Competition])
+    func reloadTableCollectionView()
 }
 
 class Database {
@@ -114,9 +115,9 @@ class Database {
     
 //      метод, который добавляет слушателя для документа,
 //      чтобы отслеживать внешнние изменения в нем на сервере
-    private func addListener(_ competitionId: String) {
-
-        db.collection("competitions").document(competitionId).addSnapshotListener { documentSnapshot, error in
+    func addListener(_ competitionId: String) {
+        print("--- added listener to competition")
+        db.collection("competitions").document(competitionId).addSnapshotListener { [self] documentSnapshot, error in
 
             guard let document = documentSnapshot else {
                 print("Error fetching document: \(error!)")
@@ -129,15 +130,55 @@ class Database {
             }
 
             json["id"] = document.documentID
-
+            
             do {
                 let data = try JSONSerialization.data(withJSONObject: json as Any)
+                
                 let competition = try self.decoder.decode(Competition.self, from: data)
+                CompetitionViewController.competition = competition
+                delegate?.reloadTableCollectionView()
+//                self.tableCollectionView.reloadData(competitionTable: competition.competitionTable!)
             } catch {
                 print("an error occurred", error)
             }
         }
 
+    }
+    
+    func addListenerToCollection() {
+        print("--- added listener to collection competitions")
+        
+        var competitions = [Competition]()
+        
+        db.collection("competitions").addSnapshotListener({ querySnapshot, error in
+            guard let snapshotData = querySnapshot?.documents else {
+                print("Error fetching documents: \(error!)")
+                return
+            }
+            
+            if snapshotData.count != 0 {
+                
+                competitions.removeAll()
+                
+                for i in 0...snapshotData.count-1 {
+                    var json = snapshotData[i].data()
+                    json["id"] = snapshotData[i].documentID
+                    do {
+                        let data = try JSONSerialization.data(withJSONObject: json as Any)
+                        
+                        let competition = try self.decoder.decode(Competition.self, from: data)
+                        
+                        competitions.append(competition)
+                    } catch {
+                        print("an error occurred", error)
+                    }
+                }
+            }
+            self.delegate?.reloadView(competitions: competitions)
+            
+        })
+            
+        
     }
     
 }
