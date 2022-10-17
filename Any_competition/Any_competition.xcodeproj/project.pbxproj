@@ -58,6 +58,9 @@
 		FDA0381E28F983400040A782 /* MatchesOfPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA0381D28F983400040A782 /* MatchesOfPlayer.swift */; };
 		FDB1085A28FDADD80020F32C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB1085928FDADD80020F32C /* ProfileViewController.swift */; };
 		FDB1085C28FDAF9B0020F32C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB1085B28FDAF9B0020F32C /* LoginView.swift */; };
+		FDB1086028FDD8790020F32C /* 68087-rocket.json in Resources */ = {isa = PBXBuildFile; fileRef = FDB1085D28FDD8790020F32C /* 68087-rocket.json */; };
+		FDB1086128FDD8790020F32C /* 35201-rocket-launch.json in Resources */ = {isa = PBXBuildFile; fileRef = FDB1085E28FDD8790020F32C /* 35201-rocket-launch.json */; };
+		FDB1086228FDD8790020F32C /* 119388-rocket.json in Resources */ = {isa = PBXBuildFile; fileRef = FDB1085F28FDD8790020F32C /* 119388-rocket.json */; };
 		FDB3FFE828E2180C000D6DDC /* CompetitionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB3FFE728E2180C000D6DDC /* CompetitionTableView.swift */; };
 		FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA29F28DADA7F00709E80 /* TabBarController.swift */; };
 		FDCCA2A228DAF97700709E80 /* AddCompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */; };
@@ -144,6 +147,9 @@
 		FDA0381D28F983400040A782 /* MatchesOfPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesOfPlayer.swift; sourceTree = "<group>"; };
 		FDB1085928FDADD80020F32C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FDB1085B28FDAF9B0020F32C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		FDB1085D28FDD8790020F32C /* 68087-rocket.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "68087-rocket.json"; sourceTree = "<group>"; };
+		FDB1085E28FDD8790020F32C /* 35201-rocket-launch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "35201-rocket-launch.json"; sourceTree = "<group>"; };
+		FDB1085F28FDD8790020F32C /* 119388-rocket.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "119388-rocket.json"; sourceTree = "<group>"; };
 		FDB3FFE728E2180C000D6DDC /* CompetitionTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionTableView.swift; sourceTree = "<group>"; };
 		FDCCA29F28DADA7F00709E80 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompetitionViewController.swift; sourceTree = "<group>"; };
@@ -377,6 +383,9 @@
 				FD6F05FC28F80E0900F0F718 /* lf30_editor_tibwdgvt.json */,
 				FD6F05FE28F80ECC00F0F718 /* 73966-confetti.json */,
 				FD6F05FA28F7F34400F0F718 /* 78540-confetti-congratulation-sparkle.json */,
+				FDB1085E28FDD8790020F32C /* 35201-rocket-launch.json */,
+				FDB1085D28FDD8790020F32C /* 68087-rocket.json */,
+				FDB1085F28FDD8790020F32C /* 119388-rocket.json */,
 				FD1E200128F1A7A5001CF0EA /* ShakeAnimation.swift */,
 			);
 			path = Animations;
@@ -517,6 +526,7 @@
 				FD6F05F928F7F1E500F0F718 /* congratulations.json in Resources */,
 				FD27FF3128D9D27100D2A405 /* 04B_30__.TTF in Resources */,
 				FD546BBB28EACFBE006B21B1 /* Hardpixel-nn51.otf in Resources */,
+				FDB1086228FDD8790020F32C /* 119388-rocket.json in Resources */,
 				FD9604F228ECC38B009C902E /* darts1.json in Resources */,
 				FD6F05FD28F80E0900F0F718 /* lf30_editor_tibwdgvt.json in Resources */,
 				FD546BBC28EACFBE006B21B1 /* DiaryOfAn8BitMage-lYDD.ttf in Resources */,
@@ -529,6 +539,8 @@
 				FD27FF2D28D9D27100D2A405 /* 8-BIT WONDER.ttf in Resources */,
 				FD27FEF728D9A63F00D2A405 /* Assets.xcassets in Resources */,
 				FD27FF2F28D9D27100D2A405 /* PressStart2P-vaV7.ttf in Resources */,
+				FDB1086028FDD8790020F32C /* 68087-rocket.json in Resources */,
+				FDB1086128FDD8790020F32C /* 35201-rocket-launch.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
