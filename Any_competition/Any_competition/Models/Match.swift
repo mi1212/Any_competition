@@ -22,23 +22,12 @@ struct Match: Codable {
         self.matchIndex = matchIndex
     }
     
-    init(_ matchMirror: Match) {
-        self.player1 = matchMirror.player2
-        self.player2 = matchMirror.player1
-        self.scorePlayer2 = self.scorePlayer1
-        self.scorePlayer1 = self.scorePlayer2
-        self.isDone.toggle()
-        self.isWinned = matchMirror.isWinned
-        self.isWinned.toggle()
-        self.matchIndex = MatchIndex(matchMirror.matchIndex.indexOfPlayer, matchMirror.matchIndex.indexOfPlayer)
-    }
-    
     var dictionary: [String: Any] {
         return [
             "player1": player1.dictionary,
             "player2": player2.dictionary,
             "isDone": isDone,
-            "isWinned": isDone,
+            "isWinned": isWinned,
             "scorePlayer1": scorePlayer1,
             "scorePlayer2": scorePlayer2,
             "matchIndex": matchIndex.dictionary,
@@ -50,13 +39,30 @@ struct Match: Codable {
             self.scorePlayer1 = scorePlayer1
             self.scorePlayer2 = scorePlayer2
             
-            self.isDone.toggle()
+            self.isDone = true
             
             if scorePlayer1 > scorePlayer2 {
-                self.isWinned.toggle()
+                self.isWinned = true
+            } else {
+                self.isWinned = false
             }
         } else {
             return
         }
+    }
+    
+    func makeMirrorMatch(match: Match) -> Match {
+        var mirrorMatch = Match(player1: match.player2, player2: match.player1, matchIndex: MatchIndex(match.matchIndex.indexOfMatch, match.matchIndex.indexOfPlayer))
+        mirrorMatch.isDone = match.isDone
+        mirrorMatch.scorePlayer1 = match.scorePlayer2
+        mirrorMatch.scorePlayer2 = match.scorePlayer1
+        
+        if mirrorMatch.scorePlayer1 > mirrorMatch.scorePlayer2 {
+            mirrorMatch.isWinned = true
+        } else {
+            mirrorMatch.isWinned = false
+        }
+        
+        return mirrorMatch
     }
 }

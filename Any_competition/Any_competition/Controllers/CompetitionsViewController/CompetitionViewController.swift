@@ -10,9 +10,11 @@ import KRTournamentView
 
 class CompetitionViewController: UIViewController{
     
-    static var competitionCell: Competition?
+    private let decoder = JSONDecoder()
     
-    static var competitionTable: CompetitionTable?
+    let dataBase = Database()
+    
+    static var competition: Competition?
     
     let side = CGFloat(40)
     
@@ -30,7 +32,7 @@ class CompetitionViewController: UIViewController{
     
     var qtyPlayers: Int?
     
-    private lazy var tableCollectionView = CompetitionTableView(competitionTable: CompetitionViewController.competitionTable!)
+    private lazy var tableCollectionView = CompetitionTableView(competitionTable: (CompetitionViewController.competition?.competitionTable!)!)
     
 //    private lazy var tournamentView = CompetitionNetView(competitionTable: competitionTable!)
     
@@ -40,6 +42,7 @@ class CompetitionViewController: UIViewController{
         self.navigationController?.navigationBar.isHidden = false
         self.view.backgroundColor = .backgroundColor
         setupController()
+//        addListener((CompetitionViewController.competition?.id)!)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -88,6 +91,33 @@ class CompetitionViewController: UIViewController{
 //            tournamentView.heightAnchor.constraint(equalToConstant: self.view.layer.bounds.width*2/3)
 //        ])
     }
+    // добавил слушателя данных с сервера
+//    private func addListener(_ competitionId: String) {
+//        print("--- added listener to competition")
+//        db.collection("competitions").document(competitionId)
+//            .addSnapshotListener { documentSnapshot, error in
+//              guard let document = documentSnapshot else {
+//                print("Error fetching document: \(error!)")
+//                return
+//              }
+//              guard var json = document.data() else {
+//                print("Document data was empty.")
+//                return
+//              }
+//                json["id"] = document.documentID
+//                do {
+//                    let data = try JSONSerialization.data(withJSONObject: json as Any)
+//
+//                    let competition = try self.decoder.decode(Competition.self, from: data)
+//                    CompetitionViewController.competition = competition
+//                    self.tableCollectionView.reloadData(competitionTable: competition.competitionTable!)
+//                } catch {
+//                    print("an error occurred", error)
+//                }
+//
+//
+//            }
+//    }
 }
 
 //extension CompetitionViewController: MatchViewControllerDelegate {
@@ -108,7 +138,7 @@ class CompetitionViewController: UIViewController{
 
 extension CompetitionViewController: CompetitionTableViewDelegate {
     func chooseMatch(_ indexPathOfMatch: IndexPath) {
-        guard let match = CompetitionViewController.competitionTable?.competitionTable[indexPathOfMatch.section].matchesOfPlayer[indexPathOfMatch.row]  else { return }
+        guard let match = CompetitionViewController.competition?.competitionTable?.competitionTable[indexPathOfMatch.section].matchesOfPlayer[indexPathOfMatch.row]  else { return }
         
         let vc = MatchViewController(match: match)
         vc.delegate = self
@@ -120,8 +150,11 @@ extension CompetitionViewController: CompetitionTableViewDelegate {
 
 extension CompetitionViewController: MatchViewControllerDelegate {
     func winning(_ match: Match) {
-        CompetitionViewController.competitionTable?.finishMatch(match)
+        CompetitionViewController.competition?.competitionTable?.finishMatch(match)
         self.tableCollectionView.tableCollectionView.reloadData()
+        dataBase.updateCompetitionDataToDataBase(CompetitionViewController.competition!, CompetitionViewController.competition!.id!)
+
+        
     }
 
 }

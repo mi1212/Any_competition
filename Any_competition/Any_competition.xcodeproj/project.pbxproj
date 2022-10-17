@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1AAC7890E7C61D20A1C509A1 /* Pods_Any_competitionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C50873D92BBC0522649DC0D /* Pods_Any_competitionTests.framework */; };
-		62EE24AF1E10D35DAD77031B /* Pods_Any_competition_Any_competitionUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 647293BB46F2DFEAB9174438 /* Pods_Any_competition_Any_competitionUITests.framework */; };
 		8A20C85D97005FEA72552B2D /* Pods_Any_competition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEAA58907250BE7DBAF0AA9 /* Pods_Any_competition.framework */; };
 		FD08C7D728DF511E00C18CD1 /* MyMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD08C7D628DF511E00C18CD1 /* MyMatch.swift */; };
 		FD0D008828DDA29B00C47570 /* ConfigurateCompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0D008728DDA29B00C47570 /* ConfigurateCompetitionViewController.swift */; };
@@ -39,6 +37,7 @@
 		FD27FF3428D9DFAF00D2A405 /* AnyCompUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF3328D9DFAF00D2A405 /* AnyCompUILabel.swift */; };
 		FD27FF3628D9E85900D2A405 /* AnyCompUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */; };
 		FD29C22528E040EF00C3B7EB /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD29C22428E040EF00C3B7EB /* MatchViewController.swift */; };
+		FD2D637C28FC0E02007C4D94 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2D637B28FC0E02007C4D94 /* Database.swift */; };
 		FD339E9928E34D6D000DD8F3 /* UIFont+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD339E9828E34D6D000DD8F3 /* UIFont+Extention.swift */; };
 		FD546BBB28EACFBE006B21B1 /* Hardpixel-nn51.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD91763F28EACD470017014B /* Hardpixel-nn51.otf */; };
 		FD546BBC28EACFBE006B21B1 /* DiaryOfAn8BitMage-lYDD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD91763D28EACD460017014B /* DiaryOfAn8BitMage-lYDD.ttf */; };
@@ -61,7 +60,6 @@
 		FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA29F28DADA7F00709E80 /* TabBarController.swift */; };
 		FDCCA2A228DAF97700709E80 /* AddCompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */; };
 		FDCCA2A428DAFA4600709E80 /* AnyCompUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA2A328DAFA4600709E80 /* AnyCompUITextField.swift */; };
-		FDE14E2028DEDC0A00005B51 /* DatabaseGetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE14E1F28DEDC0A00005B51 /* DatabaseGetData.swift */; };
 		FDE14E2228DF15AB00005B51 /* CompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE14E2128DF15AB00005B51 /* CompetitionViewController.swift */; };
 		FDE7036128E412B500FF4F06 /* CompetitionNetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE7036028E412B500FF4F06 /* CompetitionNetView.swift */; };
 		FDE720DD28DC8F9400FAF811 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FDE720DC28DC8F9400FAF811 /* GoogleService-Info.plist */; };
@@ -87,15 +85,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02DE3C560383362A5D082525 /* Pods-Any_competitionTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Any_competitionTests.debug.xcconfig"; path = "Target Support Files/Pods-Any_competitionTests/Pods-Any_competitionTests.debug.xcconfig"; sourceTree = "<group>"; };
-		2A8922C4D8D9AF9762FF9E0E /* Pods-Any_competitionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Any_competitionTests.release.xcconfig"; path = "Target Support Files/Pods-Any_competitionTests/Pods-Any_competitionTests.release.xcconfig"; sourceTree = "<group>"; };
 		5AEAA58907250BE7DBAF0AA9 /* Pods_Any_competition.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Any_competition.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C50873D92BBC0522649DC0D /* Pods_Any_competitionTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Any_competitionTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		647293BB46F2DFEAB9174438 /* Pods_Any_competition_Any_competitionUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Any_competition_Any_competitionUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		65CBE246F03226E36ED3E183 /* Pods-Any_competition-Any_competitionUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Any_competition-Any_competitionUITests.release.xcconfig"; path = "Target Support Files/Pods-Any_competition-Any_competitionUITests/Pods-Any_competition-Any_competitionUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6BA5A152F1F2D2695D4A89FB /* Pods-Any_competition.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Any_competition.release.xcconfig"; path = "Target Support Files/Pods-Any_competition/Pods-Any_competition.release.xcconfig"; sourceTree = "<group>"; };
 		BD80565C5998C930EBEA977A /* Pods-Any_competition.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Any_competition.debug.xcconfig"; path = "Target Support Files/Pods-Any_competition/Pods-Any_competition.debug.xcconfig"; sourceTree = "<group>"; };
-		FB8D15756AD6599BF4157E2F /* Pods-Any_competition-Any_competitionUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Any_competition-Any_competitionUITests.debug.xcconfig"; path = "Target Support Files/Pods-Any_competition-Any_competitionUITests/Pods-Any_competition-Any_competitionUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		FD08C7D628DF511E00C18CD1 /* MyMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMatch.swift; sourceTree = "<group>"; };
 		FD0D008728DDA29B00C47570 /* ConfigurateCompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurateCompetitionViewController.swift; sourceTree = "<group>"; };
 		FD0D008928DDBF0200C47570 /* PlayersInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -129,6 +121,7 @@
 		FD27FF3328D9DFAF00D2A405 /* AnyCompUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUILabel.swift; sourceTree = "<group>"; };
 		FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUIButton.swift; sourceTree = "<group>"; };
 		FD29C22428E040EF00C3B7EB /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
+		FD2D637B28FC0E02007C4D94 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		FD339E9828E34D6D000DD8F3 /* UIFont+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extention.swift"; sourceTree = "<group>"; };
 		FD59CC1028EEA2AB008818B1 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		FD68DC4528E2D61A00FE0E64 /* CompetitionTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionTable.swift; sourceTree = "<group>"; };
@@ -151,7 +144,6 @@
 		FDCCA29F28DADA7F00709E80 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompetitionViewController.swift; sourceTree = "<group>"; };
 		FDCCA2A328DAFA4600709E80 /* AnyCompUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUITextField.swift; sourceTree = "<group>"; };
-		FDE14E1F28DEDC0A00005B51 /* DatabaseGetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseGetData.swift; sourceTree = "<group>"; };
 		FDE14E2128DF15AB00005B51 /* CompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionViewController.swift; sourceTree = "<group>"; };
 		FDE7036028E412B500FF4F06 /* CompetitionNetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionNetView.swift; sourceTree = "<group>"; };
 		FDE720DC28DC8F9400FAF811 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -172,7 +164,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AAC7890E7C61D20A1C509A1 /* Pods_Any_competitionTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,7 +171,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62EE24AF1E10D35DAD77031B /* Pods_Any_competition_Any_competitionUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,10 +182,6 @@
 			children = (
 				BD80565C5998C930EBEA977A /* Pods-Any_competition.debug.xcconfig */,
 				6BA5A152F1F2D2695D4A89FB /* Pods-Any_competition.release.xcconfig */,
-				FB8D15756AD6599BF4157E2F /* Pods-Any_competition-Any_competitionUITests.debug.xcconfig */,
-				65CBE246F03226E36ED3E183 /* Pods-Any_competition-Any_competitionUITests.release.xcconfig */,
-				02DE3C560383362A5D082525 /* Pods-Any_competitionTests.debug.xcconfig */,
-				2A8922C4D8D9AF9762FF9E0E /* Pods-Any_competitionTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -393,7 +379,7 @@
 		FDE14E1E28DEDBD600005B51 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				FDE14E1F28DEDC0A00005B51 /* DatabaseGetData.swift */,
+				FD2D637B28FC0E02007C4D94 /* Database.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -402,8 +388,6 @@
 			isa = PBXGroup;
 			children = (
 				5AEAA58907250BE7DBAF0AA9 /* Pods_Any_competition.framework */,
-				647293BB46F2DFEAB9174438 /* Pods_Any_competition_Any_competitionUITests.framework */,
-				5C50873D92BBC0522649DC0D /* Pods_Any_competitionTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -426,8 +410,6 @@
 			dependencies = (
 			);
 			name = Any_competition;
-			packageProductDependencies = (
-			);
 			productName = Any_competition;
 			productReference = FD27FEE728D9A63E00D2A405 /* Any_competition.app */;
 			productType = "com.apple.product-type.application";
@@ -436,7 +418,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FD27FF1728D9A63F00D2A405 /* Build configuration list for PBXNativeTarget "Any_competitionTests" */;
 			buildPhases = (
-				CE6B6D393572F9B077BB414E /* [CP] Check Pods Manifest.lock */,
 				FD27FEFC28D9A63F00D2A405 /* Sources */,
 				FD27FEFD28D9A63F00D2A405 /* Frameworks */,
 				FD27FEFE28D9A63F00D2A405 /* Resources */,
@@ -455,11 +436,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FD27FF1A28D9A63F00D2A405 /* Build configuration list for PBXNativeTarget "Any_competitionUITests" */;
 			buildPhases = (
-				39DAAF30506007929CDA4FB0 /* [CP] Check Pods Manifest.lock */,
 				FD27FF0628D9A63F00D2A405 /* Sources */,
 				FD27FF0728D9A63F00D2A405 /* Frameworks */,
 				FD27FF0828D9A63F00D2A405 /* Resources */,
-				B9AD8556A137147E38D5AAEF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -503,8 +482,6 @@
 				Base,
 			);
 			mainGroup = FD27FEDE28D9A63E00D2A405;
-			packageReferences = (
-			);
 			productRefGroup = FD27FEE828D9A63E00D2A405 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -558,28 +535,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		39DAAF30506007929CDA4FB0 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Any_competition-Any_competitionUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		5415275E28A59BDD4B4529C1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -619,45 +574,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Any_competition/Pods-Any_competition-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B9AD8556A137147E38D5AAEF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Any_competition-Any_competitionUITests/Pods-Any_competition-Any_competitionUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Any_competition-Any_competitionUITests/Pods-Any_competition-Any_competitionUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Any_competition-Any_competitionUITests/Pods-Any_competition-Any_competitionUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CE6B6D393572F9B077BB414E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Any_competitionTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -668,8 +584,8 @@
 				FDCCA2A228DAF97700709E80 /* AddCompetitionViewController.swift in Sources */,
 				FD27FEEF28D9A63E00D2A405 /* StartViewController.swift in Sources */,
 				FDCCA2A428DAFA4600709E80 /* AnyCompUITextField.swift in Sources */,
-				FDE14E2028DEDC0A00005B51 /* DatabaseGetData.swift in Sources */,
 				FD1E200028F096C8001CF0EA /* PlayerDataCollectionViewCell.swift in Sources */,
+				FD2D637C28FC0E02007C4D94 /* Database.swift in Sources */,
 				FD29C22528E040EF00C3B7EB /* MatchViewController.swift in Sources */,
 				FD6E751628F6E63A005DB75F /* CompetitionsData.swift in Sources */,
 				FDF7EDED28E9EBC900FAE28E /* CompetitionTableCollectionViewCell.swift in Sources */,
@@ -931,7 +847,6 @@
 		};
 		FD27FF1828D9A63F00D2A405 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 02DE3C560383362A5D082525 /* Pods-Any_competitionTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -952,7 +867,6 @@
 		};
 		FD27FF1928D9A63F00D2A405 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2A8922C4D8D9AF9762FF9E0E /* Pods-Any_competitionTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -973,7 +887,6 @@
 		};
 		FD27FF1B28D9A63F00D2A405 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FB8D15756AD6599BF4157E2F /* Pods-Any_competition-Any_competitionUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -992,7 +905,6 @@
 		};
 		FD27FF1C28D9A63F00D2A405 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 65CBE246F03226E36ED3E183 /* Pods-Any_competition-Any_competitionUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

@@ -147,6 +147,13 @@ class CompetitionTableView: UIView {
             playersScoreCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
+    
+    func reloadData(competitionTable: CompetitionTable) {
+        self.competitionTable = competitionTable
+        tableCollectionView.reloadData()
+        playersNamesCollectionView.reloadData()
+        playersScoreCollectionView.reloadData()
+    }
 }
 
 extension CompetitionTableView: UICollectionViewDataSource {
@@ -170,10 +177,11 @@ extension CompetitionTableView: UICollectionViewDataSource {
         if collectionView == tableCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
             cell.backgroundColor = .white
+            cell.label.textAlignment = .center
  
-            let match = CompetitionViewController.competitionTable!.competitionTable[indexPath.section].matchesOfPlayer[indexPath.row]
+            let match = CompetitionViewController.competition?.competitionTable!.competitionTable[indexPath.section].matchesOfPlayer[indexPath.row]
             
-            if match.isDone != true { // проверка, что матч не состоялся
+            if match!.isDone != true { // проверка, что матч не состоялся
 
                 if indexPath.row == indexPath.section  {
                     cell.backgroundColor = .anyDarckColor
@@ -181,16 +189,14 @@ extension CompetitionTableView: UICollectionViewDataSource {
 
             } else {
 
-                if match.isWinned {
+                if match!.isWinned {
                     cell.label.text = "3"
-                    cell.backgroundColor = .cyan
+                    cell.backgroundColor = .anyColor
                 } else {
                     cell.label.text = "0"
-                    cell.backgroundColor = .cyan
+                    cell.backgroundColor = .anyColor1
                 }
-                
-                
-                
+          
             }
             
             return cell
@@ -203,8 +209,14 @@ extension CompetitionTableView: UICollectionViewDataSource {
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionTableCollectionViewCell.identifire, for: indexPath) as! CompetitionTableCollectionViewCell
-            cell.backgroundColor = .white
             
+            if let player = competitionTable?.playersArray[indexPath.section]  {
+                
+                cell.label.text = "\((competitionTable?.calculatePointsOfPlayer(player))!)"
+                
+            }
+            cell.backgroundColor = .white
+            cell.label.textAlignment = .center
             return cell
         }
   
@@ -214,6 +226,8 @@ extension CompetitionTableView: UICollectionViewDataSource {
         
         if collectionView == tableCollectionView {
             delegate?.chooseMatch(indexPath)
+            print("indexPath.section = \(indexPath.section)")
+            print("indexPath.row = \(indexPath.row)")
         }
         
     }

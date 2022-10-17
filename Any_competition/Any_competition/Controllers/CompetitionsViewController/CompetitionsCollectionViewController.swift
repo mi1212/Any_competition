@@ -6,27 +6,23 @@
 //
 
 import UIKit
-import FirebaseFirestore
 import Lottie
 
 class CompetitionsCollectionViewController: UICollectionViewController {
     
-    var db = Firestore.firestore()
+    var competitions = [Competition]()
     
-    private let decoder = JSONDecoder()
-    
-    var datarequest = [Competition]()
+    let database = Database()
         
     let animationView = AnimationView()
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.database.delegate = self
         self.collectionView.delegate = self
         self.collectionView.backgroundColor = .backgroundColor
         self.navigationController?.navigationBar.isHidden = true
         self.collectionView.register(CompetitionCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionCollectionViewCell.identifire)
-        getData()
-        
     }
     
     private func setupAnimation() {
@@ -41,43 +37,8 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getData()
-        self.collectionView.reloadData()
-        
-    }
-    
-    func getData() {
-        
-        self.setupAnimation()
-        
-        let docRef = db.collection("competitions")
-        
-        docRef.getDocuments() { snapshotData, error in
-  
-            if snapshotData != nil {
-                
-                self.datarequest.removeAll()
-                
-                for i in 0...(snapshotData?.documents.count)!-1 {
-                    let json = snapshotData?.documents[i].data()
-                    do {
-                        let data = try JSONSerialization.data(withJSONObject: json! as Any)
-                        let competition = try self.decoder.decode(Competition.self, from: data)
-                        self.datarequest.append(competition)
-                    } catch {
-                        print("an error occurred", error)
-                    }
-                }
-                
-                self.animationView.layer.opacity = 0
-                self.animationView.stop()
-                self.collectionView.reloadData()
-
-            } else {
-                print("error - \(error as Any)")
-            }
-        }
-        
+        setupAnimation()
+        self.database.getAllDocuments()
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -85,14 +46,14 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return datarequest.count
+        return competitions.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath) as! CompetitionCollectionViewCell
         
-        cell.nameLabel.text = datarequest[indexPath.row].info.title
-        cell.dateLabel.text = dateFormater(datarequest[indexPath.row].info.date)
+        cell.nameLabel.text = competitions[indexPath.row].info.title
+        cell.dateLabel.text = dateFormater(competitions[indexPath.row].info.date)
         
         switch indexPath.row % 2 {
         case 0: cell.contentView.backgroundColor = .anyColor
@@ -107,16 +68,24 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = CompetitionViewController()
         
-        CompetitionViewController.competitionCell = datarequest[indexPath.row]
+        CompetitionViewController.competition = competitions[indexPath.row]
         
-        vc.qtyPlayers = datarequest[indexPath.row].players.count
-        CompetitionViewController.competitionTable = CompetitionTable(playersArray: datarequest[indexPath.row].players)
+        vc.qtyPlayers = competitions[indexPath.row].players.count
         
-        vc.navigationItem.title = CompetitionViewController.competitionCell?.info.title
+        vc.navigationItem.title = CompetitionViewController.competition?.info.title
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
     
+}
+
+extension CompetitionsCollectionViewController: DatabaseDelegate {
+    func reloadView(competitions: [Competition]) {
+        self.competitions = competitions
+        self.collectionView.reloadData()
+        self.animationView.layer.opacity = 0
+        self.animationView.stop()
+    }
 }
 
 

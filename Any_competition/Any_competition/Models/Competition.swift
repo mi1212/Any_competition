@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Competition: Codable {
+struct Competition: Identifiable, Codable {
+    var id: String?
     let info: Info
     let players: [Player]
     var competitionTable: CompetitionTable?
