@@ -42,13 +42,13 @@ class TabBarController: UITabBarController {
     }
 
     private func configurateTabBar() {
-        self.tabBar.backgroundColor = .backgroundColor
-        self.tabBar.tintColor = .black
+        self.tabBar.backgroundColor = .clear
+        self.tabBar.tintColor = .anyDarckColor
         self.viewControllers = [
-            setupTabBar(viewController: StartViewController(), title: "add competition", image: "plus"),
-            setupTabBar(viewController: CompetitionsCollectionViewController(collectionViewLayout: setupflowLayout()), title: "competitions", image: "competition") ,
+            setupTabBar(viewController: StartViewController(), title: "add competition", image: "svg-5"),
+            setupTabBar(viewController: CompetitionsCollectionViewController(collectionViewLayout: setupflowLayout()), title: "competitions", image: "competitions") ,
             setupTabBar(viewController: ProfileViewController(), title: "profile", image: "profile")
-//            setupTabBar(viewController: TestViewController(), title: "profile", image: "profile")
+//            setupTabBar(viewController: TestViewController(), title: "profile", image: "square120")
         ]
     }
     
