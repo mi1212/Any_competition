@@ -49,6 +49,7 @@
 		FD6F05FD28F80E0900F0F718 /* lf30_editor_tibwdgvt.json in Resources */ = {isa = PBXBuildFile; fileRef = FD6F05FC28F80E0900F0F718 /* lf30_editor_tibwdgvt.json */; };
 		FD6F05FF28F80ECC00F0F718 /* 73966-confetti.json in Resources */ = {isa = PBXBuildFile; fileRef = FD6F05FE28F80ECC00F0F718 /* 73966-confetti.json */; };
 		FD6F060128F8247F00F0F718 /* MatchIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6F060028F8247F00F0F718 /* MatchIndex.swift */; };
+		FD73A21C28FF254B005FAFCE /* AnyCompClearUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD73A21B28FF254B005FAFCE /* AnyCompClearUIButton.swift */; };
 		FD7C894A28ED55D100699A7E /* AnyCompLogoUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C894928ED55D100699A7E /* AnyCompLogoUILabel.swift */; };
 		FD85BA6728FE75EE0027468E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD85BA6628FE75EE0027468E /* ProfileView.swift */; };
 		FD85BA6928FE83C80027468E /* 98200-drag.json in Resources */ = {isa = PBXBuildFile; fileRef = FD85BA6828FE83C80027468E /* 98200-drag.json */; };
@@ -139,6 +140,7 @@
 		FD6F05FC28F80E0900F0F718 /* lf30_editor_tibwdgvt.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_tibwdgvt.json; sourceTree = "<group>"; };
 		FD6F05FE28F80ECC00F0F718 /* 73966-confetti.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "73966-confetti.json"; sourceTree = "<group>"; };
 		FD6F060028F8247F00F0F718 /* MatchIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchIndex.swift; sourceTree = "<group>"; };
+		FD73A21B28FF254B005FAFCE /* AnyCompClearUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompClearUIButton.swift; sourceTree = "<group>"; };
 		FD7C894928ED55D100699A7E /* AnyCompLogoUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompLogoUILabel.swift; sourceTree = "<group>"; };
 		FD85BA6628FE75EE0027468E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		FD85BA6828FE83C80027468E /* 98200-drag.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "98200-drag.json"; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				FD27FF3328D9DFAF00D2A405 /* AnyCompUILabel.swift */,
 				FD7C894928ED55D100699A7E /* AnyCompLogoUILabel.swift */,
 				FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */,
+				FD73A21B28FF254B005FAFCE /* AnyCompClearUIButton.swift */,
 				FDCCA2A328DAFA4600709E80 /* AnyCompUITextField.swift */,
 			);
 			path = CommonUI;
@@ -623,6 +626,7 @@
 				FDCCA2A428DAFA4600709E80 /* AnyCompUITextField.swift in Sources */,
 				FD1E200028F096C8001CF0EA /* PlayerDataCollectionViewCell.swift in Sources */,
 				FD2D637C28FC0E02007C4D94 /* Database.swift in Sources */,
+				FD73A21C28FF254B005FAFCE /* AnyCompClearUIButton.swift in Sources */,
 				FD29C22528E040EF00C3B7EB /* MatchViewController.swift in Sources */,
 				FD6E751628F6E63A005DB75F /* CompetitionsData.swift in Sources */,
 				FDF7EDED28E9EBC900FAE28E /* CompetitionTableCollectionViewCell.swift in Sources */,

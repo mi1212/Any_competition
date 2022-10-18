@@ -25,6 +25,10 @@ class LoginView: UIView {
     
     let loginButton = AnyCompUIButton(title: "Войти")
     
+    let resetPass = AnyCompClearUIButton(title: "сбросить пароль")
+    
+    let createUser = AnyCompClearUIButton(title: "создать учетную запись")
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .anyColor1
@@ -44,8 +48,11 @@ class LoginView: UIView {
         self.addSubview(mailTextField)
         self.addSubview(passTextField)
         self.addSubview(loginButton)
+        self.addSubview(resetPass)
+        self.addSubview(createUser)
         loginButton.addTarget(self, action: #selector(tapLoginButton), for: .touchUpInside)
-        
+        createUser.addTarget(self, action: #selector(tapCreateUserButton), for: .touchUpInside)
+        resetPass.addTarget(self, action: #selector(tapResetPassButton), for: .touchUpInside)
         let inset: CGFloat = 16
         
         NSLayoutConstraint.activate([
@@ -55,24 +62,42 @@ class LoginView: UIView {
         ])
         
         NSLayoutConstraint.activate([
+            mailTextField.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 3*inset),
             mailTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
             mailTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-            mailTextField.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -inset),
+//            mailTextField.heightAnchor.constraint(equalToConstant: self.layer.bounds.height/7)
             mailTextField.heightAnchor.constraint(equalToConstant: 52)
         ])
         
         NSLayoutConstraint.activate([
+            passTextField.topAnchor.constraint(equalTo: self.mailTextField.bottomAnchor, constant: inset),
             passTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
             passTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-            passTextField.topAnchor.constraint(equalTo: self.mailTextField.bottomAnchor, constant: inset),
+//            passTextField.heightAnchor.constraint(equalToConstant: self.layer.bounds.height/7)
             passTextField.heightAnchor.constraint(equalToConstant: 52)
         ])
         
         NSLayoutConstraint.activate([
+            loginButton.topAnchor.constraint(equalTo: passTextField.bottomAnchor, constant: inset),
             loginButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
             loginButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
             loginButton.heightAnchor.constraint(equalToConstant: 64),
-            loginButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -inset)
+        ])
+        
+        NSLayoutConstraint.activate([
+            resetPass.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: inset),
+            resetPass.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
+            resetPass.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
+//            createUser.heightAnchor.constraint(equalToConstant: 64),
+            resetPass.bottomAnchor.constraint(greaterThanOrEqualTo: createUser.topAnchor, constant: -3*inset)
+        ])
+        
+        NSLayoutConstraint.activate([
+//            createUser.topAnchor.constraint(equalTo: resetPass.bottomAnchor, constant: inset/2),
+            createUser.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
+            createUser.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
+//            createUser.heightAnchor.constraint(equalToConstant: 64),
+            createUser.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -inset)
         ])
     }
     
@@ -80,4 +105,12 @@ class LoginView: UIView {
         delegate?.disappeare()
     }
     
+    
+    @objc func tapCreateUserButton() {
+        print("tapCreateUserButton")
+    }
+    
+    @objc func tapResetPassButton() {
+        print("tapResetPassButton")
+    }
 }

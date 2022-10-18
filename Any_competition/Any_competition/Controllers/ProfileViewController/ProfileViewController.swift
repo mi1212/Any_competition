@@ -38,8 +38,8 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
         loginView.delegate = self
-//        setupLoginView()
-        setupProfileView()
+        setupLoginView()
+//        setupProfileView()
     }
     
     // MARK: - Navigation
@@ -61,7 +61,7 @@ class ProfileViewController: UIViewController {
             loginView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: self.view.layer.bounds.height),
             loginView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
             loginView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
-            loginView.heightAnchor.constraint(equalToConstant: 340)
+            loginView.heightAnchor.constraint(equalToConstant: 480)
         ])
         
         let loginOriginalTransform = self.loginView.transform
@@ -77,6 +77,7 @@ class ProfileViewController: UIViewController {
             print("rocketAnimationView was finished. handler - \(handler)")
         }
     }
+    
     
     // установка в движении профайла
     private func movingSetupProfileView() {
