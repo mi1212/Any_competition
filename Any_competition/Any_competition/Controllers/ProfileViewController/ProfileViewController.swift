@@ -9,86 +9,144 @@ import UIKit
 import Lottie
 
 class ProfileViewController: UIViewController {
-
+    // MARK: - Views
     let loginView = LoginView()
     
-    let animationView: AnimationView = {
+    let rocketAnimationView: AnimationView = {
         let animationView = AnimationView()
-//        animationView.animation = Animation.named("35201-rocket-launch")
-//        animationView.animation = Animation.named("68087-rocket")
         animationView.animation = Animation.named("119388-rocket")
-//        animationView.backgroundColor = .black
-        animationView.contentMode = .scaleAspectFill
-        animationView.loopMode = .playOnce
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .loop
+        animationView.layer.opacity = 0.8
         animationView.translatesAutoresizingMaskIntoConstraints = false
         return animationView
     }()
     
+    let profileView = ProfileView()
+    
+    let movinAnimationView: AnimationView = {
+        let animationView = AnimationView()
+        animationView.animation = Animation.named("93693-moving-truck")
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .loop
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        return animationView
+    }()
+    
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
         loginView.delegate = self
-        setupLoginView()
+//        setupLoginView()
+        setupProfileView()
     }
     
+    // MARK: - Navigation
+    // установка логинки
     private func setupLoginView() {
-        self.view.addSubview(animationView)
+        self.view.addSubview(rocketAnimationView)
         self.view.addSubview(loginView)
         
         let inset: CGFloat = 16
         
         NSLayoutConstraint.activate([
-            animationView.bottomAnchor.constraint(equalTo: loginView.topAnchor, constant: 100),
-            animationView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
-            animationView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
-            animationView.heightAnchor.constraint(equalTo: animationView.widthAnchor )
+            rocketAnimationView.bottomAnchor.constraint(equalTo: loginView.topAnchor, constant: 100),
+            rocketAnimationView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
+            rocketAnimationView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
+            rocketAnimationView.heightAnchor.constraint(equalTo: rocketAnimationView.widthAnchor )
         ])
-
+        
         NSLayoutConstraint.activate([
             loginView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: self.view.layer.bounds.height),
             loginView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
             loginView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
-//            loginView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: inset*3),
-//            loginView.heightAnchor.constraint(equalToConstant: super.view.layer.bounds.height/2.2)
             loginView.heightAnchor.constraint(equalToConstant: 340)
         ])
         
-        
-        
         let loginOriginalTransform = self.loginView.transform
         let loginTranslatedTransform = loginOriginalTransform.translatedBy(x: 0.0, y: -self.view.layer.bounds.height)
-        let amimationOriginalTransform = self.animationView.transform
+        let amimationOriginalTransform = self.rocketAnimationView.transform
         let amimationOriginalTranslatedTransform = amimationOriginalTransform.translatedBy(x: 0.0, y: -self.view.layer.bounds.height)
         
-        UIView.animate(withDuration: 2, delay: 0) { [self] in
-            animationView.play()
+        UIView.animate(withDuration: 3, delay: 0) { [self] in
+            rocketAnimationView.play()
             self.loginView.transform = loginTranslatedTransform
-            self.animationView.transform = amimationOriginalTranslatedTransform
-//            animationView.stop()
-//            loginView.layer.opacity = 0
+            self.rocketAnimationView.transform = amimationOriginalTranslatedTransform
+        } completion: { handler in
+            print("rocketAnimationView was finished. handler - \(handler)")
         }
     }
+    
+    // установка в движении профайла
+    private func movingSetupProfileView() {
+        self.view.addSubview(profileView)
+        self.view.addSubview(movinAnimationView)
+        
+        let inset: CGFloat = 16
+        
+        NSLayoutConstraint.activate([
+            profileView.leadingAnchor.constraint(equalTo: movinAnimationView.trailingAnchor, constant: inset),
+            profileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: inset),
+            profileView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -inset),
+            profileView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor, constant: -inset*2)
+        ])
+        
+        NSLayoutConstraint.activate([
+            movinAnimationView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            movinAnimationView.leadingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            movinAnimationView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 1/2),
+            movinAnimationView.heightAnchor.constraint(equalTo: movinAnimationView.widthAnchor)
+        ])
+        
+        let movinOriginalTransform = self.movinAnimationView.transform
+        let movinTranslatedTransform = movinOriginalTransform.translatedBy(x: -self.view.layer.bounds.width*1.5, y: 0)
+        
+        let amimationOriginalTransform = self.movinAnimationView.transform
+        let amimationOriginalTranslatedTransform = amimationOriginalTransform.translatedBy(x: -self.view.layer.bounds.width*1.5, y: 0)
+        
+        UIView.animate(withDuration: 2, delay: 0, options: .transitionFlipFromLeft) {
+            self.movinAnimationView.play()
+            self.movinAnimationView.transform = movinTranslatedTransform
+            self.profileView.transform = amimationOriginalTranslatedTransform
+        } completion: { handler in
+            print("movinAnimationView was finished. handler - \(handler)")
+        }
+        
+    }
+    
+    // установка профайла
+    private func setupProfileView() {
+        self.view.addSubview(profileView)
+        
+        let inset: CGFloat = 16
+        
+        NSLayoutConstraint.activate([
+            profileView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
+            profileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: inset),
+            profileView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -inset),
+            profileView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor, constant: -inset*2)
+        ])
+    }
+    
 
-    // MARK: - Navigation
-
-
+    
 }
 extension ProfileViewController: LoginViewDelegate {
     func disappeare() {
         
         let loginOriginalTransform = self.loginView.transform
         let loginTranslatedTransform = loginOriginalTransform.translatedBy(x: 0.0, y: -self.view.layer.bounds.height)
-        let amimationOriginalTransform = self.animationView.transform
+        let amimationOriginalTransform = self.rocketAnimationView.transform
         let amimationOriginalTranslatedTransform = amimationOriginalTransform.translatedBy(x: 0.0, y: -self.view.layer.bounds.height)
         
         UIView.animate(withDuration: 1, delay: 0) { [self] in
-            animationView.play()
+            rocketAnimationView.play()
             self.loginView.transform = loginTranslatedTransform
-            self.animationView.transform = amimationOriginalTranslatedTransform
-//            animationView.stop()
-//            loginView.layer.opacity = 0
+            self.rocketAnimationView.transform = amimationOriginalTranslatedTransform
+        } completion: { [self] handler in
+            movingSetupProfileView()
+            print("rocketAnimationView was finished. handler - \(handler)")
         }
     }
-    
-    
 }

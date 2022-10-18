@@ -48,6 +48,7 @@ class TabBarController: UITabBarController {
             setupTabBar(viewController: StartViewController(), title: "add competition", image: "plus"),
             setupTabBar(viewController: CompetitionsCollectionViewController(collectionViewLayout: setupflowLayout()), title: "competitions", image: "competition") ,
             setupTabBar(viewController: ProfileViewController(), title: "profile", image: "profile")
+//            setupTabBar(viewController: TestViewController(), title: "profile", image: "profile")
         ]
     }
     

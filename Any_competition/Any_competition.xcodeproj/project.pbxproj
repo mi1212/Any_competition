@@ -50,6 +50,9 @@
 		FD6F05FF28F80ECC00F0F718 /* 73966-confetti.json in Resources */ = {isa = PBXBuildFile; fileRef = FD6F05FE28F80ECC00F0F718 /* 73966-confetti.json */; };
 		FD6F060128F8247F00F0F718 /* MatchIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6F060028F8247F00F0F718 /* MatchIndex.swift */; };
 		FD7C894A28ED55D100699A7E /* AnyCompLogoUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C894928ED55D100699A7E /* AnyCompLogoUILabel.swift */; };
+		FD85BA6728FE75EE0027468E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD85BA6628FE75EE0027468E /* ProfileView.swift */; };
+		FD85BA6928FE83C80027468E /* 98200-drag.json in Resources */ = {isa = PBXBuildFile; fileRef = FD85BA6828FE83C80027468E /* 98200-drag.json */; };
+		FD85BA6B28FE86500027468E /* 93693-moving-truck.json in Resources */ = {isa = PBXBuildFile; fileRef = FD85BA6A28FE86500027468E /* 93693-moving-truck.json */; };
 		FD94809328F4697500B31A89 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94809228F4697500B31A89 /* Match.swift */; };
 		FD94809528F46C1700B31A89 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94809428F46C1700B31A89 /* Player.swift */; };
 		FD94809728F46C4100B31A89 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94809628F46C4100B31A89 /* Info.swift */; };
@@ -137,6 +140,9 @@
 		FD6F05FE28F80ECC00F0F718 /* 73966-confetti.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "73966-confetti.json"; sourceTree = "<group>"; };
 		FD6F060028F8247F00F0F718 /* MatchIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchIndex.swift; sourceTree = "<group>"; };
 		FD7C894928ED55D100699A7E /* AnyCompLogoUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompLogoUILabel.swift; sourceTree = "<group>"; };
+		FD85BA6628FE75EE0027468E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		FD85BA6828FE83C80027468E /* 98200-drag.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "98200-drag.json"; sourceTree = "<group>"; };
+		FD85BA6A28FE86500027468E /* 93693-moving-truck.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "93693-moving-truck.json"; sourceTree = "<group>"; };
 		FD91763D28EACD460017014B /* DiaryOfAn8BitMage-lYDD.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DiaryOfAn8BitMage-lYDD.ttf"; sourceTree = "<group>"; };
 		FD91763F28EACD470017014B /* Hardpixel-nn51.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hardpixel-nn51.otf"; sourceTree = "<group>"; };
 		FD94809228F4697500B31A89 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
@@ -350,6 +356,7 @@
 				FDB3FFE728E2180C000D6DDC /* CompetitionTableView.swift */,
 				FDE7036028E412B500FF4F06 /* CompetitionNetView.swift */,
 				FDB1085B28FDAF9B0020F32C /* LoginView.swift */,
+				FD85BA6628FE75EE0027468E /* ProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -387,6 +394,8 @@
 				FDB1085D28FDD8790020F32C /* 68087-rocket.json */,
 				FDB1085F28FDD8790020F32C /* 119388-rocket.json */,
 				FD1E200128F1A7A5001CF0EA /* ShakeAnimation.swift */,
+				FD85BA6828FE83C80027468E /* 98200-drag.json */,
+				FD85BA6A28FE86500027468E /* 93693-moving-truck.json */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -523,6 +532,8 @@
 			files = (
 				FD27FF3028D9D27100D2A405 /* Pixel LCD-7.ttf in Resources */,
 				FDE720DD28DC8F9400FAF811 /* GoogleService-Info.plist in Resources */,
+				FD85BA6B28FE86500027468E /* 93693-moving-truck.json in Resources */,
+				FD85BA6928FE83C80027468E /* 98200-drag.json in Resources */,
 				FD6F05F928F7F1E500F0F718 /* congratulations.json in Resources */,
 				FD27FF3128D9D27100D2A405 /* 04B_30__.TTF in Resources */,
 				FD546BBB28EACFBE006B21B1 /* Hardpixel-nn51.otf in Resources */,
@@ -639,6 +650,7 @@
 				FD20D64928DB4FF1007F5F8F /* CompetitionFetch.swift in Sources */,
 				FD27FF3428D9DFAF00D2A405 /* AnyCompUILabel.swift in Sources */,
 				FD1E200228F1A7A5001CF0EA /* ShakeAnimation.swift in Sources */,
+				FD85BA6728FE75EE0027468E /* ProfileView.swift in Sources */,
 				FD1E1FFE28F08ED1001CF0EA /* DateFormater.swift in Sources */,
 				FD27FEED28D9A63E00D2A405 /* SceneDelegate.swift in Sources */,
 				FDF7EDEB28E9E6EE00FAE28E /* UIColor+Extention.swift in Sources */,
