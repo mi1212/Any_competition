@@ -7,13 +7,13 @@
 
 import UIKit
 
-//protocol CreatePlayerViewDelegate: AnyObject {
-//    func disappeare()
-//}
+protocol CreateUserViewDelegate: AnyObject {
+    func tapCreateUser(firstName: String, lastName: String, nickName: String, mail: String, pass: String)
+}
 
 class CreateUserView: UIView {
     
-//    var delegate: LoginViewDelegate?
+    var delegate: CreateUserViewDelegate?
     
     // MARK: UIViews
     
@@ -108,6 +108,27 @@ class CreateUserView: UIView {
     
     @objc func tapCreateButton() {
         print("tapCreateButton")
+        guard let firstName = firstNameTextField.text else {return}
+        guard let lastName = lastNameTextField.text else {return}
+        guard let nick = nickNameTextField.text else {return}
+        guard let mail = mailTextField.text else {return}
+        guard let pass = passTextField.text else {return}
+        
+        let textFieldArray = [firstNameTextField, lastNameTextField, nickNameTextField, mailTextField, passTextField]
+        
+        if firstName != "" && lastName != "" && nick != "" && mail != "" && pass != "" {
+            delegate?.tapCreateUser(
+                firstName: firstName,
+                lastName: lastName,
+                nickName: nick,
+                mail: mail,
+                pass: pass
+            )
+        } else {
+            textFieldArray.map {
+                shakeTextFieldifEmpty($0)
+            }
+        }
     }
  
 }

@@ -42,7 +42,7 @@ class Database {
         }
     }
     
-// запрос всех документов с Firebase Database
+//      запрос всех документов с Firebase Database
     func getAllDocuments(){
         print("--- get data from Firestore DataBase")
         
@@ -77,7 +77,7 @@ class Database {
         
     }
     
-//      метод обновления данных в соревновании, если произошли события
+//      метод отправки обновленных данных в соревновании, если произошли события
     func updateCompetitionDataToDataBase(_ competition: Competition ,_ competitionId: String) {
         print("--- send competition data to Firestore DataBase")
         
@@ -113,10 +113,11 @@ class Database {
 
     }
     
-//      метод, который добавляет слушателя для документа,
-//      чтобы отслеживать внешнние изменения в нем на сервере
+//      метод добавляет слушателя для документа
     func addListener(_ competitionId: String) {
+        
         print("--- added listener to competition")
+        
         db.collection("competitions").document(competitionId).addSnapshotListener { [self] documentSnapshot, error in
 
             guard let document = documentSnapshot else {
@@ -145,6 +146,7 @@ class Database {
 
     }
     
+//      метод добавляет слушателя для всей коллекции соревнований
     func addListenerToCollection() {
         print("--- added listener to collection competitions")
         
@@ -180,5 +182,25 @@ class Database {
             
         
     }
+//      метод добавляет пользователя
+    func addUser(user: User) {
+        print("--- send user to Firestore DataBase")
+        var ref: DocumentReference? = nil
+        
+        let tempUser = user
+        
+        ref = db.collection("users").addDocument(data: [
+            "id": tempUser.id as Any,
+            "firstName": tempUser.firstName,
+            "lastName": tempUser.lastName,
+            "nick" : tempUser.nick,
+            "mail" : tempUser.mail
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            }
+        }
+    }
+    
     
 }

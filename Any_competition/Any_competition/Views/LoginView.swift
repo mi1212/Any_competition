@@ -10,7 +10,7 @@ import UIKit
 protocol LoginViewDelegate: AnyObject {
     func tapLogin()
     
-    func tapCreateUser()
+    func tapStartCreateUser()
     
     func tapResetPassword()
 }
@@ -32,6 +32,12 @@ class LoginView: UIView {
     let resetPass = AnyCompClearUIButton(title: "сбросить пароль")
     
     let createUser = AnyCompClearUIButton(title: "создать учетную запись")
+    
+    convenience init(user: User, pass: String) {
+        self.init()
+        mailTextField.text = user.mail
+        passTextField.text = pass
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -113,7 +119,7 @@ class LoginView: UIView {
     
     @objc func tapCreateUserButton() {
         print("tapCreateUserButton")
-        delegate?.tapCreateUser()
+        delegate?.tapStartCreateUser()
     }
     
     @objc func tapResetPassButton() {

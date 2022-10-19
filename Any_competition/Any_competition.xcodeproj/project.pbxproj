@@ -14,7 +14,7 @@
 		FD0FB29728ECBCE6000789CD /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0FB29628ECBCE6000789CD /* TestViewController.swift */; };
 		FD1E1FFE28F08ED1001CF0EA /* DateFormater.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1E1FFD28F08ED1001CF0EA /* DateFormater.swift */; };
 		FD1E200028F096C8001CF0EA /* PlayerDataCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1E1FFF28F096C8001CF0EA /* PlayerDataCollectionViewCell.swift */; };
-		FD1E200228F1A7A5001CF0EA /* ShakeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1E200128F1A7A5001CF0EA /* ShakeAnimation.swift */; };
+		FD1E200228F1A7A5001CF0EA /* shakeTextFieldifEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1E200128F1A7A5001CF0EA /* shakeTextFieldifEmpty.swift */; };
 		FD20D63A28DB0B19007F5F8F /* CompetitionsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20D63928DB0B19007F5F8F /* CompetitionsCollectionViewController.swift */; };
 		FD20D63D28DB0DE9007F5F8F /* CompetitionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20D63C28DB0DE9007F5F8F /* CompetitionCollectionViewCell.swift */; };
 		FD20D64028DB0E97007F5F8F /* UIView+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20D63F28DB0E97007F5F8F /* UIView+Extention.swift */; };
@@ -51,6 +51,7 @@
 		FD6F060128F8247F00F0F718 /* MatchIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6F060028F8247F00F0F718 /* MatchIndex.swift */; };
 		FD73A21C28FF254B005FAFCE /* AnyCompClearUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD73A21B28FF254B005FAFCE /* AnyCompClearUIButton.swift */; };
 		FD7C894A28ED55D100699A7E /* AnyCompLogoUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C894928ED55D100699A7E /* AnyCompLogoUILabel.swift */; };
+		FD7D09822900559400E6CE60 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7D09812900559400E6CE60 /* User.swift */; };
 		FD85BA6728FE75EE0027468E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD85BA6628FE75EE0027468E /* ProfileView.swift */; };
 		FD85BA6928FE83C80027468E /* 98200-drag.json in Resources */ = {isa = PBXBuildFile; fileRef = FD85BA6828FE83C80027468E /* 98200-drag.json */; };
 		FD85BA6B28FE86500027468E /* 93693-moving-truck.json in Resources */ = {isa = PBXBuildFile; fileRef = FD85BA6A28FE86500027468E /* 93693-moving-truck.json */; };
@@ -104,7 +105,7 @@
 		FD0FB29628ECBCE6000789CD /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		FD1E1FFD28F08ED1001CF0EA /* DateFormater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormater.swift; sourceTree = "<group>"; };
 		FD1E1FFF28F096C8001CF0EA /* PlayerDataCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDataCollectionViewCell.swift; sourceTree = "<group>"; };
-		FD1E200128F1A7A5001CF0EA /* ShakeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeAnimation.swift; sourceTree = "<group>"; };
+		FD1E200128F1A7A5001CF0EA /* shakeTextFieldifEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shakeTextFieldifEmpty.swift; sourceTree = "<group>"; };
 		FD20D63928DB0B19007F5F8F /* CompetitionsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsCollectionViewController.swift; sourceTree = "<group>"; };
 		FD20D63C28DB0DE9007F5F8F /* CompetitionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionCollectionViewCell.swift; sourceTree = "<group>"; };
 		FD20D63F28DB0E97007F5F8F /* UIView+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extention.swift"; sourceTree = "<group>"; };
@@ -143,6 +144,7 @@
 		FD6F060028F8247F00F0F718 /* MatchIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchIndex.swift; sourceTree = "<group>"; };
 		FD73A21B28FF254B005FAFCE /* AnyCompClearUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompClearUIButton.swift; sourceTree = "<group>"; };
 		FD7C894928ED55D100699A7E /* AnyCompLogoUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompLogoUILabel.swift; sourceTree = "<group>"; };
+		FD7D09812900559400E6CE60 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FD85BA6628FE75EE0027468E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		FD85BA6828FE83C80027468E /* 98200-drag.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "98200-drag.json"; sourceTree = "<group>"; };
 		FD85BA6A28FE86500027468E /* 93693-moving-truck.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "93693-moving-truck.json"; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				FD6F060028F8247F00F0F718 /* MatchIndex.swift */,
 				FD1E1FFD28F08ED1001CF0EA /* DateFormater.swift */,
 				FDA0381D28F983400040A782 /* MatchesOfPlayer.swift */,
+				FD7D09812900559400E6CE60 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -399,7 +402,7 @@
 				FDB1085E28FDD8790020F32C /* 35201-rocket-launch.json */,
 				FDB1085D28FDD8790020F32C /* 68087-rocket.json */,
 				FDB1085F28FDD8790020F32C /* 119388-rocket.json */,
-				FD1E200128F1A7A5001CF0EA /* ShakeAnimation.swift */,
+				FD1E200128F1A7A5001CF0EA /* shakeTextFieldifEmpty.swift */,
 				FD85BA6828FE83C80027468E /* 98200-drag.json */,
 				FD85BA6A28FE86500027468E /* 93693-moving-truck.json */,
 			);
@@ -657,7 +660,7 @@
 				FD20D64928DB4FF1007F5F8F /* CompetitionFetch.swift in Sources */,
 				FDDD6DFE28FFC41300F9A649 /* CreateUserView.swift in Sources */,
 				FD27FF3428D9DFAF00D2A405 /* AnyCompUILabel.swift in Sources */,
-				FD1E200228F1A7A5001CF0EA /* ShakeAnimation.swift in Sources */,
+				FD1E200228F1A7A5001CF0EA /* shakeTextFieldifEmpty.swift in Sources */,
 				FD85BA6728FE75EE0027468E /* ProfileView.swift in Sources */,
 				FD1E1FFE28F08ED1001CF0EA /* DateFormater.swift in Sources */,
 				FD27FEED28D9A63E00D2A405 /* SceneDelegate.swift in Sources */,
@@ -666,6 +669,7 @@
 				FDB1085C28FDAF9B0020F32C /* LoginView.swift in Sources */,
 				FDB3FFE828E2180C000D6DDC /* CompetitionTableView.swift in Sources */,
 				FD94809728F46C4100B31A89 /* Info.swift in Sources */,
+				FD7D09822900559400E6CE60 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

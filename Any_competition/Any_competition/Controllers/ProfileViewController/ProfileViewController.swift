@@ -7,10 +7,15 @@
 
 import UIKit
 import Lottie
+import FirebaseAuth
+import FirebaseFirestore
 
 class ProfileViewController: UIViewController {
+    
+    let database = Database()
+    
     // MARK: - Views
-    let loginView = LoginView()
+    var loginView = LoginView()
     
     let rocketAnimationView: AnimationView = {
         let animationView = AnimationView()
@@ -24,7 +29,13 @@ class ProfileViewController: UIViewController {
     
     let profileView = ProfileView()
     
-    let createUser = CreateUserView()
+    let createUserView = CreateUserView()
+    
+    let alert : UIAlertController = {
+        let alert = UIAlertController(title: "ошибка", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ок", style: .cancel))
+        return alert
+    }()
     
     let movinAnimationView: AnimationView = {
         let animationView = AnimationView()
@@ -40,7 +51,8 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
         loginView.delegate = self
-        setupLoginView()
+        createUserView.delegate = self
+        setupLoginView(loginView)
 //        setupProfileView()
 //        setupCreateUserView()
     }
@@ -48,7 +60,7 @@ class ProfileViewController: UIViewController {
     // MARK: - Navigation
         
     // установка логинки
-    private func setupLoginView() {
+    private func setupLoginView(_ loginView: UIView) {
         self.view.addSubview(loginView)
         
         let inset: CGFloat = 16
@@ -77,15 +89,15 @@ class ProfileViewController: UIViewController {
     
     // установка вью создания аккаунта
     private func setupCreateUserView() {
-        self.view.addSubview(createUser)
+        self.view.addSubview(createUserView)
         
         let inset: CGFloat = 16
         
         NSLayoutConstraint.activate([
-            createUser.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-            createUser.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
-            createUser.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
-            createUser.heightAnchor.constraint(equalToConstant: 560)
+            createUserView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            createUserView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
+            createUserView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
+            createUserView.heightAnchor.constraint(equalToConstant: 560)
         ])
         
     }
@@ -167,7 +179,22 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: LoginViewDelegate {
     func tapLogin() {
         loginView.removeFromSuperview()
-        setupProfileView()
+        guard let mail = loginView.mailTextField.text else {return}
+        guard let pass = loginView.passTextField.text else {return}
+        
+        Auth.auth().signIn(withEmail: mail, password: pass) {[self] result, error in
+            if error != nil {
+                alert.message = error?.localizedDescription
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                profileView.label.text = result?.user.email
+                setupProfileView()
+            }
+        }
+            
+        
+        
+        
         
         //        let loginOriginalTransform = self.loginView.transform
         //        let loginTranslatedTransform = loginOriginalTransform.translatedBy(x: 0.0, y: -self.view.layer.bounds.height)
@@ -184,8 +211,8 @@ extension ProfileViewController: LoginViewDelegate {
         //        }
     }
     
-    func tapCreateUser() {
-        loginView.removeFromSuperview()
+    func tapStartCreateUser() {
+        loginView.layer.opacity = 0
         setupCreateUserView()
         
         
@@ -194,7 +221,26 @@ extension ProfileViewController: LoginViewDelegate {
     func tapResetPassword() {
         
     }
-    
-    
-    
+}
+
+extension ProfileViewController: CreateUserViewDelegate {
+    func tapCreateUser(firstName: String, lastName: String, nickName: String, mail: String, pass: String) {
+        var tempUser = User(firstName: firstName, lastName: lastName, nick: nickName, mail: mail)
+        //        if let login = loginView.text, let password = passView.text, let name = nameView.text, let city = cityView.text {
+        Auth.auth().createUser(withEmail: mail, password: pass) { [self] authDataResult, error in
+            
+            if error != nil {
+                alert.message = error?.localizedDescription
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                tempUser.id = authDataResult?.user.uid
+            }
+            
+            database.addUser(user: tempUser)
+        }
+        loginView.mailTextField.text = tempUser.mail
+        loginView.passTextField.text = pass
+        loginView.layer.opacity = 1
+        createUserView.layer.opacity = 0
+    }
 }
