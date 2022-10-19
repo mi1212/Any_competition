@@ -46,7 +46,7 @@ class TabBarController: UITabBarController {
         self.tabBar.tintColor = .anyDarckColor
         self.viewControllers = [
             setupTabBar(viewController: StartViewController(), title: "add competition", image: "plus"),
-            setupTabBar(viewController: CompetitionsCollectionViewController(collectionViewLayout: setupflowLayout()), title: "competitions", image: "competitions") ,
+            setupTabBar(viewController: CompetitionsCollectionViewController(collectionViewLayout: setupflowLayout()), title: "competitions", image: "ic_car") ,
             setupTabBar(viewController: ProfileViewController(), title: "profile", image: "profile")
 //            setupTabBar(viewController: TestViewController(), title: "profile", image: "square120")
         ]

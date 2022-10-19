@@ -69,6 +69,7 @@
 		FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA29F28DADA7F00709E80 /* TabBarController.swift */; };
 		FDCCA2A228DAF97700709E80 /* AddCompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */; };
 		FDCCA2A428DAFA4600709E80 /* AnyCompUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA2A328DAFA4600709E80 /* AnyCompUITextField.swift */; };
+		FDDD6DFE28FFC41300F9A649 /* CreateUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDD6DFD28FFC41300F9A649 /* CreateUserView.swift */; };
 		FDE14E2228DF15AB00005B51 /* CompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE14E2128DF15AB00005B51 /* CompetitionViewController.swift */; };
 		FDE7036128E412B500FF4F06 /* CompetitionNetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE7036028E412B500FF4F06 /* CompetitionNetView.swift */; };
 		FDE720DD28DC8F9400FAF811 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FDE720DC28DC8F9400FAF811 /* GoogleService-Info.plist */; };
@@ -162,6 +163,7 @@
 		FDCCA29F28DADA7F00709E80 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompetitionViewController.swift; sourceTree = "<group>"; };
 		FDCCA2A328DAFA4600709E80 /* AnyCompUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUITextField.swift; sourceTree = "<group>"; };
+		FDDD6DFD28FFC41300F9A649 /* CreateUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserView.swift; sourceTree = "<group>"; };
 		FDE14E2128DF15AB00005B51 /* CompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionViewController.swift; sourceTree = "<group>"; };
 		FDE7036028E412B500FF4F06 /* CompetitionNetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionNetView.swift; sourceTree = "<group>"; };
 		FDE720DC28DC8F9400FAF811 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 				FDE7036028E412B500FF4F06 /* CompetitionNetView.swift */,
 				FDB1085B28FDAF9B0020F32C /* LoginView.swift */,
 				FD85BA6628FE75EE0027468E /* ProfileView.swift */,
+				FDDD6DFD28FFC41300F9A649 /* CreateUserView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 				FD7C894A28ED55D100699A7E /* AnyCompLogoUILabel.swift in Sources */,
 				FDB1085A28FDADD80020F32C /* ProfileViewController.swift in Sources */,
 				FD20D64928DB4FF1007F5F8F /* CompetitionFetch.swift in Sources */,
+				FDDD6DFE28FFC41300F9A649 /* CreateUserView.swift in Sources */,
 				FD27FF3428D9DFAF00D2A405 /* AnyCompUILabel.swift in Sources */,
 				FD1E200228F1A7A5001CF0EA /* ShakeAnimation.swift in Sources */,
 				FD85BA6728FE75EE0027468E /* ProfileView.swift in Sources */,

@@ -13,7 +13,7 @@ class AddCompetitionViewController: UIViewController {
     
     let playerQtyTextField = AnyCompUITextField(placeholder: "Количество участников", isSecure: false)
     
-    let typeTextField = AnyCompUITextField(placeholder: "Вид спорта", isSecure: false)
+//    let typeTextField = AnyCompUITextField(placeholder: "Вид спорта", isSecure: false)
     
     let addButton = AnyCompUIButton(title: "Добавить игроков")
     
@@ -29,7 +29,7 @@ class AddCompetitionViewController: UIViewController {
     private func setupController() {
         self.view.addSubview(competitionTitleTextField)
         self.view.addSubview(playerQtyTextField)
-        self.view.addSubview(typeTextField)
+//        self.view.addSubview(typeTextField)
         self.view.addSubview(addButton)
         
         let inset: CGFloat = 16
@@ -48,15 +48,15 @@ class AddCompetitionViewController: UIViewController {
             playerQtyTextField.heightAnchor.constraint(equalToConstant: 52)
         ])
         
-        NSLayoutConstraint.activate([
-            typeTextField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
-            typeTextField.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
-            typeTextField.topAnchor.constraint(equalTo: self.playerQtyTextField.bottomAnchor, constant: inset),
-            typeTextField.heightAnchor.constraint(equalToConstant: 52)
-        ])
+//        NSLayoutConstraint.activate([
+//            typeTextField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
+//            typeTextField.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
+//            typeTextField.topAnchor.constraint(equalTo: self.playerQtyTextField.bottomAnchor, constant: inset),
+//            typeTextField.heightAnchor.constraint(equalToConstant: 52)
+//        ])
         
         NSLayoutConstraint.activate([
-            addButton.topAnchor.constraint(equalTo: self.typeTextField.bottomAnchor, constant: inset*2),
+            addButton.topAnchor.constraint(equalTo: self.playerQtyTextField.bottomAnchor, constant: inset*2),
             addButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
             addButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
             addButton.heightAnchor.constraint(equalToConstant: 64)
@@ -71,7 +71,7 @@ class AddCompetitionViewController: UIViewController {
             let vc = ConfigurateCompetitionViewController()
             vc.competitionTitle = competitionTitleTextField.text
             vc.playerQty = Int(playerQtyTextField.text!)
-            vc.sportType = typeTextField.text
+//            vc.sportType = typeTextField.text
             vc.delegate = self
             self.present(vc, animated: true)
         } else {

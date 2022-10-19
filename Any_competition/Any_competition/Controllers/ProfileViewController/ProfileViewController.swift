@@ -24,6 +24,8 @@ class ProfileViewController: UIViewController {
     
     let profileView = ProfileView()
     
+    let createUser = CreateUserView()
+    
     let movinAnimationView: AnimationView = {
         let animationView = AnimationView()
         animationView.animation = Animation.named("93693-moving-truck")
@@ -38,8 +40,9 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
         loginView.delegate = self
-        setupLoginView()
+//        setupLoginView()
 //        setupProfileView()
+        setupCreateUserView()
     }
     
     // MARK: - Navigation
@@ -49,6 +52,7 @@ class ProfileViewController: UIViewController {
         self.view.addSubview(loginView)
         
         let inset: CGFloat = 16
+       
         
         NSLayoutConstraint.activate([
             rocketAnimationView.bottomAnchor.constraint(equalTo: loginView.topAnchor, constant: 100),
@@ -68,7 +72,7 @@ class ProfileViewController: UIViewController {
         let loginTranslatedTransform = loginOriginalTransform.translatedBy(x: 0.0, y: -self.view.layer.bounds.height)
         let amimationOriginalTransform = self.rocketAnimationView.transform
         let amimationOriginalTranslatedTransform = amimationOriginalTransform.translatedBy(x: 0.0, y: -self.view.layer.bounds.height)
-        
+
         UIView.animate(withDuration: 3, delay: 0) { [self] in
             rocketAnimationView.play()
             self.loginView.transform = loginTranslatedTransform
@@ -76,6 +80,21 @@ class ProfileViewController: UIViewController {
         } completion: { handler in
             print("rocketAnimationView was finished. handler - \(handler)")
         }
+    }
+    // установка вью создания аккаунта
+    private func setupCreateUserView() {
+
+        self.view.addSubview(createUser)
+        
+        let inset: CGFloat = 16
+        
+        NSLayoutConstraint.activate([
+            createUser.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            createUser.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
+            createUser.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
+            createUser.heightAnchor.constraint(equalToConstant: 480)
+        ])
+        
     }
     
     
