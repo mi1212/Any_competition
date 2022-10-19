@@ -96,7 +96,6 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             $0.font = UIFont.systemFont(ofSize: 24, weight: .heavy)
             $0.leftView = .none
             $0.rightView = .none
-            
         }
         
         finishMatchButton.addTarget(self, action: #selector(finishMatch), for: .touchUpInside)

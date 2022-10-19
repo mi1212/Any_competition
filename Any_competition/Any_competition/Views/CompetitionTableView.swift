@@ -213,7 +213,7 @@ extension CompetitionTableView: UICollectionViewDataSource {
             } else {
 
                 if match!.isWinned {
-                    cell.label.text = "3"
+                    cell.label.text = "1"
                     cell.backgroundColor = .anyColor
                 } else {
                     cell.label.text = "0"

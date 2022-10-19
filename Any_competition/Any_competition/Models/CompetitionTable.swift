@@ -83,7 +83,7 @@ struct CompetitionTable: Codable {
         for i in 0...competitionTable[playerNumber].matchesOfPlayer.count-1 {
             switch competitionTable[playerNumber].matchesOfPlayer[i].isWinned {
             case true:
-                points += 3
+                points += 1
             case false:
                 points += 0
             }

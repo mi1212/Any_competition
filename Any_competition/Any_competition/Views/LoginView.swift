@@ -8,7 +8,11 @@
 import UIKit
 
 protocol LoginViewDelegate: AnyObject {
-    func disappeare() 
+    func tapLogin()
+    
+    func tapCreateUser()
+    
+    func tapResetPassword()
 }
 
 class LoginView: UIView {
@@ -102,15 +106,18 @@ class LoginView: UIView {
     }
     
     @objc func tapLoginButton() {
-        delegate?.disappeare()
+        print("tapLoginButton")
+        delegate?.tapLogin()
     }
     
     
     @objc func tapCreateUserButton() {
         print("tapCreateUserButton")
+        delegate?.tapCreateUser()
     }
     
     @objc func tapResetPassButton() {
         print("tapResetPassButton")
+        delegate?.tapResetPassword()
     }
 }
