@@ -17,13 +17,13 @@ struct User: Identifiable, Codable, Hashable {
     
     var dictionary: [String: Any] {
         return [
-            "firstname": firstName,
+            "firstName": firstName,
             "lastName": lastName,
             "nick": nick,
             "mail": mail
         ]
     }
-    
+     
     static func == (lhs: User, rhs: User) -> Bool {
         return lhs.firstName == rhs.firstName && lhs.lastName == rhs.lastName && lhs.nick == rhs.nick
     }

@@ -12,6 +12,12 @@ class StartViewController: UIViewController {
     var labelView = AnyCompLogoUILabel()
     
     var buttonView = AnyCompUIButton(title: "Начнем игру")
+    
+    let alert : UIAlertController = {
+        let alert = UIAlertController(title: "", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ок", style: .cancel))
+        return alert
+    }()
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +47,16 @@ class StartViewController: UIViewController {
     }
     
     @objc func tapButton() {
-        let vc = AddCompetitionViewController()
-        self.navigationController?.present(vc, animated: true)
+        
+        if let user = ProfileViewController.user {
+            let vc = AddCompetitionViewController()
+            self.navigationController?.present(vc, animated: true)
+        } else {
+            alert.message = "необходимо авторизоваться в приложении если есть аккаунт\nили создать предварительно аккаунт"
+            self.present(alert, animated: true)
+        }
+        
+        
     }
 }
 

@@ -12,7 +12,7 @@ import FirebaseFirestore
 
 class ProfileViewController: UIViewController {
     
-    var user: User?
+    static var user: User?
     
     let database = Database()
     
@@ -238,20 +238,7 @@ extension ProfileViewController: LoginViewDelegate {
                 database.getUserData(uid: result!.user.uid)
             }
         }
-        
-        //        let loginOriginalTransform = self.loginView.transform
-        //        let loginTranslatedTransform = loginOriginalTransform.translatedBy(x: 0.0, y: -self.view.layer.bounds.height)
-        //        let amimationOriginalTransform = self.rocketAnimationView.transform
-        //        let amimationOriginalTranslatedTransform = amimationOriginalTransform.translatedBy(x: 0.0, y: -self.view.layer.bounds.height)
-        //
-        //        UIView.animate(withDuration: 1, delay: 0) { [self] in
-        //            rocketAnimationView.play()
-        //            self.loginView.transform = loginTranslatedTransform
-        //            self.rocketAnimationView.transform = amimationOriginalTranslatedTransform
-        //        } completion: { [self] handler in
-        //            movingSetupProfileView()
-        //            print("rocketAnimationView was finished. handler - \(handler)")
-        //        }
+    
     }
     
     func tapStartCreateUser() {
@@ -291,6 +278,7 @@ extension ProfileViewController: DatabaseDelegate {
     
     func reloadView(user: User) {
         
+        ProfileViewController.user = user
         loadingAnimationView.stop()
         setupProfileView()
         profileView.label.text = user.docId
@@ -308,3 +296,18 @@ extension ProfileViewController: DatabaseDelegate {
     
     
 }
+
+
+//        let loginOriginalTransform = self.loginView.transform
+//        let loginTranslatedTransform = loginOriginalTransform.translatedBy(x: 0.0, y: -self.view.layer.bounds.height)
+//        let amimationOriginalTransform = self.rocketAnimationView.transform
+//        let amimationOriginalTranslatedTransform = amimationOriginalTransform.translatedBy(x: 0.0, y: -self.view.layer.bounds.height)
+//
+//        UIView.animate(withDuration: 1, delay: 0) { [self] in
+//            rocketAnimationView.play()
+//            self.loginView.transform = loginTranslatedTransform
+//            self.rocketAnimationView.transform = amimationOriginalTranslatedTransform
+//        } completion: { [self] handler in
+//            movingSetupProfileView()
+//            print("rocketAnimationView was finished. handler - \(handler)")
+//        }

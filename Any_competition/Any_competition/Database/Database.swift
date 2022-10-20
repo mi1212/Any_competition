@@ -31,7 +31,8 @@ class Database {
         
         ref = db.collection("competitions").addDocument(data: [
             "info": tempCompetiton.info.dictionary,
-            "players": tempCompetiton.players.map{ $0.dictionary },
+            "accessUsersArray": tempCompetiton.accessUsersArray.map{ $0.dictionary},
+            "players": tempCompetiton.players.map{ $0.dictionary},
             "competitionTable": tempCompetiton.competitionTable!.dictionary
         ]) { err in
             if let err = err {

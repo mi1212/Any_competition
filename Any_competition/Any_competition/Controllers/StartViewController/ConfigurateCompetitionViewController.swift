@@ -28,6 +28,12 @@ class ConfigurateCompetitionViewController: UIViewController {
     
     var id = ""
     
+    let alert : UIAlertController = {
+        let alert = UIAlertController(title: "ошибка", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ок", style: .cancel))
+        return alert
+    }()
+    
     weak var delegate: ConfigurateCompetitionViewControllerDelegate?
     
     private lazy var scrollView: UIScrollView = {
@@ -110,15 +116,25 @@ class ConfigurateCompetitionViewController: UIViewController {
     
     @objc func tapAddButton() {
     
-        let info = Info(title: competitionTitle!, qtyPlayers: playerQty!, sportType: sportType!, date: Date.now.description)
+        let info = Info(title: competitionTitle!, qtyPlayers: playerQty!, date: Date.now.description)
         
-        let competition = Competition(info: info, players: playersArray)
+        if let user = ProfileViewController.user {
+            
+            let accessUserArray = [user]
+            
+            let competition = Competition(info: info, players: playersArray, accessUserArray: accessUserArray)
+            
+            database.sendCompetitionToDatabase(competition: competition)
+            
+            dismiss(animated: true, completion: nil)
+            
+            delegate?.dismissController()
+        } else {
+            alert.message = "необходимо авторизоваться"
+            self.present(alert, animated: true)
+        }
         
-        database.sendCompetitionToDatabase(competition: competition)
         
-        dismiss(animated: true, completion: nil)
-        
-        delegate?.dismissController()
     }
 }
 
