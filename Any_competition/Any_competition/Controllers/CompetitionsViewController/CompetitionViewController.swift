@@ -135,13 +135,12 @@ extension CompetitionViewController: MatchViewControllerDelegate {
 }
 
 extension CompetitionViewController: DatabaseDelegate {
-    func reloadView(competitions: [Competition]) {
-        
-    }
+    func reloadView(user: User) {}
+ 
+    func reloadView(competitions: [Competition]) {}
     
     func reloadTableCollectionView() {
         tableCollectionView.reloadData(competitionTable: (CompetitionViewController.competition?.competitionTable!)!)
     }
-    
-    
+ 
 }

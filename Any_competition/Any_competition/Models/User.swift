@@ -8,6 +8,7 @@
 import Foundation
 
 struct User: Identifiable, Codable, Hashable {
+    var docId: String?
     var id: String?
     var firstName: String
     var lastName: String

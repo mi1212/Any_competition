@@ -19,6 +19,8 @@ class CreateUserView: UIView {
     
     let label = AnyCompLogoUILabel()
     
+//    let tempVar = 2
+    
     let firstNameTextField = AnyCompUITextField(placeholder: "Имя", isSecure: false)
     
     let lastNameTextField = AnyCompUITextField(placeholder: "Фамилия", isSecure: false)
@@ -115,7 +117,7 @@ class CreateUserView: UIView {
         guard let pass = passTextField.text else {return}
         
         let textFieldArray = [firstNameTextField, lastNameTextField, nickNameTextField, mailTextField, passTextField]
-        
+        print(tempVar)
         if firstName != "" && lastName != "" && nick != "" && mail != "" && pass != "" {
             delegate?.tapCreateUser(
                 firstName: firstName,
@@ -128,6 +130,7 @@ class CreateUserView: UIView {
             textFieldArray.map {
                 shakeTextFieldifEmpty($0)
             }
+            
         }
     }
  

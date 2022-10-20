@@ -80,6 +80,8 @@ class CompetitionsCollectionViewController: UICollectionViewController {
 }
 
 extension CompetitionsCollectionViewController: DatabaseDelegate {
+    func reloadView(user: User) {}
+    
     func reloadTableCollectionView() {}
     
     func reloadView(competitions: [Competition]) {

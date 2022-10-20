@@ -12,10 +12,26 @@ import FirebaseFirestore
 
 class ProfileViewController: UIViewController {
     
+    var user: User?
+    
     let database = Database()
+    
+    private let decoder = JSONDecoder()
+    
+    private let notificationCentre = NotificationCenter.default
     
     // MARK: - Views
     var loginView = LoginView()
+    
+    let loadingAnimationView: AnimationView = {
+        let animationView = AnimationView()
+        animationView.animation = Animation.named("loading")
+        animationView.backgroundColor = .backgroundColor
+        animationView.contentMode = .scaleAspectFill
+        animationView.loopMode = .loop
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        return animationView
+    }()
     
     let rocketAnimationView: AnimationView = {
         let animationView = AnimationView()
@@ -50,15 +66,17 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
+        self.database.delegate = self
         loginView.delegate = self
         createUserView.delegate = self
         setupLoginView(loginView)
-//        setupProfileView()
-//        setupCreateUserView()
+        self.view.addGestureRecognizer(tap)
+        //        setupProfileView()
+        //        setupCreateUserView()
     }
     
     // MARK: - Navigation
-        
+    
     // установка логинки
     private func setupLoginView(_ loginView: UIView) {
         self.view.addSubview(loginView)
@@ -101,11 +119,12 @@ class ProfileViewController: UIViewController {
         ])
         
     }
- 
+    
     // установка в движении профайла
     private func movingSetupProfileView() {
         self.view.addSubview(profileView)
         self.view.addSubview(movinAnimationView)
+        setupLoading()
         
         let inset: CGFloat = 16
         
@@ -136,7 +155,6 @@ class ProfileViewController: UIViewController {
         } completion: { handler in
             print("movinAnimationView was finished. handler - \(handler)")
         }
-        
     }
     
     // установка логинки с анимацией
@@ -145,7 +163,7 @@ class ProfileViewController: UIViewController {
         self.view.addSubview(loginView)
         
         let inset: CGFloat = 16
-       
+        
         
         NSLayoutConstraint.activate([
             rocketAnimationView.bottomAnchor.constraint(equalTo: loginView.topAnchor, constant: 100),
@@ -165,7 +183,7 @@ class ProfileViewController: UIViewController {
         let loginTranslatedTransform = loginOriginalTransform.translatedBy(x: 0.0, y: -self.view.layer.bounds.height)
         let amimationOriginalTransform = self.rocketAnimationView.transform
         let amimationOriginalTranslatedTransform = amimationOriginalTransform.translatedBy(x: 0.0, y: -self.view.layer.bounds.height)
-
+        
         UIView.animate(withDuration: 3, delay: 0) { [self] in
             rocketAnimationView.play()
             self.loginView.transform = loginTranslatedTransform
@@ -174,27 +192,52 @@ class ProfileViewController: UIViewController {
             print("rocketAnimationView was finished. handler - \(handler)")
         }
     }
-
+    
+    private func setupLoading() {
+        self.view.addSubview(loadingAnimationView)
+        loadingAnimationView.play()
+        NSLayoutConstraint.activate([
+            loadingAnimationView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            loadingAnimationView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            loadingAnimationView.heightAnchor.constraint(equalToConstant: 40)
+        ])
+    }
+    
+    //MARK: dismissKeyboardTap
+    
+    private lazy var tap: UITapGestureRecognizer = {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        return tap
+    }()
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
+
 extension ProfileViewController: LoginViewDelegate {
     func tapLogin() {
-        loginView.removeFromSuperview()
+        
+//        var user: User?
+        
         guard let mail = loginView.mailTextField.text else {return}
+        
         guard let pass = loginView.passTextField.text else {return}
         
+        setupLoading()
+        
+        loginView.layer.opacity = 0
+        print("--- login user")
         Auth.auth().signIn(withEmail: mail, password: pass) {[self] result, error in
             if error != nil {
                 alert.message = error?.localizedDescription
                 self.present(alert, animated: true, completion: nil)
             } else {
-                profileView.label.text = result?.user.email
-                setupProfileView()
+                
+                print("--- user authorized")
+                database.getUserData(uid: result!.user.uid)
             }
         }
-            
-        
-        
-        
         
         //        let loginOriginalTransform = self.loginView.transform
         //        let loginTranslatedTransform = loginOriginalTransform.translatedBy(x: 0.0, y: -self.view.layer.bounds.height)
@@ -214,8 +257,6 @@ extension ProfileViewController: LoginViewDelegate {
     func tapStartCreateUser() {
         loginView.layer.opacity = 0
         setupCreateUserView()
-        
-        
     }
     
     func tapResetPassword() {
@@ -226,7 +267,7 @@ extension ProfileViewController: LoginViewDelegate {
 extension ProfileViewController: CreateUserViewDelegate {
     func tapCreateUser(firstName: String, lastName: String, nickName: String, mail: String, pass: String) {
         var tempUser = User(firstName: firstName, lastName: lastName, nick: nickName, mail: mail)
-        //        if let login = loginView.text, let password = passView.text, let name = nameView.text, let city = cityView.text {
+        
         Auth.auth().createUser(withEmail: mail, password: pass) { [self] authDataResult, error in
             
             if error != nil {
@@ -234,13 +275,36 @@ extension ProfileViewController: CreateUserViewDelegate {
                 self.present(alert, animated: true, completion: nil)
             } else {
                 tempUser.id = authDataResult?.user.uid
+                loginView.mailTextField.text = tempUser.mail
+                loginView.passTextField.text = pass
+                loginView.layer.opacity = 1
+                createUserView.layer.opacity = 0
+                database.addUser(user: tempUser)
+                
             }
-            
-            database.addUser(user: tempUser)
         }
-        loginView.mailTextField.text = tempUser.mail
-        loginView.passTextField.text = pass
-        loginView.layer.opacity = 1
-        createUserView.layer.opacity = 0
     }
+}
+
+extension ProfileViewController: DatabaseDelegate {
+    func reloadView(competitions: [Competition]) {}
+    
+    func reloadView(user: User) {
+        
+        loadingAnimationView.stop()
+        setupProfileView()
+        profileView.label.text = user.docId
+        loginView.layer.opacity = 0
+        profileView.setupData(
+            nick: user.nick,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            id: user.id!
+        )
+        
+    }
+    
+    func reloadTableCollectionView() {}
+    
+    
 }

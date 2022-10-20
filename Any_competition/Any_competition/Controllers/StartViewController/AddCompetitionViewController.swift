@@ -13,6 +13,8 @@ class AddCompetitionViewController: UIViewController {
     
     let playerQtyTextField = AnyCompUITextField(placeholder: "Количество участников", isSecure: false)
     
+    var array: [[Int]] = []
+    
 //    let typeTextField = AnyCompUITextField(placeholder: "Вид спорта", isSecure: false)
     
     let addButton = AnyCompUIButton(title: "Добавить игроков")
@@ -23,7 +25,7 @@ class AddCompetitionViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
         setupController()
-        addButton.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
+        addButton.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)        
     }
     
     private func setupController() {
