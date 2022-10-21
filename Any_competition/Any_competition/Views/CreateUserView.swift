@@ -17,9 +17,16 @@ class CreateUserView: UIView {
     
     // MARK: UIViews
     
-    let label = AnyCompLogoUILabel()
+    let contentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .anyColor1
+        view.layer.cornerRadius = 24
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
-//    let tempVar = 2
+    let label = AnyCompLogoUILabel()
     
     let firstNameTextField = AnyCompUITextField(placeholder: "Имя", isSecure: false)
     
@@ -35,10 +42,9 @@ class CreateUserView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .anyColor1
+        self.backgroundColor = .blue
         self.translatesAutoresizingMaskIntoConstraints = false
         setupView()
-        self.layer.cornerRadius = 24
     }
     
     required init?(coder: NSCoder) {
@@ -46,65 +52,73 @@ class CreateUserView: UIView {
     }
     
     private func setupView() {
-        self.addSubview(label)
+        self.addSubview(contentView)
+        contentView.addSubview(label)
         label.text = "Создать аккаунт"
-        self.addSubview(firstNameTextField)
-        self.addSubview(lastNameTextField)
-        self.addSubview(nickNameTextField)
-        self.addSubview(mailTextField)
-        self.addSubview(passTextField)
-        self.addSubview(createButton)
+        contentView.addSubview(firstNameTextField)
+        contentView.addSubview(lastNameTextField)
+        contentView.addSubview(nickNameTextField)
+        contentView.addSubview(mailTextField)
+        contentView.addSubview(passTextField)
+        contentView.addSubview(createButton)
 
         createButton.addTarget(self, action: #selector(tapCreateButton), for: .touchUpInside)
         
         let inset: CGFloat = 16
         
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
-            label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-            label.topAnchor.constraint(equalTo: self.topAnchor, constant: inset*2),
+            contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
+            contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
+            contentView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.8),
+            contentView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
         ])
         
         NSLayoutConstraint.activate([
             firstNameTextField.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 3*inset),
-            firstNameTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
-            firstNameTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-            firstNameTextField.heightAnchor.constraint(equalToConstant: 52)
+            firstNameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            firstNameTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            firstNameTextField.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.1)
         ])
         
         NSLayoutConstraint.activate([
-            lastNameTextField.topAnchor.constraint(equalTo: self.firstNameTextField.bottomAnchor, constant: inset),
-            lastNameTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
-            lastNameTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-            lastNameTextField.heightAnchor.constraint(equalToConstant: 52)
+            lastNameTextField.topAnchor.constraint(equalTo: firstNameTextField.bottomAnchor, constant: inset),
+            lastNameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            lastNameTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            lastNameTextField.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.1)
         ])
         
         NSLayoutConstraint.activate([
-            nickNameTextField.topAnchor.constraint(equalTo: self.lastNameTextField.bottomAnchor, constant: inset),
-            nickNameTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
-            nickNameTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-            nickNameTextField.heightAnchor.constraint(equalToConstant: 52)
+            nickNameTextField.topAnchor.constraint(equalTo: lastNameTextField.bottomAnchor, constant: inset),
+            nickNameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            nickNameTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            nickNameTextField.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.1)
         ])
         
         NSLayoutConstraint.activate([
             mailTextField.topAnchor.constraint(equalTo: nickNameTextField.bottomAnchor, constant: inset),
-            mailTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
-            mailTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-            mailTextField.heightAnchor.constraint(equalToConstant: 52)
+            mailTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            mailTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            mailTextField.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.1)
         ])
         
         NSLayoutConstraint.activate([
-            passTextField.topAnchor.constraint(equalTo: self.mailTextField.bottomAnchor, constant: inset),
-            passTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
-            passTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-            passTextField.heightAnchor.constraint(equalToConstant: 52)
+            passTextField.topAnchor.constraint(equalTo: mailTextField.bottomAnchor, constant: inset),
+            passTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            passTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            passTextField.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.1)
         ])
         
         NSLayoutConstraint.activate([
             createButton.topAnchor.constraint(equalTo: passTextField.bottomAnchor, constant: inset),
-            createButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
-            createButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-            createButton.heightAnchor.constraint(equalToConstant: 64),
+            createButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            createButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            createButton.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.1),
         ])
     }
     

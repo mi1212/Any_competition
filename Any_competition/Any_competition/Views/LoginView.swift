@@ -21,6 +21,15 @@ class LoginView: UIView {
     
     // MARK: UIViews
     
+    let contentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .anyColor1
+        view.layer.cornerRadius = 24
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     let label = AnyCompLogoUILabel()
     
     let mailTextField = AnyCompUITextField(placeholder: "введите почту", isSecure: false)
@@ -41,10 +50,10 @@ class LoginView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .anyColor1
+//        self.backgroundColor = .black
         self.translatesAutoresizingMaskIntoConstraints = false
         setupView()
-        self.layer.cornerRadius = 24
+        
     }
 
     
@@ -53,61 +62,64 @@ class LoginView: UIView {
     }
     
     private func setupView() {
-        self.addSubview(label)
+        self.addSubview(contentView)
+        contentView.addSubview(label)
         label.text = "Пожалуйста авторизуйтесь"
-        self.addSubview(mailTextField)
-        self.addSubview(passTextField)
-        self.addSubview(loginButton)
-        self.addSubview(resetPass)
-        self.addSubview(createUser)
+        contentView.addSubview(mailTextField)
+        contentView.addSubview(passTextField)
+        contentView.addSubview(loginButton)
+        contentView.addSubview(resetPass)
+        contentView.addSubview(createUser)
         loginButton.addTarget(self, action: #selector(tapLoginButton), for: .touchUpInside)
         createUser.addTarget(self, action: #selector(tapCreateUserButton), for: .touchUpInside)
         resetPass.addTarget(self, action: #selector(tapResetPassButton), for: .touchUpInside)
         let inset: CGFloat = 16
         
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
-            label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-            label.topAnchor.constraint(equalTo: self.topAnchor, constant: inset*2),
+            contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
+            contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
+            contentView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.7),
+            contentView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset*2),
         ])
         
         NSLayoutConstraint.activate([
             mailTextField.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 3*inset),
-            mailTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
-            mailTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-//            mailTextField.heightAnchor.constraint(equalToConstant: self.layer.bounds.height/7)
+            mailTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            mailTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             mailTextField.heightAnchor.constraint(equalToConstant: 52)
         ])
         
         NSLayoutConstraint.activate([
-            passTextField.topAnchor.constraint(equalTo: self.mailTextField.bottomAnchor, constant: inset),
-            passTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
-            passTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-//            passTextField.heightAnchor.constraint(equalToConstant: self.layer.bounds.height/7)
+            passTextField.topAnchor.constraint(equalTo: mailTextField.bottomAnchor, constant: inset),
+            passTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            passTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             passTextField.heightAnchor.constraint(equalToConstant: 52)
         ])
         
         NSLayoutConstraint.activate([
             loginButton.topAnchor.constraint(equalTo: passTextField.bottomAnchor, constant: inset),
-            loginButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
-            loginButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
+            loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             loginButton.heightAnchor.constraint(equalToConstant: 64),
         ])
         
         NSLayoutConstraint.activate([
             resetPass.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: inset),
-            resetPass.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
-            resetPass.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-//            createUser.heightAnchor.constraint(equalToConstant: 64),
+            resetPass.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            resetPass.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             resetPass.bottomAnchor.constraint(greaterThanOrEqualTo: createUser.topAnchor, constant: -3*inset)
         ])
         
         NSLayoutConstraint.activate([
-//            createUser.topAnchor.constraint(equalTo: resetPass.bottomAnchor, constant: inset/2),
-            createUser.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
-            createUser.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-//            createUser.heightAnchor.constraint(equalToConstant: 64),
-            createUser.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -inset)
+            createUser.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            createUser.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            createUser.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset)
         ])
     }
     
