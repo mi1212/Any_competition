@@ -26,9 +26,8 @@ class AnyCompClearUIButton: UIButton {
     
     private func configure() {
         self.backgroundColor = .clear
-        self.layer.cornerRadius = 24
-        self.clipsToBounds = true
         self.titleLabel?.font =  UIFont.systemFont(ofSize: UIFont.buttonFontSize, weight: .regular)
+        self.titleLabel?.textAlignment = .center
         self.setTitleColor(.black, for: .normal)
         translatesAutoresizingMaskIntoConstraints = false
     }

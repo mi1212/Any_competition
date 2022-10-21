@@ -50,10 +50,8 @@ class LoginView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        self.backgroundColor = .black
         self.translatesAutoresizingMaskIntoConstraints = false
         setupView()
-        
     }
 
     
@@ -78,7 +76,7 @@ class LoginView: UIView {
         NSLayoutConstraint.activate([
             contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
             contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-            contentView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.7),
+            contentView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.8),
             contentView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
         ])
         
@@ -111,14 +109,12 @@ class LoginView: UIView {
         
         NSLayoutConstraint.activate([
             resetPass.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: inset),
-            resetPass.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            resetPass.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            resetPass.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             resetPass.bottomAnchor.constraint(greaterThanOrEqualTo: createUser.topAnchor, constant: -3*inset)
         ])
         
         NSLayoutConstraint.activate([
-            createUser.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            createUser.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            createUser.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             createUser.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset)
         ])
     }

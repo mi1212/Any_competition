@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol ProfileViewDelegate: AnyObject {
+    func exitFromProfileView()
+}
+
 class ProfileView: UIView {
+    
+    var delegate: ProfileViewDelegate?
     
     let contentView: UIView = {
         let view = UIView()
@@ -20,13 +26,11 @@ class ProfileView: UIView {
     
     let label = AnyCompLogoUILabel()
     
-    let nickLabel = AnyCompUILabel(title: "", fontSize: .large)
-    
     let firstNameLabel = AnyCompUILabel(title: "", fontSize: .medium)
     
     let lastNameLabel = AnyCompUILabel(title: "", fontSize: .medium)
-    
-    let idLabel = AnyCompUILabel(title: "", fontSize: .small)
+
+    let exitButton = AnyCompClearUIButton(title: "Выйти из профиля")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,15 +47,16 @@ class ProfileView: UIView {
     private func setupView() {
         self.addSubview(contentView)
         contentView.addSubview(label)
-        contentView.addSubview(nickLabel)
-        nickLabel.textAlignment = .left
         contentView.addSubview(firstNameLabel)
-        firstNameLabel.textAlignment = .left
         contentView.addSubview(lastNameLabel)
+        contentView.addSubview(exitButton)
+        
+        exitButton.addTarget(self, action: #selector(tapExitButton), for: .touchUpInside)
+        
+        firstNameLabel.textAlignment = .left
         lastNameLabel.textAlignment = .left
-        contentView.addSubview(idLabel)
-        idLabel.textAlignment = .left
         label.textAlignment = .center
+        
         
         let inset: CGFloat = 16
         
@@ -81,23 +86,20 @@ class ProfileView: UIView {
         ])
         
         NSLayoutConstraint.activate([
-            nickLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            nickLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-            nickLabel.topAnchor.constraint(equalTo: lastNameLabel.bottomAnchor, constant: inset*2),
-        ])
-  
-        NSLayoutConstraint.activate([
-            idLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset*2),
-            idLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-            idLabel.topAnchor.constraint(equalTo: nickLabel.bottomAnchor, constant: inset*2),
+            exitButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            exitButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            exitButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset*2),
         ])
     }
     
-    func setupData(nick: String, firstName: String, lastName: String, id: String) {
-        nickLabel.text = nick
+    func setupData(nick: String, firstName: String, lastName: String) {
+        label.text = nick
         firstNameLabel.text = firstName
         lastNameLabel.text = lastName
-        idLabel.text = id
+    }
+    
+    @objc func tapExitButton() {
+        delegate?.exitFromProfileView()
     }
     
 }

@@ -9,6 +9,7 @@ import UIKit
 
 protocol CreateUserViewDelegate: AnyObject {
     func tapCreateUser(firstName: String, lastName: String, nickName: String, mail: String, pass: String)
+    func tapCancelButton()
 }
 
 class CreateUserView: UIView {
@@ -40,9 +41,10 @@ class CreateUserView: UIView {
     
     let createButton = AnyCompUIButton(title: "Создать")
     
+    let cancelButton = AnyCompClearUIButton(title: "Вернуться назад")
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .blue
         self.translatesAutoresizingMaskIntoConstraints = false
         setupView()
     }
@@ -61,8 +63,10 @@ class CreateUserView: UIView {
         contentView.addSubview(mailTextField)
         contentView.addSubview(passTextField)
         contentView.addSubview(createButton)
+        contentView.addSubview(cancelButton)
 
         createButton.addTarget(self, action: #selector(tapCreateButton), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(tapCancelButton), for: .touchUpInside)
         
         let inset: CGFloat = 16
         
@@ -80,7 +84,7 @@ class CreateUserView: UIView {
         ])
         
         NSLayoutConstraint.activate([
-            firstNameTextField.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 3*inset),
+            firstNameTextField.topAnchor.constraint(equalTo: label.bottomAnchor, constant: inset),
             firstNameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             firstNameTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             firstNameTextField.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.1)
@@ -120,6 +124,12 @@ class CreateUserView: UIView {
             createButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             createButton.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.1),
         ])
+        
+        NSLayoutConstraint.activate([
+            cancelButton.topAnchor.constraint(equalTo: createButton.bottomAnchor, constant: inset),
+            cancelButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            cancelButton.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.1),
+        ])
     }
     
     @objc func tapCreateButton() {
@@ -146,6 +156,12 @@ class CreateUserView: UIView {
             }
             
         }
+    }
+    
+    @objc func tapCancelButton() {
+        print("tapCancelButton")
+        delegate?.tapCancelButton()
+        
     }
  
 }
