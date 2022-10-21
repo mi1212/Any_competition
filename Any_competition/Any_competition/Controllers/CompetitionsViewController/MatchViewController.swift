@@ -81,6 +81,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         scoreStack.addArrangedSubview(scorePlayer1TextField)
         scoreStack.addArrangedSubview(scorePlayer2TextField)
         self.view.addSubview(finishMatchButton)
+        self.view.addGestureRecognizer(tap)
         
         let labelesArray = [firstPlayerLabel, firstPlayerLabel]
         labelesArray.map {
@@ -163,7 +164,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     }
 
     @objc func finishMatch() {
-        
+        view.endEditing(true)
         let scorePlayer1 = Int(scorePlayer1TextField.text!)!
         let scorePlayer2 = Int(scorePlayer2TextField.text!)!
 
@@ -193,4 +194,13 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         return newLength <= maxLength
     }
 
+    //MARK: dismissKeyboardTap
+    private lazy var tap: UITapGestureRecognizer = {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        return tap
+    }()
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

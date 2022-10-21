@@ -141,7 +141,7 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: LoginViewDelegate {
     func tapLogin() {
-        
+        view.endEditing(true)
         guard let mail = loginView.mailTextField.text else {return}
 
         guard let pass = loginView.passTextField.text else {return}
@@ -169,7 +169,7 @@ extension ProfileViewController: LoginViewDelegate {
     
     func tapStartCreateUser() {
        print("tapStartCreateUserDelegate")
-        
+        view.endEditing(true)
         UIView.animate(withDuration: 1, delay: 0) { [self] in
             loginView.transform = loginView.transform.scaledBy(x: 0.9, y: 0.9)
             createUserView.transform = createUserView.transform.translatedBy(x: -self.view.layer.bounds.width, y: 0)
@@ -217,6 +217,10 @@ extension ProfileViewController: CreateUserViewDelegate {
 }
 
 extension ProfileViewController: DatabaseDelegate {
+    func alertMessage(alertMessage: String) {
+        
+    }
+    
     func reloadView(competitions: [Competition]) {}
     
     func reloadView(user: User) {

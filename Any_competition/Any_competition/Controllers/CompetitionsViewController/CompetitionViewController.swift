@@ -44,7 +44,11 @@ class CompetitionViewController: UIViewController{
         self.view.backgroundColor = .backgroundColor
         self.side = self.view.layer.bounds.width/8
         setupController()
-        database.addListener((CompetitionViewController.competition?.id)!)
+        if let collectionId = CompetitionViewController.competition?.id {
+            database.addListenerToCompetition(collectionId)
+        } else {
+            print("Something wrong with collectionId")
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -135,6 +139,10 @@ extension CompetitionViewController: MatchViewControllerDelegate {
 }
 
 extension CompetitionViewController: DatabaseDelegate {
+    func alertMessage(alertMessage: String) {
+        
+    }
+    
     func reloadView(user: User) {}
  
     func reloadView(competitions: [Competition]) {}

@@ -15,6 +15,14 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     let database = Database()
         
     let animationView = AnimationView()
+    
+    let alert : UIAlertController = {
+        let alert = UIAlertController(title: "", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ок", style: .cancel))
+        return alert
+    }()
+    
+    var isListenerConnected = false
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +31,14 @@ class CompetitionsCollectionViewController: UICollectionViewController {
         self.collectionView.backgroundColor = .backgroundColor
         self.navigationController?.navigationBar.isHidden = true
         self.collectionView.register(CompetitionCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionCollectionViewCell.identifire)
-        self.database.addListenerToCollection()
+//        self.database.addListenerToCollection()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if !isListenerConnected {
+            self.database.addListenerToCollection()
+            isListenerConnected.toggle()
+        }
     }
     
     private func setupAnimation() {
@@ -80,6 +95,13 @@ class CompetitionsCollectionViewController: UICollectionViewController {
 }
 
 extension CompetitionsCollectionViewController: DatabaseDelegate {
+    func alertMessage(alertMessage: String) {
+        isListenerConnected = true
+        
+        alert.message = alertMessage
+        self.present(alert, animated: true)
+    }
+    
     func reloadView(user: User) {}
     
     func reloadTableCollectionView() {}

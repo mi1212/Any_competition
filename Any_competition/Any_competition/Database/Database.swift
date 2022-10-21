@@ -12,6 +12,7 @@ protocol DatabaseDelegate: AnyObject {
     func reloadView(competitions: [Competition])
     func reloadView(user: User)
     func reloadTableCollectionView()
+    func alertMessage(alertMessage: String)
 }
 
 class Database {
@@ -136,9 +137,10 @@ class Database {
                 }
             
             transaction.setData([
-                    "info": tempCompetiton.info.dictionary,
-                    "players": tempCompetiton.players.map{ $0.dictionary },
-                    "competitionTable": tempCompetiton.competitionTable!.dictionary
+                "info": tempCompetiton.info.dictionary,
+                "accessUsersArray": tempCompetiton.accessUsersArray.map{ $0.dictionary},
+                "players": tempCompetiton.players.map{ $0.dictionary},
+                "competitionTable": tempCompetiton.competitionTable!.dictionary
                 ], forDocument: docRef)
             
             return nil
@@ -153,7 +155,7 @@ class Database {
     }
     
 //      метод добавляет слушателя для документа
-    func addListener(_ competitionId: String) {
+    func addListenerToCompetition(_ competitionId: String) {
         
         print("--- added listener to competition")
         
@@ -177,7 +179,6 @@ class Database {
                 let competition = try self.decoder.decode(Competition.self, from: data)
                 CompetitionViewController.competition = competition
                 delegate?.reloadTableCollectionView()
-//                self.tableCollectionView.reloadData(competitionTable: competition.competitionTable!)
             } catch {
                 print("an error occurred", error)
             }
@@ -191,34 +192,41 @@ class Database {
         
         var competitions = [Competition]()
         
-        db.collection("competitions").addSnapshotListener({ querySnapshot, error in
-            guard let snapshotData = querySnapshot?.documents else {
-                print("Error fetching documents: \(error!)")
-                return
-            }
+        if ProfileViewController.user != nil {
             
-            if snapshotData.count != 0 {
+            db.collection("competitions").addSnapshotListener({ querySnapshot, error in
+                guard let snapshotData = querySnapshot?.documents else {
+                    print("Error fetching documents: \(error!)")
+                    return
+                }
                 
-                competitions.removeAll()
-                
-                for i in 0...snapshotData.count-1 {
-                    var json = snapshotData[i].data()
-                    json["id"] = snapshotData[i].documentID
-                    do {
-                        let data = try JSONSerialization.data(withJSONObject: json as Any)
-                        
-                        let competition = try self.decoder.decode(Competition.self, from: data)
-                        
-                        competitions.append(competition)
-                    } catch {
-                        print("an error occurred", error)
+                if snapshotData.count != 0 {
+                    
+                    competitions.removeAll()
+                    
+                    for i in 0...snapshotData.count-1 {
+                        var json = snapshotData[i].data()
+                        json["id"] = snapshotData[i].documentID
+                        do {
+                            let data = try JSONSerialization.data(withJSONObject: json as Any)
+                            
+                            let competition = try self.decoder.decode(Competition.self, from: data)
+                            
+                            competitions.append(competition)
+                        } catch {
+                            print("an error occurred", error)
+                        }
                     }
                 }
-            }
-            self.delegate?.reloadView(competitions: competitions)
+                self.delegate?.reloadView(competitions: competitions)
+                
+            })
             
-        })
-            
+        } else {
+            delegate?.alertMessage(alertMessage: "Сначала нужно авторизоваться, чтобы увидеть свои соревнования")
+        }
+        
+        
         
     }
 //      метод добавляет пользователя
