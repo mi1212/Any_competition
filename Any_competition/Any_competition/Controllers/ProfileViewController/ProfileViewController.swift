@@ -172,6 +172,7 @@ extension ProfileViewController: LoginViewDelegate {
         view.endEditing(true)
         UIView.animate(withDuration: 1, delay: 0) { [self] in
             loginView.transform = loginView.transform.scaledBy(x: 0.9, y: 0.9)
+            loginView.layer.opacity = 0.6
             createUserView.transform = createUserView.transform.translatedBy(x: -self.view.layer.bounds.width, y: 0)
         } completion: { handler in
         }
@@ -188,6 +189,7 @@ extension ProfileViewController: CreateUserViewDelegate {
     func tapCancelButton() {
         UIView.animate(withDuration: 1, delay: 0) { [self] in
             loginView.transform = loginView.transform.scaledBy(x: 1/0.9, y: 1/0.9)
+            loginView.layer.opacity = 1
             createUserView.transform = createUserView.transform.translatedBy(x: self.view.layer.bounds.width, y: 0)
         } completion: { handler in
         }
@@ -203,6 +205,7 @@ extension ProfileViewController: CreateUserViewDelegate {
                 self.present(alert, animated: true, completion: nil)
             } else {
                 tempUser.id = authDataResult?.user.uid
+                loginView.layer.opacity = 1
                 loginView.mailTextField.text = tempUser.mail
                 loginView.passTextField.text = pass
                 database.addUser(user: tempUser)
@@ -234,11 +237,11 @@ extension ProfileViewController: DatabaseDelegate {
         )
         
         UIView.animate(withDuration: 1, delay: 0) { [self] in
-            
             loadingAnimationView.layer.opacity = 0
             profileView.transform = profileView.transform.translatedBy(x: self.view.layer.bounds.width, y: 0)
         } completion: { [self] handler in
             loadingAnimationView.stop()
+            loadingAnimationView.layer.opacity = 0
         }
         
     }

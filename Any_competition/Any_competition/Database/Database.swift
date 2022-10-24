@@ -12,7 +12,6 @@ protocol DatabaseDelegate: AnyObject {
     func reloadView(competitions: [Competition])
     func reloadView(user: User)
     func reloadTableCollectionView()
-    func alertMessage(alertMessage: String)
 }
 
 class Database {
@@ -32,7 +31,7 @@ class Database {
         
         ref = db.collection("competitions").addDocument(data: [
             "info": tempCompetiton.info.dictionary,
-            "accessUsersArray": tempCompetiton.accessUsersArray.map{ $0.dictionary},
+            "accessUsersIdArray": tempCompetiton.accessUsersIdArray.map{ $0 },
             "players": tempCompetiton.players.map{ $0.dictionary},
             "competitionTable": tempCompetiton.competitionTable!.dictionary
         ]) { err in
@@ -40,7 +39,7 @@ class Database {
                 print("Error adding document: \(err)")
             } else {
                 tempCompetiton.id = ref!.documentID
-                print("Document added with ID: \(ref!.documentID)")
+                print("--- Document added with ID: \(ref!.documentID)")
             }
         }
     }
@@ -103,13 +102,9 @@ class Database {
                             } catch {
                                 print("an error occurred", error)
                             }
-                            
-                            
                         }
-                        
                     }
                 }
-                
             } else {
                 print("error - \(error as Any)")
             }
@@ -127,18 +122,9 @@ class Database {
         
         db.runTransaction { (transaction, errorPointer) -> Any? in
             
-            let sfDocument: DocumentSnapshot
-
-                do {
-                    try sfDocument = transaction.getDocument(docRef)
-                } catch let fetchError as NSError {
-                    errorPointer?.pointee = fetchError
-                    return nil
-                }
-            
             transaction.setData([
                 "info": tempCompetiton.info.dictionary,
-                "accessUsersArray": tempCompetiton.accessUsersArray.map{ $0.dictionary},
+                "accessUsersIdArray": tempCompetiton.accessUsersIdArray.map{ $0 },
                 "players": tempCompetiton.players.map{ $0.dictionary},
                 "competitionTable": tempCompetiton.competitionTable!.dictionary
                 ], forDocument: docRef)
@@ -148,7 +134,7 @@ class Database {
             if let error = error {
                     print("Transaction failed: \(error)")
                 } else {
-                    print("Transaction successfully committed!")
+                    print("--- Transaction successfully committed!")
                 }
         }
 
@@ -159,7 +145,9 @@ class Database {
         
         print("--- added listener to competition")
         
-        db.collection("competitions").document(competitionId).addSnapshotListener { [self] documentSnapshot, error in
+        let ref = db.collection("competitions").document(competitionId)
+
+        ref.addSnapshotListener { [self] documentSnapshot, error in
 
             guard let document = documentSnapshot else {
                 print("Error fetching document: \(error!)")
@@ -167,15 +155,15 @@ class Database {
             }
 
             guard var json = document.data() else {
-                print("Document data was empty.")
+                print("--- Document data was empty.")
                 return
             }
 
             json["id"] = document.documentID
-            
+
             do {
                 let data = try JSONSerialization.data(withJSONObject: json as Any)
-                
+
                 let competition = try self.decoder.decode(Competition.self, from: data)
                 CompetitionViewController.competition = competition
                 delegate?.reloadTableCollectionView()
@@ -183,7 +171,6 @@ class Database {
                 print("an error occurred", error)
             }
         }
-
     }
     
 //      метод добавляет слушателя для всей коллекции соревнований
@@ -192,8 +179,6 @@ class Database {
         
         var competitions = [Competition]()
         
-        if ProfileViewController.user != nil {
-            
             db.collection("competitions").addSnapshotListener({ querySnapshot, error in
                 guard let snapshotData = querySnapshot?.documents else {
                     print("Error fetching documents: \(error!)")
@@ -219,16 +204,10 @@ class Database {
                     }
                 }
                 self.delegate?.reloadView(competitions: competitions)
-                
             })
             
-        } else {
-            delegate?.alertMessage(alertMessage: "Сначала нужно авторизоваться, чтобы увидеть свои соревнования")
-        }
-        
-        
-        
     }
+    
 //      метод добавляет пользователя
     func addUser(user: User) {
         print("--- send user to Firestore DataBase")
@@ -244,7 +223,7 @@ class Database {
             "mail" : tempUser.mail
         ]) { err in
             if let err = err {
-                print("Error adding document: \(err)")
+                print("--- Error adding document: \(err)")
             }
         }
     }

@@ -36,8 +36,17 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if !isListenerConnected {
-            self.database.addListenerToCollection()
-            isListenerConnected.toggle()
+            
+            if let userId = ProfileViewController.user?.id {
+                
+                self.database.addListenerToCollection()
+                isListenerConnected.toggle()
+            } else {
+                alert.message = "Сначала нужно авторизоваться, чтобы увидеть свои соревнования"
+                self.present(alert, animated: true)
+            }
+            
+            
         }
     }
     
@@ -95,13 +104,7 @@ class CompetitionsCollectionViewController: UICollectionViewController {
 }
 
 extension CompetitionsCollectionViewController: DatabaseDelegate {
-    func alertMessage(alertMessage: String) {
-        isListenerConnected = true
         
-        alert.message = alertMessage
-        self.present(alert, animated: true)
-    }
-    
     func reloadView(user: User) {}
     
     func reloadTableCollectionView() {}

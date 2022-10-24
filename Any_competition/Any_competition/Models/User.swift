@@ -20,7 +20,8 @@ struct User: Identifiable, Codable, Hashable {
             "firstName": firstName,
             "lastName": lastName,
             "nick": nick,
-            "mail": mail
+            "mail": mail,
+            "id": id as Any
         ]
     }
      

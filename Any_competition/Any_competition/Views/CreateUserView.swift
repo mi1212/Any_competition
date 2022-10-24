@@ -141,7 +141,6 @@ class CreateUserView: UIView {
         guard let pass = passTextField.text else {return}
         
         let textFieldArray = [firstNameTextField, lastNameTextField, nickNameTextField, mailTextField, passTextField]
-        print(tempVar)
         if firstName != "" && lastName != "" && nick != "" && mail != "" && pass != "" {
             delegate?.tapCreateUser(
                 firstName: firstName,
