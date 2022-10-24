@@ -153,7 +153,7 @@ class Database {
             var competitions = [Competition]()
                 
             let ref = db.collection("competitions").whereField("accessUsersIdArray", arrayContainsAny: [ProfileViewController.user?.id])
-            
+
             ref.addSnapshotListener({ querySnapshot, error in
                             guard let snapshotData = querySnapshot?.documents else {
                                 print("Error fetching documents: \(error!)")

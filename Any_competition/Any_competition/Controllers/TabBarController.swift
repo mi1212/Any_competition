@@ -19,8 +19,6 @@ class TabBarController: UITabBarController {
         view.backgroundColor = .backgroundColor
         setupAnimation()
         setupTabBar()
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.tabBarController?.navigationItem.title = "Profile Settings"
     }
     
     private func setupAnimation() {
@@ -45,10 +43,16 @@ class TabBarController: UITabBarController {
         self.tabBar.backgroundColor = .clear
         self.tabBar.tintColor = .anyDarckColor
         self.viewControllers = [
-            setupTabBar(viewController: StartViewController(), title: "add competition", image: "plus"),
-            setupTabBar(viewController: CompetitionsCollectionViewController(collectionViewLayout: setupflowLayout()), title: "competitions", image: "ic_car") ,
-            setupTabBar(viewController: ProfileViewController(), title: "profile", image: "profile")
-//            setupTabBar(viewController: TestViewController(), title: "profile", image: "square120")
+            setupTabBar(
+                viewController: CompetitionsCollectionViewController(collectionViewLayout: setupflowLayout()),
+                title: "competitions",
+                image: "ic_car"
+            ),
+            setupTabBar(
+                viewController: ProfileViewController(),
+                title: "profile",
+                image: "profile"
+            )
         ]
     }
     
@@ -56,11 +60,10 @@ class TabBarController: UITabBarController {
         let navigationVC = UINavigationController(rootViewController: viewController)
         navigationVC.tabBarItem.title = title
         navigationVC.tabBarItem.image = UIImage(named: image)
-        
         return navigationVC
     }
     
-        private func setupflowLayout() -> UICollectionViewFlowLayout {
+    private func setupflowLayout() -> UICollectionViewFlowLayout {
             let inset: CGFloat = 16
     
             let collectionViewlowFLayout: UICollectionViewFlowLayout = {
@@ -76,7 +79,9 @@ class TabBarController: UITabBarController {
             }()
     
             return collectionViewlowFLayout
-        }    
+        }
+    
+    
 }
 
 

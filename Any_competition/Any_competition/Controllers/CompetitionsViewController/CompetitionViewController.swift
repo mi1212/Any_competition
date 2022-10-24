@@ -54,7 +54,6 @@ class CompetitionViewController: UIViewController{
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
-        self.navigationController?.navigationBar.isHidden = true
     }
     
     private func setupController() {

@@ -67,7 +67,7 @@ class ProfileViewController: UIViewController {
         self.view.addGestureRecognizer(tap)
     }
     
-    // MARK: Navigation
+    // MARK: - Navigation
    
     // установка вьюх
     private func setupViews() {
@@ -76,6 +76,8 @@ class ProfileViewController: UIViewController {
         contentView.addSubview(loginView)
         contentView.addSubview(createUserView)
         contentView.addSubview(profileView)
+        
+        let inset: CGFloat = 16
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
@@ -109,8 +111,8 @@ class ProfileViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             profileView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            profileView.trailingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            profileView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            profileView.trailingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: -inset),
+            profileView.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -2*inset),
             profileView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }

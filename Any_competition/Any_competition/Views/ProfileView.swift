@@ -61,8 +61,8 @@ class ProfileView: UIView {
         let inset: CGFloat = 16
         
         NSLayoutConstraint.activate([
-            contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
+            contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
             contentView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1),
             contentView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
         ])

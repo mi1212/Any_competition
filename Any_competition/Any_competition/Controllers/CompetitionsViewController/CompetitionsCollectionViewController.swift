@@ -13,8 +13,10 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     var competitions = [Competition]()
     
     let database = Database()
-        
+    
     let animationView = AnimationView()
+    
+    var isAddedListener = false
     
     let alert : UIAlertController = {
         let alert = UIAlertController(title: "", message: nil, preferredStyle: .alert)
@@ -22,33 +24,17 @@ class CompetitionsCollectionViewController: UICollectionViewController {
         return alert
     }()
     
-    var isListenerConnected = false
-        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.database.delegate = self
         self.collectionView.delegate = self
         self.collectionView.backgroundColor = .backgroundColor
-        self.navigationController?.navigationBar.isHidden = true
         self.collectionView.register(CompetitionCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionCollectionViewCell.identifire)
-//        self.database.addListenerToCollection()
+        setupNavigationBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        if !isListenerConnected {
-            
-            if let userId = ProfileViewController.user?.id {
-                print("--- added listener to Competitions Collection ")
-                self.database.addListenerToCompetitionCollection()
-//                isListenerConnected.toggle()
-            } else {
-                self.database.removeListenerToCompetitionCollection()
-                alert.message = "Сначала нужно авторизоваться, чтобы увидеть свои соревнования"
-                self.present(alert, animated: true)
-            }
-            
-            
-//        }
+        setupListenerToCompetitions()
     }
     
     private func setupAnimation() {
@@ -61,9 +47,30 @@ class CompetitionsCollectionViewController: UICollectionViewController {
         self.collectionView.addSubview(animationView)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupAnimation()
+    private func setupNavigationBar() {
+        
+        let plus = UIImage(systemName: "plus.app.fill")
+    
+        self.navigationController?.navigationBar.tintColor = .anyDarckColor
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: plus, style: .plain, target: self, action: #selector(addCompetition))
+    }
+    
+    private func setupListenerToCompetitions() {
+        if (ProfileViewController.user?.id) != nil {
+            if !isAddedListener {
+                self.database.addListenerToCompetitionCollection()
+            }
+        } else {
+            self.database.removeListenerToCompetitionCollection()
+            alert.message = "Сначала нужно авторизоваться, чтобы увидеть свои соревнования"
+            self.present(alert, animated: true)
+        }
+    }
+    
+    @objc func addCompetition() {
+        let vc = AddCompetitionViewController()
+        self.navigationController?.present(vc, animated: true)
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
