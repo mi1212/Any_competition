@@ -115,14 +115,18 @@ class ConfigurateCompetitionViewController: UIViewController {
     }
     
     @objc func tapAddButton() {
-    
-        let info = Info(title: competitionTitle!, qtyPlayers: playerQty!, date: Date.now.description)
         
         if let user = ProfileViewController.user {
             
             let accessUserArray = [user]
             
-            let competition = Competition(info: info, players: playersArray, accessUserArray: accessUserArray)
+            let competition = Competition(
+                title: competitionTitle!,
+                qtyPlayers: playerQty!,
+                date: Date.now.description,
+                players: playersArray,
+                accessUserArray: accessUserArray
+            )
             
             database.sendCompetitionToDatabase(competition: competition)
             

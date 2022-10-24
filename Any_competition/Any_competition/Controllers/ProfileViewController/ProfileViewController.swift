@@ -253,6 +253,9 @@ extension ProfileViewController: DatabaseDelegate {
 
 extension ProfileViewController: ProfileViewDelegate {
     func exitFromProfileView() {
+        
+        ProfileViewController.user = nil
+        
         UIView.animate(withDuration: 1, delay: 0) { [self] in
             loginView.transform = loginView.transform.translatedBy(x: -self.view.layer.bounds.width, y: 0)
             profileView.transform = profileView.transform.translatedBy(x: -self.view.layer.bounds.width, y: 0)

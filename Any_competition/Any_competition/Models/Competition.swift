@@ -9,22 +9,28 @@ import Foundation
 
 struct Competition: Identifiable, Codable {
     var id: String?
-    let info: Info
+    let title: String
+    let qtyPlayers: Int
+    let date: String
     let accessUsersIdArray: [String]
     let players: [Player]
     var competitionTable: CompetitionTable?
     
     var dictionary: [String: Any] {
         return [
-            "info": info.dictionary,
+            "title": title,
+            "qtyPlayers": qtyPlayers,
+            "date": date,
             "accessUsersIdArray": accessUsersIdArray.map{ $0 },
             "players": players.map{ $0.dictionary },
             "competitionTable": competitionTable!.dictionary
         ]
     }
     
-    init(info: Info, players: [Player], accessUserArray: [User]) {
-        self.info = info
+    init(title: String, qtyPlayers: Int, date: String, players: [Player], accessUserArray: [User]) {
+        self.title = title
+        self.qtyPlayers = qtyPlayers
+        self.date = date
         self.players = players
         self.competitionTable = CompetitionTable(playersArray: self.players)
 //        var accessUserArray = [User]()

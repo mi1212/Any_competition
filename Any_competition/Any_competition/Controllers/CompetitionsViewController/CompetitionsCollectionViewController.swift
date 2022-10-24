@@ -38,10 +38,11 @@ class CompetitionsCollectionViewController: UICollectionViewController {
 //        if !isListenerConnected {
             
             if let userId = ProfileViewController.user?.id {
-                
-                self.database.addListenerToCollection()
+                print("--- added listener to Competitions Collection ")
+                self.database.addListenerToCompetitionCollection()
 //                isListenerConnected.toggle()
             } else {
+                self.database.removeListenerToCompetitionCollection()
                 alert.message = "Сначала нужно авторизоваться, чтобы увидеть свои соревнования"
                 self.present(alert, animated: true)
             }
@@ -76,8 +77,8 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath) as! CompetitionCollectionViewCell
         
-        cell.nameLabel.text = competitions[indexPath.row].info.title
-        cell.dateLabel.text = dateFormater(competitions[indexPath.row].info.date)
+        cell.nameLabel.text = competitions[indexPath.row].title
+        cell.dateLabel.text = dateFormater(competitions[indexPath.row].date)
         
         switch indexPath.row % 2 {
         case 0: cell.contentView.backgroundColor = .anyColor
@@ -96,7 +97,7 @@ class CompetitionsCollectionViewController: UICollectionViewController {
         
         vc.qtyPlayers = competitions[indexPath.row].players.count
         
-        vc.navigationItem.title = CompetitionViewController.competition?.info.title
+        vc.navigationItem.title = CompetitionViewController.competition?.title
         self.navigationController?.pushViewController(vc, animated: true)
         
     }

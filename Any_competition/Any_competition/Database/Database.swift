@@ -30,7 +30,9 @@ class Database {
         var tempCompetiton = competition
         
         ref = db.collection("competitions").addDocument(data: [
-            "info": tempCompetiton.info.dictionary,
+            "title": tempCompetiton.title,
+            "qtyPlayers": tempCompetiton.qtyPlayers,
+            "date": tempCompetiton.date,
             "accessUsersIdArray": tempCompetiton.accessUsersIdArray.map{ $0 },
             "players": tempCompetiton.players.map{ $0.dictionary},
             "competitionTable": tempCompetiton.competitionTable!.dictionary
@@ -79,6 +81,7 @@ class Database {
         
     }
     
+//      запрос данных пользователя Firebase Database
     func getUserData(uid: String) {
         print("--- get user data from Firestore DataBase")
         
@@ -123,7 +126,9 @@ class Database {
         db.runTransaction { (transaction, errorPointer) -> Any? in
             
             transaction.setData([
-                "info": tempCompetiton.info.dictionary,
+                "title": tempCompetiton.title,
+                "qtyPlayers": tempCompetiton.qtyPlayers,
+                "date": tempCompetiton.date,
                 "accessUsersIdArray": tempCompetiton.accessUsersIdArray.map{ $0 },
                 "players": tempCompetiton.players.map{ $0.dictionary},
                 "competitionTable": tempCompetiton.competitionTable!.dictionary
@@ -138,6 +143,60 @@ class Database {
                 }
         }
 
+    }
+
+//MARK: - listeners
+//      метод добавляет слушателя для всей коллекции соревнований
+        func addListenerToCompetitionCollection() {
+            print("--- added listener to collection competitions")
+            
+            var competitions = [Competition]()
+                
+            let ref = db.collection("competitions").whereField("accessUsersIdArray", arrayContainsAny: [ProfileViewController.user?.id])
+            
+            ref.addSnapshotListener({ querySnapshot, error in
+                            guard let snapshotData = querySnapshot?.documents else {
+                                print("Error fetching documents: \(error!)")
+                                return
+                            }
+            
+                            if snapshotData.count != 0 {
+            
+                                competitions.removeAll()
+            
+                                for i in 0...snapshotData.count-1 {
+                                    var json = snapshotData[i].data()
+                                    json["id"] = snapshotData[i].documentID
+                                    do {
+                                        let data = try JSONSerialization.data(withJSONObject: json as Any)
+            
+                                        let competition = try self.decoder.decode(Competition.self, from: data)
+            
+                                        competitions.append(competition)
+                                    } catch {
+                                        print("an error occurred", error)
+                                    }
+                                }
+                            }
+                            self.delegate?.reloadView(competitions: competitions)
+                        })
+            
+        }
+    
+//      метод добавляет слушателя для всей коллекции соревнований
+    func removeListenerToCompetitionCollection() {
+        print("--- remove listener to collection competitions")
+        
+        var competitions = [Competition]()
+        
+        let ref = db.collection("competitions").whereField("accessUsersIdArray", arrayContainsAny: [ProfileViewController.user?.id]).addSnapshotListener({ querySnapshot, error in
+        
+        }).remove()
+        
+        self.delegate?.reloadView(competitions: competitions)
+        
+        
+        
     }
     
 //      метод добавляет слушателя для документа
@@ -173,69 +232,7 @@ class Database {
         }
     }
     
-//      метод добавляет слушателя для всей коллекции соревнований
-    func addListenerToCollection() {
-        print("--- added listener to collection competitions")
-        
-        var competitions = [Competition]()
-        
-//            db.collection("competitions").addSnapshotListener({ querySnapshot, error in
-//                guard let snapshotData = querySnapshot?.documents else {
-//                    print("Error fetching documents: \(error!)")
-//                    return
-//                }
-//
-//                if snapshotData.count != 0 {
-//
-//                    competitions.removeAll()
-//
-//                    for i in 0...snapshotData.count-1 {
-//                        var json = snapshotData[i].data()
-//                        json["id"] = snapshotData[i].documentID
-//                        do {
-//                            let data = try JSONSerialization.data(withJSONObject: json as Any)
-//
-//                            let competition = try self.decoder.decode(Competition.self, from: data)
-//
-//                            competitions.append(competition)
-//                        } catch {
-//                            print("an error occurred", error)
-//                        }
-//                    }
-//                }
-//                self.delegate?.reloadView(competitions: competitions)
-//            })
-            
-        let ref = db.collection("competitions").whereField("accessUsersIdArray", arrayContainsAny: [ProfileViewController.user?.id])
-        
-        ref.addSnapshotListener({ querySnapshot, error in
-                        guard let snapshotData = querySnapshot?.documents else {
-                            print("Error fetching documents: \(error!)")
-                            return
-                        }
-        
-                        if snapshotData.count != 0 {
-        
-                            competitions.removeAll()
-        
-                            for i in 0...snapshotData.count-1 {
-                                var json = snapshotData[i].data()
-                                json["id"] = snapshotData[i].documentID
-                                do {
-                                    let data = try JSONSerialization.data(withJSONObject: json as Any)
-        
-                                    let competition = try self.decoder.decode(Competition.self, from: data)
-        
-                                    competitions.append(competition)
-                                } catch {
-                                    print("an error occurred", error)
-                                }
-                            }
-                        }
-                        self.delegate?.reloadView(competitions: competitions)
-                    })
-        
-    }
+
     
 //      метод добавляет пользователя
     func addUser(user: User) {
