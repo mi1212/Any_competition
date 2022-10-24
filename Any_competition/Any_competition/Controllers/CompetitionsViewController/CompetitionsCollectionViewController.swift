@@ -35,19 +35,19 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if !isListenerConnected {
+//        if !isListenerConnected {
             
             if let userId = ProfileViewController.user?.id {
                 
                 self.database.addListenerToCollection()
-                isListenerConnected.toggle()
+//                isListenerConnected.toggle()
             } else {
                 alert.message = "Сначала нужно авторизоваться, чтобы увидеть свои соревнования"
                 self.present(alert, animated: true)
             }
             
             
-        }
+//        }
     }
     
     private func setupAnimation() {
