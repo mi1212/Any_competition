@@ -129,7 +129,7 @@ class ProfileViewController: UIViewController {
         ])
     }
     
-    //MARK: dismissKeyboardTap
+    //MARK: - dismissKeyboardTap
     
     private lazy var tap: UITapGestureRecognizer = {
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -178,13 +178,9 @@ extension ProfileViewController: LoginViewDelegate {
             createUserView.transform = createUserView.transform.translatedBy(x: -self.view.layer.bounds.width, y: 0)
         } completion: { handler in
         }
-        
-
     }
     
-    func tapResetPassword() {
-        
-    }
+    func tapResetPassword() {}
 }
 
 extension ProfileViewController: CreateUserViewDelegate {

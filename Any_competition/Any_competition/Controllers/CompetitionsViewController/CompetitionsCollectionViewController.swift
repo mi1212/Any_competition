@@ -48,9 +48,8 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     }
     
     private func setupNavigationBar() {
-        
-        let plus = UIImage(systemName: "plus.app.fill")
-    
+        let plus = UIImage(systemName: "plus")
+
         self.navigationController?.navigationBar.tintColor = .anyDarckColor
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: plus, style: .plain, target: self, action: #selector(addCompetition))
@@ -60,6 +59,7 @@ class CompetitionsCollectionViewController: UICollectionViewController {
         if (ProfileViewController.user?.id) != nil {
             if !isAddedListener {
                 self.database.addListenerToCompetitionCollection()
+                isAddedListener.toggle()
             }
         } else {
             self.database.removeListenerToCompetitionCollection()
