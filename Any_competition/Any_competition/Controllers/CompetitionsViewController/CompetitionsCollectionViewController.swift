@@ -112,7 +112,10 @@ class CompetitionsCollectionViewController: UICollectionViewController {
 }
 
 extension CompetitionsCollectionViewController: DatabaseDelegate {
-        
+    func reloadViewWithoutAnimate(user: User) {}
+    
+    func animateAndReloadView(user: User) {}
+    
     func reloadView(user: User) {}
     
     func reloadTableCollectionView() {}

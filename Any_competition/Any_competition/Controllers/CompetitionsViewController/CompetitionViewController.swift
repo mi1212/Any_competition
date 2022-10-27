@@ -138,6 +138,10 @@ extension CompetitionViewController: MatchViewControllerDelegate {
 }
 
 extension CompetitionViewController: DatabaseDelegate {
+    func reloadViewWithoutAnimate(user: User) {}
+    
+    func animateAndReloadView(user: User) {}
+    
     func alertMessage(alertMessage: String) {
         
     }

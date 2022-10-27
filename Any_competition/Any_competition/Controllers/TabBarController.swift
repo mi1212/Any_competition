@@ -10,6 +10,10 @@ import Lottie
 
 class TabBarController: UITabBarController {
  
+    let database = Database()
+    
+    let userDefaults = UserDefaults.standard
+    
     var timer: Timer?
 
     let animationView = AnimationView()
@@ -17,6 +21,7 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
+        checkLogin()
         setupAnimation()
         setupTabBar()
     }
@@ -80,7 +85,12 @@ class TabBarController: UITabBarController {
     
             return collectionViewlowFLayout
         }
-    
+
+    private func checkLogin() {
+        if let uid = userDefaults.object(forKey: "uid") {
+            database.getUserData(uid: uid as! String)
+        }
+    }
     
 }
 

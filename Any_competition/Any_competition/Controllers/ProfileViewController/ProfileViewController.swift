@@ -11,6 +11,8 @@ import FirebaseAuth
 
 class ProfileViewController: UIViewController {
     
+    let userDefaults = UserDefaults.standard
+    
     static var user: User?
     
     let database = Database()
@@ -63,14 +65,14 @@ class ProfileViewController: UIViewController {
         loginView.delegate = self
         createUserView.delegate = self
         profileView.delegate = self
-        setupViews()
+        checkLogin()
         self.view.addGestureRecognizer(tap)
     }
     
     // MARK: - Navigation
    
-    // установка вьюх
-    private func setupViews() {
+    // установка вьюх если нужно залогиниться
+    private func setupViewsToLogin() {
         self.view.addSubview(scrollView)
         self.scrollView.addSubview(contentView)
         contentView.addSubview(loginView)
@@ -117,6 +119,74 @@ class ProfileViewController: UIViewController {
         ])
     }
     
+    // установка вьюх если не нужно залогиниться
+    private func setupViewsWithoutLogin() {
+        self.view.addSubview(scrollView)
+        self.scrollView.addSubview(contentView)
+        contentView.addSubview(loginView)
+//        contentView.addSubview(createUserView)
+        contentView.addSubview(profileView)
+        
+        profileView.setupData(
+            nick: ProfileViewController.user!.nick,
+            firstName: ProfileViewController.user!.firstName,
+            lastName: ProfileViewController.user!.lastName
+        )
+        
+        let inset: CGFloat = 16
+        
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
+        ])
+      
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
+        ])
+
+        NSLayoutConstraint.activate([
+            loginView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            loginView.leadingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            loginView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            loginView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
+        
+//        NSLayoutConstraint.activate([
+//            createUserView.topAnchor.constraint(equalTo: contentView.topAnchor),
+//            createUserView.leadingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//            createUserView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+//            createUserView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+//        ])
+        
+        NSLayoutConstraint.activate([
+            profileView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            profileView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            profileView.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -2*inset),
+            profileView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
+    }
+    
+    // функция проверки логина
+    private func checkLogin() {
+        switch userDefaults.object(forKey: "uid") {
+        case nil:
+            setupViewsToLogin()
+        default:
+            if let uid = userDefaults.object(forKey: "uid") {
+//                database.getUserDataReloadViewWithoutAnimate(uid: uid as! String)
+                setupViewsWithoutLogin()
+            }
+
+        }
+    }
+    
     // установка анимации загрузки
     private func setupLoading() {
         self.view.addSubview(loadingAnimationView)
@@ -155,7 +225,8 @@ extension ProfileViewController: LoginViewDelegate {
                 self.present(alert, animated: true, completion: nil)
             } else {
                 print("--- user authorized")
-                database.getUserData(uid: result!.user.uid)
+                userDefaults.set(result!.user.uid, forKey: "uid")
+                database.getUserDataWithReloadAndAnimateView(uid: result!.user.uid)
                 UIView.animate(withDuration: 1, delay: 0) { [self] in
                     setupLoading()
                     loginView.transform = loginView.transform.translatedBy(x: self.view.layer.bounds.width, y: 0)
@@ -218,14 +289,17 @@ extension ProfileViewController: CreateUserViewDelegate {
 }
 
 extension ProfileViewController: DatabaseDelegate {
-    func alertMessage(alertMessage: String) {
-        
+    func reloadViewWithoutAnimate(user: User) {
+        ProfileViewController.user = user
+
+        profileView.setupData(
+            nick: user.nick,
+            firstName: user.firstName,
+            lastName: user.lastName
+        )
     }
     
-    func reloadView(competitions: [Competition]) {}
-    
-    func reloadView(user: User) {
-        
+    func animateAndReloadView(user: User) {
         ProfileViewController.user = user
 
         profileView.setupData(
@@ -241,8 +315,13 @@ extension ProfileViewController: DatabaseDelegate {
             loadingAnimationView.stop()
             loadingAnimationView.layer.opacity = 0
         }
+    }
+    
+    func alertMessage(alertMessage: String) {
         
     }
+    
+    func reloadView(competitions: [Competition]) {}
     
     func reloadTableCollectionView() {}
     
@@ -253,6 +332,8 @@ extension ProfileViewController: ProfileViewDelegate {
     func exitFromProfileView() {
         
         ProfileViewController.user = nil
+        
+        userDefaults.set(nil, forKey: "uid")
         
         UIView.animate(withDuration: 1, delay: 0) { [self] in
             loginView.transform = loginView.transform.translatedBy(x: -self.view.layer.bounds.width, y: 0)
