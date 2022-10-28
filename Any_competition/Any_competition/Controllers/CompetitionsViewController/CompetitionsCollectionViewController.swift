@@ -121,7 +121,8 @@ extension CompetitionsCollectionViewController: DatabaseDelegate {
     func reloadTableCollectionView() {}
     
     func reloadView(competitions: [Competition]) {
-        self.competitions = competitions
+        
+        self.competitions = competitions.sorted { $0.date > $1.date }
         self.collectionView.reloadData()
         self.animationView.layer.opacity = 0
         self.animationView.stop()
