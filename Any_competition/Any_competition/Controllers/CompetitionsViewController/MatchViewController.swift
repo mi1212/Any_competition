@@ -200,8 +200,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func setupLabels() {
-        firstPlayerLabel.text = (match?.player1.name)! + " " + (match?.player1.secondName)!
-        secondPlayerLabel.text = (match?.player2.name)! + " " + (match?.player2.secondName)!
+        firstPlayerLabel.text = (match?.player1.firstName)! + " " + (match?.player1.lastName)!
+        secondPlayerLabel.text = (match?.player2.firstName)! + " " + (match?.player2.lastName)!
     }
     
     private func winningAnimation(winnedPlayer: Player) {
@@ -226,7 +226,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             winnedPlayerLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
         ])
         
-        winnedPlayerLabel.text = winnedPlayer.name + " " + winnedPlayer.secondName + " выиграл"
+        winnedPlayerLabel.text = winnedPlayer.firstName + " " + winnedPlayer.lastName + " выиграл"
         
         timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { [self] _ in
             animationView.removeFromSuperview()

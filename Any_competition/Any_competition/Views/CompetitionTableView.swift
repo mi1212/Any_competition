@@ -12,11 +12,13 @@ protocol CompetitionTableViewDelegate: AnyObject {
 }
 
 class CompetitionTableView: UIView {
- 
+    
     var competitionTable: CompetitionTable?
     
+    var playersArray: [Player]?
+    
     var side = CGFloat(0)
-        
+    
     var delegate: CompetitionTableViewDelegate?
     
     private lazy var qty = competitionTable?.qtyPlayers
@@ -40,9 +42,16 @@ class CompetitionTableView: UIView {
         return content
     }()
     
+    private lazy var fakeView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .backgroundColor
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private lazy var playersNumberCollectionView: UICollectionView = {
         let table = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-//        table.backgroundColor = .backgroundColor
+        //        table.backgroundColor = .backgroundColor
         table.delegate = self
         table.dataSource = self
         table.register(CompetitionTableCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionTableCollectionViewCell.identifire)
@@ -77,8 +86,9 @@ class CompetitionTableView: UIView {
         return table
     }()
     
-    convenience init(competitionTable: CompetitionTable, side: CGFloat) {
+    convenience init(competitionTable: CompetitionTable, side: CGFloat, playersArray: [Player]) {
         self.init()
+        self.playersArray = playersArray
         self.side = side
         self.translatesAutoresizingMaskIntoConstraints = false
         self.competitionTable = competitionTable
@@ -103,6 +113,8 @@ class CompetitionTableView: UIView {
         
         contentView.addSubview(tableCollectionView)
         contentView.addSubview(playersScoreCollectionView)
+        
+        subView.addSubview(fakeView)
         
         NSLayoutConstraint.activate([
             subView.topAnchor.constraint(equalTo: self.topAnchor),
@@ -129,12 +141,19 @@ class CompetitionTableView: UIView {
         ])
         
         NSLayoutConstraint.activate([
+            fakeView.topAnchor.constraint(equalTo: subView.topAnchor),
+            fakeView.leadingAnchor.constraint(equalTo: subView.leadingAnchor),
+            fakeView.widthAnchor.constraint(equalTo: playersNamesCollectionView.widthAnchor),
+            fakeView.bottomAnchor.constraint(equalTo: playersNamesCollectionView.topAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: playersNumberCollectionView.bottomAnchor),
             scrollView.bottomAnchor.constraint(equalTo: subView.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: playersNamesCollectionView.trailingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: subView.trailingAnchor),
         ])
-
+        
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
@@ -142,14 +161,14 @@ class CompetitionTableView: UIView {
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
         ])
-
+        
         NSLayoutConstraint.activate([
             tableCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
             tableCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             tableCollectionView.widthAnchor.constraint(equalToConstant: side*CGFloat(qty!)),
             tableCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
-
+        
         NSLayoutConstraint.activate([
             playersScoreCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
             playersScoreCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -159,8 +178,9 @@ class CompetitionTableView: UIView {
         ])
     }
     
-    func reloadData(competitionTable: CompetitionTable) {
+    func reloadData(competitionTable: CompetitionTable, playersArray: [Player]) {
         self.competitionTable = competitionTable
+        self.playersArray = playersArray
         tableCollectionView.reloadData()
         playersNamesCollectionView.reloadData()
         playersScoreCollectionView.reloadData()
@@ -201,17 +221,17 @@ extension CompetitionTableView: UICollectionViewDataSource {
         case tableCollectionView:
             cell.backgroundColor = .white
             cell.label.textAlignment = .center
- 
+            
             let match = CompetitionViewController.competition?.competitionTable!.competitionTable[indexPath.section].matchesOfPlayer[indexPath.row]
             
             if match!.isDone != true { // проверка, что матч не состоялся
-
+                
                 if indexPath.row == indexPath.section  {
                     cell.backgroundColor = .anyDarckColor
                 }
-
+                
             } else {
-
+                
                 if match!.isWinned {
                     cell.label.text = "1"
                     cell.backgroundColor = .anyColor
@@ -219,19 +239,19 @@ extension CompetitionTableView: UICollectionViewDataSource {
                     cell.label.text = "0"
                     cell.backgroundColor = .anyColor1
                 }
-          
+                
             }
             
             return cell
         case playersNamesCollectionView:
             
-            cell.backgroundColor = .white
-            cell.label.text = "#\(indexPath.section+1) \(competitionTable!.playersArray[indexPath.section].name)\n\(competitionTable!.playersArray[indexPath.section].nick)"
+            cell.backgroundColor = .backgroundColor
+            cell.label.text = "#\(indexPath.section+1) \(playersArray![indexPath.section].firstName)\n\(playersArray![indexPath.section].nick)"
             cell.label.textAlignment = .left
             return cell
             
         case playersNumberCollectionView:
-                           
+            cell.backgroundColor = .backgroundColor
             cell.label.text = "#\(indexPath.row + 1)"
             cell.layer.borderWidth = 0
             cell.label.textAlignment = .center
@@ -240,11 +260,9 @@ extension CompetitionTableView: UICollectionViewDataSource {
             
         case playersScoreCollectionView:
             
-            if let player = competitionTable?.playersArray[indexPath.section]  {
-                
-                cell.label.text = "\((competitionTable?.calculatePointsOfPlayer(player))!)"
-                
-            }
+            let player = playersArray![indexPath.section]
+            cell.label.text = "\((competitionTable?.calculatePointsOfPlayer(player))!)"
+            
             
             cell.backgroundColor = .white
             cell.label.textAlignment = .center
@@ -254,55 +272,7 @@ extension CompetitionTableView: UICollectionViewDataSource {
         default:
             return cell
         }
-//
-//        if collectionView == tableCollectionView {
-//
-//            cell.backgroundColor = .white
-//            cell.label.textAlignment = .center
-//
-//            let match = CompetitionViewController.competition?.competitionTable!.competitionTable[indexPath.section].matchesOfPlayer[indexPath.row]
-//
-//            if match!.isDone != true { // проверка, что матч не состоялся
-//
-//                if indexPath.row == indexPath.section  {
-//                    cell.backgroundColor = .anyDarckColor
-//                }
-//
-//            } else {
-//
-//                if match!.isWinned {
-//                    cell.label.text = "3"
-//                    cell.backgroundColor = .anyColor
-//                } else {
-//                    cell.label.text = "0"
-//                    cell.backgroundColor = .anyColor1
-//                }
-//
-//            }
-//
-//            return cell
-//
-//        } else if collectionView == playersNamesCollectionView {
-//
-//            cell.backgroundColor = .white
-//            cell.label.text = "#\(indexPath.section+1) \(competitionTable!.playersArray[indexPath.section].name)\n\(competitionTable!.playersArray[indexPath.section].nick)"
-//            cell.label.textAlignment = .left
-//            return cell
-//        } else {
-//
-//
-//            if let player = competitionTable?.playersArray[indexPath.section]  {
-//
-//                cell.label.text = "\((competitionTable?.calculatePointsOfPlayer(player))!)"
-//
-//            }
-//
-//            cell.backgroundColor = .white
-//            cell.label.textAlignment = .center
-//
-//            return cell
-//        }
-  
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -314,7 +284,7 @@ extension CompetitionTableView: UICollectionViewDataSource {
         }
         
     }
-  
+    
 }
 
 extension CompetitionTableView: UICollectionViewDelegateFlowLayout {

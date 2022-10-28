@@ -9,7 +9,7 @@ import Foundation
 
 struct CompetitionTable: Codable {
     
-    var playersArray: [Player]
+//    var playersArray: [Player]
     
     var competitionTable = [MatchesOfPlayer]()
  
@@ -23,7 +23,7 @@ struct CompetitionTable: Codable {
     
     var dictionary: [String: Any] {
         return [
-            "playersArray": playersArray.map{ $0.dictionary },
+//            "playersArray": playersArray.map{ $0.dictionary },
             "competitionTable": competitionTable.map { $0.dictionary},
             "qtyPlayers": qtyPlayers,
             "qtyGames": qtyGames,
@@ -33,7 +33,7 @@ struct CompetitionTable: Codable {
     }
     
     init(playersArray: [Player]) {
-        self.playersArray = playersArray
+//        self.playersArray = playersArray
         competitionTable = createCompetitionTable(playersArray)
         qtyPlayers = playersArray.count
         self.qtyGames = (qtyPlayers*qtyPlayers - qtyPlayers)/2
@@ -79,9 +79,10 @@ struct CompetitionTable: Codable {
     
     func calculatePointsOfPlayer(_ player: Player) -> Int {
         var points = 0
-        let playerNumber = player.number
-        for i in 0...competitionTable[playerNumber].matchesOfPlayer.count-1 {
-            switch competitionTable[playerNumber].matchesOfPlayer[i].isWinned {
+        
+        for i in 0...competitionTable[0].matchesOfPlayer.count-1 {
+            let playerNumber = i
+            switch competitionTable[i].matchesOfPlayer[i].isWinned {
             case true:
                 points += 1
             case false:

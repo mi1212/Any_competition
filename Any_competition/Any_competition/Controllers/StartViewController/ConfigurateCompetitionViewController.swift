@@ -200,7 +200,7 @@ extension ConfigurateCompetitionViewController: UICollectionViewDelegateFlowLayo
             cell.secondNameLabel.text = alert.textFields![1].text
             cell.nickLabel.text = alert.textFields![2].text
 
-            let player = Player(number: indexPath.row, name: cell.nameLabel.text!, secondName: cell.secondNameLabel.text!, nick: cell.nickLabel.text!)
+            let player = Player(firstName: cell.nameLabel.text!, lastName: cell.secondNameLabel.text!, nick: cell.nickLabel.text!)
 
             let index = indexPath.row
             

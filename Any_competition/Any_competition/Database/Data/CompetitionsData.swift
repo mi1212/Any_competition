@@ -14,6 +14,5 @@ class CompetitionData {
     init(competition: Competition) {
         self.competition = competition
     }
-    
-    
+
 }

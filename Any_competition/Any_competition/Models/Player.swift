@@ -7,22 +7,32 @@
 
 import Foundation
 
-struct Player: Codable, Hashable {
-    var number: Int
-    var name: String
-    var secondName: String
+class Player: Codable, Hashable {
+    var firstName: String
+    var lastName: String
     var nick: String
     
     var dictionary: [String: Any] {
         return [
-            "number": number,
-            "name": name,
-            "secondName": secondName,
+            "firstName": firstName,
+            "lastName": lastName,
             "nick": nick
         ]
     }
     
-    static func == (lhs: Player, rhs: Player) -> Bool {
-        return lhs.number == rhs.number && lhs.name == rhs.name && lhs.secondName == rhs.secondName && lhs.nick == rhs.nick
+    init(firstName: String, lastName: String, nick: String) {
+        self.firstName = firstName
+        self.lastName = lastName
+        self.nick = nick
+    }
+    
+    public static func == (lhs: Player, rhs: Player) -> Bool {
+        lhs.firstName == rhs.firstName && lhs.lastName == rhs.lastName && lhs.nick == rhs.nick
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(firstName)
+        hasher.combine(lastName)
+        hasher.combine(nick)
     }
 }
