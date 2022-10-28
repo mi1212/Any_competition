@@ -53,14 +53,17 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     let scorePlayer1TextField = AnyCompUITextField(placeholder: "", isSecure: false)
     
     let scorePlayer2TextField = AnyCompUITextField(placeholder: "", isSecure: false)
+    
+    let scorePlayer1Label = AnyCompUILabel(title: "", fontSize: .large)
+    
+    let scorePlayer2Label = AnyCompUILabel(title: "", fontSize: .large)
       
     let finishMatchButton = AnyCompUIButton(title: "Finish match")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
-        setupViewController()
-        setupLabels()
+        setupViews()
     }
         
     init(match: Match) {
@@ -73,7 +76,33 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    private func setupViewController() {
+    private func setupViews() {
+        switch match?.isDone {
+        case true:
+            setupViewControllerToCheck()
+            if let score1 = match?.scorePlayer1, let score2 = match?.scorePlayer2 {
+                
+                scorePlayer1Label.text = "\(score1)"
+                scorePlayer2Label.text = "\(score2)"
+                
+                if score1 > score2 {
+                    scorePlayer1Label.backgroundColor = .anyColor
+                    scorePlayer2Label.backgroundColor = .anyColor1
+                } else {
+                    scorePlayer2Label.backgroundColor = .anyColor
+                    scorePlayer1Label.backgroundColor = .anyColor1
+                }
+            }
+            
+        case false:
+            setupViewControllerToPlay()
+        default:
+            break
+        }
+        setupLabels()
+    }
+    
+    private func setupViewControllerToPlay() {
         self.view.addSubview(playerStack)
         playerStack.addArrangedSubview(firstPlayerLabel)
         playerStack.addArrangedSubview(secondPlayerLabel)
@@ -122,6 +151,51 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             finishMatchButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             finishMatchButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: inset),
             finishMatchButton.heightAnchor.constraint(equalToConstant: 58)
+        ])
+    }
+    
+    private func setupViewControllerToCheck() {
+        self.view.addSubview(playerStack)
+        playerStack.addArrangedSubview(firstPlayerLabel)
+        playerStack.addArrangedSubview(secondPlayerLabel)
+        self.view.addSubview(scoreStack)
+        scoreStack.addArrangedSubview(scorePlayer1Label)
+        scoreStack.addArrangedSubview(scorePlayer2Label)
+//        self.view.addSubview(finishMatchButton)
+        self.view.addGestureRecognizer(tap)
+        
+        let labelesArray = [firstPlayerLabel, firstPlayerLabel]
+        labelesArray.map {
+            $0.textAlignment = .center
+        }
+        
+        
+//        let textFieldSArray = [scorePlayer1TextField, scorePlayer2TextField]
+//        textFieldSArray.map {
+//            $0.keyboardType = .numberPad
+//            $0.delegate = self
+//            $0.textAlignment = .center
+//            $0.font = UIFont.systemFont(ofSize: 24, weight: .heavy)
+//            $0.leftView = .none
+//            $0.rightView = .none
+//        }
+        
+//        finishMatchButton.addTarget(self, action: #selector(finishMatch), for: .touchUpInside)
+        
+    let inset: CGFloat = 16
+        
+        NSLayoutConstraint.activate([
+            playerStack.topAnchor.constraint(equalTo: self.view.topAnchor, constant: inset),
+            playerStack.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            playerStack.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: inset),
+            playerStack.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
+        NSLayoutConstraint.activate([
+            scoreStack.topAnchor.constraint(equalTo: playerStack.bottomAnchor, constant: inset),
+            scoreStack.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            scoreStack.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 4*inset),
+            scoreStack.heightAnchor.constraint(equalToConstant: 58)
         ])
     }
     
