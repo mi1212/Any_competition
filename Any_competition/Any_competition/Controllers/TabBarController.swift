@@ -49,7 +49,7 @@ class TabBarController: UITabBarController {
         self.tabBar.tintColor = .anyDarckColor
         self.viewControllers = [
             setupTabBar(
-                viewController: CompetitionsCollectionViewController(collectionViewLayout: setupflowLayout()),
+                viewController: CompetitionsViewController(),
                 title: "competitions",
                 image: "ic_car"
             ),
@@ -68,24 +68,6 @@ class TabBarController: UITabBarController {
         return navigationVC
     }
     
-    private func setupflowLayout() -> UICollectionViewFlowLayout {
-            let inset: CGFloat = 16
-    
-            let collectionViewlowFLayout: UICollectionViewFlowLayout = {
-                let flowLayout = UICollectionViewFlowLayout()
-                let width = (self.view.bounds.width - inset*2)/1
-                let height = (self.view.bounds.height - inset*8)/7
-                flowLayout.itemSize = CGSize(width: width, height: height)
-    
-                flowLayout.minimumLineSpacing = inset
-    
-                flowLayout.sectionInset = UIEdgeInsets(top: inset*2, left: inset, bottom: inset*2, right: inset)
-                return flowLayout
-            }()
-    
-            return collectionViewlowFLayout
-        }
-
     private func checkLogin() {
         if let uid = userDefaults.object(forKey: "uid") {
             database.getUserData(uid: uid as! String)

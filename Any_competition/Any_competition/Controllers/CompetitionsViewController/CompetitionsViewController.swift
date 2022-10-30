@@ -8,15 +8,19 @@
 import UIKit
 import Lottie
 
-class CompetitionsCollectionViewController: UICollectionViewController {
+class CompetitionsViewController: UIViewController {
     
-    var competitions = [Competition]()
+    static var competitions = [Competition]()
     
     let database = Database()
     
     let animationView = AnimationView()
     
     var isAddedListener = false
+    
+    var timer: Timer?
+    
+    let competitionsCollectionView = CompetitionsCollectionView()
     
     let alert : UIAlertController = {
         let alert = UIAlertController(title: "", message: nil, preferredStyle: .alert)
@@ -26,11 +30,11 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .backgroundColor
         self.database.delegate = self
-        self.collectionView.delegate = self
-        self.collectionView.backgroundColor = .backgroundColor
-        self.collectionView.register(CompetitionCollectionViewCell.self, forCellWithReuseIdentifier: CompetitionCollectionViewCell.identifire)
         setupNavigationBar()
+        setupAnimation()
+        setupViews()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,19 +44,31 @@ class CompetitionsCollectionViewController: UICollectionViewController {
     private func setupAnimation() {
         animationView.animation = Animation.named("loading")
         animationView.frame = CGRect(origin: CGPoint(x: view.bounds.width/4, y: 0), size: CGSize(width: view.bounds.width/2, height: view.bounds.height/6))
-        animationView.backgroundColor = .backgroundColor
+        animationView.backgroundColor = .clear
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
         animationView.play()
-        self.collectionView.addSubview(animationView)
+        self.view.addSubview(animationView)
     }
     
     private func setupNavigationBar() {
         let plus = UIImage(systemName: "plus")
-
+        
         self.navigationController?.navigationBar.tintColor = .anyDarckColor
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: plus, style: .plain, target: self, action: #selector(addCompetition))
+    }
+    
+    private func setupViews() {
+        self.view.addSubview(competitionsCollectionView)
+        self.competitionsCollectionView.delegate = self
+        
+        NSLayoutConstraint.activate([
+            competitionsCollectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            competitionsCollectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            competitionsCollectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            competitionsCollectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+        ])
     }
     
     private func setupListenerToCompetitions() {
@@ -73,45 +89,10 @@ class CompetitionsCollectionViewController: UICollectionViewController {
         self.navigationController?.present(vc, animated: true)
     }
     
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return competitions.count
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath) as! CompetitionCollectionViewCell
-        
-        cell.nameLabel.text = competitions[indexPath.row].title
-        cell.dateLabel.text = dateFormater(competitions[indexPath.row].date)
-        
-        switch indexPath.row % 2 {
-        case 0: cell.contentView.backgroundColor = .anyColor
-        case 1: cell.contentView.backgroundColor = .anyColor1
-        default:
-            cell.backgroundColor = .anyColor
-        }
-        
-        return cell
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = CompetitionViewController()
-        
-        CompetitionViewController.competition = competitions[indexPath.row]
-        
-        vc.qtyPlayers = competitions[indexPath.row].players.count
-        
-        vc.navigationItem.title = CompetitionViewController.competition?.title
-        self.navigationController?.pushViewController(vc, animated: true)
-        
-    }
-    
 }
 
-extension CompetitionsCollectionViewController: DatabaseDelegate {
+extension CompetitionsViewController: DatabaseDelegate {
+    
     func reloadViewWithoutAnimate(user: User) {}
     
     func animateAndReloadView(user: User) {}
@@ -121,12 +102,29 @@ extension CompetitionsCollectionViewController: DatabaseDelegate {
     func reloadTableCollectionView() {}
     
     func reloadView(competitions: [Competition]) {
-        
-        self.competitions = competitions.sorted { $0.date > $1.date }
-        self.collectionView.reloadData()
-        self.animationView.layer.opacity = 0
-        self.animationView.stop()
+        timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { _ in
+            CompetitionsViewController.competitions = competitions.sorted { $0.date > $1.date }
+            self.competitionsCollectionView.competitionsCollectionView.reloadData()
+            self.animationView.layer.opacity = 0
+            self.animationView.stop()
+        })
     }
+    
+}
+
+extension CompetitionsViewController: CompetitionsCollectionViewDelegate {
+    
+    func pressCompetition(index: Int) {
+        let vc = CompetitionViewController()
+        
+        CompetitionViewController.competition = CompetitionsViewController.competitions[index]
+        
+        vc.qtyPlayers = CompetitionsViewController.competitions[index].players.count
+        
+        vc.navigationItem.title = CompetitionViewController.competition?.title
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    
 }
 
 

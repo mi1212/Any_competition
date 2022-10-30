@@ -77,23 +77,21 @@ struct CompetitionTable: Codable {
         }
     }
     
+    // считает очки у игрока в турнирной таблице
     func calculatePointsOfPlayer(_ playerNumber: Int) -> Int {
         var points = 0
         
         for i in 0...competitionTable[playerNumber].matchesOfPlayer.count-1 {
             switch CompetitionViewController.competition?.competitionTable?.competitionTable[playerNumber].matchesOfPlayer[i].isWinned {
             case true:
-                print("true")
                 points += 1
             case false:
-                print("\(CompetitionViewController.competition?.competitionTable?.competitionTable[i].matchesOfPlayer[i])")
                 points += 0
             default:
                 points += 0
             }
         }
-        
-        
+  
         return points
     }
 }
