@@ -81,8 +81,7 @@ struct CompetitionTable: Codable {
         var points = 0
         
         for i in 0...competitionTable[playerNumber].matchesOfPlayer.count-1 {
-            let playerNumber = i
-            switch CompetitionViewController.competition?.competitionTable?.competitionTable[i].matchesOfPlayer[i].isWinned {
+            switch CompetitionViewController.competition?.competitionTable?.competitionTable[playerNumber].matchesOfPlayer[i].isWinned {
             case true:
                 print("true")
                 points += 1
