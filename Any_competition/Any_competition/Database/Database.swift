@@ -301,7 +301,7 @@ class Database {
         }
     }
    
-//      метод добавляет пользователя
+//      метод добавляет пользователя в Firebase
     func addUser(user: User) {
         print("--- send user to Firestore DataBase")
         var ref: DocumentReference? = nil

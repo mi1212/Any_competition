@@ -7,7 +7,8 @@
 
 import Foundation
 
-class Player: Codable {
+class Player: Codable, Hashable {
+    
     var firstName: String
     var lastName: String
     var nick: String
@@ -25,32 +26,25 @@ class Player: Codable {
         self.lastName = lastName
         self.nick = nick
     }
-    
-    
+   
     private enum CodingKeys: String, CodingKey {
         case firstName
         case lastName
         case nick
     }
+
+    public static func == (lhs: Player, rhs: Player) -> Bool {
+        lhs.firstName == rhs.firstName && lhs.lastName == rhs.lastName && lhs.nick == rhs.nick
+    }
     
-//    required init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        var list = try container.nestedUnkeyedContainer(forKey: Player.CodingKeys.firstName)
-//        
-//        if let player = try? list.decode(Player.self) {
-//            player
-//        }
-//    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(firstName)
+        hasher.combine(lastName)
+        hasher.combine(nick)
+    }
+    
 }
     
-//    public static func == (lhs: Player, rhs: Player) -> Bool {
-//        lhs.firstName == rhs.firstName && lhs.lastName == rhs.lastName && lhs.nick == rhs.nick
-//    }
-//
-//    func hash(into hasher: inout Hasher) {
-//        hasher.combine(firstName)
-//        hasher.combine(lastName)
-//        hasher.combine(nick)
-//    }
+
  
 

@@ -22,7 +22,6 @@
 		FD20D64928DB4FF1007F5F8F /* CompetitionFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD20D64828DB4FF1007F5F8F /* CompetitionFetch.swift */; };
 		FD27FEEB28D9A63E00D2A405 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FEEA28D9A63E00D2A405 /* AppDelegate.swift */; };
 		FD27FEED28D9A63E00D2A405 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FEEC28D9A63E00D2A405 /* SceneDelegate.swift */; };
-		FD27FEEF28D9A63E00D2A405 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FEEE28D9A63E00D2A405 /* StartViewController.swift */; };
 		FD27FEF528D9A63E00D2A405 /* Any_competition.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FD27FEF328D9A63E00D2A405 /* Any_competition.xcdatamodeld */; };
 		FD27FEF728D9A63F00D2A405 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD27FEF628D9A63F00D2A405 /* Assets.xcassets */; };
 		FD27FEFA28D9A63F00D2A405 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD27FEF828D9A63F00D2A405 /* LaunchScreen.storyboard */; };
@@ -115,7 +114,6 @@
 		FD27FEE728D9A63E00D2A405 /* Any_competition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Any_competition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD27FEEA28D9A63E00D2A405 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD27FEEC28D9A63E00D2A405 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FD27FEEE28D9A63E00D2A405 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		FD27FEF428D9A63E00D2A405 /* Any_competition.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Any_competition.xcdatamodel; sourceTree = "<group>"; };
 		FD27FEF628D9A63F00D2A405 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD27FEF928D9A63F00D2A405 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -341,7 +339,7 @@
 		FD27FF3728D9EEF000D2A405 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FD339E9A28E3637F000DD8F3 /* StartViewController */,
+				FD339E9A28E3637F000DD8F3 /* AddCompetitionViewControllers */,
 				FD339E9C28E363C4000DD8F3 /* CompetitionsViewController */,
 				FDB1085828FDAD900020F32C /* ProfileViewController */,
 				FD0FB29628ECBCE6000789CD /* TestViewController.swift */,
@@ -350,14 +348,13 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		FD339E9A28E3637F000DD8F3 /* StartViewController */ = {
+		FD339E9A28E3637F000DD8F3 /* AddCompetitionViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				FD0D008728DDA29B00C47570 /* ConfigurateCompetitionViewController.swift */,
 				FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */,
-				FD27FEEE28D9A63E00D2A405 /* StartViewController.swift */,
 			);
-			path = StartViewController;
+			path = AddCompetitionViewControllers;
 			sourceTree = "<group>";
 		};
 		FD339E9B28E363B2000DD8F3 /* Views */ = {
@@ -631,7 +628,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDCCA2A228DAF97700709E80 /* AddCompetitionViewController.swift in Sources */,
-				FD27FEEF28D9A63E00D2A405 /* StartViewController.swift in Sources */,
 				FDCCA2A428DAFA4600709E80 /* AnyCompUITextField.swift in Sources */,
 				FD1E200028F096C8001CF0EA /* PlayerDataCollectionViewCell.swift in Sources */,
 				FD2D637C28FC0E02007C4D94 /* Database.swift in Sources */,

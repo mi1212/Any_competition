@@ -122,10 +122,19 @@ class ProfileViewController: UIViewController {
     // установка вьюх если не нужно залогиниться
     private func setupViewsWithoutLogin() {
         self.view.addSubview(scrollView)
-        self.scrollView.addSubview(contentView)
+        scrollView.addSubview(contentView)
         contentView.addSubview(loginView)
-//        contentView.addSubview(createUserView)
         contentView.addSubview(profileView)
+        
+//        let user = User(firstName: "ascas", lastName: "sdfsdf", nick: "sdsdf", mail: "asdasd")
+//
+//        let player = Player(firstName: "ascaa", lastName: "sdfsdf", nick: "sdsdf")
+//
+//        if user.firstName == player.firstName && user.lastName == player.lastName && user.nick == player.nick {
+//            print("true")
+//        } else {
+//            print("false")
+//        }
         
         profileView.setupData(
             nick: ProfileViewController.user!.nick,
