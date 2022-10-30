@@ -265,6 +265,7 @@ extension ProfileViewController: CreateUserViewDelegate {
     }
     
     func tapCreateUser(firstName: String, lastName: String, nickName: String, mail: String, pass: String) {
+        
         var tempUser = User(firstName: firstName, lastName: lastName, nick: nickName, mail: mail)
         
         Auth.auth().createUser(withEmail: mail, password: pass) { [self] authDataResult, error in
@@ -273,7 +274,7 @@ extension ProfileViewController: CreateUserViewDelegate {
                 alert.message = error?.localizedDescription
                 self.present(alert, animated: true, completion: nil)
             } else {
-                tempUser.id = authDataResult?.user.uid
+                tempUser.id = (authDataResult?.user.uid)!
                 loginView.layer.opacity = 1
                 loginView.mailTextField.text = tempUser.mail
                 loginView.passTextField.text = pass

@@ -23,7 +23,7 @@ class Database {
     
     private let decoder = JSONDecoder()
    
-// отправка созданного соревнования в Firebase Database
+//      отправка созданного соревнования в Firebase Database
     func sendCompetitionToDatabase(competition: Competition) {
         print("--- send competition to Firestore DataBase")
         var ref: DocumentReference? = nil
@@ -116,42 +116,42 @@ class Database {
         
     }
     
-    //      запрос данных пользователя Firebase Database
-        func getUserDataReloadViewWithoutAnimate(uid: String) {
-            print("--- get user data from Firestore DataBase")
-            
-            let docRef = Firestore.firestore().collection("users")
-            
-            docRef.getDocuments() { [self] snapshotData, error in
-                print("--- receive data from dataBase")
-                if snapshotData != nil {
-                    if snapshotData?.documents.count != 0 {
-                        for i in 0...(snapshotData?.documents.count)!-1 {
-                            var json = snapshotData?.documents[i].data()
-                            if json!["id"] as! String == uid {
+//      запрос данных пользователя Firebase Database
+    func getUserDataReloadViewWithoutAnimate(uid: String) {
+        print("--- get user data from Firestore DataBase")
+        
+        let docRef = Firestore.firestore().collection("users")
+        
+        docRef.getDocuments() { [self] snapshotData, error in
+            print("--- receive data from dataBase")
+            if snapshotData != nil {
+                if snapshotData?.documents.count != 0 {
+                    for i in 0...(snapshotData?.documents.count)!-1 {
+                        var json = snapshotData?.documents[i].data()
+                        if json!["id"] as! String == uid {
+                            
+                            json?["docId"] = snapshotData?.documents[i].documentID
+                            
+                            do {
+                                let data = try JSONSerialization.data(withJSONObject: json! as Any)
                                 
-                                json?["docId"] = snapshotData?.documents[i].documentID
-                                
-                                do {
-                                    let data = try JSONSerialization.data(withJSONObject: json! as Any)
-                                    
-                                    let tempUser = try self.decoder.decode(User.self, from: data)
-                                    delegate?.reloadViewWithoutAnimate(user: tempUser)
-                                } catch {
-                                    print("an error occurred", error)
-                                }
+                                let tempUser = try self.decoder.decode(User.self, from: data)
+                                delegate?.reloadViewWithoutAnimate(user: tempUser)
+                            } catch {
+                                print("an error occurred", error)
                             }
                         }
                     }
-                } else {
-                    print("error - \(error as Any)")
                 }
+            } else {
+                print("error - \(error as Any)")
             }
-            
         }
+        
+    }
     
-    //      запрос данных пользователя Firebase Database
-        func getUserData(uid: String) {
+//      запрос данных пользователя Firebase Database
+    func getUserData(uid: String) {
             print("--- get user data from Firestore DataBase")
             
             let docRef = Firestore.firestore().collection("users")
@@ -216,41 +216,41 @@ class Database {
 
 //MARK: - listeners
 //      метод добавляет слушателя для всей коллекции соревнований
-        func addListenerToCompetitionCollection() {
-            print("--- added listener to collection competitions")
+    func addListenerToCompetitionCollection() {
+        print("--- added listener to collection competitions")
+        
+        var competitions = [Competition]()
+        
+        let ref = db.collection("competitions").whereField("accessUsersIdArray", arrayContainsAny: [ProfileViewController.user?.id])
+        
+        ref.addSnapshotListener({ querySnapshot, error in
+            guard let snapshotData = querySnapshot?.documents else {
+                print("Error fetching documents: \(error!)")
+                return
+            }
             
-            var competitions = [Competition]()
+            if snapshotData.count != 0 {
                 
-            let ref = db.collection("competitions").whereField("accessUsersIdArray", arrayContainsAny: [ProfileViewController.user?.id])
-
-            ref.addSnapshotListener({ querySnapshot, error in
-                            guard let snapshotData = querySnapshot?.documents else {
-                                print("Error fetching documents: \(error!)")
-                                return
-                            }
-            
-                            if snapshotData.count != 0 {
-            
-                                competitions.removeAll()
-            
-                                for i in 0...snapshotData.count-1 {
-                                    var json = snapshotData[i].data()
-                                    json["id"] = snapshotData[i].documentID
-                                    do {
-                                        let data = try JSONSerialization.data(withJSONObject: json as Any)
-            
-                                        let competition = try self.decoder.decode(Competition.self, from: data)
-            
-                                        competitions.append(competition)
-                                    } catch {
-                                        print("an error occurred", error)
-                                    }
-                                }
-                            }
-                            self.delegate?.reloadView(competitions: competitions)
-                        })
-            
-        }
+                competitions.removeAll()
+                
+                for i in 0...snapshotData.count-1 {
+                    var json = snapshotData[i].data()
+                    json["id"] = snapshotData[i].documentID
+                    do {
+                        let data = try JSONSerialization.data(withJSONObject: json as Any)
+                        
+                        let competition = try self.decoder.decode(Competition.self, from: data)
+                        
+                        competitions.append(competition)
+                    } catch {
+                        print("an error occurred", error)
+                    }
+                }
+            }
+            self.delegate?.reloadView(competitions: competitions)
+        })
+        
+    }
     
 //      метод добавляет слушателя для всей коллекции соревнований
     func removeListenerToCompetitionCollection() {
@@ -259,7 +259,7 @@ class Database {
         var competitions = [Competition]()
         
         let ref = db.collection("competitions").whereField("accessUsersIdArray", arrayContainsAny: [ProfileViewController.user?.id]).addSnapshotListener({ querySnapshot, error in
-        
+            
         }).remove()
         
         self.delegate?.reloadView(competitions: competitions)
@@ -300,9 +300,7 @@ class Database {
             }
         }
     }
-    
-
-    
+   
 //      метод добавляет пользователя
     func addUser(user: User) {
         print("--- send user to Firestore DataBase")
@@ -322,6 +320,4 @@ class Database {
             }
         }
     }
-    
-    
 }

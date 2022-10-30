@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import KRTournamentView
 
 class CompetitionViewController: UIViewController{
     
@@ -34,8 +33,6 @@ class CompetitionViewController: UIViewController{
     
     private lazy var tableCollectionView = CompetitionTableView(competitionTable: (CompetitionViewController.competition?.competitionTable!)!, side: self.view.layer.bounds.width/8, playersArray: (CompetitionViewController.competition?.players)!)
     
-//    private lazy var tournamentView = CompetitionNetView(competitionTable: competitionTable!)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.database.delegate = self
@@ -61,7 +58,6 @@ class CompetitionViewController: UIViewController{
         scrollView.addSubview(contentView)
         contentView.addSubview(tableCollectionView)
         tableCollectionView.delegate = self
-//        contentView.addSubview(tournamentView)
   
         let inset: CGFloat = 16
         
@@ -87,33 +83,10 @@ class CompetitionViewController: UIViewController{
             tableCollectionView.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor),
             tableCollectionView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -inset),
         ])
-        
-//        NSLayoutConstraint.activate([
-//            tournamentView.topAnchor.constraint(equalTo: self.tableCollectionView.bottomAnchor, constant: inset),
-//            tournamentView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: inset),
-//            tournamentView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -inset),
-//            tournamentView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -inset),
-//            tournamentView.heightAnchor.constraint(equalToConstant: self.view.layer.bounds.width*2/3)
-//        ])
+
     }
 
 }
-
-//extension CompetitionViewController: MatchViewControllerDelegate {
-//
-//    func firstPlayerWin(matchPath: MatchPath) {
-//        tournamentView.builder.getChildBuilder(for: matchPath)?.setWinnerIndexes([0])
-//        print("firstPlayerWin")
-//        tournamentView.reloadData()
-//    }
-//
-//    func secondPlayerWin(matchPath: MatchPath) {
-//        tournamentView.builder.getChildBuilder(for: matchPath)?.setWinnerIndexes([1])
-//        print("secondPlayerWin")
-//        tournamentView.reloadData()
-//    }
-//
-//}
 
 extension CompetitionViewController: CompetitionTableViewDelegate {
     func chooseMatch(_ indexPathOfMatch: IndexPath) {
@@ -153,7 +126,7 @@ extension CompetitionViewController: DatabaseDelegate {
     func reloadView(competitions: [Competition]) {}
     
     func reloadTableCollectionView() {
-        tableCollectionView.reloadData(competitionTable: (CompetitionViewController.competition?.competitionTable!)!, playersArray: CompetitionViewController.competition!.players)
+        tableCollectionView.reloadData(competitionTable: CompetitionViewController.competition!.competitionTable!, playersArray: CompetitionViewController.competition!.players)
     }
  
 }

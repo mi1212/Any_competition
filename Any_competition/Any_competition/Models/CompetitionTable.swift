@@ -77,15 +77,19 @@ struct CompetitionTable: Codable {
         }
     }
     
-    func calculatePointsOfPlayer(_ player: Player) -> Int {
+    func calculatePointsOfPlayer(_ playerNumber: Int) -> Int {
         var points = 0
         
-        for i in 0...competitionTable[0].matchesOfPlayer.count-1 {
+        for i in 0...competitionTable[playerNumber].matchesOfPlayer.count-1 {
             let playerNumber = i
-            switch competitionTable[i].matchesOfPlayer[i].isWinned {
+            switch CompetitionViewController.competition?.competitionTable?.competitionTable[i].matchesOfPlayer[i].isWinned {
             case true:
+                print("true")
                 points += 1
             case false:
+                print("\(CompetitionViewController.competition?.competitionTable?.competitionTable[i].matchesOfPlayer[i])")
+                points += 0
+            default:
                 points += 0
             }
         }

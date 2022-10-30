@@ -259,10 +259,11 @@ extension CompetitionTableView: UICollectionViewDataSource {
             return cell
             
         case playersScoreCollectionView:
-            
-            let player = playersArray![indexPath.section]
-            cell.label.text = "\((competitionTable?.calculatePointsOfPlayer(player))!)"
-            
+//            let player = playersArray![indexPath.section]
+            if let score = CompetitionViewController.competition?.competitionTable!.calculatePointsOfPlayer(indexPath.section) {
+                
+                cell.label.text = "\(score)"
+        }
             
             cell.backgroundColor = .white
             cell.label.textAlignment = .center
