@@ -59,6 +59,7 @@ class TabBarController: UITabBarController {
                 image: "profile"
             )
         ]
+
     }
     
     private func setupTabBar(viewController: UIViewController, title: String, image: String) -> UIViewController {
@@ -70,7 +71,7 @@ class TabBarController: UITabBarController {
     
     private func checkLogin() {
         if let uid = userDefaults.object(forKey: "uid") {
-            database.getUserData(uid: uid as! String)
+            database.getUserData(uid: uid as! String, isReloadView: false)
         }
     }
     

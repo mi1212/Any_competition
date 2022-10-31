@@ -125,22 +125,7 @@ class ProfileViewController: UIViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(loginView)
         contentView.addSubview(profileView)
-        
-//        let user = User(firstName: "ascas", lastName: "sdfsdf", nick: "sdsdf", mail: "asdasd")
-//
-//        let player = Player(firstName: "ascaa", lastName: "sdfsdf", nick: "sdsdf")
-//
-//        if user.firstName == player.firstName && user.lastName == player.lastName && user.nick == player.nick {
-//            print("true")
-//        } else {
-//            print("false")
-//        }
-        
-        profileView.setupData(
-            nick: ProfileViewController.user!.nick,
-            firstName: ProfileViewController.user!.firstName,
-            lastName: ProfileViewController.user!.lastName
-        )
+        contentView.addSubview(createUserView)
         
         let inset: CGFloat = 16
         
@@ -167,12 +152,12 @@ class ProfileViewController: UIViewController {
             loginView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         
-//        NSLayoutConstraint.activate([
-//            createUserView.topAnchor.constraint(equalTo: contentView.topAnchor),
-//            createUserView.leadingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//            createUserView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-//            createUserView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-//        ])
+        NSLayoutConstraint.activate([
+            createUserView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            createUserView.leadingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            createUserView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            createUserView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
         
         NSLayoutConstraint.activate([
             profileView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -188,11 +173,16 @@ class ProfileViewController: UIViewController {
         case nil:
             setupViewsToLogin()
         default:
-            if let uid = userDefaults.object(forKey: "uid") {
-//                database.getUserDataReloadViewWithoutAnimate(uid: uid as! String)
+            if userDefaults.object(forKey: "uid") != nil {
                 setupViewsWithoutLogin()
+                if ProfileViewController.user != nil {
+                    profileView.setupData(user: ProfileViewController.user!)
+                } else {
+                    print("ProfileViewController.user = nil ")
+                    setupLoading()
+                }
+//                setupLoading()
             }
-
         }
     }
     
@@ -221,13 +211,15 @@ class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: LoginViewDelegate {
+    
     func tapLogin() {
         view.endEditing(true)
         guard let mail = loginView.mailTextField.text else {return}
 
         guard let pass = loginView.passTextField.text else {return}
-
-        print("--- login user")
+        
+        setupLoading()
+        
         Auth.auth().signIn(withEmail: mail, password: pass) {[self] result, error in
             if error != nil {
                 alert.message = error?.localizedDescription
@@ -235,9 +227,9 @@ extension ProfileViewController: LoginViewDelegate {
             } else {
                 print("--- user authorized")
                 userDefaults.set(result!.user.uid, forKey: "uid")
-                database.getUserDataWithReloadAndAnimateView(uid: result!.user.uid)
+                database.getUserData(uid: result!.user.uid, isReloadView: true)
                 UIView.animate(withDuration: 1, delay: 0) { [self] in
-                    setupLoading()
+
                     loginView.transform = loginView.transform.translatedBy(x: self.view.layer.bounds.width, y: 0)
                 } completion: { [self] handler in
                     loginView.mailTextField.text = ""
@@ -246,7 +238,6 @@ extension ProfileViewController: LoginViewDelegate {
                 }
             }
         }
-    
     }
     
     func tapStartCreateUser() {
@@ -264,6 +255,7 @@ extension ProfileViewController: LoginViewDelegate {
 }
 
 extension ProfileViewController: CreateUserViewDelegate {
+    
     func tapCancelButton() {
         UIView.animate(withDuration: 1, delay: 0) { [self] in
             loginView.transform = loginView.transform.scaledBy(x: 1/0.9, y: 1/0.9)
@@ -296,27 +288,39 @@ extension ProfileViewController: CreateUserViewDelegate {
             }
         }
     }
+    
+}
+
+extension ProfileViewController: ProfileViewDelegate {
+    func exitFromProfileView() {
+        
+        ProfileViewController.user = nil
+        database.removeListenerToCompetitionCollection()
+        userDefaults.set(nil, forKey: "uid")
+        
+        UIView.animate(withDuration: 1, delay: 0) { [self] in
+            loginView.transform = loginView.transform.translatedBy(x: -self.view.layer.bounds.width, y: 0)
+            profileView.transform = profileView.transform.translatedBy(x: -self.view.layer.bounds.width, y: 0)
+        } completion: { _ in
+            
+        }
+    }
 }
 
 extension ProfileViewController: DatabaseDelegate {
+    
     func reloadViewWithoutAnimate(user: User) {
         ProfileViewController.user = user
-
-        profileView.setupData(
-            nick: user.nick,
-            firstName: user.firstName,
-            lastName: user.lastName
-        )
+        print("reloadViewWithoutAnimate")
+        profileView.reloadInputViews()
+        loadingAnimationView.stop()
+        loadingAnimationView.layer.opacity = 0
     }
     
     func animateAndReloadView(user: User) {
         ProfileViewController.user = user
 
-        profileView.setupData(
-            nick: user.nick,
-            firstName: user.firstName,
-            lastName: user.lastName
-        )
+        profileView.setupData(user: user)
         
         UIView.animate(withDuration: 1, delay: 0) { [self] in
             loadingAnimationView.layer.opacity = 0
@@ -327,32 +331,11 @@ extension ProfileViewController: DatabaseDelegate {
         }
     }
     
-    func alertMessage(alertMessage: String) {
-        
-    }
+    func alertMessage(alertMessage: String) {}
     
     func reloadView(competitions: [Competition]) {}
     
     func reloadTableCollectionView() {}
-    
-    
-}
-
-extension ProfileViewController: ProfileViewDelegate {
-    func exitFromProfileView() {
-        
-        ProfileViewController.user = nil
-        
-        userDefaults.set(nil, forKey: "uid")
-        
-        UIView.animate(withDuration: 1, delay: 0) { [self] in
-            loginView.transform = loginView.transform.translatedBy(x: -self.view.layer.bounds.width, y: 0)
-            profileView.transform = profileView.transform.translatedBy(x: -self.view.layer.bounds.width, y: 0)
-        } completion: { _ in
-            
-        }
-    }
-    
     
 }
 

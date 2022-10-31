@@ -19,6 +19,8 @@ class Database {
 
     var delegate: DatabaseDelegate?
     
+    let userDefaults = UserDefaults.standard
+    
     var db = Firestore.firestore()
     
     private let decoder = JSONDecoder()
@@ -83,13 +85,47 @@ class Database {
     }
     
 //      запрос данных пользователя Firebase Database
-    func getUserDataWithReloadAndAnimateView(uid: String) {
-        print("--- get user data from Firestore DataBase")
+//    func getUserDataWithReloadAndAnimateView(uid: String) {
+//        print("--- get user data from Firestore DataBase")
+//        
+//        let docRef = Firestore.firestore().collection("users")
+//        
+//        docRef.getDocuments() { [self] snapshotData, error in
+//            print("--- receive data from dataBase")
+//            if snapshotData != nil {
+//                if snapshotData?.documents.count != 0 {
+//                    for i in 0...(snapshotData?.documents.count)!-1 {
+//                        var json = snapshotData?.documents[i].data()
+//                        if json!["id"] as! String == uid {
+//                            
+//                            json?["docId"] = snapshotData?.documents[i].documentID
+//                            
+//                            do {
+//                                let data = try JSONSerialization.data(withJSONObject: json! as Any)
+//                                
+//                                let tempUser = try self.decoder.decode(User.self, from: data)
+//
+//                            } catch {
+//                                print("an error occurred", error)
+//                            }
+//                        }
+//                    }
+//                }
+//            } else {
+//                print("error - \(error as Any)")
+//            }
+//        }
+//        
+//    }
+    
+//      запрос данных пользователя Firebase Database
+    func getUserData(uid: String, isReloadView: Bool) {
+        print("--- get UserData from Firestore DataBase")
         
         let docRef = Firestore.firestore().collection("users")
         
         docRef.getDocuments() { [self] snapshotData, error in
-            print("--- receive data from dataBase")
+            print("--- receive UserData from dataBase")
             if snapshotData != nil {
                 if snapshotData?.documents.count != 0 {
                     for i in 0...(snapshotData?.documents.count)!-1 {
@@ -102,87 +138,59 @@ class Database {
                                 let data = try JSONSerialization.data(withJSONObject: json! as Any)
                                 
                                 let tempUser = try self.decoder.decode(User.self, from: data)
-                                delegate?.animateAndReloadView(user: tempUser)
-                            } catch {
-                                print("an error occurred", error)
-                            }
-                        }
-                    }
-                }
-            } else {
-                print("error - \(error as Any)")
-            }
-        }
-        
-    }
-    
-//      запрос данных пользователя Firebase Database
-    func getUserDataReloadViewWithoutAnimate(uid: String) {
-        print("--- get user data from Firestore DataBase")
-        
-        let docRef = Firestore.firestore().collection("users")
-        
-        docRef.getDocuments() { [self] snapshotData, error in
-            print("--- receive data from dataBase")
-            if snapshotData != nil {
-                if snapshotData?.documents.count != 0 {
-                    for i in 0...(snapshotData?.documents.count)!-1 {
-                        var json = snapshotData?.documents[i].data()
-                        if json!["id"] as! String == uid {
-                            
-                            json?["docId"] = snapshotData?.documents[i].documentID
-                            
-                            do {
-                                let data = try JSONSerialization.data(withJSONObject: json! as Any)
-                                
-                                let tempUser = try self.decoder.decode(User.self, from: data)
-                                delegate?.reloadViewWithoutAnimate(user: tempUser)
-                            } catch {
-                                print("an error occurred", error)
-                            }
-                        }
-                    }
-                }
-            } else {
-                print("error - \(error as Any)")
-            }
-        }
-        
-    }
-    
-//      запрос данных пользователя Firebase Database
-    func getUserData(uid: String) {
-            print("--- get user data from Firestore DataBase")
-            
-            let docRef = Firestore.firestore().collection("users")
-            
-            docRef.getDocuments() { [self] snapshotData, error in
-                print("--- receive data from dataBase")
-                if snapshotData != nil {
-                    if snapshotData?.documents.count != 0 {
-                        for i in 0...(snapshotData?.documents.count)!-1 {
-                            var json = snapshotData?.documents[i].data()
-                            if json!["id"] as! String == uid {
-                                
-                                json?["docId"] = snapshotData?.documents[i].documentID
-                                
-                                do {
-                                    let data = try JSONSerialization.data(withJSONObject: json! as Any)
-                                    
-                                    let tempUser = try self.decoder.decode(User.self, from: data)
-                                    ProfileViewController.user = tempUser
-                                } catch {
-                                    print("an error occurred", error)
+                                ProfileViewController.user = tempUser
+                                if isReloadView {
+                                    delegate?.animateAndReloadView(user: tempUser)
+                                } else {
+                                    delegate?.reloadViewWithoutAnimate(user: tempUser)
                                 }
+                                
+                            } catch {
+                                print("an error occurred", error)
                             }
                         }
                     }
-                } else {
-                    print("error - \(error as Any)")
                 }
+            } else {
+                print("error - \(error as Any)")
             }
-            
         }
+        
+    }
+    
+//      запрос данных пользователя Firebase Database
+//    func getUserData(uid: String) {
+//            print("--- get user data from Firestore DataBase")
+//
+//            let docRef = Firestore.firestore().collection("users")
+//
+//            docRef.getDocuments() { [self] snapshotData, error in
+//                print("--- receive data from dataBase")
+//                if snapshotData != nil {
+//                    if snapshotData?.documents.count != 0 {
+//                        for i in 0...(snapshotData?.documents.count)!-1 {
+//                            var json = snapshotData?.documents[i].data()
+//                            if json!["id"] as! String == uid {
+//
+//                                json?["docId"] = snapshotData?.documents[i].documentID
+//
+//                                do {
+//                                    let data = try JSONSerialization.data(withJSONObject: json! as Any)
+//
+//                                    let tempUser = try self.decoder.decode(User.self, from: data)
+//                                    ProfileViewController.user = tempUser
+//                                } catch {
+//                                    print("an error occurred", error)
+//                                }
+//                            }
+//                        }
+//                    }
+//                } else {
+//                    print("error - \(error as Any)")
+//                }
+//            }
+//
+//        }
     
 //      метод отправки обновленных данных в соревновании, если произошли события
     func updateCompetitionDataToDataBase(_ competition: Competition ,_ competitionId: String) {
@@ -216,12 +224,12 @@ class Database {
 
 //MARK: - listeners
 //      метод добавляет слушателя для всей коллекции соревнований
-    func addListenerToCompetitionCollection() {
+    func addListenerToCompetitionCollection(uid: String) {
         print("--- added listener to collection competitions")
         
         var competitions = [Competition]()
         
-        let ref = db.collection("competitions").whereField("accessUsersIdArray", arrayContainsAny: [ProfileViewController.user?.id])
+        let ref = db.collection("competitions").whereField("accessUsersIdArray", arrayContainsAny: [uid])
         
         ref.addSnapshotListener({ querySnapshot, error in
             guard let snapshotData = querySnapshot?.documents else {
@@ -232,22 +240,25 @@ class Database {
             if snapshotData.count != 0 {
                 
                 competitions.removeAll()
-                
-                for i in 0...snapshotData.count-1 {
-                    var json = snapshotData[i].data()
-                    json["id"] = snapshotData[i].documentID
-                    do {
-                        let data = try JSONSerialization.data(withJSONObject: json as Any)
-                        
-                        let competition = try self.decoder.decode(Competition.self, from: data)
-                        
-                        competitions.append(competition)
-                    } catch {
-                        print("an error occurred", error)
+
+                    for i in 0...snapshotData.count-1 {
+                        var json = snapshotData[i].data()
+                        json["id"] = snapshotData[i].documentID
+                        do {
+                            let data = try JSONSerialization.data(withJSONObject: json as Any)
+                            
+                            let competition = try self.decoder.decode(Competition.self, from: data)
+                            
+                            competitions.append(competition)
+                        } catch {
+                            print("an error occurred", error)
+                        }
                     }
-                }
+//                }
+                
+                self.delegate?.reloadView(competitions: competitions)
             }
-            self.delegate?.reloadView(competitions: competitions)
+            
         })
         
     }

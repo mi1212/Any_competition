@@ -14,6 +14,8 @@ class CompetitionsViewController: UIViewController {
     
     let database = Database()
     
+    let userDefaults = UserDefaults.standard
+    
     let animationView = AnimationView()
     
     var isAddedListener = false
@@ -33,7 +35,6 @@ class CompetitionsViewController: UIViewController {
         self.view.backgroundColor = .backgroundColor
         self.database.delegate = self
         setupNavigationBar()
-        setupAnimation()
         setupViews()
     }
     
@@ -72,13 +73,14 @@ class CompetitionsViewController: UIViewController {
     }
     
     private func setupListenerToCompetitions() {
-        if (ProfileViewController.user?.id) != nil {
+        if let uid = userDefaults.object(forKey: "uid") {
             if !isAddedListener {
-                self.database.addListenerToCompetitionCollection()
-                isAddedListener.toggle()
+                self.database.addListenerToCompetitionCollection(uid: uid as! String)
+//                isAddedListener.toggle()
             }
         } else {
-            self.database.removeListenerToCompetitionCollection()
+            CompetitionsViewController.competitions = [Competition]()
+            competitionsCollectionView.competitionsCollectionView.reloadData()
             alert.message = "Сначала нужно авторизоваться, чтобы увидеть свои соревнования"
             self.present(alert, animated: true)
         }
@@ -102,12 +104,10 @@ extension CompetitionsViewController: DatabaseDelegate {
     func reloadTableCollectionView() {}
     
     func reloadView(competitions: [Competition]) {
-        timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { _ in
+            print("--- competitionsCollectionView.reloadData()")
             CompetitionsViewController.competitions = competitions.sorted { $0.date > $1.date }
             self.competitionsCollectionView.competitionsCollectionView.reloadData()
-            self.animationView.layer.opacity = 0
-            self.animationView.stop()
-        })
+
     }
     
 }

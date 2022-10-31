@@ -15,6 +15,8 @@ class ProfileView: UIView {
     
     var delegate: ProfileViewDelegate?
     
+    var database = Database()
+    
     let contentView: UIView = {
         let view = UIView()
         view.backgroundColor = .anyColor1
@@ -24,13 +26,48 @@ class ProfileView: UIView {
         return view
     }()
     
-    let label = AnyCompLogoUILabel()
+    let stackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.alignment = .leading
+        stack.distribution = .equalSpacing
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
     
-    let firstNameLabel = AnyCompUILabel(title: "", fontSize: .medium)
+    let nameStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.alignment = .fill
+        stack.distribution = .fillEqually
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
     
-    let lastNameLabel = AnyCompUILabel(title: "", fontSize: .medium)
+    let nickLabel = AnyCompLogoUILabel()
+    
+    let firstNameLabel = AnyCompUILabel(title: "Имя: ", fontSize: .medium)
+    
+    let lastNameLabel = AnyCompUILabel(title: "Фамилия: ", fontSize: .medium)
+    
+    let playedGamesLabel = AnyCompUILabel(title: "Игры: ", fontSize: .medium)
+    
+    let wonGamesLabel = AnyCompUILabel(title: "Победы: ", fontSize: .medium)
+    
+    let lostGamesLabel = AnyCompUILabel(title: "Поражения: ", fontSize: .medium)
+
+    let wonCupsLabel = AnyCompUILabel(title: "Кубки: ", fontSize: .medium)
 
     let exitButton = AnyCompClearUIButton(title: "Выйти из профиля")
+    
+    private lazy var imageView: UIImageView = {
+        let image = UIImageView()
+        image.backgroundColor = .anyColor
+        image.image = UIImage(systemName: "person")
+        image.tintColor = .anyDarckColor
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,16 +83,27 @@ class ProfileView: UIView {
     
     private func setupView() {
         self.addSubview(contentView)
-        contentView.addSubview(label)
-        contentView.addSubview(firstNameLabel)
-        contentView.addSubview(lastNameLabel)
+        contentView.addSubview(nickLabel)
+        
+        
+        contentView.addSubview(imageView)
+        contentView.addSubview(nameStackView)
+        nameStackView.addArrangedSubview(firstNameLabel)
+        nameStackView.addArrangedSubview(lastNameLabel)
+        
+        contentView.addSubview(stackView)
+        stackView.addArrangedSubview(playedGamesLabel)
+        stackView.addArrangedSubview(wonGamesLabel)
+        stackView.addArrangedSubview(lostGamesLabel)
+        stackView.addArrangedSubview(wonCupsLabel)
+        
         contentView.addSubview(exitButton)
         
         exitButton.addTarget(self, action: #selector(tapExitButton), for: .touchUpInside)
         
         firstNameLabel.textAlignment = .left
         lastNameLabel.textAlignment = .left
-        label.textAlignment = .center
+        nickLabel.textAlignment = .center
         
         
         let inset: CGFloat = 16
@@ -68,21 +116,30 @@ class ProfileView: UIView {
         ])
         
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset*2),
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset*2),
+            nickLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset*2),
+            nickLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            nickLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset*2),
         ])
         
         NSLayoutConstraint.activate([
-            firstNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            firstNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-            firstNameLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: inset*2),
+            imageView.topAnchor.constraint(equalTo: nickLabel.bottomAnchor, constant: inset),
+            imageView.bottomAnchor.constraint(equalTo: nameStackView.bottomAnchor),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            lastNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            lastNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-            lastNameLabel.topAnchor.constraint(equalTo: firstNameLabel.bottomAnchor, constant: inset*2),
+            nameStackView.topAnchor.constraint(equalTo: nickLabel.bottomAnchor, constant: inset),
+            nameStackView.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: inset),
+            nameStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            nameStackView.heightAnchor.constraint(equalToConstant: inset*5)
+        ])
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: nameStackView.bottomAnchor, constant: inset),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            stackView.heightAnchor.constraint(equalToConstant: inset*6)
         ])
         
         NSLayoutConstraint.activate([
@@ -92,14 +149,19 @@ class ProfileView: UIView {
         ])
     }
     
-    func setupData(nick: String, firstName: String, lastName: String) {
-        label.text = nick
-        firstNameLabel.text = firstName
-        lastNameLabel.text = lastName
+    func setupData(user: User) {
+        nickLabel.text = user.nick
+        firstNameLabel.text! = user.firstName
+        lastNameLabel.text! = user.lastName
+        playedGamesLabel.text! = "Игры: \(user.playedGames)"
+        wonGamesLabel.text! = "Победы: \(user.wonGames)"
+        lostGamesLabel.text! = "Поражения: \(user.lostGames)"
+        wonCupsLabel.text! = "Кубки: \(user.wonCups)"
     }
     
     @objc func tapExitButton() {
-        delegate?.exitFromProfileView()
+//        delegate?.exitFromProfileView()
+        database.getUserData(uid: "sdfsdfsdf" as! String, isReloadView: false)
     }
     
 }

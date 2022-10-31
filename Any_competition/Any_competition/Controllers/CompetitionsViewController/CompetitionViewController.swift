@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CompetitionViewController: UIViewController{
+class CompetitionViewController: UIViewController {
     
     private let decoder = JSONDecoder()
     
