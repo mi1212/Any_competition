@@ -36,6 +36,7 @@
 		FD27FF3628D9E85900D2A405 /* AnyCompUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */; };
 		FD29C22528E040EF00C3B7EB /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD29C22428E040EF00C3B7EB /* MatchViewController.swift */; };
 		FD2D637C28FC0E02007C4D94 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2D637B28FC0E02007C4D94 /* Database.swift */; };
+		FD324CE5291184C300A46A2F /* AddPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD324CE4291184C300A46A2F /* AddPlayerView.swift */; };
 		FD339E9928E34D6D000DD8F3 /* UIFont+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD339E9828E34D6D000DD8F3 /* UIFont+Extention.swift */; };
 		FD546BBB28EACFBE006B21B1 /* Hardpixel-nn51.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD91763F28EACD470017014B /* Hardpixel-nn51.otf */; };
 		FD546BBC28EACFBE006B21B1 /* DiaryOfAn8BitMage-lYDD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD91763D28EACD460017014B /* DiaryOfAn8BitMage-lYDD.ttf */; };
@@ -57,7 +58,6 @@
 		FD85BA6B28FE86500027468E /* 93693-moving-truck.json in Resources */ = {isa = PBXBuildFile; fileRef = FD85BA6A28FE86500027468E /* 93693-moving-truck.json */; };
 		FD94809328F4697500B31A89 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94809228F4697500B31A89 /* Match.swift */; };
 		FD94809528F46C1700B31A89 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94809428F46C1700B31A89 /* Player.swift */; };
-		FD94809728F46C4100B31A89 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94809628F46C4100B31A89 /* Info.swift */; };
 		FD9604F228ECC38B009C902E /* darts1.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9604F028ECC38A009C902E /* darts1.json */; };
 		FD9604F328ECC38B009C902E /* darts2.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9604F128ECC38B009C902E /* darts2.json */; };
 		FD96E63F290E6CFE00B51FD0 /* CompetitionsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD96E63E290E6CFE00B51FD0 /* CompetitionsCollectionView.swift */; };
@@ -132,6 +132,7 @@
 		FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUIButton.swift; sourceTree = "<group>"; };
 		FD29C22428E040EF00C3B7EB /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
 		FD2D637B28FC0E02007C4D94 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		FD324CE4291184C300A46A2F /* AddPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerView.swift; sourceTree = "<group>"; };
 		FD339E9828E34D6D000DD8F3 /* UIFont+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extention.swift"; sourceTree = "<group>"; };
 		FD5927C329112DE800CF2E7C /* PlayerTableCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableCollectionView.swift; sourceTree = "<group>"; };
 		FD5927C529112EBE00CF2E7C /* PlayersTableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTableCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -153,7 +154,6 @@
 		FD91763F28EACD470017014B /* Hardpixel-nn51.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hardpixel-nn51.otf"; sourceTree = "<group>"; };
 		FD94809228F4697500B31A89 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		FD94809428F46C1700B31A89 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		FD94809628F46C4100B31A89 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		FD9604F028ECC38A009C902E /* darts1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = darts1.json; sourceTree = "<group>"; };
 		FD9604F128ECC38B009C902E /* darts2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = darts2.json; sourceTree = "<group>"; };
 		FD96E63E290E6CFE00B51FD0 /* CompetitionsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsCollectionView.swift; sourceTree = "<group>"; };
@@ -236,7 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				FD20D64428DB3AA0007F5F8F /* Competition.swift */,
-				FD94809628F46C4100B31A89 /* Info.swift */,
 				FD94809428F46C1700B31A89 /* Player.swift */,
 				FD68DC4528E2D61A00FE0E64 /* CompetitionTable.swift */,
 				FD94809228F4697500B31A89 /* Match.swift */,
@@ -368,6 +367,7 @@
 				FDB1085B28FDAF9B0020F32C /* LoginView.swift */,
 				FD85BA6628FE75EE0027468E /* ProfileView.swift */,
 				FDDD6DFD28FFC41300F9A649 /* CreateUserView.swift */,
+				FD324CE4291184C300A46A2F /* AddPlayerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -636,6 +636,7 @@
 				FD20D64528DB3AA0007F5F8F /* Competition.swift in Sources */,
 				FDE7036128E412B500FF4F06 /* CompetitionNetView.swift in Sources */,
 				FDA0381E28F983400040A782 /* MatchesOfPlayer.swift in Sources */,
+				FD324CE5291184C300A46A2F /* AddPlayerView.swift in Sources */,
 				FD08C7D728DF511E00C18CD1 /* MyMatch.swift in Sources */,
 				FD6F060128F8247F00F0F718 /* MatchIndex.swift in Sources */,
 				FD27FEF528D9A63E00D2A405 /* Any_competition.xcdatamodeld in Sources */,
@@ -663,7 +664,6 @@
 				FD20D64028DB0E97007F5F8F /* UIView+Extention.swift in Sources */,
 				FDB1085C28FDAF9B0020F32C /* LoginView.swift in Sources */,
 				FDB3FFE828E2180C000D6DDC /* CompetitionTableView.swift in Sources */,
-				FD94809728F46C4100B31A89 /* Info.swift in Sources */,
 				FD7D09822900559400E6CE60 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

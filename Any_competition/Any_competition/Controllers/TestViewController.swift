@@ -55,23 +55,11 @@ class TestViewController: UIViewController {
         UIView.animate(withDuration: 1, delay: 5) {
             print("start")
             self.rocketAnimationView.layer.opacity = 0
-//            self.rocketAnimationView.play()
         } completion: { handler in
             print("finish")
-//            self.rocketAnimationView.stop()
             print(handler)
         }
-        
-//        UIView.animate(
-//            withDuration: 5,
-//            delay: 0,
-//            options: .curveEaseInOut) {
-//                print("start")
-//                //                self.rocketAnimationView.layer.position = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
-//                self.rocketAnimationView.layer.opacity = 0.8
-//            } completion: { _ in
-//                print("finish")
-//            }
+
     }
         
 }

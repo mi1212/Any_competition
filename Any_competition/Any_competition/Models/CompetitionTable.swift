@@ -33,7 +33,6 @@ struct CompetitionTable: Codable {
     }
     
     init(playersArray: [Player]) {
-//        self.playersArray = playersArray
         competitionTable = createCompetitionTable(playersArray)
         qtyPlayers = playersArray.count
         self.qtyGames = (qtyPlayers*qtyPlayers - qtyPlayers)/2

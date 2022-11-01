@@ -27,11 +27,6 @@ class playersTableCollectionView: UIView {
         return collection
     }()
     
-//    init(playersArray: [Player]) {
-//        self.init()
-//        self.playersArray = playersArray
-//    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .brown

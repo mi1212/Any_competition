@@ -37,8 +37,6 @@ class AddCompetitionViewController: UIViewController {
     
     let addCompetitionButton = AnyCompUIButton(title: "Готово")
     
-    let addPlayerView = AddPlayerView()
-    
     var cons: NSLayoutConstraint?
     
     let alert : UIAlertController = {
@@ -111,38 +109,51 @@ class AddCompetitionViewController: UIViewController {
         ])
     }
     
-    private func setupAddPlayerView() {
-        self.view.addSubview(addPlayerView)
-        addPlayerView.delegate = self
-        
-        
-        let inset: CGFloat = 16
-
-        NSLayoutConstraint.activate([
-            addPlayerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            addPlayerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-//            addPlayerView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8),
-            addPlayerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: inset),
-            addPlayerView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5)
-        ])
-        
-        addPlayerView.layer.opacity = 0.2
-        addPlayerView.transform = addPlayerView.transform.scaledBy(x: 0.2, y: 0.2)
-        UIView.animate(withDuration: 0.2, delay: 0) { [self] in
-            addPlayerView.layer.opacity = 1
-            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1/0.2, y: 1/0.2)
-        } completion: { [self] _ in
-            addPlayerView.layer.opacity = 1
-            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1, y: 1)
-        }
-
-    }
-    
     @objc func tapAddPlayerButton() {
 
         animationTapButton(addPlayerButton)
         
-        setupAddPlayerView()
+        let alert = UIAlertController(title: "Введите данные игрока", message: nil, preferredStyle: .alert)
+        
+        alert.addTextField { (nameTextField) in
+            nameTextField.placeholder = "Имя"
+        }
+        
+        alert.addTextField { (secondNameTextField) in
+            secondNameTextField.placeholder = "Фамилия"
+        }
+        
+        alert.addTextField { (nickTextField) in
+            nickTextField.placeholder = "Ник"
+        }
+        
+        alert.addAction(UIAlertAction(title: "отмена", style: .cancel))
+        
+        alert.addAction(UIAlertAction(title: "добавить", style: .default, handler: { [self] _ in
+            guard let firstname = alert.textFields![0].text else {return}
+            guard let lastName = alert.textFields![1].text  else {return}
+            guard let nick = alert.textFields![2].text  else {return}
+
+            let player = Player(firstName: firstname, lastName: lastName, nick: nick)
+
+            playersArray.append(player)
+            
+            playersTable.playersArray = playersArray
+            playersTable.collectionView.reloadData()
+            
+            cons?.isActive = false
+
+            cons = playersTable.heightAnchor.constraint(equalToConstant: CGFloat(52*playersArray.count))
+            
+            cons?.isActive = true
+            
+            self.view.reloadInputViews()
+            
+        }))
+        
+        
+        
+        self.present(alert, animated: true, completion: nil)
         
     }
     
@@ -193,46 +204,5 @@ class AddCompetitionViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Ок", style: .cancel))
         self.present(alert, animated: true, completion: nil)
     }
-    
-}
-
-extension AddCompetitionViewController: AddPlayerViewDelegate {
-    func tapAddButton(player: Player) {
-        
-        self.playersArray.append(player)
-
-        playersTable.playersArray = self.playersArray
-        playersTable.collectionView.reloadData()
-        cons?.isActive = false
-
-        cons = playersTable.heightAnchor.constraint(equalToConstant: CGFloat(52*playersArray.count))
-
-        cons?.isActive = true
-
-        self.view.reloadInputViews()
-        addPlayerView.clearTextFields()
-        UIView.animate(withDuration: 0.2, delay: 0) { [self] in
-            addPlayerView.layer.opacity = 0.2
-            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 0.2, y: 0.2)
-        } completion: { [self] _ in
-            addPlayerView.removeFromSuperview()
-            addPlayerView.layer.opacity = 1
-            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1/0.2, y: 1/0.2)
-        }
-    }
-    
-    func tapCancelButton() {
-        addPlayerView.clearTextFields()
-        UIView.animate(withDuration: 0.2, delay: 0) { [self] in
-            addPlayerView.layer.opacity = 0.2
-            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 0.2, y: 0.2)
-        } completion: { [self] _ in
-            addPlayerView.removeFromSuperview()
-            addPlayerView.layer.opacity = 1
-            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1/0.2, y: 1/0.2)
-        }
-        
-    }
-    
     
 }
