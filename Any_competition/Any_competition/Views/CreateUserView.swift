@@ -133,7 +133,7 @@ class CreateUserView: UIView {
     }
     
     @objc func tapCreateButton() {
-        print("tapCreateButton")
+        animationTapButton(createButton)
         guard let firstName = firstNameTextField.text else {return}
         guard let lastName = lastNameTextField.text else {return}
         guard let nick = nickNameTextField.text else {return}
@@ -158,7 +158,7 @@ class CreateUserView: UIView {
     }
     
     @objc func tapCancelButton() {
-        print("tapCancelButton")
+        animationTapButton(cancelButton)
         delegate?.tapCancelButton()
         
     }

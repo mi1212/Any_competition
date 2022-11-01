@@ -174,14 +174,8 @@ class ProfileViewController: UIViewController {
             setupViewsToLogin()
         default:
             if userDefaults.object(forKey: "uid") != nil {
-                setupViewsWithoutLogin()
-                if ProfileViewController.user != nil {
-                    profileView.setupData(user: ProfileViewController.user!)
-                } else {
-                    print("ProfileViewController.user = nil ")
-                    setupLoading()
-                }
-//                setupLoading()
+                database.getUserData(uid: userDefaults.object(forKey: "uid") as! String, isReloadView: false)
+                setupLoading()
             }
         }
     }
@@ -222,6 +216,7 @@ extension ProfileViewController: LoginViewDelegate {
         
         Auth.auth().signIn(withEmail: mail, password: pass) {[self] result, error in
             if error != nil {
+                loadingAnimationView.removeFromSuperview()
                 alert.message = error?.localizedDescription
                 self.present(alert, animated: true, completion: nil)
             } else {
@@ -257,21 +252,24 @@ extension ProfileViewController: LoginViewDelegate {
 extension ProfileViewController: CreateUserViewDelegate {
     
     func tapCancelButton() {
+        
         UIView.animate(withDuration: 1, delay: 0) { [self] in
             loginView.transform = loginView.transform.scaledBy(x: 1/0.9, y: 1/0.9)
             loginView.layer.opacity = 1
             createUserView.transform = createUserView.transform.translatedBy(x: self.view.layer.bounds.width, y: 0)
         } completion: { handler in
         }
+        
     }
     
     func tapCreateUser(firstName: String, lastName: String, nickName: String, mail: String, pass: String) {
         
-        var tempUser = User(firstName: firstName, lastName: lastName, nick: nickName, mail: mail)
+        let tempUser = User(firstName: firstName, lastName: lastName, nick: nickName, mail: mail)
         
         Auth.auth().createUser(withEmail: mail, password: pass) { [self] authDataResult, error in
             
             if error != nil {
+                loadingAnimationView.removeFromSuperview()
                 alert.message = error?.localizedDescription
                 self.present(alert, animated: true, completion: nil)
             } else {
@@ -297,7 +295,7 @@ extension ProfileViewController: ProfileViewDelegate {
         ProfileViewController.user = nil
         database.removeListenerToCompetitionCollection()
         userDefaults.set(nil, forKey: "uid")
-        
+        CompetitionsViewController.isAddedListener = false
         UIView.animate(withDuration: 1, delay: 0) { [self] in
             loginView.transform = loginView.transform.translatedBy(x: -self.view.layer.bounds.width, y: 0)
             profileView.transform = profileView.transform.translatedBy(x: -self.view.layer.bounds.width, y: 0)
@@ -308,13 +306,13 @@ extension ProfileViewController: ProfileViewDelegate {
 }
 
 extension ProfileViewController: DatabaseDelegate {
-    
+        
     func reloadViewWithoutAnimate(user: User) {
         ProfileViewController.user = user
-        print("reloadViewWithoutAnimate")
-        profileView.reloadInputViews()
         loadingAnimationView.stop()
         loadingAnimationView.layer.opacity = 0
+        setupViewsWithoutLogin()
+        profileView.setupData(user: ProfileViewController.user!)
     }
     
     func animateAndReloadView(user: User) {
@@ -322,16 +320,18 @@ extension ProfileViewController: DatabaseDelegate {
 
         profileView.setupData(user: user)
         
+        loadingAnimationView.removeFromSuperview()
+        
         UIView.animate(withDuration: 1, delay: 0) { [self] in
-            loadingAnimationView.layer.opacity = 0
             profileView.transform = profileView.transform.translatedBy(x: self.view.layer.bounds.width, y: 0)
-        } completion: { [self] handler in
-            loadingAnimationView.stop()
-            loadingAnimationView.layer.opacity = 0
         }
     }
     
-    func alertMessage(alertMessage: String) {}
+    func alertMessage(alertMessage: String) {
+        loadingAnimationView.removeFromSuperview()
+        alert.message = alertMessage
+        self.present(alert, animated: true, completion: nil)
+    }
     
     func reloadView(competitions: [Competition]) {}
     

@@ -160,8 +160,7 @@ class ProfileView: UIView {
     }
     
     @objc func tapExitButton() {
-//        delegate?.exitFromProfileView()
-        database.getUserData(uid: "sdfsdfsdf" as! String, isReloadView: false)
+        delegate?.exitFromProfileView()
     }
     
 }

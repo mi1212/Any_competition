@@ -9,6 +9,8 @@ import UIKit
 import Lottie
 
 class TabBarController: UITabBarController {
+    
+    static var user: User?
  
     let database = Database()
     
@@ -21,7 +23,7 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
-        checkLogin()
+        getUserData()
         setupAnimation()
         setupTabBar()
     }
@@ -69,7 +71,7 @@ class TabBarController: UITabBarController {
         return navigationVC
     }
     
-    private func checkLogin() {
+    private func getUserData() {
         if let uid = userDefaults.object(forKey: "uid") {
             database.getUserData(uid: uid as! String, isReloadView: false)
         }

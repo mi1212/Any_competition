@@ -18,7 +18,7 @@ class CompetitionsViewController: UIViewController {
     
     let animationView = AnimationView()
     
-    var isAddedListener = false
+    static var isAddedListener = false
     
     var timer: Timer?
     
@@ -42,15 +42,15 @@ class CompetitionsViewController: UIViewController {
         setupListenerToCompetitions()
     }
     
-    private func setupAnimation() {
+    let loadingAnimationView: AnimationView = {
+        let animationView = AnimationView()
         animationView.animation = Animation.named("loading")
-        animationView.frame = CGRect(origin: CGPoint(x: view.bounds.width/4, y: 0), size: CGSize(width: view.bounds.width/2, height: view.bounds.height/6))
         animationView.backgroundColor = .clear
-        animationView.contentMode = .scaleAspectFit
+        animationView.contentMode = .scaleAspectFill
         animationView.loopMode = .loop
-        animationView.play()
-        self.view.addSubview(animationView)
-    }
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        return animationView
+    }()
     
     private func setupNavigationBar() {
         let plus = UIImage(systemName: "plus")
@@ -74,9 +74,11 @@ class CompetitionsViewController: UIViewController {
     
     private func setupListenerToCompetitions() {
         if let uid = userDefaults.object(forKey: "uid") {
-            if !isAddedListener {
+            
+            if !CompetitionsViewController.isAddedListener {
+                setupLoading()
                 self.database.addListenerToCompetitionCollection(uid: uid as! String)
-//                isAddedListener.toggle()
+                CompetitionsViewController.isAddedListener = true
             }
         } else {
             CompetitionsViewController.competitions = [Competition]()
@@ -84,6 +86,18 @@ class CompetitionsViewController: UIViewController {
             alert.message = "Сначала нужно авторизоваться, чтобы увидеть свои соревнования"
             self.present(alert, animated: true)
         }
+    }
+    
+    // установка анимации загрузки
+    private func setupLoading() {
+        self.view.addSubview(loadingAnimationView)
+        loadingAnimationView.layer.opacity = 1
+        loadingAnimationView.play()
+        NSLayoutConstraint.activate([
+            loadingAnimationView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            loadingAnimationView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            loadingAnimationView.heightAnchor.constraint(equalToConstant: 40)
+        ])
     }
     
     @objc func addCompetition() {
@@ -94,6 +108,9 @@ class CompetitionsViewController: UIViewController {
 }
 
 extension CompetitionsViewController: DatabaseDelegate {
+    func alertMessage(alertMessage: String) {
+        loadingAnimationView.removeFromSuperview()
+    }
     
     func reloadViewWithoutAnimate(user: User) {}
     
@@ -104,10 +121,9 @@ extension CompetitionsViewController: DatabaseDelegate {
     func reloadTableCollectionView() {}
     
     func reloadView(competitions: [Competition]) {
-            print("--- competitionsCollectionView.reloadData()")
-            CompetitionsViewController.competitions = competitions.sorted { $0.date > $1.date }
-            self.competitionsCollectionView.competitionsCollectionView.reloadData()
-
+        loadingAnimationView.removeFromSuperview()
+        CompetitionsViewController.competitions = competitions.sorted { $0.date > $1.date }
+        self.competitionsCollectionView.competitionsCollectionView.reloadData()
     }
     
 }

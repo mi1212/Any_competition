@@ -38,9 +38,9 @@ class LoginView: UIView {
     
     let loginButton = AnyCompUIButton(title: "Войти")
     
-    let resetPass = AnyCompClearUIButton(title: "сбросить пароль")
+    let resetPassButton = AnyCompClearUIButton(title: "сбросить пароль")
     
-    let createUser = AnyCompClearUIButton(title: "создать учетную запись")
+    let createUserButton = AnyCompClearUIButton(title: "создать учетную запись")
     
     convenience init(user: User, pass: String) {
         self.init()
@@ -66,11 +66,11 @@ class LoginView: UIView {
         contentView.addSubview(mailTextField)
         contentView.addSubview(passTextField)
         contentView.addSubview(loginButton)
-        contentView.addSubview(resetPass)
-        contentView.addSubview(createUser)
+        contentView.addSubview(resetPassButton)
+        contentView.addSubview(createUserButton)
         loginButton.addTarget(self, action: #selector(tapLoginButton), for: .touchUpInside)
-        createUser.addTarget(self, action: #selector(tapCreateUserButton), for: .touchUpInside)
-        resetPass.addTarget(self, action: #selector(tapResetPassButton), for: .touchUpInside)
+        createUserButton.addTarget(self, action: #selector(tapCreateUserButton), for: .touchUpInside)
+        resetPassButton.addTarget(self, action: #selector(tapResetPassButton), for: .touchUpInside)
         let inset: CGFloat = 16
         
         NSLayoutConstraint.activate([
@@ -108,30 +108,30 @@ class LoginView: UIView {
         ])
         
         NSLayoutConstraint.activate([
-            resetPass.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: inset),
-            resetPass.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            resetPass.bottomAnchor.constraint(greaterThanOrEqualTo: createUser.topAnchor, constant: -3*inset)
+            resetPassButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: inset),
+            resetPassButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            resetPassButton.bottomAnchor.constraint(greaterThanOrEqualTo: createUserButton.topAnchor, constant: -3*inset)
         ])
         
         NSLayoutConstraint.activate([
-            createUser.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            createUser.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset)
+            createUserButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            createUserButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset)
         ])
     }
     
     @objc func tapLoginButton() {
-        print("tapLoginButton")
         delegate?.tapLogin()
+        animationTapButton(loginButton)
     }
     
     
     @objc func tapCreateUserButton() {
-        print("tapCreateUserButton")
         delegate?.tapStartCreateUser()
+        animationTapButton(createUserButton)
     }
     
     @objc func tapResetPassButton() {
-        print("tapResetPassButton")
         delegate?.tapResetPassword()
+        animationTapButton(resetPassButton)
     }
 }

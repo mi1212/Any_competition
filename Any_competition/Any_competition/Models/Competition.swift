@@ -33,8 +33,6 @@ struct Competition: Identifiable, Codable {
         self.date = date
         self.players = players
         self.competitionTable = CompetitionTable(playersArray: self.players)
-//        var accessUserArray = [User]()
-//        accessUserArray.append(accessUser)
         self.accessUsersIdArray = accessUserArray.map {$0.id!}
     }
     
