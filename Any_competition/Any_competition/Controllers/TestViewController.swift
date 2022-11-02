@@ -106,15 +106,12 @@ class TestViewController: UIViewController {
             .orEmpty
             .throttle(.milliseconds(300), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
-//            .filter { !$0.isEmpty }
             .subscribe(onNext: { [self]query in
-                TestViewController.foundUsers = TestViewController.users.filter { $0.nick.contains(query) }
+                TestViewController.foundUsers = TestViewController.users.filter { $0.nick.hasPrefix(query) }
                 print(TestViewController.foundUsers)
                 tableView.reloadData()
             }).disposed(by: disposeBag)
     }
-    
-    
 }
 extension TestViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
