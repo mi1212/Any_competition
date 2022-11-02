@@ -360,14 +360,10 @@
 		FD339E9B28E363B2000DD8F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FDB3FFE728E2180C000D6DDC /* CompetitionTableView.swift */,
-				FD5927C329112DE800CF2E7C /* PlayerTableCollectionView.swift */,
-				FDE7036028E412B500FF4F06 /* CompetitionNetView.swift */,
-				FD96E63E290E6CFE00B51FD0 /* CompetitionsCollectionView.swift */,
-				FDB1085B28FDAF9B0020F32C /* LoginView.swift */,
-				FD85BA6628FE75EE0027468E /* ProfileView.swift */,
-				FDDD6DFD28FFC41300F9A649 /* CreateUserView.swift */,
-				FD324CE4291184C300A46A2F /* AddPlayerView.swift */,
+				FD703B0C291251D800E89108 /* CompetitionViewController */,
+				FD703B0B2912507100E89108 /* CompetitionsViewController */,
+				FD703B0A2912505F00E89108 /* ProfileViewController */,
+				FD703B0D291251F200E89108 /* AddCompetitionViewController */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -380,6 +376,42 @@
 				FD29C22428E040EF00C3B7EB /* MatchViewController.swift */,
 			);
 			path = CompetitionsViewController;
+			sourceTree = "<group>";
+		};
+		FD703B0A2912505F00E89108 /* ProfileViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FDB1085B28FDAF9B0020F32C /* LoginView.swift */,
+				FD85BA6628FE75EE0027468E /* ProfileView.swift */,
+				FDDD6DFD28FFC41300F9A649 /* CreateUserView.swift */,
+			);
+			path = ProfileViewController;
+			sourceTree = "<group>";
+		};
+		FD703B0B2912507100E89108 /* CompetitionsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FD96E63E290E6CFE00B51FD0 /* CompetitionsCollectionView.swift */,
+			);
+			path = CompetitionsViewController;
+			sourceTree = "<group>";
+		};
+		FD703B0C291251D800E89108 /* CompetitionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FDB3FFE728E2180C000D6DDC /* CompetitionTableView.swift */,
+				FDE7036028E412B500FF4F06 /* CompetitionNetView.swift */,
+			);
+			path = CompetitionViewController;
+			sourceTree = "<group>";
+		};
+		FD703B0D291251F200E89108 /* AddCompetitionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FD5927C329112DE800CF2E7C /* PlayerTableCollectionView.swift */,
+				FD324CE4291184C300A46A2F /* AddPlayerView.swift */,
+			);
+			path = AddCompetitionViewController;
 			sourceTree = "<group>";
 		};
 		FD9604EF28ECC364009C902E /* Animations */ = {
@@ -841,7 +873,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -874,7 +906,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

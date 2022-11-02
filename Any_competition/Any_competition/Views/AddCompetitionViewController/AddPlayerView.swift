@@ -30,14 +30,18 @@ class AddPlayerView: UIView {
     
     let label = AnyCompLogoUILabel()
     
+    let userLabel = AnyCompUILabel(title: "добавить пользователя", fontSize: .small)
+    
+    let userTextField = AnyCompUITextField(placeholder: "Поиск пользователя", isSecure: false)
+    
+    let playerLabel = AnyCompUILabel(title: "ввести данные игрока", fontSize: .small)
+    
     let firstNameTextField = AnyCompUITextField(placeholder: "Имя", isSecure: false)
     
     let lastNameTextField = AnyCompUITextField(placeholder: "Фамилия", isSecure: false)
     
     let nickNameTextField = AnyCompUITextField(placeholder: "Ник в игре", isSecure: false)
-    
-    
-    
+       
     let addButton = AnyCompUIButton(title: "Добавить")
     
     let cancelButton = AnyCompUIButton(title: "Выйти")
@@ -56,6 +60,9 @@ class AddPlayerView: UIView {
         self.addSubview(contentView)
         contentView.addSubview(label)
         label.text = "Игрок"
+        contentView.addSubview(userLabel)
+        contentView.addSubview(userTextField)
+        contentView.addSubview(playerLabel)
         contentView.addSubview(firstNameTextField)
         contentView.addSubview(lastNameTextField)
         contentView.addSubview(nickNameTextField)
@@ -81,7 +88,28 @@ class AddPlayerView: UIView {
         ])
         
         NSLayoutConstraint.activate([
-            firstNameTextField.topAnchor.constraint(equalTo: label.bottomAnchor, constant: inset),
+            userLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: inset),
+            userLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            userLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+//            userLabel.heightAnchor.constraint(equalToConstant: 52)
+        ])
+        
+        NSLayoutConstraint.activate([
+            userTextField.topAnchor.constraint(equalTo: userLabel.bottomAnchor, constant: inset),
+            userTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            userTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            userTextField.heightAnchor.constraint(equalToConstant: 52)
+        ])
+        
+        NSLayoutConstraint.activate([
+            playerLabel.topAnchor.constraint(equalTo: userTextField.bottomAnchor, constant: 2*inset),
+            playerLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            playerLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+//            userLabel.heightAnchor.constraint(equalToConstant: 52)
+        ])
+        
+        NSLayoutConstraint.activate([
+            firstNameTextField.topAnchor.constraint(equalTo: playerLabel.bottomAnchor, constant: inset),
             firstNameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             firstNameTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             firstNameTextField.heightAnchor.constraint(equalToConstant: 52)

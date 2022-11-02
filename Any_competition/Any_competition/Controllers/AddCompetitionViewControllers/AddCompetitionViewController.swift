@@ -53,6 +53,7 @@ class AddCompetitionViewController: UIViewController {
         setupController()
         addPlayerButton.addTarget(self, action: #selector(tapAddPlayerButton), for: .touchUpInside)
         addCompetitionButton.addTarget(self, action: #selector(tapAddCompetitionButton), for: .touchUpInside)
+        self.view.addGestureRecognizer(tap)
     }
     
     private func setupController() {
@@ -121,9 +122,8 @@ class AddCompetitionViewController: UIViewController {
         NSLayoutConstraint.activate([
             addPlayerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             addPlayerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-//            addPlayerView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8),
             addPlayerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: inset),
-            addPlayerView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5)
+            addPlayerView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.7)
         ])
         
         addPlayerView.layer.opacity = 0.2
@@ -192,6 +192,15 @@ class AddCompetitionViewController: UIViewController {
         let alert = UIAlertController(title: "\(message)", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ок", style: .cancel))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    private lazy var tap: UITapGestureRecognizer = {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        return tap
+    }()
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
 }

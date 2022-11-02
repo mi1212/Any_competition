@@ -155,6 +155,30 @@ class Database {
         }
 
     }
+    
+ //      метод добавляет пользователя в Firebase
+     func addUser(user: User) {
+         print("--- send user to Firestore DataBase")
+         let ref: DocumentReference?
+         
+         let tempUser = user
+         
+         ref = db.collection("users").addDocument(data: [
+             "id": tempUser.id as Any,
+             "firstName": tempUser.firstName,
+             "lastName": tempUser.lastName,
+             "nick" : tempUser.nick,
+             "mail" : tempUser.mail,
+             "playedGames": tempUser.playedGames,
+             "wonGames": tempUser.wonGames,
+             "lostGames": tempUser.lostGames,
+             "wonCups": tempUser.wonCups,
+         ]) { err in
+             if let err = err {
+                 print("--- Error adding document: \(err)")
+             }
+         }
+     }
 
 //MARK: - listeners
 //      метод добавляет слушателя для всей коллекции соревнований
@@ -244,24 +268,5 @@ class Database {
             }
         }
     }
-   
-//      метод добавляет пользователя в Firebase
-    func addUser(user: User) {
-        print("--- send user to Firestore DataBase")
-        let ref: DocumentReference?
-        
-        let tempUser = user
-        
-        ref = db.collection("users").addDocument(data: [
-            "id": tempUser.id as Any,
-            "firstName": tempUser.firstName,
-            "lastName": tempUser.lastName,
-            "nick" : tempUser.nick,
-            "mail" : tempUser.mail
-        ]) { err in
-            if let err = err {
-                print("--- Error adding document: \(err)")
-            }
-        }
-    }
+
 }
