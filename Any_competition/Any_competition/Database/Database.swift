@@ -14,6 +14,7 @@ protocol DatabaseDelegate: AnyObject {
     func animateAndReloadView(user: User)
     func reloadTableCollectionView()
     func alertMessage(alertMessage: String)
+    func receivedAllUsers(users: [User])
 }
 
 class Database {
@@ -50,8 +51,8 @@ class Database {
         }
     }
     
-//      запрос всех документов с Firebase Database
-    func getAllDocuments(){
+//      запрос всех документов из коллекции competitions с Firebase Database
+    func getAllCompetitions(){
         print("--- get data from Firestore DataBase")
         
         let docRef = db.collection("competitions")
@@ -84,6 +85,42 @@ class Database {
         }
         
     }
+    
+    //      запрос всех документов из коллекции users с Firebase Database
+        func getAllUsers(){
+            print("--- get data from Firestore DataBase")
+            
+            let docRef = db.collection("users")
+            
+            var users = [User]()
+            
+            docRef.getDocuments() { [self] snapshotData, error in
+                if snapshotData != nil {
+                    if snapshotData?.documents.count != 0 {
+                        for i in 0...(snapshotData?.documents.count)!-1 {
+                            var json = snapshotData?.documents[i].data()
+                            json?["docId"] = snapshotData?.documents[i].documentID
+                            do {
+                                
+                                let data = try JSONSerialization.data(withJSONObject: json! as Any)
+                                
+                                let user = try self.decoder.decode(User.self, from: data)
+                                
+                                users.append(user)
+                            } catch {
+                                print("an error occurred", error)
+                            }
+                        }
+                    }
+                    
+                    delegate?.receivedAllUsers(users: users)
+                    
+                } else {
+                    print("error - \(error as Any)")
+                }
+            }
+            
+        }
     
 //      запрос данных пользователя Firebase Database
     func getUserData(uid: String, isReloadView: Bool) {

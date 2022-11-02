@@ -113,6 +113,10 @@ extension CompetitionViewController: MatchViewControllerDelegate {
 }
 
 extension CompetitionViewController: DatabaseDelegate {
+    func receivedAllUsers(users: [User]) {
+        
+    }
+    
     func sendError() {
         
     }

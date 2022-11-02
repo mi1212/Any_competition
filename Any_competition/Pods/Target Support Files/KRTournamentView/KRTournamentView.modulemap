@@ -1,6 +1,0 @@
-framework module KRTournamentView {
-  umbrella header "KRTournamentView-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -306,6 +306,10 @@ extension ProfileViewController: ProfileViewDelegate {
 }
 
 extension ProfileViewController: DatabaseDelegate {
+    func receivedAllUsers(users: [User]) {
+        
+    }
+    
         
     func reloadViewWithoutAnimate(user: User) {
         ProfileViewController.user = user

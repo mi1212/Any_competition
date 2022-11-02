@@ -108,6 +108,10 @@ class CompetitionsViewController: UIViewController {
 }
 
 extension CompetitionsViewController: DatabaseDelegate {
+    func receivedAllUsers(users: [User]) {
+        
+    }
+    
     func alertMessage(alertMessage: String) {
         loadingAnimationView.removeFromSuperview()
     }

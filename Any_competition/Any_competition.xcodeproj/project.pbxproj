@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8A20C85D97005FEA72552B2D /* Pods_Any_competition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEAA58907250BE7DBAF0AA9 /* Pods_Any_competition.framework */; };
-		FD08C7D728DF511E00C18CD1 /* MyMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD08C7D628DF511E00C18CD1 /* MyMatch.swift */; };
 		FD0D008A28DDBF0200C47570 /* PlayersInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0D008928DDBF0200C47570 /* PlayersInfoTableViewCell.swift */; };
 		FD0FB29728ECBCE6000789CD /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0FB29628ECBCE6000789CD /* TestViewController.swift */; };
 		FD1E1FFE28F08ED1001CF0EA /* DateFormater.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1E1FFD28F08ED1001CF0EA /* DateFormater.swift */; };
@@ -100,7 +99,6 @@
 		5AEAA58907250BE7DBAF0AA9 /* Pods_Any_competition.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Any_competition.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BA5A152F1F2D2695D4A89FB /* Pods-Any_competition.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Any_competition.release.xcconfig"; path = "Target Support Files/Pods-Any_competition/Pods-Any_competition.release.xcconfig"; sourceTree = "<group>"; };
 		BD80565C5998C930EBEA977A /* Pods-Any_competition.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Any_competition.debug.xcconfig"; path = "Target Support Files/Pods-Any_competition/Pods-Any_competition.debug.xcconfig"; sourceTree = "<group>"; };
-		FD08C7D628DF511E00C18CD1 /* MyMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMatch.swift; sourceTree = "<group>"; };
 		FD0D008928DDBF0200C47570 /* PlayersInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersInfoTableViewCell.swift; sourceTree = "<group>"; };
 		FD0FB29628ECBCE6000789CD /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		FD1E1FFD28F08ED1001CF0EA /* DateFormater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormater.swift; sourceTree = "<group>"; };
@@ -289,7 +287,6 @@
 				FD27FEFB28D9A63F00D2A405 /* Info.plist */,
 				FDE720DC28DC8F9400FAF811 /* GoogleService-Info.plist */,
 				FD27FEF328D9A63E00D2A405 /* Any_competition.xcdatamodeld */,
-				FD08C7D628DF511E00C18CD1 /* MyMatch.swift */,
 			);
 			path = Any_competition;
 			sourceTree = "<group>";
@@ -669,7 +666,6 @@
 				FDE7036128E412B500FF4F06 /* CompetitionNetView.swift in Sources */,
 				FDA0381E28F983400040A782 /* MatchesOfPlayer.swift in Sources */,
 				FD324CE5291184C300A46A2F /* AddPlayerView.swift in Sources */,
-				FD08C7D728DF511E00C18CD1 /* MyMatch.swift in Sources */,
 				FD6F060128F8247F00F0F718 /* MatchIndex.swift in Sources */,
 				FD27FEF528D9A63E00D2A405 /* Any_competition.xcdatamodeld in Sources */,
 				FDE14E2228DF15AB00005B51 /* CompetitionViewController.swift in Sources */,
