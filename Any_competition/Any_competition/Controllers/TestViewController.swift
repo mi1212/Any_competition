@@ -36,7 +36,7 @@ class TestViewController: UIViewController {
     
     let userTextField = AnyCompUITextField(placeholder: "Поиск пользователя", isSecure: false)
     
-    
+    let testButton = AnyCompLoadinUIButton(title: "Test")
     
     let tableView: UITableView = {
         let table = UITableView()
@@ -62,6 +62,8 @@ class TestViewController: UIViewController {
         contentView.addSubview(userLabel)
         contentView.addSubview(userTextField)
         contentView.addSubview(tableView)
+        contentView.addSubview(testButton)
+        testButton.addTarget(self, action: #selector(tapTestButton), for: .touchUpInside)
         
         let inset: CGFloat = 16
         
@@ -95,9 +97,14 @@ class TestViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: userTextField.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-//            tableView.heightAnchor.constraint(equalToConstant: CGFloat(52*TestViewController.users.count))
-            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-//            tableView.heightAnchor.constraint(equalToConstant: CGFloat(600))
+            tableView.bottomAnchor.constraint(equalTo: testButton.bottomAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            testButton.heightAnchor.constraint(equalToConstant: 64),
+            testButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            testButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            testButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     
@@ -107,16 +114,23 @@ class TestViewController: UIViewController {
             .throttle(.milliseconds(300), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .subscribe(onNext: { [self]query in
-                TestViewController.foundUsers = TestViewController.users.filter { $0.nick.hasPrefix(query) }
-                print(TestViewController.foundUsers)
+                TestViewController.foundUsers = TestViewController.users.filter { $0.nick.hasPrefix(query) ||  $0.firstName.hasPrefix(query) ||  $0.lastName.hasPrefix(query)}
                 tableView.reloadData()
             }).disposed(by: disposeBag)
+    }
+    
+    @objc func tapTestButton() {
+        testButton.isLoading = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) { [self] in
+                testButton.isLoading = false
+            }
     }
 }
 extension TestViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        TestViewController.users.count
         TestViewController.foundUsers.count
+//        10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -155,7 +169,6 @@ extension TestViewController: DatabaseDelegate {
     
     func receivedAllUsers(users: [User]) {
         print(users.map {$0.nick})
-        
         TestViewController.users = users
         tableView.reloadData()
     }

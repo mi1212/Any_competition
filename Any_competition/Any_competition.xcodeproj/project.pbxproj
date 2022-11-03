@@ -60,6 +60,7 @@
 		FD9604F228ECC38B009C902E /* darts1.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9604F028ECC38A009C902E /* darts1.json */; };
 		FD9604F328ECC38B009C902E /* darts2.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9604F128ECC38B009C902E /* darts2.json */; };
 		FD96E63F290E6CFE00B51FD0 /* CompetitionsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD96E63E290E6CFE00B51FD0 /* CompetitionsCollectionView.swift */; };
+		FD9F36932913DC6F003CE1C6 /* AnyCompLoadinUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9F36922913DC6F003CE1C6 /* AnyCompLoadinUIButton.swift */; };
 		FDA0381E28F983400040A782 /* MatchesOfPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA0381D28F983400040A782 /* MatchesOfPlayer.swift */; };
 		FDB1085A28FDADD80020F32C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB1085928FDADD80020F32C /* ProfileViewController.swift */; };
 		FDB1085C28FDAF9B0020F32C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB1085B28FDAF9B0020F32C /* LoginView.swift */; };
@@ -155,6 +156,7 @@
 		FD9604F028ECC38A009C902E /* darts1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = darts1.json; sourceTree = "<group>"; };
 		FD9604F128ECC38B009C902E /* darts2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = darts2.json; sourceTree = "<group>"; };
 		FD96E63E290E6CFE00B51FD0 /* CompetitionsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsCollectionView.swift; sourceTree = "<group>"; };
+		FD9F36922913DC6F003CE1C6 /* AnyCompLoadinUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompLoadinUIButton.swift; sourceTree = "<group>"; };
 		FDA0381D28F983400040A782 /* MatchesOfPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesOfPlayer.swift; sourceTree = "<group>"; };
 		FDB1085928FDADD80020F32C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FDB1085B28FDAF9B0020F32C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				FD27FF3328D9DFAF00D2A405 /* AnyCompUILabel.swift */,
 				FD7C894928ED55D100699A7E /* AnyCompLogoUILabel.swift */,
 				FD27FF3528D9E85900D2A405 /* AnyCompUIButton.swift */,
+				FD9F36922913DC6F003CE1C6 /* AnyCompLoadinUIButton.swift */,
 				FD73A21B28FF254B005FAFCE /* AnyCompClearUIButton.swift */,
 				FDCCA2A328DAFA4600709E80 /* AnyCompUITextField.swift */,
 			);
@@ -672,6 +675,7 @@
 				FD0FB29728ECBCE6000789CD /* TestViewController.swift in Sources */,
 				FD20D63A28DB0B19007F5F8F /* CompetitionsViewController.swift in Sources */,
 				FD94809328F4697500B31A89 /* Match.swift in Sources */,
+				FD9F36932913DC6F003CE1C6 /* AnyCompLoadinUIButton.swift in Sources */,
 				FD339E9928E34D6D000DD8F3 /* UIFont+Extention.swift in Sources */,
 				FD20D63D28DB0DE9007F5F8F /* CompetitionCollectionViewCell.swift in Sources */,
 				FD94809528F46C1700B31A89 /* Player.swift in Sources */,
