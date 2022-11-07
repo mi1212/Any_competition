@@ -41,6 +41,7 @@ class TestViewController: UIViewController {
     let tableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = .clear
+        table.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.identifire)
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
@@ -126,6 +127,7 @@ class TestViewController: UIViewController {
             }
     }
 }
+
 extension TestViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        TestViewController.users.count
@@ -134,13 +136,17 @@ extension TestViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.identifire, for: indexPath)
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.width, height: cell.bounds.height))
         label.text = TestViewController.foundUsers[indexPath.row].nick + " " + TestViewController.foundUsers[indexPath.row].firstName + " " + TestViewController.foundUsers[indexPath.row].lastName
         cell.backgroundColor = .white
-//        label.text = TestViewController.users[indexPath.row].nick + " " + TestViewController.users[indexPath.row].firstName + " " + TestViewController.users[indexPath.row].lastName
         cell.contentView.addSubview(label)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as? UITableViewCell
+        print(cell)
     }
     
     
