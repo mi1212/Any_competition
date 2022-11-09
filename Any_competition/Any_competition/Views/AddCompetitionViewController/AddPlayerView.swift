@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 protocol AddPlayerViewDelegate: AnyObject {
     func tapAddButton(player: Player)
@@ -16,6 +18,8 @@ protocol AddPlayerViewDelegate: AnyObject {
 class AddPlayerView: UIView {
     
     var delegate: AddPlayerViewDelegate?
+    
+    let disposeBag = DisposeBag()
     
     // MARK: UIViews
     
@@ -41,6 +45,8 @@ class AddPlayerView: UIView {
     let lastNameTextField = AnyCompUITextField(placeholder: "Фамилия", isSecure: false)
     
     let nickNameTextField = AnyCompUITextField(placeholder: "Ник в игре", isSecure: false)
+    
+    let searchTable = SearchTableView()
        
     let addButton = AnyCompUIButton(title: "Добавить")
     
@@ -50,6 +56,7 @@ class AddPlayerView: UIView {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
         setupView()
+        setupObserver()
     }
     
     required init?(coder: NSCoder) {
@@ -66,6 +73,7 @@ class AddPlayerView: UIView {
         contentView.addSubview(firstNameTextField)
         contentView.addSubview(lastNameTextField)
         contentView.addSubview(nickNameTextField)
+        contentView.addSubview(searchTable)
         contentView.addSubview(addButton)
         contentView.addSubview(cancelButton)
 
@@ -129,6 +137,13 @@ class AddPlayerView: UIView {
             nickNameTextField.heightAnchor.constraint(equalToConstant: 52)
         ])
         
+//        NSLayoutConstraint.activate([
+//            searchTable.topAnchor.constraint(equalTo: userTextField.bottomAnchor),
+//            searchTable.leadingAnchor.constraint(equalTo: userTextField.leadingAnchor),
+//            searchTable.trailingAnchor.constraint(equalTo: userTextField.trailingAnchor),
+//            searchTable.bottomAnchor.constraint(equalTo: cancelButton.topAnchor)
+//        ])
+        
         NSLayoutConstraint.activate([
             addButton.topAnchor.constraint(equalTo: nickNameTextField.bottomAnchor, constant: inset),
             addButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -183,5 +198,22 @@ class AddPlayerView: UIView {
         animationTapButton(cancelButton)
         delegate?.tapCancelButton()
     }
+    
+    private func setupObserver() {
+        userTextField.rx.text
+            .orEmpty
+            .throttle(.milliseconds(300), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .filter({ string in
+                string != ""
+            })
+            .subscribe(onNext: { [self] query in
+//                TestViewController.foundUsers = TestViewController.users.filter { $0.nick.hasPrefix(query) ||  $0.firstName.hasPrefix(query) ||  $0.lastName.hasPrefix(query)}
+                print(query)
+                searchTable.tableView.reloadData()
+            }).disposed(by: disposeBag)
+    }
  
 }
+
+

@@ -50,11 +50,11 @@ class TabBarController: UITabBarController {
         self.tabBar.backgroundColor = .clear
         self.tabBar.tintColor = .anyDarckColor
         self.viewControllers = [
-//            setupTabBar(
-//                viewController: CompetitionsViewController(),
-//                title: "competitions",
-//                image: "ic_car"
-//            ),
+            setupTabBar(
+                viewController: CompetitionsViewController(),
+                title: "competitions",
+                image: "ic_car"
+            ),
             setupTabBar(
                 viewController: TestViewController(),
                 title: "competitions",

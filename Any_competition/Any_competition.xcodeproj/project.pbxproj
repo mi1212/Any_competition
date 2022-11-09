@@ -37,6 +37,7 @@
 		FD2D637C28FC0E02007C4D94 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2D637B28FC0E02007C4D94 /* Database.swift */; };
 		FD324CE5291184C300A46A2F /* AddPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD324CE4291184C300A46A2F /* AddPlayerView.swift */; };
 		FD339E9928E34D6D000DD8F3 /* UIFont+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD339E9828E34D6D000DD8F3 /* UIFont+Extention.swift */; };
+		FD3573D1291C1DC2000AADB0 /* FidingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3573D0291C1DC2000AADB0 /* FidingTableView.swift */; };
 		FD546BBB28EACFBE006B21B1 /* Hardpixel-nn51.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD91763F28EACD470017014B /* Hardpixel-nn51.otf */; };
 		FD546BBC28EACFBE006B21B1 /* DiaryOfAn8BitMage-lYDD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD91763D28EACD460017014B /* DiaryOfAn8BitMage-lYDD.ttf */; };
 		FD5927C429112DE800CF2E7C /* PlayerTableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5927C329112DE800CF2E7C /* PlayerTableCollectionView.swift */; };
@@ -133,6 +134,7 @@
 		FD2D637B28FC0E02007C4D94 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		FD324CE4291184C300A46A2F /* AddPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerView.swift; sourceTree = "<group>"; };
 		FD339E9828E34D6D000DD8F3 /* UIFont+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extention.swift"; sourceTree = "<group>"; };
+		FD3573D0291C1DC2000AADB0 /* FidingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FidingTableView.swift; sourceTree = "<group>"; };
 		FD5927C329112DE800CF2E7C /* PlayerTableCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableCollectionView.swift; sourceTree = "<group>"; };
 		FD5927C529112EBE00CF2E7C /* PlayersTableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTableCollectionViewCell.swift; sourceTree = "<group>"; };
 		FD5927C729115C5300CF2E7C /* AnimationTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTapButton.swift; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 			children = (
 				FD5927C329112DE800CF2E7C /* PlayerTableCollectionView.swift */,
 				FD324CE4291184C300A46A2F /* AddPlayerView.swift */,
+				FD3573D0291C1DC2000AADB0 /* FidingTableView.swift */,
 			);
 			path = AddCompetitionViewController;
 			sourceTree = "<group>";
@@ -663,6 +666,7 @@
 				FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */,
 				FD0D008A28DDBF0200C47570 /* PlayersInfoTableViewCell.swift in Sources */,
 				FD68DC4628E2D61A00FE0E64 /* CompetitionTable.swift in Sources */,
+				FD3573D1291C1DC2000AADB0 /* FidingTableView.swift in Sources */,
 				FD5927C429112DE800CF2E7C /* PlayerTableCollectionView.swift in Sources */,
 				FD27FEEB28D9A63E00D2A405 /* AppDelegate.swift in Sources */,
 				FD20D64528DB3AA0007F5F8F /* Competition.swift in Sources */,

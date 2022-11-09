@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class AddCompetitionViewController: UIViewController {
 
@@ -14,6 +16,14 @@ class AddCompetitionViewController: UIViewController {
     var playersArray: [Player] = []
     
     let competitionTitleTextField = AnyCompUITextField(placeholder: "Название", isSecure: false)
+    
+    static var users = [User]()
+    
+    static var foundUsers = [User]()
+    
+    var searchText: String? = nil
+    
+    let disposeBag = DisposeBag()
     
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()

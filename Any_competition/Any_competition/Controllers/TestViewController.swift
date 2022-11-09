@@ -38,23 +38,14 @@ class TestViewController: UIViewController {
     
     let testButton = AnyCompLoadinUIButton(title: "Test")
     
-    let tableView: UITableView = {
-        let table = UITableView()
-        table.backgroundColor = .clear
-        table.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.identifire)
-        table.translatesAutoresizingMaskIntoConstraints = false
-        return table
-    }()
+    private lazy var tableView = SearchTableView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
         self.database.delegate = self
         self.database.getAllUsers()
         setupView()
-        setupObserver()
     }
     
     private func setupView() {
@@ -65,42 +56,42 @@ class TestViewController: UIViewController {
         contentView.addSubview(tableView)
         contentView.addSubview(testButton)
         testButton.addTarget(self, action: #selector(tapTestButton), for: .touchUpInside)
-        
+
         let inset: CGFloat = 16
-        
+
         NSLayoutConstraint.activate([
             contentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: inset),
             contentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -inset),
             contentView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.8),
             contentView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
         ])
-        
+
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
         ])
-        
+
         NSLayoutConstraint.activate([
             userLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: inset),
             userLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             userLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
         ])
-        
+
         NSLayoutConstraint.activate([
             userTextField.topAnchor.constraint(equalTo: userLabel.bottomAnchor, constant: inset),
             userTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             userTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             userTextField.heightAnchor.constraint(equalToConstant: 52)
         ])
-        
+
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: userTextField.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-            tableView.bottomAnchor.constraint(equalTo: testButton.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: testButton.topAnchor)
         ])
-        
+
         NSLayoutConstraint.activate([
             testButton.heightAnchor.constraint(equalToConstant: 64),
             testButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
@@ -109,6 +100,21 @@ class TestViewController: UIViewController {
         ])
     }
     
+//    private func setupSearchTableView() {
+//        self.view.addSubview(tableView)
+//
+//        let inset = CGFloat(16)
+//
+//        NSLayoutConstraint.activate([
+//            tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: inset),
+//            tableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
+//            tableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
+//            tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -inset)
+//        ])
+//
+//
+//    }
+    
     private func setupObserver() {
         userTextField.rx.text
             .orEmpty
@@ -116,7 +122,7 @@ class TestViewController: UIViewController {
             .distinctUntilChanged()
             .subscribe(onNext: { [self]query in
                 TestViewController.foundUsers = TestViewController.users.filter { $0.nick.hasPrefix(query) ||  $0.firstName.hasPrefix(query) ||  $0.lastName.hasPrefix(query)}
-                tableView.reloadData()
+                tableView.tableView.reloadData()
             }).disposed(by: disposeBag)
     }
     
@@ -128,29 +134,27 @@ class TestViewController: UIViewController {
     }
 }
 
-extension TestViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        TestViewController.users.count
-        TestViewController.foundUsers.count
-//        10
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.identifire, for: indexPath)
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.width, height: cell.bounds.height))
-        label.text = TestViewController.foundUsers[indexPath.row].nick + " " + TestViewController.foundUsers[indexPath.row].firstName + " " + TestViewController.foundUsers[indexPath.row].lastName
-        cell.backgroundColor = .white
-        cell.contentView.addSubview(label)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as? UITableViewCell
-        print(cell)
-    }
-    
-    
-}
+//extension TestViewController: UITableViewDataSource, UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+////        TestViewController.users.count
+//        TestViewController.foundUsers.count
+////        10
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.identifire, for: indexPath)
+//        let label = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.width, height: cell.bounds.height))
+//        label.text = TestViewController.foundUsers[indexPath.row].nick + " " + TestViewController.foundUsers[indexPath.row].firstName + " " + TestViewController.foundUsers[indexPath.row].lastName
+//        cell.backgroundColor = .white
+//        cell.contentView.addSubview(label)
+//        return cell
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let cell = tableView.cellForRow(at: indexPath) as? UITableViewCell
+//        print(cell)
+//    }
+//}
 
 extension TestViewController: DatabaseDelegate {
     func reloadView(competitions: [Competition]) {
@@ -176,7 +180,7 @@ extension TestViewController: DatabaseDelegate {
     func receivedAllUsers(users: [User]) {
         print(users.map {$0.nick})
         TestViewController.users = users
-        tableView.reloadData()
+//        tableView.reloadData()
     }
     
     
