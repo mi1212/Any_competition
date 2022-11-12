@@ -15,7 +15,7 @@ class CompetitionTableView: UIView {
     
     var competitionTable: CompetitionTable?
     
-    var playersArray: [Player]?
+    var playersArray: [User]?
     
     var side = CGFloat(0)
     
@@ -86,7 +86,7 @@ class CompetitionTableView: UIView {
         return table
     }()
     
-    convenience init(competitionTable: CompetitionTable, side: CGFloat, playersArray: [Player]) {
+    convenience init(competitionTable: CompetitionTable, side: CGFloat, playersArray: [User]) {
         self.init()
         self.playersArray = playersArray
         self.side = side
@@ -178,7 +178,7 @@ class CompetitionTableView: UIView {
         ])
     }
     
-    func reloadData(competitionTable: CompetitionTable, playersArray: [Player]) {
+    func reloadData(competitionTable: CompetitionTable, playersArray: [User]) {
         self.competitionTable = competitionTable
         self.playersArray = playersArray
         tableCollectionView.reloadData()

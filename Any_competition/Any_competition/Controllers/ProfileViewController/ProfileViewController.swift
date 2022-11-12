@@ -264,7 +264,7 @@ extension ProfileViewController: CreateUserViewDelegate {
     
     func tapCreateUser(firstName: String, lastName: String, nickName: String, mail: String, pass: String) {
         
-        let tempUser = User(firstName: firstName, lastName: lastName, nick: nickName, mail: mail)
+        var tempUser = User(firstName: firstName, lastName: lastName, nick: nickName)
         
         Auth.auth().createUser(withEmail: mail, password: pass) { [self] authDataResult, error in
             

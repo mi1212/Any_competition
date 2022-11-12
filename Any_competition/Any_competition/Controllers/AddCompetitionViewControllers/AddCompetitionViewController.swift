@@ -13,7 +13,7 @@ class AddCompetitionViewController: UIViewController {
 
     let database = Database()
     
-    var playersArray: [Player] = []
+    var playersArray: [User] = []
     
     let competitionTitleTextField = AnyCompUITextField(placeholder: "Название", isSecure: false)
     
@@ -216,7 +216,7 @@ class AddCompetitionViewController: UIViewController {
 }
 
 extension AddCompetitionViewController: AddPlayerViewDelegate {
-    func tapAddButton(player: Player) {
+    func tapAddButton(player: User) {
         
         self.playersArray.append(player)
 

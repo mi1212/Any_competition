@@ -8,15 +8,15 @@
 import Foundation
 
 struct Match: Codable {
-    let player1: Player
-    let player2: Player
+    let player1: User
+    let player2: User
     var isDone = false
     var isWinned = false
     var scorePlayer1: Int = 0
     var scorePlayer2: Int = 0
     var matchIndex: MatchIndex
     
-    init(player1: Player, player2: Player, matchIndex: MatchIndex) {
+    init(player1: User, player2: User, matchIndex: MatchIndex) {
         self.player1 = player1
         self.player2 = player2
         self.matchIndex = matchIndex

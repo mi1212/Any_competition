@@ -43,7 +43,7 @@ class playersTableCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    func setupCellData(player: Player) {
+    func setupCellData(player: User) {
         nameLabel.text = player.firstName + " " + player.lastName
         nickLabel.text = player.nick
     }

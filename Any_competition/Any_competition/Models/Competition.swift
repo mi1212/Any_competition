@@ -13,7 +13,7 @@ struct Competition: Identifiable, Codable {
     let qtyPlayers: Int
     let date: String
     let accessUsersIdArray: [String]
-    let players: [Player]
+    let players: [User]
     var competitionTable: CompetitionTable?
     
     var dictionary: [String: Any] {
@@ -27,7 +27,7 @@ struct Competition: Identifiable, Codable {
         ]
     }
     
-    init(title: String, qtyPlayers: Int, date: String, players: [Player], accessUserArray: [User]) {
+    init(title: String, qtyPlayers: Int, date: String, players: [User], accessUserArray: [User]) {
         self.title = title
         self.qtyPlayers = qtyPlayers
         self.date = date

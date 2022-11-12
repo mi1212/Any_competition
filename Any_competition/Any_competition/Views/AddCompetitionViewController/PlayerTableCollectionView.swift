@@ -15,7 +15,7 @@ class playersTableCollectionView: UIView {
     
 //    weak var delegate: CompetitionsCollectionViewDelegate?
     
-    var playersArray: [Player] = []
+    var playersArray: [User] = []
     
     lazy var collectionView: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())

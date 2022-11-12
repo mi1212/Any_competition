@@ -32,13 +32,13 @@ struct CompetitionTable: Codable {
         ]
     }
     
-    init(playersArray: [Player]) {
+    init(playersArray: [User]) {
         competitionTable = createCompetitionTable(playersArray)
         qtyPlayers = playersArray.count
         self.qtyGames = (qtyPlayers*qtyPlayers - qtyPlayers)/2
     }
     
-    private func createCompetitionTable(_ playersArray: [Player]) -> [MatchesOfPlayer] {
+    private func createCompetitionTable(_ playersArray: [User]) -> [MatchesOfPlayer] {
         
         var competitionTable = [MatchesOfPlayer]()
         var matchArray = [Match]()

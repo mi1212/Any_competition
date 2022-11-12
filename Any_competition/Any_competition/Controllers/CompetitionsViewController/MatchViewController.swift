@@ -204,7 +204,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         secondPlayerLabel.text = (match?.player2.firstName)! + " " + (match?.player2.lastName)!
     }
     
-    private func winningAnimation(winnedPlayer: Player) {
+    private func winningAnimation(winnedPlayer: User) {
         
         let animation = Animation.named("73966-confetti")
         animationView = AnimationView(
