@@ -19,6 +19,8 @@ class AddPlayerView: UIView {
     
     var delegate: AddPlayerViewDelegate?
     
+    var users = [User]()
+    
     let disposeBag = DisposeBag()
     
     // MARK: UIViews
@@ -38,17 +40,7 @@ class AddPlayerView: UIView {
     
     let userTextField = AnyCompUITextField(placeholder: "Поиск пользователя", isSecure: false)
     
-    let playerLabel = AnyCompUILabel(title: "ввести данные игрока", fontSize: .small)
-    
-    let firstNameTextField = AnyCompUITextField(placeholder: "Имя", isSecure: false)
-    
-    let lastNameTextField = AnyCompUITextField(placeholder: "Фамилия", isSecure: false)
-    
-    let nickNameTextField = AnyCompUITextField(placeholder: "Ник в игре", isSecure: false)
-    
     let searchTable = SearchTableView()
-       
-    let addButton = AnyCompUIButton(title: "Добавить")
     
     let cancelButton = AnyCompUIButton(title: "Выйти")
     
@@ -56,6 +48,8 @@ class AddPlayerView: UIView {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
         setupView()
+        searchTable.isExclusiveTouch = true
+        setupSearchTableView()
         setupObserver()
     }
     
@@ -69,15 +63,9 @@ class AddPlayerView: UIView {
         label.text = "Игрок"
         contentView.addSubview(userLabel)
         contentView.addSubview(userTextField)
-//        contentView.addSubview(playerLabel)
-//        contentView.addSubview(firstNameTextField)
-//        contentView.addSubview(lastNameTextField)
-//        contentView.addSubview(nickNameTextField)
         contentView.addSubview(searchTable)
-//        contentView.addSubview(addButton)
         contentView.addSubview(cancelButton)
 
-        addButton.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(tapCancelButton), for: .touchUpInside)
         
         let inset: CGFloat = 16
@@ -99,7 +87,6 @@ class AddPlayerView: UIView {
             userLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: inset),
             userLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             userLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-//            userLabel.heightAnchor.constraint(equalToConstant: 52)
         ])
         
         NSLayoutConstraint.activate([
@@ -109,90 +96,25 @@ class AddPlayerView: UIView {
             userTextField.heightAnchor.constraint(equalToConstant: 52)
         ])
         
-//        NSLayoutConstraint.activate([
-//            playerLabel.topAnchor.constraint(equalTo: userTextField.bottomAnchor, constant: 2*inset),
-//            playerLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-//            playerLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-////            userLabel.heightAnchor.constraint(equalToConstant: 52)
-//        ])
-        
-//        NSLayoutConstraint.activate([
-//            firstNameTextField.topAnchor.constraint(equalTo: playerLabel.bottomAnchor, constant: inset),
-//            firstNameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-//            firstNameTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-//            firstNameTextField.heightAnchor.constraint(equalToConstant: 52)
-//        ])
-//
-//        NSLayoutConstraint.activate([
-//            lastNameTextField.topAnchor.constraint(equalTo: firstNameTextField.bottomAnchor, constant: inset),
-//            lastNameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-//            lastNameTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-//            lastNameTextField.heightAnchor.constraint(equalToConstant: 52)
-//        ])
-//
-//        NSLayoutConstraint.activate([
-//            nickNameTextField.topAnchor.constraint(equalTo: lastNameTextField.bottomAnchor, constant: inset),
-//            nickNameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-//            nickNameTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-//            nickNameTextField.heightAnchor.constraint(equalToConstant: 52)
-//        ])
-        
-//        NSLayoutConstraint.activate([
-//            searchTable.topAnchor.constraint(equalTo: userTextField.bottomAnchor),
-//            searchTable.leadingAnchor.constraint(equalTo: userTextField.leadingAnchor),
-//            searchTable.trailingAnchor.constraint(equalTo: userTextField.trailingAnchor),
-//            searchTable.bottomAnchor.constraint(equalTo: cancelButton.topAnchor)
-//        ])
-        
-//        NSLayoutConstraint.activate([
-//            addButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: inset),
-//            addButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//            addButton.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1/2),
-//            addButton.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.2),
-//        ])
-        
         NSLayoutConstraint.activate([
             cancelButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset),
-//            cancelButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-//            cancelButton.leadingAnchor.constraint(equalTo: addButton.trailingAnchor),
             cancelButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             cancelButton.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1/2),
             cancelButton.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.15),
         ])
     }
     
-    func clearTextFields() {
-        let textFieldArray = [firstNameTextField, lastNameTextField, nickNameTextField]
+    private func setupSearchTableView() {
+        contentView.addSubview(searchTable)
         
-        textFieldArray.map {
-            $0.text = ""
-            $0.backgroundColor = .white
-            
-        }
-    }
-    
-    @objc func tapAddButton() {
-        animationTapButton(addButton)
+        let inset: CGFloat = 16
         
-        guard let firstName = firstNameTextField.text else {return}
-        
-        guard let lastName = lastNameTextField.text else {return}
-        
-        guard let nick = nickNameTextField.text else {return}
-        
-        let textFieldArray = [firstNameTextField, lastNameTextField, nickNameTextField]
-        
-        if firstName != "" && lastName != "" && nick != "" {
-            let player = User(firstName: firstName, lastName: lastName, nick: nick)
-            
-            delegate?.tapAddButton(player: player)
-        } else {
-            textFieldArray.map {
-                shakeTextFieldifEmpty($0)
-            }
-            
-        }
-        
+        NSLayoutConstraint.activate([
+            searchTable.leadingAnchor.constraint(equalTo: userTextField.leadingAnchor),
+            searchTable.trailingAnchor.constraint(equalTo: userTextField.trailingAnchor),
+            searchTable.topAnchor.constraint(equalTo: userTextField.bottomAnchor),
+            searchTable.bottomAnchor.constraint(equalTo: cancelButton.topAnchor),
+        ])
     }
     
     @objc func tapCancelButton() {
@@ -205,14 +127,19 @@ class AddPlayerView: UIView {
             .orEmpty
             .throttle(.milliseconds(300), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
-            .filter({ string in
-                string != ""
-            })
+//            .filter({ string in
+//                string != ""
+//            })
             .subscribe(onNext: { [self] query in
-//                TestViewController.foundUsers = TestViewController.users.filter { $0.nick.hasPrefix(query) ||  $0.firstName.hasPrefix(query) ||  $0.lastName.hasPrefix(query)}
-                print(query)
+                if query != "" {
+                    AddCompetitionViewController.foundUsers = AddCompetitionViewController.users.filter { $0.nick.hasPrefix(query) ||  $0.firstName.hasPrefix(query) ||  $0.lastName.hasPrefix(query)}
+                } else {
+                    AddCompetitionViewController.foundUsers = [User]()
+                }
+                searchTable.numberOfItems = AddCompetitionViewController.foundUsers.count
                 searchTable.tableView.reloadData()
             }).disposed(by: disposeBag)
+
     }
  
 }

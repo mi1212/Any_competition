@@ -13,7 +13,12 @@ protocol CompetitionsCollectionViewDelegate: AnyObject{
 
 class CompetitionsCollectionView: UIView {
     
-    var competitions = [Competition]()
+    var competitions = [Competition]() {
+        didSet{
+            print("CompetitionsCollectionView competitions.count = \(competitions.count)")
+            competitionsCollectionView.reloadData()
+        }
+    }
     
     weak var delegate: CompetitionsCollectionViewDelegate?
     
@@ -30,7 +35,7 @@ class CompetitionsCollectionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.competitions = CompetitionsViewController.competitions
+//        self.competitions = CompetitionsViewController.competitions
         setupViews()
     }
     
@@ -47,6 +52,10 @@ class CompetitionsCollectionView: UIView {
             competitionsCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             competitionsCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
+    }
+    
+    func reloadCollection() {
+        self.competitionsCollectionView.reloadData()
     }
   
 }
@@ -66,14 +75,14 @@ extension CompetitionsCollectionView: UICollectionViewDelegateFlowLayout {
 
 extension CompetitionsCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        CompetitionsViewController.competitions.count
+        competitions.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath) as! CompetitionCollectionViewCell
 
-        cell.nameLabel.text = CompetitionsViewController.competitions[indexPath.row].title
-        cell.dateLabel.text = dateFormater(CompetitionsViewController.competitions[indexPath.row].date)
+        cell.nameLabel.text = competitions[indexPath.row].title
+        cell.dateLabel.text = dateFormater(competitions[indexPath.row].date)
 
         switch indexPath.row % 2 {
         case 0: cell.contentView.backgroundColor = .anyColor

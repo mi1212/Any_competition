@@ -10,7 +10,11 @@ import Lottie
 
 class CompetitionsViewController: UIViewController {
     
-    static var competitions = [Competition]()
+    var competitions = [Competition]() {
+        didSet{
+            competitionsCollectionView.competitions = competitions
+        }
+    }
     
     let database = Database()
     
@@ -36,6 +40,7 @@ class CompetitionsViewController: UIViewController {
         self.database.delegate = self
         setupNavigationBar()
         setupViews()
+        addObserverToCompetitionsDatabase()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -81,7 +86,7 @@ class CompetitionsViewController: UIViewController {
                 CompetitionsViewController.isAddedListener = true
             }
         } else {
-            CompetitionsViewController.competitions = [Competition]()
+            competitions = [Competition]()
             competitionsCollectionView.competitionsCollectionView.reloadData()
             alert.message = "Сначала нужно авторизоваться, чтобы увидеть свои соревнования"
             self.present(alert, animated: true)
@@ -105,6 +110,18 @@ class CompetitionsViewController: UIViewController {
         self.navigationController?.present(vc, animated: true)
     }
     
+    func addObserverToCompetitionsDatabase() {
+        database.competitionsDatabase.subscribe { [self] competitionsArray in
+            loadingAnimationView.removeFromSuperview()
+            competitions = competitionsArray.element!
+            reloadCollection()
+        }
+    }
+    
+    func reloadCollection() {
+        self.competitionsCollectionView.reloadCollection()
+    }
+    
 }
 
 extension CompetitionsViewController: DatabaseDelegate {
@@ -124,12 +141,6 @@ extension CompetitionsViewController: DatabaseDelegate {
     
     func reloadTableCollectionView() {}
     
-    func reloadView(competitions: [Competition]) {
-        loadingAnimationView.removeFromSuperview()
-        CompetitionsViewController.competitions = competitions.sorted { $0.date > $1.date }
-        self.competitionsCollectionView.competitionsCollectionView.reloadData()
-    }
-    
 }
 
 extension CompetitionsViewController: CompetitionsCollectionViewDelegate {
@@ -137,9 +148,9 @@ extension CompetitionsViewController: CompetitionsCollectionViewDelegate {
     func pressCompetition(index: Int) {
         let vc = CompetitionViewController()
         
-        CompetitionViewController.competition = CompetitionsViewController.competitions[index]
+        CompetitionViewController.competition = competitions[index]
         
-        vc.qtyPlayers = CompetitionsViewController.competitions[index].players.count
+        vc.qtyPlayers = competitions[index].players.count
         
         vc.navigationItem.title = CompetitionViewController.competition?.title
         self.navigationController!.pushViewController(vc, animated: true)

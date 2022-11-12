@@ -31,7 +31,11 @@ class CompetitionViewController: UIViewController {
     
     var qtyPlayers: Int?
     
-    private lazy var tableCollectionView = CompetitionTableView(competitionTable: (CompetitionViewController.competition?.competitionTable!)!, side: self.view.layer.bounds.width/8, playersArray: (CompetitionViewController.competition?.players)!)
+    private lazy var tableCollectionView = CompetitionTableView(
+        competitionTable: (CompetitionViewController.competition?.competitionTable!)!,
+        side: self.view.layer.bounds.width/8,
+        playersArray: (CompetitionViewController.competition?.players)!
+    )
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -46,6 +46,7 @@ class TestViewController: UIViewController {
         self.database.delegate = self
         self.database.getAllUsers()
         setupView()
+        setupObserver()
     }
     
     private func setupView() {
@@ -121,8 +122,11 @@ class TestViewController: UIViewController {
             .throttle(.milliseconds(300), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .subscribe(onNext: { [self]query in
+//                setupSearchTableView()
                 TestViewController.foundUsers = TestViewController.users.filter { $0.nick.hasPrefix(query) ||  $0.firstName.hasPrefix(query) ||  $0.lastName.hasPrefix(query)}
                 tableView.tableView.reloadData()
+                print("\(query)")
+                print("\(TestViewController.foundUsers)")
             }).disposed(by: disposeBag)
     }
     
@@ -134,27 +138,27 @@ class TestViewController: UIViewController {
     }
 }
 
-//extension TestViewController: UITableViewDataSource, UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-////        TestViewController.users.count
+extension TestViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        TestViewController.users.count
 //        TestViewController.foundUsers.count
-////        10
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.identifire, for: indexPath)
-//        let label = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.width, height: cell.bounds.height))
-//        label.text = TestViewController.foundUsers[indexPath.row].nick + " " + TestViewController.foundUsers[indexPath.row].firstName + " " + TestViewController.foundUsers[indexPath.row].lastName
-//        cell.backgroundColor = .white
-//        cell.contentView.addSubview(label)
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let cell = tableView.cellForRow(at: indexPath) as? UITableViewCell
-//        print(cell)
-//    }
-//}
+//        10
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.identifire, for: indexPath)
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.width, height: cell.bounds.height))
+        label.text = TestViewController.foundUsers[indexPath.row].nick + " " + TestViewController.foundUsers[indexPath.row].firstName + " " + TestViewController.foundUsers[indexPath.row].lastName
+        cell.backgroundColor = .white
+        cell.contentView.addSubview(label)
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as? UITableViewCell
+        print(cell)
+    }
+}
 
 extension TestViewController: DatabaseDelegate {
     func reloadView(competitions: [Competition]) {

@@ -6,12 +6,25 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class SearchTableView: UIView {
     
+    let dataBase = Database()
+    
+    var numberOfItems = 0 {
+        didSet{
+            self.tableView.reloadData()
+        }
+    }
+    
+    var choosedUser = PublishRelay<User>()
+    
     let tableView: UITableView = {
         let table = UITableView()
-        table.backgroundColor = .clear
+        table.backgroundColor = .white
+        table.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identifire)
         table.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.identifire)
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
@@ -19,11 +32,12 @@ class SearchTableView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .clear
+        self.backgroundColor = .white
         self.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.dataSource = self
         self.tableView.delegate = self
         setupView()
+        dataBase.getAllUsers()
     }
     
     required init?(coder: NSCoder) {
@@ -47,16 +61,18 @@ class SearchTableView: UIView {
 
 extension SearchTableView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        0
+        numberOfItems
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.identifire, for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifire, for: indexPath) as! SearchTableViewCell
+        let user = AddCompetitionViewController.foundUsers[indexPath.row]
+        cell.setupCell(firstName: user.firstName, lastName: user.lastName, nickName: user.nick)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        tableView.deselectRow(at: indexPath, animated: false)
+        choosedUser.accept(AddCompetitionViewController.foundUsers[indexPath.row])
     }
 }

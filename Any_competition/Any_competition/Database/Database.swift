@@ -7,9 +7,10 @@
 
 import Foundation
 import FirebaseFirestore
+import RxCocoa
+import RxSwift
 
 protocol DatabaseDelegate: AnyObject {
-    func reloadView(competitions: [Competition])
     func reloadViewWithoutAnimate(user: User)
     func animateAndReloadView(user: User)
     func reloadTableCollectionView()
@@ -26,6 +27,10 @@ class Database {
     var db = Firestore.firestore()
     
     private let decoder = JSONDecoder()
+    
+    public var usersDatabase = PublishRelay<[User]>()
+    
+    public var competitionsDatabase = PublishRelay<[Competition]>()
    
 //      отправка созданного соревнования в Firebase Database
     func sendCompetitionToDatabase(competition: Competition) {
@@ -76,8 +81,8 @@ class Database {
                         }
                     }
                 }
-                self.delegate?.reloadView(competitions: competitions)
-
+//                self.delegate?.reloadView(competitions: competitions)
+                competitionsDatabase.accept(competitions)
                 
             } else {
                 print("error - \(error as Any)")
@@ -87,12 +92,12 @@ class Database {
     }
     
     //      запрос всех документов из коллекции users с Firebase Database
-        func getAllUsers(){
+    func getAllUsers(){
             print("--- get data from Firestore DataBase")
             
             let docRef = db.collection("users")
             
-            var users = [User]()
+            var usersArray = [User]()
             
             docRef.getDocuments() { [self] snapshotData, error in
                 if snapshotData != nil {
@@ -106,14 +111,16 @@ class Database {
                                 
                                 let user = try self.decoder.decode(User.self, from: data)
                                 
-                                users.append(user)
+                                usersArray.append(user)
+                                
                             } catch {
                                 print("an error occurred", error)
                             }
                         }
                     }
+                    usersDatabase.accept(usersArray)
                     
-                    delegate?.receivedAllUsers(users: users)
+                    delegate?.receivedAllUsers(users: usersArray)
                     
                 } else {
                     print("error - \(error as Any)")
@@ -250,7 +257,8 @@ class Database {
                         }
                     }
 
-                self.delegate?.reloadView(competitions: competitions)
+                self.competitionsDatabase.accept(competitions)
+
             }
             
         })
@@ -267,10 +275,7 @@ class Database {
             
         }).remove()
         
-        self.delegate?.reloadView(competitions: competitions)
-        
-        
-        
+        self.competitionsDatabase.accept(competitions)
     }
     
 //      метод добавляет слушателя для документа

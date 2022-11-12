@@ -16,7 +16,7 @@ class AddCompetitionViewController: UIViewController {
     var playersArray: [User] = []
     
     let competitionTitleTextField = AnyCompUITextField(placeholder: "Название", isSecure: false)
-    
+    // массивы для поиска
     static var users = [User]()
     
     static var foundUsers = [User]()
@@ -63,7 +63,10 @@ class AddCompetitionViewController: UIViewController {
         setupController()
         addPlayerButton.addTarget(self, action: #selector(tapAddPlayerButton), for: .touchUpInside)
         addCompetitionButton.addTarget(self, action: #selector(tapAddCompetitionButton), for: .touchUpInside)
-        self.view.addGestureRecognizer(tap)
+//        self.view.addGestureRecognizer(tap)
+        self.database.getAllUsers()
+        addObserverToUser()
+        choosedUser()
     }
     
     private func setupController() {
@@ -126,7 +129,6 @@ class AddCompetitionViewController: UIViewController {
         self.view.addSubview(addPlayerView)
         addPlayerView.delegate = self
         
-        
         let inset: CGFloat = 16
 
         NSLayoutConstraint.activate([
@@ -149,11 +151,8 @@ class AddCompetitionViewController: UIViewController {
     }
     
     @objc func tapAddPlayerButton() {
-
         animationTapButton(addPlayerButton)
-        
         setupAddPlayerView()
-        
     }
     
     @objc func tapAddCompetitionButton() {
@@ -213,6 +212,44 @@ class AddCompetitionViewController: UIViewController {
         view.endEditing(true)
     }
     
+    private func addObserverToUser() {
+        database.usersDatabase.subscribe(onNext: { value in
+            AddCompetitionViewController.users = value
+    })
+    }
+    
+    private func choosedUser() {
+        addPlayerView.searchTable.choosedUser.subscribe { [self] user in
+
+            if playersArray.contains(user) {
+                print("--- user has already added")
+            } else {
+                self.playersArray.append(user)
+
+                playersTable.playersArray = self.playersArray
+                playersTable.collectionView.reloadData()
+                cons?.isActive = false
+
+                cons = playersTable.heightAnchor.constraint(equalToConstant: CGFloat(52*playersArray.count))
+
+                cons?.isActive = true
+
+                self.view.reloadInputViews()
+            }
+            
+            
+    //        addPlayerView.clearTextFields()
+//            UIView.animate(withDuration: 0.2, delay: 0) { [self] in
+//                addPlayerView.layer.opacity = 0.2
+//                addPlayerView.transform = addPlayerView.transform.scaledBy(x: 0.2, y: 0.2)
+//            } completion: { [self] _ in
+//                addPlayerView.removeFromSuperview()
+//                addPlayerView.layer.opacity = 1
+//                addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1/0.2, y: 1/0.2)
+//            }
+            
+        }
+    }
 }
 
 extension AddCompetitionViewController: AddPlayerViewDelegate {
@@ -229,7 +266,7 @@ extension AddCompetitionViewController: AddPlayerViewDelegate {
         cons?.isActive = true
 
         self.view.reloadInputViews()
-        addPlayerView.clearTextFields()
+//        addPlayerView.clearTextFields()
         UIView.animate(withDuration: 0.2, delay: 0) { [self] in
             addPlayerView.layer.opacity = 0.2
             addPlayerView.transform = addPlayerView.transform.scaledBy(x: 0.2, y: 0.2)
@@ -241,7 +278,7 @@ extension AddCompetitionViewController: AddPlayerViewDelegate {
     }
     
     func tapCancelButton() {
-        addPlayerView.clearTextFields()
+//        addPlayerView.clearTextFields()
         UIView.animate(withDuration: 0.2, delay: 0) { [self] in
             addPlayerView.layer.opacity = 0.2
             addPlayerView.transform = addPlayerView.transform.scaledBy(x: 0.2, y: 0.2)

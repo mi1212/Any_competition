@@ -45,7 +45,7 @@ import Foundation
 //
 //}
 
-struct User: Identifiable, Codable {
+struct User: Identifiable, Codable, Hashable {
     
     var firstName: String
     var lastName: String

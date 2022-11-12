@@ -259,7 +259,6 @@ extension CompetitionTableView: UICollectionViewDataSource {
             return cell
             
         case playersScoreCollectionView:
-//            let player = playersArray![indexPath.section]
             if let score = CompetitionViewController.competition?.competitionTable!.calculatePointsOfPlayer(indexPath.section) {
                 
                 cell.label.text = "\(score)"
