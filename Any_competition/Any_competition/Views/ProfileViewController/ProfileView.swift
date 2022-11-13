@@ -15,7 +15,11 @@ class ProfileView: UIView {
     
     var delegate: ProfileViewDelegate?
     
-    var database = Database()
+    var user: User? {
+        didSet {
+            setupData(user: user!)
+        }
+    }
     
     let contentView: UIView = {
         let view = UIView()
@@ -57,6 +61,8 @@ class ProfileView: UIView {
     let lostGamesLabel = AnyCompUILabel(title: "Поражения: ", fontSize: .medium)
 
     let wonCupsLabel = AnyCompUILabel(title: "Кубки: ", fontSize: .medium)
+    
+    let friendsView = FriendsCollectionView()
 
     let exitButton = AnyCompClearUIButton(title: "Выйти из профиля")
     
@@ -74,14 +80,14 @@ class ProfileView: UIView {
         self.backgroundColor = .anyColor1
         self.translatesAutoresizingMaskIntoConstraints = false
         self.layer.cornerRadius = 24
-        setupView()
+        setupViews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupView() {
+    private func setupViews() {
         self.addSubview(contentView)
         contentView.addSubview(nickLabel)
         
@@ -96,6 +102,8 @@ class ProfileView: UIView {
         stackView.addArrangedSubview(wonGamesLabel)
         stackView.addArrangedSubview(lostGamesLabel)
         stackView.addArrangedSubview(wonCupsLabel)
+        
+        contentView.addSubview(friendsView)
         
         contentView.addSubview(exitButton)
         
@@ -140,6 +148,13 @@ class ProfileView: UIView {
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             stackView.heightAnchor.constraint(equalToConstant: inset*6)
+        ])
+        
+        NSLayoutConstraint.activate([
+            friendsView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: inset),
+            friendsView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            friendsView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            friendsView.heightAnchor.constraint(equalToConstant: inset*10)
         ])
         
         NSLayoutConstraint.activate([

@@ -12,7 +12,7 @@ import RxSwift
 protocol AddPlayerViewDelegate: AnyObject {
     func tapAddButton(player: User)
     
-    func tapCancelButton()
+    func tapCancelButtonAddPlayerView()
 }
 
 class AddPlayerView: UIView {
@@ -20,6 +20,8 @@ class AddPlayerView: UIView {
     var delegate: AddPlayerViewDelegate?
     
     var users = [User]()
+    
+    var foundUsers = [User]()
     
     let disposeBag = DisposeBag()
     
@@ -119,7 +121,7 @@ class AddPlayerView: UIView {
     
     @objc func tapCancelButton() {
         animationTapButton(cancelButton)
-        delegate?.tapCancelButton()
+        delegate?.tapCancelButtonAddPlayerView()
     }
     
     private func setupObserver() {
@@ -132,12 +134,12 @@ class AddPlayerView: UIView {
 //            })
             .subscribe(onNext: { [self] query in
                 if query != "" {
-                    AddCompetitionViewController.foundUsers = AddCompetitionViewController.users.filter { $0.nick.hasPrefix(query) ||  $0.firstName.hasPrefix(query) ||  $0.lastName.hasPrefix(query)}
+                    foundUsers = users.filter { $0.nick.hasPrefix(query) ||  $0.firstName.hasPrefix(query) ||  $0.lastName.hasPrefix(query)}
                 } else {
-                    AddCompetitionViewController.foundUsers = [User]()
+                    foundUsers = [User]()
                 }
-                searchTable.numberOfItems = AddCompetitionViewController.foundUsers.count
-                searchTable.tableView.reloadData()
+                searchTable.foundUsers = foundUsers
+//                searchTable.tableView.reloadData()
             }).disposed(by: disposeBag)
 
     }

@@ -54,6 +54,8 @@
 		FD73A21C28FF254B005FAFCE /* AnyCompClearUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD73A21B28FF254B005FAFCE /* AnyCompClearUIButton.swift */; };
 		FD7C894A28ED55D100699A7E /* AnyCompLogoUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C894928ED55D100699A7E /* AnyCompLogoUILabel.swift */; };
 		FD7D09822900559400E6CE60 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7D09812900559400E6CE60 /* User.swift */; };
+		FD83DB082920D03400025282 /* FriendsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD83DB072920D03400025282 /* FriendsCollectionView.swift */; };
+		FD83DB0A2920F89000025282 /* FindToAddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD83DB092920F89000025282 /* FindToAddUserViewController.swift */; };
 		FD85BA6728FE75EE0027468E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD85BA6628FE75EE0027468E /* ProfileView.swift */; };
 		FD85BA6928FE83C80027468E /* 98200-drag.json in Resources */ = {isa = PBXBuildFile; fileRef = FD85BA6828FE83C80027468E /* 98200-drag.json */; };
 		FD85BA6B28FE86500027468E /* 93693-moving-truck.json in Resources */ = {isa = PBXBuildFile; fileRef = FD85BA6A28FE86500027468E /* 93693-moving-truck.json */; };
@@ -150,6 +152,8 @@
 		FD73A21B28FF254B005FAFCE /* AnyCompClearUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompClearUIButton.swift; sourceTree = "<group>"; };
 		FD7C894928ED55D100699A7E /* AnyCompLogoUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompLogoUILabel.swift; sourceTree = "<group>"; };
 		FD7D09812900559400E6CE60 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FD83DB072920D03400025282 /* FriendsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionView.swift; sourceTree = "<group>"; };
+		FD83DB092920F89000025282 /* FindToAddUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindToAddUserViewController.swift; sourceTree = "<group>"; };
 		FD85BA6628FE75EE0027468E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		FD85BA6828FE83C80027468E /* 98200-drag.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "98200-drag.json"; sourceTree = "<group>"; };
 		FD85BA6A28FE86500027468E /* 93693-moving-truck.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "93693-moving-truck.json"; sourceTree = "<group>"; };
@@ -389,6 +393,7 @@
 				FDB1085B28FDAF9B0020F32C /* LoginView.swift */,
 				FD85BA6628FE75EE0027468E /* ProfileView.swift */,
 				FDDD6DFD28FFC41300F9A649 /* CreateUserView.swift */,
+				FD83DB072920D03400025282 /* FriendsCollectionView.swift */,
 			);
 			path = ProfileViewController;
 			sourceTree = "<group>";
@@ -445,6 +450,7 @@
 			isa = PBXGroup;
 			children = (
 				FDB1085928FDADD80020F32C /* ProfileViewController.swift */,
+				FD83DB092920F89000025282 /* FindToAddUserViewController.swift */,
 			);
 			path = ProfileViewController;
 			sourceTree = "<group>";
@@ -659,6 +665,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD83DB082920D03400025282 /* FriendsCollectionView.swift in Sources */,
 				FDCCA2A228DAF97700709E80 /* AddCompetitionViewController.swift in Sources */,
 				FDCCA2A428DAFA4600709E80 /* AnyCompUITextField.swift in Sources */,
 				FD1E200028F096C8001CF0EA /* PlayerDataCollectionViewCell.swift in Sources */,
@@ -684,6 +691,7 @@
 				FD94809328F4697500B31A89 /* Match.swift in Sources */,
 				FD9F36932913DC6F003CE1C6 /* AnyCompLoadinUIButton.swift in Sources */,
 				FD339E9928E34D6D000DD8F3 /* UIFont+Extention.swift in Sources */,
+				FD83DB0A2920F89000025282 /* FindToAddUserViewController.swift in Sources */,
 				FD20D63D28DB0DE9007F5F8F /* CompetitionCollectionViewCell.swift in Sources */,
 				FD94809528F46C1700B31A89 /* Player.swift in Sources */,
 				FD27FF3628D9E85900D2A405 /* AnyCompUIButton.swift in Sources */,

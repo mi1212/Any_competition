@@ -36,6 +36,8 @@ class TestViewController: UIViewController {
     
     let userTextField = AnyCompUITextField(placeholder: "Поиск пользователя", isSecure: false)
     
+    let followersCollectionView = FriendsCollectionView()
+    
     let testButton = AnyCompLoadinUIButton(title: "Test")
     
     private lazy var tableView = SearchTableView()
@@ -47,6 +49,7 @@ class TestViewController: UIViewController {
         self.database.getAllUsers()
         setupView()
         setupObserver()
+        setupCollectionView()
     }
     
     private func setupView() {
@@ -54,7 +57,7 @@ class TestViewController: UIViewController {
         contentView.addSubview(label)
         contentView.addSubview(userLabel)
         contentView.addSubview(userTextField)
-        contentView.addSubview(tableView)
+
         contentView.addSubview(testButton)
         testButton.addTarget(self, action: #selector(tapTestButton), for: .touchUpInside)
 
@@ -87,17 +90,23 @@ class TestViewController: UIViewController {
         ])
 
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: userTextField.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-            tableView.bottomAnchor.constraint(equalTo: testButton.topAnchor)
-        ])
-
-        NSLayoutConstraint.activate([
             testButton.heightAnchor.constraint(equalToConstant: 64),
             testButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             testButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             testButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
+    }
+    
+    private func setupCollectionView() {
+        contentView.addSubview(followersCollectionView)
+        
+        let inset = CGFloat(16)
+        
+        NSLayoutConstraint.activate([
+            followersCollectionView.topAnchor.constraint(equalTo: userTextField.bottomAnchor, constant: inset),
+            followersCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+            followersCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            followersCollectionView.heightAnchor.constraint(equalToConstant: 150)
         ])
     }
     

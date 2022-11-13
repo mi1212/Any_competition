@@ -41,6 +41,8 @@ class ProfileViewController: UIViewController {
     
     let createUserView = CreateUserView()
     
+    let addPlayerView = AddPlayerView()
+    
     let loadingAnimationView: AnimationView = {
         let animationView = AnimationView()
         animationView.animation = Animation.named("loading")
@@ -65,6 +67,7 @@ class ProfileViewController: UIViewController {
         loginView.delegate = self
         createUserView.delegate = self
         profileView.delegate = self
+        profileView.friendsView.delegate = self
         checkLogin()
         self.view.addGestureRecognizer(tap)
     }
@@ -165,6 +168,31 @@ class ProfileViewController: UIViewController {
             profileView.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -2*inset),
             profileView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
+    }
+    
+    private func setupAddPlayerView() {
+        self.view.addSubview(addPlayerView)
+//        addPlayerView.delegate = self
+        
+        let inset: CGFloat = 16
+
+        NSLayoutConstraint.activate([
+            addPlayerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            addPlayerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            addPlayerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: inset),
+            addPlayerView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.7)
+        ])
+        
+        addPlayerView.layer.opacity = 0.2
+        addPlayerView.transform = addPlayerView.transform.scaledBy(x: 0.2, y: 0.2)
+        UIView.animate(withDuration: 0.2, delay: 0) { [self] in
+            addPlayerView.layer.opacity = 1
+            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1/0.2, y: 1/0.2)
+        } completion: { [self] _ in
+            addPlayerView.layer.opacity = 1
+            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1, y: 1)
+        }
+
     }
     
     // функция проверки логина
@@ -316,7 +344,8 @@ extension ProfileViewController: DatabaseDelegate {
         loadingAnimationView.stop()
         loadingAnimationView.layer.opacity = 0
         setupViewsWithoutLogin()
-        profileView.setupData(user: ProfileViewController.user!)
+        profileView.user = user
+//        profileView.setupData(user: ProfileViewController.user!)
     }
     
     func animateAndReloadView(user: User) {
@@ -371,4 +400,26 @@ extension ProfileViewController {
         scrollView.verticalScrollIndicatorInsets = .zero
     }
     
+}
+
+extension ProfileViewController: FriendsCollectionViewDelegate {
+    func tapAddFriendButton() {
+        let vc = FindToAddUserViewController()
+        self.navigationController?.present(vc, animated: true)
+    }
+}
+
+extension ProfileViewController: AddPlayerViewDelegate {
+    func tapAddButton(player: User) {}
+    
+    func tapCancelButtonAddPlayerView() {
+        UIView.animate(withDuration: 0.2, delay: 0) { [self] in
+            addPlayerView.layer.opacity = 0.2
+            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 0.2, y: 0.2)
+        } completion: { [self] _ in
+            addPlayerView.removeFromSuperview()
+            addPlayerView.layer.opacity = 1
+            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1/0.2, y: 1/0.2)
+        }
+    }
 }

@@ -13,6 +13,12 @@ class SearchTableView: UIView {
     
     let dataBase = Database()
     
+    var foundUsers = [User]() {
+        didSet{
+            numberOfItems = self.foundUsers.count
+        }
+    }
+    
     var numberOfItems = 0 {
         didSet{
             self.tableView.reloadData()
@@ -23,7 +29,8 @@ class SearchTableView: UIView {
     
     let tableView: UITableView = {
         let table = UITableView()
-        table.backgroundColor = .white
+//        table.backgroundColor = .white
+        table.backgroundColor = .clear
         table.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identifire)
         table.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.identifire)
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -32,7 +39,8 @@ class SearchTableView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+//        self.backgroundColor = .white
+        self.backgroundColor = .clear
         self.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -66,13 +74,13 @@ extension SearchTableView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifire, for: indexPath) as! SearchTableViewCell
-        let user = AddCompetitionViewController.foundUsers[indexPath.row]
+        let user = foundUsers[indexPath.row]
         cell.setupCell(firstName: user.firstName, lastName: user.lastName, nickName: user.nick)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        choosedUser.accept(AddCompetitionViewController.foundUsers[indexPath.row])
+        choosedUser.accept(foundUsers[indexPath.row])
     }
 }

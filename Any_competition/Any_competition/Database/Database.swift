@@ -91,7 +91,7 @@ class Database {
         
     }
     
-    //      запрос всех документов из коллекции users с Firebase Database
+//      запрос всех документов из коллекции users с Firebase Database
     func getAllUsers(){
             print("--- get data from Firestore DataBase")
             
@@ -213,6 +213,7 @@ class Database {
              "lastName": tempUser.lastName,
              "nick" : tempUser.nick,
              "mail" : tempUser.mail,
+             "friends": tempUser.friends.map{ $0.dictionary },
              "playedGames": tempUser.playedGames,
              "wonGames": tempUser.wonGames,
              "lostGames": tempUser.lostGames,

@@ -17,9 +17,13 @@ class AddCompetitionViewController: UIViewController {
     
     let competitionTitleTextField = AnyCompUITextField(placeholder: "Название", isSecure: false)
     // массивы для поиска
-    static var users = [User]()
+    var users = [User]() {
+        didSet{
+            addPlayerView.users = self.users
+        }
+    }
     
-    static var foundUsers = [User]()
+    var foundUsers = [User]()
     
     var searchText: String? = nil
     
@@ -128,6 +132,7 @@ class AddCompetitionViewController: UIViewController {
     private func setupAddPlayerView() {
         self.view.addSubview(addPlayerView)
         addPlayerView.delegate = self
+        addPlayerView.searchTable.foundUsers = foundUsers
         
         let inset: CGFloat = 16
 
@@ -213,8 +218,8 @@ class AddCompetitionViewController: UIViewController {
     }
     
     private func addObserverToUser() {
-        database.usersDatabase.subscribe(onNext: { value in
-            AddCompetitionViewController.users = value
+        database.usersDatabase.subscribe(onNext: { [self] value in
+            users = value
     })
     }
     
@@ -277,7 +282,7 @@ extension AddCompetitionViewController: AddPlayerViewDelegate {
         }
     }
     
-    func tapCancelButton() {
+    func tapCancelButtonAddPlayerView() {
 //        addPlayerView.clearTextFields()
         UIView.animate(withDuration: 0.2, delay: 0) { [self] in
             addPlayerView.layer.opacity = 0.2
