@@ -55,11 +55,11 @@ class TabBarController: UITabBarController {
                 title: "competitions",
                 image: "ic_car"
             ),
-            setupTabBar(
-                viewController: TestViewController(),
-                title: "competitions",
-                image: "ic_car"
-            ),
+//            setupTabBar(
+//                viewController: TestViewController(),
+//                title: "competitions",
+//                image: "ic_car"
+//            ),
             setupTabBar(
                 viewController: ProfileViewController(),
                 title: "profile",

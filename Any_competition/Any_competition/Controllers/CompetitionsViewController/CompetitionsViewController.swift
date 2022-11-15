@@ -59,9 +59,7 @@ class CompetitionsViewController: UIViewController {
     
     private func setupNavigationBar() {
         let plus = UIImage(systemName: "plus")
-        
         self.navigationController?.navigationBar.tintColor = .anyDarckColor
-        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: plus, style: .plain, target: self, action: #selector(addCompetition))
     }
     

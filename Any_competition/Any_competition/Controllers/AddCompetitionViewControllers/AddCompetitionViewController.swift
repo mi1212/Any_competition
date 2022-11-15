@@ -15,6 +15,8 @@ class AddCompetitionViewController: UIViewController {
     
     var playersArray: [User] = []
     
+    var accessUserArray: [User] = []
+    
     let competitionTitleTextField = AnyCompUITextField(placeholder: "Название", isSecure: false)
     // массивы для поиска
     var users = [User]() {
@@ -188,9 +190,7 @@ class AddCompetitionViewController: UIViewController {
         animationTapButton(addCompetitionButton)
         
         if let user = TabBarController.user {
-            
-            let accessUserArray = [user]
-            
+
             let playerQty = playersArray.count
             
             let title = competitionTitleTextField.text
@@ -210,7 +210,7 @@ class AddCompetitionViewController: UIViewController {
                     qtyPlayers: playerQty,
                     date: Date.now.description,
                     players: playersArray,
-                    accessUserArray: accessUserArray
+                    accessUserIdArray: playersArray.map {$0.id!}
                 )
                 
                 database.sendCompetitionToDatabase(competition: competition)

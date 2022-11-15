@@ -121,8 +121,6 @@ class TestViewController: UIViewController {
 //            tableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
 //            tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -inset)
 //        ])
-//
-//
 //    }
     
     private func setupObserver() {

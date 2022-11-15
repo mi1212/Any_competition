@@ -27,13 +27,13 @@ struct Competition: Identifiable, Codable {
         ]
     }
     
-    init(title: String, qtyPlayers: Int, date: String, players: [User], accessUserArray: [User]) {
+    init(title: String, qtyPlayers: Int, date: String, players: [User], accessUserIdArray: [String]) {
         self.title = title
         self.qtyPlayers = qtyPlayers
         self.date = date
         self.players = players
         self.competitionTable = CompetitionTable(playersArray: self.players)
-        self.accessUsersIdArray = accessUserArray.map {$0.id!}
+        self.accessUsersIdArray = accessUserIdArray
     }
     
 }
