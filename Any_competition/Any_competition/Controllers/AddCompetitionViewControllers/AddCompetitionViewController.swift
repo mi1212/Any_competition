@@ -23,6 +23,18 @@ class AddCompetitionViewController: UIViewController {
         }
     }
     
+    // тумблер показать/скрыть addPlayerView
+    var isSetupAddPlayerView = false {
+        didSet{
+            switch self.isSetupAddPlayerView {
+            case true:
+                setupAddPlayerView()
+            case false:
+                closeAddPlayerView()
+            }
+        }
+    }
+    
     var foundUsers = [User]()
     
     var searchText: String? = nil
@@ -67,7 +79,7 @@ class AddCompetitionViewController: UIViewController {
         setupController()
         addPlayerButton.addTarget(self, action: #selector(tapAddPlayerButton), for: .touchUpInside)
         addCompetitionButton.addTarget(self, action: #selector(tapAddCompetitionButton), for: .touchUpInside)
-//        self.view.addGestureRecognizer(tap)
+//        self.view.addGestureRecognizer(tap) // при добавлении жеста перестает работать didSelectRow в таблице addPlayer
         self.database.getAllUsers()
         addObserverToUser()
         choosedUser()
@@ -128,7 +140,7 @@ class AddCompetitionViewController: UIViewController {
             addCompetitionButton.heightAnchor.constraint(equalToConstant: 64)
         ])
     }
-    
+    // установить вью добавления игрока
     private func setupAddPlayerView() {
         self.view.addSubview(addPlayerView)
         addPlayerView.delegate = self
@@ -152,12 +164,23 @@ class AddCompetitionViewController: UIViewController {
             addPlayerView.layer.opacity = 1
             addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1, y: 1)
         }
-
+    }
+    // убрать вью добавления игрока
+    private func closeAddPlayerView() {
+        UIView.animate(withDuration: 0.2, delay: 0) { [self] in
+            addPlayerView.layer.opacity = 0.2
+            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 0.2, y: 0.2)
+        } completion: { [self] _ in
+            addPlayerView.removeFromSuperview()
+            addPlayerView.layer.opacity = 1
+            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1/0.2, y: 1/0.2)
+            addPlayerView.userTextField.text = ""
+        }
     }
     
     @objc func tapAddPlayerButton() {
         animationTapButton(addPlayerButton)
-        setupAddPlayerView()
+        self.isSetupAddPlayerView.toggle()
     }
     
     @objc func tapAddCompetitionButton() {
@@ -220,7 +243,7 @@ class AddCompetitionViewController: UIViewController {
     private func addObserverToUser() {
         database.usersDatabase.subscribe(onNext: { [self] value in
             users = value
-    })
+        })
     }
     
     private func choosedUser() {
@@ -241,18 +264,6 @@ class AddCompetitionViewController: UIViewController {
 
                 self.view.reloadInputViews()
             }
-            
-            
-    //        addPlayerView.clearTextFields()
-//            UIView.animate(withDuration: 0.2, delay: 0) { [self] in
-//                addPlayerView.layer.opacity = 0.2
-//                addPlayerView.transform = addPlayerView.transform.scaledBy(x: 0.2, y: 0.2)
-//            } completion: { [self] _ in
-//                addPlayerView.removeFromSuperview()
-//                addPlayerView.layer.opacity = 1
-//                addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1/0.2, y: 1/0.2)
-//            }
-            
         }
     }
 }
@@ -271,7 +282,6 @@ extension AddCompetitionViewController: AddPlayerViewDelegate {
         cons?.isActive = true
 
         self.view.reloadInputViews()
-//        addPlayerView.clearTextFields()
         UIView.animate(withDuration: 0.2, delay: 0) { [self] in
             addPlayerView.layer.opacity = 0.2
             addPlayerView.transform = addPlayerView.transform.scaledBy(x: 0.2, y: 0.2)
@@ -283,16 +293,7 @@ extension AddCompetitionViewController: AddPlayerViewDelegate {
     }
     
     func tapCancelButtonAddPlayerView() {
-//        addPlayerView.clearTextFields()
-        UIView.animate(withDuration: 0.2, delay: 0) { [self] in
-            addPlayerView.layer.opacity = 0.2
-            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 0.2, y: 0.2)
-        } completion: { [self] _ in
-            addPlayerView.removeFromSuperview()
-            addPlayerView.layer.opacity = 1
-            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1/0.2, y: 1/0.2)
-        }
-        
+        self.isSetupAddPlayerView.toggle()
     }
     
     
