@@ -15,7 +15,6 @@ class CompetitionsCollectionView: UIView {
     
     var competitions = [Competition]() {
         didSet{
-            print("CompetitionsCollectionView competitions.count = \(competitions.count)")
             competitionsCollectionView.reloadData()
         }
     }
@@ -35,7 +34,6 @@ class CompetitionsCollectionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
-//        self.competitions = CompetitionsViewController.competitions
         setupViews()
     }
     

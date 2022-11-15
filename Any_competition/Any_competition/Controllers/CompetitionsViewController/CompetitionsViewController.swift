@@ -104,8 +104,13 @@ class CompetitionsViewController: UIViewController {
     }
     
     @objc func addCompetition() {
-        let vc = AddCompetitionViewController()
-        self.navigationController?.present(vc, animated: true)
+        if userDefaults.object(forKey: "uid") != nil {
+            let vc = AddCompetitionViewController()
+            self.navigationController?.present(vc, animated: true)
+        } else {
+            alert.message = "Сначала нужно авторизоваться, для добавления соревнования"
+            self.present(alert, animated: true)
+        }
     }
     
     func addObserverToCompetitionsDatabase() {

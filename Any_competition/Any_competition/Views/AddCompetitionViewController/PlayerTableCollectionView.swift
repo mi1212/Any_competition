@@ -1,5 +1,5 @@
 //
-//  playersTableCollectionView.swift
+//  PlayersTableCollectionView.swift
 //  Any_competition
 //
 //  Created by Mikhail Chuparnov on 01.11.2022.
@@ -11,7 +11,7 @@ import UIKit
 //    func pressCompetition(index: Int)
 //}
 
-class playersTableCollectionView: UIView {
+class PlayersTableCollectionView: UIView {
     
 //    weak var delegate: CompetitionsCollectionViewDelegate?
     
@@ -55,7 +55,7 @@ class playersTableCollectionView: UIView {
   
 }
 
-extension playersTableCollectionView: UICollectionViewDelegateFlowLayout {
+extension PlayersTableCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         0
@@ -71,7 +71,7 @@ extension playersTableCollectionView: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension playersTableCollectionView: UICollectionViewDataSource {
+extension PlayersTableCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         playersArray.count
     }
