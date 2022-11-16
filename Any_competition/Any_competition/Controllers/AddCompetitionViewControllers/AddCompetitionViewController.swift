@@ -20,6 +20,7 @@ class AddCompetitionViewController: UIViewController {
     let competitionTitleTextField = AnyCompUITextField(placeholder: "Название", isSecure: false)
 
     // массив пользователей найденных в поиске
+    
     var foundUsers = [User]()
     
     var searchText: String? = nil
@@ -60,12 +61,18 @@ class AddCompetitionViewController: UIViewController {
         return alert
     }()
     
+    private lazy var tap: UITapGestureRecognizer = {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        return tap
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
-        setupController()
         addCompetitionButton.addTarget(self, action: #selector(tapAddCompetitionButton), for: .touchUpInside)
+        addCompetitionButton.isExclusiveTouch = true
 //        self.view.addGestureRecognizer(tap) // при добавлении жеста перестает работать didSelectRow в таблице addPlayer
+        setupController()
         self.database.getAllUsers()
         addObserverToUser()
         choosedUser()
@@ -86,8 +93,8 @@ class AddCompetitionViewController: UIViewController {
         let inset: CGFloat = 16
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
         ])
@@ -106,9 +113,7 @@ class AddCompetitionViewController: UIViewController {
             competitionTitleTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset*3),
             competitionTitleTextField.heightAnchor.constraint(equalToConstant: 52)
         ])
-        
-        
-        
+          
         NSLayoutConstraint.activate([
             playersTableLabel.topAnchor.constraint(equalTo: competitionTitleTextField.bottomAnchor, constant: inset),
             playersTableLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
@@ -131,10 +136,15 @@ class AddCompetitionViewController: UIViewController {
         NSLayoutConstraint.activate([
             addCompetitionButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             addCompetitionButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-            addCompetitionButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            addCompetitionButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -inset),
+            addCompetitionButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset),
+            addCompetitionButton.topAnchor.constraint(equalTo: playersTable.bottomAnchor, constant: inset),
+//            addCompetitionButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -inset),
             addCompetitionButton.heightAnchor.constraint(equalToConstant: 64)
         ])
+
+    }
+    
+    private func  setupSearchTable() {
         
         contentView.addSubview(searchTable)
         
@@ -142,9 +152,10 @@ class AddCompetitionViewController: UIViewController {
             searchTable.leadingAnchor.constraint(equalTo: userTextField.leadingAnchor),
             searchTable.trailingAnchor.constraint(equalTo: userTextField.trailingAnchor),
             searchTable.topAnchor.constraint(equalTo: userTextField.bottomAnchor),
-            searchTable.bottomAnchor.constraint(equalTo: addCompetitionButton.topAnchor),
+            searchTable.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
         ])
     }
+    
 //    // установить вью добавления игрока
 //    private func setupAddPlayerView() {
 //        self.view.addSubview(addPlayerView)
@@ -235,13 +246,8 @@ class AddCompetitionViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    private lazy var tap: UITapGestureRecognizer = {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-        return tap
-    }()
-    
     @objc func dismissKeyboard() {
-        view.endEditing(true)
+        self.view.endEditing(true)
     }
     
     private func addObserverToUser() {
@@ -249,6 +255,7 @@ class AddCompetitionViewController: UIViewController {
             users = value
         })
     }
+    
     // подписка на выбранного игрока в searchTable
     private func choosedUser() {
         self.searchTable.choosedUser.subscribe { [self] user in
@@ -270,6 +277,7 @@ class AddCompetitionViewController: UIViewController {
             }
         }
     }
+    
     // установка наблюдателя за textField "поиск пользователя"
     private func setupObserver() {
         userTextField.rx.text
@@ -278,18 +286,17 @@ class AddCompetitionViewController: UIViewController {
             .distinctUntilChanged()
             .subscribe(onNext: { [self] query in
                 if query != "" {
+                    setupSearchTable()                  // добавляем searchTable на view
                     foundUsers = users.filter { $0.nick.hasPrefix(query) ||  $0.firstName.hasPrefix(query) ||  $0.lastName.hasPrefix(query)}
-                    print(query)
-                    print(foundUsers)
-                    
                 } else {
+                    searchTable.removeFromSuperview()   // удаляем searchTable с view если текстовое поле пустое
                     foundUsers = [User]()
                 }
                 searchTable.foundUsers = foundUsers
-//                searchTable.tableView.reloadData()
             }).disposed(by: disposeBag)
 
     }
+    
     // функция добавления себя сразу в список игроков
     private func addOwnUserToPlayersArray() {
         if let user = TabBarController.user {

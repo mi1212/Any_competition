@@ -40,6 +40,7 @@ class AnyCompUITextField: UITextField {
         self.layer.borderColor = UIColor.lightGray.cgColor
         self.layer.borderWidth = 1
         self.clipsToBounds = true
+        self.clearButtonMode = .whileEditing
         translatesAutoresizingMaskIntoConstraints = false
     }
 }

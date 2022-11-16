@@ -76,9 +76,23 @@ class ProfileViewController: UIViewController {
     // MARK: - Navigation
     
     private func setupNavigationBar() {
-        let plus = UIImage(systemName: "bell")
         self.navigationController?.navigationBar.tintColor = .anyDarckColor
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: plus, style: .plain, target: self, action: #selector(presentNotificationController))
+        
+        let plus = UIImage(systemName: "bell")
+        let gear = UIImage(systemName: "gear")
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: plus,
+            style: .done,
+            target: self,
+            action: #selector(presentNotificationController)
+        )
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: gear,
+            style: .plain,
+            target: self,
+            action: #selector(presentSettingsController)
+        )
     }
    
     // установка вьюх если нужно залогиниться
@@ -177,40 +191,38 @@ class ProfileViewController: UIViewController {
         ])
     }
     
-    private func setupAddPlayerView() {
-        self.view.addSubview(addPlayerView)
-//        addPlayerView.delegate = self
-        
-        let inset: CGFloat = 16
-
-        NSLayoutConstraint.activate([
-            addPlayerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            addPlayerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-            addPlayerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: inset),
-            addPlayerView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.7)
-        ])
-        
-        addPlayerView.layer.opacity = 0.2
-        addPlayerView.transform = addPlayerView.transform.scaledBy(x: 0.2, y: 0.2)
-        UIView.animate(withDuration: 0.2, delay: 0) { [self] in
-            addPlayerView.layer.opacity = 1
-            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1/0.2, y: 1/0.2)
-        } completion: { [self] _ in
-            addPlayerView.layer.opacity = 1
-            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1, y: 1)
-        }
-    }
+//    private func setupAddPlayerView() {
+//        self.view.addSubview(addPlayerView)
+////        addPlayerView.delegate = self
+//
+//        let inset: CGFloat = 16
+//
+//        NSLayoutConstraint.activate([
+//            addPlayerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+//            addPlayerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+//            addPlayerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: inset),
+//            addPlayerView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.7)
+//        ])
+//
+//        addPlayerView.layer.opacity = 0.2
+//        addPlayerView.transform = addPlayerView.transform.scaledBy(x: 0.2, y: 0.2)
+//        UIView.animate(withDuration: 0.2, delay: 0) { [self] in
+//            addPlayerView.layer.opacity = 1
+//            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1/0.2, y: 1/0.2)
+//        } completion: { [self] _ in
+//            addPlayerView.layer.opacity = 1
+//            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1, y: 1)
+//        }
+//    }
     
     @objc func presentNotificationController() {
-//        if userDefaults.object(forKey: "uid") != nil {
-            let vc = AddCompetitionViewController()
+            let vc = NotificationViewController()
             self.navigationController?.pushViewController(vc, animated: true)
-//        } else {
-////            alert.message = "Сначала нужно авторизоваться, для добавления соревнования"
-////            self.present(alert, animated: true)
-//        }
-        
-        
+    }
+    
+    @objc func presentSettingsController() {
+            let vc = SettingsViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // функция проверки логина
@@ -336,6 +348,7 @@ extension ProfileViewController: CreateUserViewDelegate {
 }
 
 extension ProfileViewController: ProfileViewDelegate {
+    
     func exitFromProfileView() {
         
         ProfileViewController.user = nil
@@ -349,6 +362,7 @@ extension ProfileViewController: ProfileViewDelegate {
             
         }
     }
+    
 }
 
 extension ProfileViewController: DatabaseDelegate {

@@ -39,6 +39,8 @@
 		FD324CE5291184C300A46A2F /* AddPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD324CE4291184C300A46A2F /* AddPlayerView.swift */; };
 		FD339E9928E34D6D000DD8F3 /* UIFont+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD339E9828E34D6D000DD8F3 /* UIFont+Extention.swift */; };
 		FD3573D1291C1DC2000AADB0 /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3573D0291C1DC2000AADB0 /* SearchTableView.swift */; };
+		FD4FC26629251B5F0011D264 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4FC26529251B5F0011D264 /* SettingsViewController.swift */; };
+		FD4FC26829251B810011D264 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4FC26729251B810011D264 /* NotificationViewController.swift */; };
 		FD546BBB28EACFBE006B21B1 /* Hardpixel-nn51.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD91763F28EACD470017014B /* Hardpixel-nn51.otf */; };
 		FD546BBC28EACFBE006B21B1 /* DiaryOfAn8BitMage-lYDD.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD91763D28EACD460017014B /* DiaryOfAn8BitMage-lYDD.ttf */; };
 		FD5927C429112DE800CF2E7C /* PlayerTableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5927C329112DE800CF2E7C /* PlayerTableCollectionView.swift */; };
@@ -139,6 +141,8 @@
 		FD324CE4291184C300A46A2F /* AddPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerView.swift; sourceTree = "<group>"; };
 		FD339E9828E34D6D000DD8F3 /* UIFont+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extention.swift"; sourceTree = "<group>"; };
 		FD3573D0291C1DC2000AADB0 /* SearchTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableView.swift; sourceTree = "<group>"; };
+		FD4FC26529251B5F0011D264 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		FD4FC26729251B810011D264 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		FD5927C329112DE800CF2E7C /* PlayerTableCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableCollectionView.swift; sourceTree = "<group>"; };
 		FD5927C529112EBE00CF2E7C /* PlayersTableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTableCollectionViewCell.swift; sourceTree = "<group>"; };
 		FD5927C729115C5300CF2E7C /* AnimationTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTapButton.swift; sourceTree = "<group>"; };
@@ -451,6 +455,8 @@
 			children = (
 				FDB1085928FDADD80020F32C /* ProfileViewController.swift */,
 				FD83DB092920F89000025282 /* FindToAddUserViewController.swift */,
+				FD4FC26529251B5F0011D264 /* SettingsViewController.swift */,
+				FD4FC26729251B810011D264 /* NotificationViewController.swift */,
 			);
 			path = ProfileViewController;
 			sourceTree = "<group>";
@@ -675,6 +681,7 @@
 				FDF7EDED28E9EBC900FAE28E /* CompetitionTableCollectionViewCell.swift in Sources */,
 				FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */,
 				FD0D008A28DDBF0200C47570 /* PlayersInfoTableViewCell.swift in Sources */,
+				FD4FC26829251B810011D264 /* NotificationViewController.swift in Sources */,
 				FD68DC4628E2D61A00FE0E64 /* CompetitionTable.swift in Sources */,
 				FD3573D1291C1DC2000AADB0 /* SearchTableView.swift in Sources */,
 				FD5927C429112DE800CF2E7C /* PlayerTableCollectionView.swift in Sources */,
@@ -695,6 +702,7 @@
 				FD20D63D28DB0DE9007F5F8F /* CompetitionCollectionViewCell.swift in Sources */,
 				FD94809528F46C1700B31A89 /* Player.swift in Sources */,
 				FD27FF3628D9E85900D2A405 /* AnyCompUIButton.swift in Sources */,
+				FD4FC26629251B5F0011D264 /* SettingsViewController.swift in Sources */,
 				FD7C894A28ED55D100699A7E /* AnyCompLogoUILabel.swift in Sources */,
 				FDB1085A28FDADD80020F32C /* ProfileViewController.swift in Sources */,
 				FD5927C829115C5300CF2E7C /* AnimationTapButton.swift in Sources */,
