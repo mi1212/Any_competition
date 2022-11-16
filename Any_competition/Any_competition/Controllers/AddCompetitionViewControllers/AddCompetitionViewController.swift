@@ -13,35 +13,14 @@ class AddCompetitionViewController: UIViewController {
 
     let database = Database()
     
+    var users = [User]()
+    
     var playersArray: [User] = []
     
-    var accessUserArray: [User] = []
-    
     let competitionTitleTextField = AnyCompUITextField(placeholder: "Название", isSecure: false)
-    // массивы для поиска
-    var users = [User]() {
-        didSet{
-//            addPlayerView.users = self.users
-        }
-    }
-    
-    // тумблер показать/скрыть addPlayerView
-//    var isSetupAddPlayerView = false {
-//        didSet{
-//            switch self.isSetupAddPlayerView {
-//            case true:
-//                setupAddPlayerView()
-//            case false:
-//                closeAddPlayerView()
-//            }
-//        }
-//    }
+
     // массив пользователей найденных в поиске
-    var foundUsers = [User]() {
-        didSet{
-//            SearchTableView.users = self.users
-        }
-    }
+    var foundUsers = [User]()
     
     var searchText: String? = nil
     
@@ -66,12 +45,8 @@ class AddCompetitionViewController: UIViewController {
     let playersTable = PlayersTableCollectionView()
     
     let playersTableLabel = AnyCompUILabel(title: "Игроки", fontSize: .small)
-
-    //    let addPlayerButton = AnyCompUIButton(title: "Добавить игроков")
     
     let addCompetitionButton = AnyCompUIButton(title: "Готово")
-    
-//    let addPlayerView = AddPlayerView()
     
     let userTextField = AnyCompUITextField(placeholder: "Поиск пользователя", isSecure: false)
     
@@ -93,7 +68,7 @@ class AddCompetitionViewController: UIViewController {
 //        self.view.addGestureRecognizer(tap) // при добавлении жеста перестает работать didSelectRow в таблице addPlayer
         self.database.getAllUsers()
         addObserverToUser()
-//        choosedUser()
+        choosedUser()
         addOwnUserToPlayersArray()
         setupObserver()
     }
@@ -102,13 +77,10 @@ class AddCompetitionViewController: UIViewController {
         
         self.view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        
         contentView.addSubview(competitionTitleTextField)
         contentView.addSubview(playersTableLabel)
         contentView.addSubview(userTextField)
-        
         contentView.addSubview(playersTable)
-//        contentView.addSubview(addPlayerButton)
         contentView.addSubview(addCompetitionButton)
                 
         let inset: CGFloat = 16
@@ -156,17 +128,7 @@ class AddCompetitionViewController: UIViewController {
             playersTable.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
         ])
         
-        
-        
-//        NSLayoutConstraint.activate([
-//            addPlayerButton.topAnchor.constraint(equalTo: playersTable.bottomAnchor, constant: inset*2),
-//            addPlayerButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-//            addPlayerButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-//            addPlayerButton.heightAnchor.constraint(equalToConstant: 64)
-//        ])
-        
         NSLayoutConstraint.activate([
-//            addCompetitionButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset),
             addCompetitionButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             addCompetitionButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             addCompetitionButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
@@ -183,7 +145,7 @@ class AddCompetitionViewController: UIViewController {
             searchTable.bottomAnchor.constraint(equalTo: addCompetitionButton.topAnchor),
         ])
     }
-    // установить вью добавления игрока
+//    // установить вью добавления игрока
 //    private func setupAddPlayerView() {
 //        self.view.addSubview(addPlayerView)
 //        addPlayerView.delegate = self
@@ -208,7 +170,7 @@ class AddCompetitionViewController: UIViewController {
 //            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1, y: 1)
 //        }
 //    }
-    // убрать вью добавления игрока
+//    // убрать вью добавления игрока
 //    private func closeAddPlayerView() {
 //        UIView.animate(withDuration: 0.2, delay: 0) { [self] in
 //            addPlayerView.layer.opacity = 0.2
@@ -220,11 +182,12 @@ class AddCompetitionViewController: UIViewController {
 //            addPlayerView.userTextField.text = ""
 //        }
 //    }
-    // презентовать вью добавления игроков в соревнование
+//     // презентовать вью добавления игроков в соревнование
 //    @objc func tapAddPlayerButton() {
 //        animationTapButton(addPlayerButton)
 //        self.isSetupAddPlayerView.toggle()
 //    }
+
     // добавление соревнования в базу данных
     @objc func tapAddCompetitionButton() {
         
@@ -286,36 +249,33 @@ class AddCompetitionViewController: UIViewController {
             users = value
         })
     }
-    
-//    private func choosedUser() {
-//        addPlayerView.searchTable.choosedUser.subscribe { [self] user in
-//
-//            if playersArray.contains(user) {
-//                print("--- user has already added")
-//            } else {
-//                self.playersArray.append(user)
-//
-//                playersTable.playersArray = self.playersArray
-//                playersTable.collectionView.reloadData()
-//                cons?.isActive = false
-//
-//                cons = playersTable.heightAnchor.constraint(equalToConstant: CGFloat(52*playersArray.count))
-//
-//                cons?.isActive = true
-//
-//                self.view.reloadInputViews()
-//            }
-//        }
-//    }
-    
+    // подписка на выбранного игрока в searchTable
+    private func choosedUser() {
+        self.searchTable.choosedUser.subscribe { [self] user in
+
+            if playersArray.contains(user) {
+                print("--- user has already added")
+            } else {
+                self.playersArray.append(user)
+
+                playersTable.playersArray = self.playersArray
+                playersTable.collectionView.reloadData()
+                cons?.isActive = false
+
+                cons = playersTable.heightAnchor.constraint(equalToConstant: CGFloat(52*playersArray.count))
+
+                cons?.isActive = true
+
+                self.view.reloadInputViews()
+            }
+        }
+    }
+    // установка наблюдателя за textField "поиск пользователя"
     private func setupObserver() {
         userTextField.rx.text
             .orEmpty
             .throttle(.milliseconds(300), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
-//            .filter({ string in
-//                string != ""
-//            })
             .subscribe(onNext: { [self] query in
                 if query != "" {
                     foundUsers = users.filter { $0.nick.hasPrefix(query) ||  $0.firstName.hasPrefix(query) ||  $0.lastName.hasPrefix(query)}
@@ -330,7 +290,7 @@ class AddCompetitionViewController: UIViewController {
             }).disposed(by: disposeBag)
 
     }
-    
+    // функция добавления себя сразу в список игроков
     private func addOwnUserToPlayersArray() {
         if let user = TabBarController.user {
             self.playersArray.append(user)
@@ -348,34 +308,3 @@ class AddCompetitionViewController: UIViewController {
     }
     
 }
-
-//extension AddCompetitionViewController: AddPlayerViewDelegate {
-//    func tapAddButton(player: User) {
-//
-//        self.playersArray.append(player)
-//
-//        playersTable.playersArray = self.playersArray
-//        playersTable.collectionView.reloadData()
-//        cons?.isActive = false
-//
-//        cons = playersTable.heightAnchor.constraint(equalToConstant: CGFloat(52*playersArray.count))
-//
-//        cons?.isActive = true
-//
-//        self.view.reloadInputViews()
-//        UIView.animate(withDuration: 0.2, delay: 0) { [self] in
-//            addPlayerView.layer.opacity = 0.2
-//            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 0.2, y: 0.2)
-//        } completion: { [self] _ in
-//            addPlayerView.removeFromSuperview()
-//            addPlayerView.layer.opacity = 1
-//            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1/0.2, y: 1/0.2)
-//        }
-//    }
-//
-//    func tapCancelButtonAddPlayerView() {
-//        self.isSetupAddPlayerView.toggle()
-//    }
-//
-//
-//}

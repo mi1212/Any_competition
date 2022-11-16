@@ -62,6 +62,7 @@ class ProfileViewController: UIViewController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         self.view.backgroundColor = .backgroundColor
         self.database.delegate = self
         loginView.delegate = self
@@ -73,6 +74,12 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - Navigation
+    
+    private func setupNavigationBar() {
+        let plus = UIImage(systemName: "bell")
+        self.navigationController?.navigationBar.tintColor = .anyDarckColor
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: plus, style: .plain, target: self, action: #selector(presentNotificationController))
+    }
    
     // установка вьюх если нужно залогиниться
     private func setupViewsToLogin() {
@@ -192,7 +199,18 @@ class ProfileViewController: UIViewController {
             addPlayerView.layer.opacity = 1
             addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1, y: 1)
         }
-
+    }
+    
+    @objc func presentNotificationController() {
+//        if userDefaults.object(forKey: "uid") != nil {
+            let vc = AddCompetitionViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+//        } else {
+////            alert.message = "Сначала нужно авторизоваться, для добавления соревнования"
+////            self.present(alert, animated: true)
+//        }
+        
+        
     }
     
     // функция проверки логина
