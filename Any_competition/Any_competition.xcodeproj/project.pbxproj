@@ -82,6 +82,8 @@
 		FDE7036128E412B500FF4F06 /* CompetitionNetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE7036028E412B500FF4F06 /* CompetitionNetView.swift */; };
 		FDE720DD28DC8F9400FAF811 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FDE720DC28DC8F9400FAF811 /* GoogleService-Info.plist */; };
 		FDF151E72926265500A102A4 /* AddFriendNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF151E62926265500A102A4 /* AddFriendNotification.swift */; };
+		FDF151E9292665FC00A102A4 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF151E8292665FC00A102A4 /* UserViewController.swift */; };
+		FDF151EB292667D700A102A4 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF151EA292667D700A102A4 /* UserProfileView.swift */; };
 		FDF7EDEB28E9E6EE00FAE28E /* UIColor+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7EDEA28E9E6EE00FAE28E /* UIColor+Extention.swift */; };
 		FDF7EDED28E9EBC900FAE28E /* CompetitionTableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7EDEC28E9EBC900FAE28E /* CompetitionTableCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -185,6 +187,8 @@
 		FDE7036028E412B500FF4F06 /* CompetitionNetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionNetView.swift; sourceTree = "<group>"; };
 		FDE720DC28DC8F9400FAF811 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FDF151E62926265500A102A4 /* AddFriendNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendNotification.swift; sourceTree = "<group>"; };
+		FDF151E8292665FC00A102A4 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		FDF151EA292667D700A102A4 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		FDF7EDEA28E9E6EE00FAE28E /* UIColor+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extention.swift"; sourceTree = "<group>"; };
 		FDF7EDEC28E9EBC900FAE28E /* CompetitionTableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionTableCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -401,6 +405,7 @@
 				FD85BA6628FE75EE0027468E /* ProfileView.swift */,
 				FDDD6DFD28FFC41300F9A649 /* CreateUserView.swift */,
 				FD83DB072920D03400025282 /* FriendsCollectionView.swift */,
+				FDF151EA292667D700A102A4 /* UserProfileView.swift */,
 			);
 			path = ProfileViewController;
 			sourceTree = "<group>";
@@ -460,6 +465,7 @@
 				FD83DB092920F89000025282 /* FindToAddUserViewController.swift */,
 				FD4FC26529251B5F0011D264 /* SettingsViewController.swift */,
 				FD4FC26729251B810011D264 /* NotificationViewController.swift */,
+				FDF151E8292665FC00A102A4 /* UserViewController.swift */,
 			);
 			path = ProfileViewController;
 			sourceTree = "<group>";
@@ -684,6 +690,7 @@
 				FDF7EDED28E9EBC900FAE28E /* CompetitionTableCollectionViewCell.swift in Sources */,
 				FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */,
 				FD0D008A28DDBF0200C47570 /* PlayersInfoTableViewCell.swift in Sources */,
+				FDF151EB292667D700A102A4 /* UserProfileView.swift in Sources */,
 				FD4FC26829251B810011D264 /* NotificationViewController.swift in Sources */,
 				FD68DC4628E2D61A00FE0E64 /* CompetitionTable.swift in Sources */,
 				FD3573D1291C1DC2000AADB0 /* SearchTableView.swift in Sources */,
@@ -715,6 +722,7 @@
 				FDDD6DFE28FFC41300F9A649 /* CreateUserView.swift in Sources */,
 				FD27FF3428D9DFAF00D2A405 /* AnyCompUILabel.swift in Sources */,
 				FD1E200228F1A7A5001CF0EA /* shakeTextFieldifEmpty.swift in Sources */,
+				FDF151E9292665FC00A102A4 /* UserViewController.swift in Sources */,
 				FD85BA6728FE75EE0027468E /* ProfileView.swift in Sources */,
 				FD5927C629112EBE00CF2E7C /* PlayersTableCollectionViewCell.swift in Sources */,
 				FD1E1FFE28F08ED1001CF0EA /* DateFormater.swift in Sources */,
@@ -902,6 +910,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

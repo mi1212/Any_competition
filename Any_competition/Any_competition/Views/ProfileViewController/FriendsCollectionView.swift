@@ -13,11 +13,17 @@ protocol FriendsCollectionViewDelegate: AnyObject {
 
 class FriendsCollectionView: UIView {
     
+    let userDefaults = UserDefaults.standard
+    
     weak var delegate: FriendsCollectionViewDelegate?
     
     // MARK: - UIViews
     
-    var user: User?
+    var user: User? {
+        didSet {
+//            self.layoutIfNeeded()
+        }
+    }
     
     let label = AnyCompUILabel(title: "Друзья: ", fontSize: .medium)
     
@@ -38,7 +44,7 @@ class FriendsCollectionView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        setupMainView()
+        self.backgroundColor = .brown
         setupViews()
         self.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -47,23 +53,17 @@ class FriendsCollectionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupViews() {
+    private func setupViewsWithoutButton() {
         self.addSubview(label)
-        self.addSubview(addFriendButton)
         self.addSubview(followersCollectionView)
-        addFriendButton.backgroundColor = .anyColor
-        addFriendButton.addTarget(self, action: #selector(tapAddFriendButton), for: .touchUpInside)
+        
+        
         
         let inset = CGFloat(8)
         
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: self.topAnchor),
             label.leadingAnchor.constraint(equalTo: self.leadingAnchor)
-        ])
-        NSLayoutConstraint.activate([
-            addFriendButton.topAnchor.constraint(equalTo: label.topAnchor),
-            addFriendButton.bottomAnchor.constraint(equalTo: label.bottomAnchor),
-            addFriendButton.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -72,6 +72,29 @@ class FriendsCollectionView: UIView {
             followersCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             followersCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -inset),
         ])
+    }
+    
+    private func setupButton() {
+        self.addSubview(addFriendButton)
+        
+        addFriendButton.backgroundColor = .anyColor
+        addFriendButton.addTarget(self, action: #selector(tapAddFriendButton), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            addFriendButton.topAnchor.constraint(equalTo: label.topAnchor),
+            addFriendButton.bottomAnchor.constraint(equalTo: label.bottomAnchor),
+            addFriendButton.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+        ])
+    }
+    
+    private func setupViews() {
+//        if user?.id == userDefaults.object(forKey: "uid") as! String {
+            setupViewsWithoutButton()
+            setupButton()
+//        } else {
+//            setupViewsWithoutButton()
+//        }
+        
     }
     
     private func setupMainView() {
@@ -104,8 +127,7 @@ extension FriendsCollectionView: UICollectionViewDataSource {
         
         return cell
     }
-    
-    
+ 
 }
 
 extension FriendsCollectionView: UICollectionViewDelegateFlowLayout {

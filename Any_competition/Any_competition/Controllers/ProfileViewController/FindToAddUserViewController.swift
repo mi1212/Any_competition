@@ -37,6 +37,7 @@ class FindToAddUserViewController: UIViewController {
         setupObserverToTextField()
         setupViews()
         setupSearchTableView()
+        choosedUserObserver()
     }
     
     private func setupViews() {
@@ -47,9 +48,9 @@ class FindToAddUserViewController: UIViewController {
         let inset: CGFloat = 16
 
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: inset),
-            label.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -inset),
-            label.topAnchor.constraint(equalTo: self.view.topAnchor, constant: inset),
+            label.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: inset),
+            label.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -inset),
+            label.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: inset),
         ])
 
         NSLayoutConstraint.activate([
@@ -103,6 +104,15 @@ class FindToAddUserViewController: UIViewController {
 //                searchTable.tableView.reloadData()
             }).disposed(by: disposeBag)
 
+    }
+    
+    // подписка на выбранного игрока в searchTable
+    private func choosedUserObserver() {
+        self.searchTable.choosedUser.subscribe { [self] user in
+            let vc = UserViewController()
+            vc.userProfileView.user = user
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 
 }

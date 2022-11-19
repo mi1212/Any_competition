@@ -58,6 +58,7 @@ struct User: Identifiable, Codable, Hashable {
     var wonGames: Int = 0
     var lostGames: Int = 0
     var wonCups: Int = 0
+    var notificationArray: [AddFriendNotification] = []
      
     var dictionary: [String: Any] {
         return [
@@ -70,7 +71,8 @@ struct User: Identifiable, Codable, Hashable {
             "playedGames": playedGames,
             "wonGames": wonGames,
             "lostGames": lostGames,
-            "wonCups": wonCups
+            "wonCups": wonCups,
+            "notificationArray": notificationArray.map {$0.dictionary}
         ]
     }
     

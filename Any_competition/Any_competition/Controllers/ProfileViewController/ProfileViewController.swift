@@ -437,7 +437,7 @@ extension ProfileViewController {
 extension ProfileViewController: FriendsCollectionViewDelegate {
     func tapAddFriendButton() {
         let vc = FindToAddUserViewController()
-        self.navigationController?.present(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

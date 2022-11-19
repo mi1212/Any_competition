@@ -218,6 +218,7 @@ class Database {
              "wonGames": tempUser.wonGames,
              "lostGames": tempUser.lostGames,
              "wonCups": tempUser.wonCups,
+             "notificationArray": tempUser.notificationArray.map{ $0.dictionary }
          ]) { err in
              if let err = err {
                  print("--- Error adding document: \(err)")
@@ -254,7 +255,7 @@ class Database {
                             
                             competitions.append(competition)
                         } catch {
-                            print("an error occurred", error)
+                            print("--- addSnapshotListener an error occurred", error)
                         }
                     }
 

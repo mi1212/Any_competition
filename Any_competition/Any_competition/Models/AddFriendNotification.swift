@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AddFriendNotification {
+struct AddFriendNotification: Codable, Hashable {
     
     let date: Date
     let userFriend: User // User, который просится в друзья
@@ -26,6 +26,10 @@ struct AddFriendNotification {
     
     func declineAdd () {
         
+    }
+    
+    public static func == (lhs: AddFriendNotification, rhs: AddFriendNotification) -> Bool {
+        lhs.date == rhs.date && lhs.userFriend == rhs.userFriend
     }
     
 }
