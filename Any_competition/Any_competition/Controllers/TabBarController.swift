@@ -53,7 +53,7 @@ class TabBarController: UITabBarController {
             setupTabBar(
                 viewController: CompetitionsViewController(),
                 title: "competitions",
-                image: "ic_car"
+                image: "competitions"
             ),
 //            setupTabBar(
 //                viewController: TestViewController(),
