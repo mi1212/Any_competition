@@ -157,8 +157,9 @@ class LoginViewController: UIViewController {
     func addObserverToUserDatabase() {
         database.userDatabase.subscribe { [self] user in
             loadingAnimationView.removeFromSuperview()
-            
-            let vc = CustomTabBarController()
+            self.mailTextField.text = ""
+            self.passTextField.text = ""
+            let vc = CustomTabBarController(user: user)
             
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -192,8 +193,9 @@ class LoginViewController: UIViewController {
                         
                         print("--- handler was finished with uid = \(uid)")
                     }
-                    self.mailTextField.text = ""
-                    self.passTextField.text = ""
+                    
+//                    self.mailTextField.text = ""
+//                    self.passTextField.text = ""
                     
                 }
             }
@@ -209,7 +211,6 @@ class LoginViewController: UIViewController {
     
     @objc func tapCreateUserButton() {
         animationTapButton(createUserButton)
-        
         view.endEditing(true)
         let vc = CreateUserViewController()
         self.navigationController?.pushViewController(vc, animated: true)

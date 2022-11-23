@@ -22,6 +22,13 @@ class CompetitionsViewController: UIViewController {
     
 //    let animationView = AnimationView()
     
+    var user: User? = nil {
+        willSet{
+            self.user = CustomTabBarController.user
+        }
+        
+    }
+    
     static var isAddedListener = false
     
     var timer: Timer?
@@ -37,6 +44,7 @@ class CompetitionsViewController: UIViewController {
     override func viewDidLoad() {
         self.tabBarController?.tabBar.isHidden = true
         super.viewDidLoad()
+        print("--- user \(user)")
 //        self.view.backgroundColor = .backgroundColor
         view.backgroundColor = .anyPurpleColor
 //        self.database.delegate = self

@@ -20,14 +20,26 @@ class CustomTabBarController: UITabBarController {
     let userDefaults = UserDefaults.standard
 
     private let disposeBag = DisposeBag()
+    
+    init(user: User) {
+        super.init(nibName: nil, bundle: nil)
+        CustomTabBarController.user = user
+    }
 
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupHierarchy()
         setupLayout()
         setupProperties()
         bind()
-//        getUserData()
         view.layoutIfNeeded()
     }
     
@@ -48,14 +60,12 @@ class CustomTabBarController: UITabBarController {
     }
     
     private func setupProperties() {
-        self.tabBar.isHidden = true
-        
+
         customTabBar.translatesAutoresizingMaskIntoConstraints = false
 
         selectedIndex = 0
         let controllers = CustomTabItem.allCases.map {
             $0.viewController
-            
         }
 
         setViewControllers(controllers, animated: true)

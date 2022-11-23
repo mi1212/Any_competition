@@ -103,9 +103,7 @@ final class CustomTabBar: UIView {
 //                            make.width.equalToSuperview().multipliedBy(0.5)
 //                        }
 //                    }
-                    
-                    
-                    
+  
                 }
             }
             .disposed(by: disposeBag)
@@ -125,8 +123,7 @@ final class CustomTabBar: UIView {
 //                            make.width.equalToSuperview().multipliedBy(0.5)
 //                        }
 //                    }
-                    
-                    
+ 
                 }
             }
             .disposed(by: disposeBag)

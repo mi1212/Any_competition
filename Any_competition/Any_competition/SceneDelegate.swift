@@ -21,9 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         var controller = UINavigationController(rootViewController: LoginViewController())
         
-        if let uid = userDefaults.object(forKey: "uid") {
-            controller = UINavigationController(rootViewController: CustomTabBarController())
-        }
+//        if let uid = userDefaults.object(forKey: "uid") {
+//            controller = UINavigationController(rootViewController: CustomTabBarController())
+//        }
         
         window.rootViewController = controller
         

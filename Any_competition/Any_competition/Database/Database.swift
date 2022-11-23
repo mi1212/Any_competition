@@ -151,7 +151,7 @@ class Database {
                                 let data = try JSONSerialization.data(withJSONObject: json! as Any)
                                 
                                 let tempUser = try self.decoder.decode(User.self, from: data)
-                                ProfileViewController.user = tempUser
+//                                ProfileViewController.user = tempUser
 //                                TabBarController.user = tempUser
                                 if isReloadView {
                                     delegate?.animateAndReloadView(user: tempUser)
@@ -311,9 +311,9 @@ class Database {
         
         let competitions = [Competition]()
         
-        let ref = db.collection("competitions").whereField("accessUsersIdArray", arrayContainsAny: [ProfileViewController.user?.id]).addSnapshotListener({ querySnapshot, error in
+//        let ref = db.collection("competitions").whereField("accessUsersIdArray", arrayContainsAny: [ProfileViewController.user?.id]).addSnapshotListener({ querySnapshot, error in
             
-        }).remove()
+//        }).remove()
         
         self.competitionsDatabase.accept(competitions)
     }

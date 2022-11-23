@@ -14,7 +14,11 @@ class ProfileViewController: UIViewController {
     
     let userDefaults = UserDefaults.standard
     
-    static var user: User?
+    var user: User? {
+        didSet {
+            print("--- user setuped")
+        }
+    }
     
     let database = Database()
     
@@ -30,9 +34,11 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         self.tabBarController?.tabBar.isHidden = true
         super.viewDidLoad()
-        view.backgroundColor = .anyPurpleColor
+        view.backgroundColor = .backgroundColor
+        user = CustomTabBarController.user
         setupNavigationBar()
-//        setupViews()
+        profileView.setupUserData(user: CustomTabBarController.user!)
+        setupViews()
 //        self.view.addGestureRecognizer(tap)
     }
     
@@ -63,7 +69,9 @@ class ProfileViewController: UIViewController {
         view.addSubview(profileView)
 
         profileView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.top.equalToSuperview().inset(60)
+            make.top.bottom.equalTo(view.snp.bottom).inset(105)
         }
         
     }
