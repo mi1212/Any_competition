@@ -86,11 +86,11 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
                 scorePlayer2Label.text = "\(score2)"
                 
                 if score1 > score2 {
-                    scorePlayer1Label.backgroundColor = .anyColor
-                    scorePlayer2Label.backgroundColor = .anyColor1
+                    scorePlayer1Label.backgroundColor = .anyGreenColor
+                    scorePlayer2Label.backgroundColor = .anyPurpleColor
                 } else {
-                    scorePlayer2Label.backgroundColor = .anyColor
-                    scorePlayer1Label.backgroundColor = .anyColor1
+                    scorePlayer2Label.backgroundColor = .anyGreenColor
+                    scorePlayer1Label.backgroundColor = .anyPurpleColor
                 }
             }
             

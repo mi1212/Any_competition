@@ -29,7 +29,7 @@ class AddPlayerView: UIView {
     
     let contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .anyColor1
+        view.backgroundColor = .anyGreenColor
         view.layer.cornerRadius = 24
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false

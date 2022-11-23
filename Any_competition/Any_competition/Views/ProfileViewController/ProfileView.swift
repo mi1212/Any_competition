@@ -23,7 +23,7 @@ class ProfileView: UIView {
     
     let contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .anyColor1
+        view.backgroundColor = .anyPurpleColor
         view.layer.cornerRadius = 24
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -68,7 +68,7 @@ class ProfileView: UIView {
     
     private lazy var imageView: UIImageView = {
         let image = UIImageView()
-        image.backgroundColor = .anyColor
+        image.backgroundColor = .anyGreenColor
         image.image = UIImage(systemName: "person")
         image.tintColor = .anyDarckColor
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -77,7 +77,7 @@ class ProfileView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .anyColor1
+        self.backgroundColor = .anyPurpleColor
         self.translatesAutoresizingMaskIntoConstraints = false
         self.layer.cornerRadius = 24
         setupViews()

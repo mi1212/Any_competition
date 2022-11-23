@@ -17,15 +17,17 @@ extension UIColor {
         return color
     }
     
-    static var anyColor: UIColor{
+    static var anyGreenColor: UIColor{
         #colorLiteral(red: 0.4745098039, green: 0.9215686275, blue: 0.4666666667, alpha: 1)
     }
     
-    static var anyColor1: UIColor{
+    static var anyPurpleColor: UIColor{
         #colorLiteral(red: 0.8862745098, green: 0.8274509804, blue: 1, alpha: 1)
     }
     
-    
+//    static var anuPurpleColor: UIColor{
+//
+//    }
     
     static var anyDarckColor: UIColor{
         #colorLiteral(red: 0.1411764706, green: 0.1882352941, blue: 0.368627451, alpha: 1)

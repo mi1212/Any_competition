@@ -774,9 +774,13 @@ PODS:
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
+  - RxGesture (4.0.4):
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
   - RxRelay (6.5.0):
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
+  - SnapKit (5.6.0)
 
 DEPENDENCIES:
   - Firebase
@@ -784,7 +788,9 @@ DEPENDENCIES:
   - FirebaseFirestore
   - lottie-ios
   - RxCocoa (= 6.5.0)
+  - RxGesture
   - RxSwift (= 6.5.0)
+  - SnapKit (~> 5.6.0)
 
 SPEC REPOS:
   trunk:
@@ -810,8 +816,10 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - RxCocoa
+    - RxGesture
     - RxRelay
     - RxSwift
+    - SnapKit
 
 SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
@@ -836,9 +844,11 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxGesture: f3efb47ed2d26a8082f7b660d4a59970e275a7f8
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 5f509f08ea7deffb4671004007c82b0a8586d82b
+PODFILE CHECKSUM: 9cf0e7f77257d2ec767c975231f822592520e7f3
 
 COCOAPODS: 1.11.3

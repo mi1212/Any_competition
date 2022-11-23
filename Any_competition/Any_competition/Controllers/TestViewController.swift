@@ -23,7 +23,7 @@ class TestViewController: UIViewController {
     
     let contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .anyColor1
+        view.backgroundColor = .anyPurpleColor
         view.layer.cornerRadius = 24
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -47,68 +47,68 @@ class TestViewController: UIViewController {
         self.view.backgroundColor = .white
         self.database.delegate = self
         self.database.getAllUsers()
-        setupView()
+//        setupView()
         setupObserver()
-        setupCollectionView()
+//        setupCollectionView()
     }
     
-    private func setupView() {
-        self.view.addSubview(contentView)
-        contentView.addSubview(label)
-        contentView.addSubview(userLabel)
-        contentView.addSubview(userTextField)
-
-        contentView.addSubview(testButton)
-        testButton.addTarget(self, action: #selector(tapTestButton), for: .touchUpInside)
-
-        let inset: CGFloat = 16
-
-        NSLayoutConstraint.activate([
-            contentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: inset),
-            contentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -inset),
-            contentView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.8),
-            contentView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-        ])
-
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
-        ])
-
-        NSLayoutConstraint.activate([
-            userLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: inset),
-            userLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            userLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-        ])
-
-        NSLayoutConstraint.activate([
-            userTextField.topAnchor.constraint(equalTo: userLabel.bottomAnchor, constant: inset),
-            userTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            userTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-            userTextField.heightAnchor.constraint(equalToConstant: 52)
-        ])
-
-        NSLayoutConstraint.activate([
-            testButton.heightAnchor.constraint(equalToConstant: 64),
-            testButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            testButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-            testButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
-    }
+//    private func setupView() {
+//        self.view.addSubview(contentView)
+//        contentView.addSubview(label)
+//        contentView.addSubview(userLabel)
+//        contentView.addSubview(userTextField)
+//
+//        contentView.addSubview(testButton)
+//        testButton.addTarget(self, action: #selector(tapTestButton), for: .touchUpInside)
+//
+//        let inset: CGFloat = 16
+//
+//        NSLayoutConstraint.activate([
+//            contentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: inset),
+//            contentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -inset),
+//            contentView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.8),
+//            contentView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+//        ])
+//
+//        NSLayoutConstraint.activate([
+//            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+//            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+//            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
+//        ])
+//
+//        NSLayoutConstraint.activate([
+//            userLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: inset),
+//            userLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+//            userLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+//        ])
+//
+//        NSLayoutConstraint.activate([
+//            userTextField.topAnchor.constraint(equalTo: userLabel.bottomAnchor, constant: inset),
+//            userTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+//            userTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+//            userTextField.heightAnchor.constraint(equalToConstant: 52)
+//        ])
+//
+//        NSLayoutConstraint.activate([
+//            testButton.heightAnchor.constraint(equalToConstant: 64),
+//            testButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+//            testButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+//            testButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+//        ])
+//    }
     
-    private func setupCollectionView() {
-        contentView.addSubview(followersCollectionView)
-        
-        let inset = CGFloat(16)
-        
-        NSLayoutConstraint.activate([
-            followersCollectionView.topAnchor.constraint(equalTo: userTextField.bottomAnchor, constant: inset),
-            followersCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            followersCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
-            followersCollectionView.heightAnchor.constraint(equalToConstant: 150)
-        ])
-    }
+//    private func setupCollectionView() {
+//        contentView.addSubview(followersCollectionView)
+//
+//        let inset = CGFloat(16)
+//
+//        NSLayoutConstraint.activate([
+//            followersCollectionView.topAnchor.constraint(equalTo: userTextField.bottomAnchor, constant: inset),
+//            followersCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+//            followersCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+//            followersCollectionView.heightAnchor.constraint(equalToConstant: 150)
+//        ])
+//    }
     
 //    private func setupSearchTableView() {
 //        self.view.addSubview(tableView)

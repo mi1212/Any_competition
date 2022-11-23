@@ -23,7 +23,7 @@ class UserProfileView: UIView {
     
     let contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .anyColor1
+        view.backgroundColor = .anyGreenColor
         view.layer.cornerRadius = 24
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -68,7 +68,7 @@ class UserProfileView: UIView {
     
     private lazy var imageView: UIImageView = {
         let image = UIImageView()
-        image.backgroundColor = .anyColor
+        image.backgroundColor = .anyGreenColor
         image.image = UIImage(systemName: "person")
         image.tintColor = .anyDarckColor
         image.translatesAutoresizingMaskIntoConstraints = false

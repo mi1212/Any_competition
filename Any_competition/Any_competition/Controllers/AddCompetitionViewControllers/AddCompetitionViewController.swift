@@ -69,7 +69,8 @@ class AddCompetitionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
-        addCompetitionButton.addTarget(self, action: #selector(tapAddCompetitionButton), for: .touchUpInside)
+#warning("вернуть")
+//        addCompetitionButton.addTarget(self, action: #selector(tapAddCompetitionButton), for: .touchUpInside)
         addCompetitionButton.isExclusiveTouch = true
 //        self.view.addGestureRecognizer(tap) // при добавлении жеста перестает работать didSelectRow в таблице addPlayer
         setupController()
@@ -198,47 +199,47 @@ class AddCompetitionViewController: UIViewController {
 //        animationTapButton(addPlayerButton)
 //        self.isSetupAddPlayerView.toggle()
 //    }
-
+#warning("вернуть")
     // добавление соревнования в базу данных
-    @objc func tapAddCompetitionButton() {
-        
-        animationTapButton(addCompetitionButton)
-        
-        if TabBarController.user != nil {
-
-            let playerQty = playersArray.count
-            
-            let title = competitionTitleTextField.text
-            
-            if title == "" {
-                
-                shakeTextFieldifEmpty(competitionTitleTextField)
-                
-            } else if playerQty < 2 {
-                shakeTextFieldifEmpty(competitionTitleTextField)
-                alert.message = "добавьте минимум 2 игрока"
-                self.present(alert, animated: true)
-            } else {
-                shakeTextFieldifEmpty(competitionTitleTextField)
-                let competition = Competition(
-                    title: title!,
-                    qtyPlayers: playerQty,
-                    date: Date.now.description,
-                    players: playersArray,
-                    accessUserIdArray: playersArray.map {$0.id!}
-                )
-                
-                database.sendCompetitionToDatabase(competition: competition)
-                
-                dismiss(animated: true, completion: nil)
-            }
-            
-        } else {
-            alert.message = "необходимо авторизоваться"
-            self.present(alert, animated: true)
-        }
-        
-    }
+//    @objc func tapAddCompetitionButton() {
+//
+//        animationTapButton(addCompetitionButton)
+//
+//        if TabBarController.user != nil {
+//
+//            let playerQty = playersArray.count
+//
+//            let title = competitionTitleTextField.text
+//
+//            if title == "" {
+//
+//                shakeTextFieldifEmpty(competitionTitleTextField)
+//
+//            } else if playerQty < 2 {
+//                shakeTextFieldifEmpty(competitionTitleTextField)
+//                alert.message = "добавьте минимум 2 игрока"
+//                self.present(alert, animated: true)
+//            } else {
+//                shakeTextFieldifEmpty(competitionTitleTextField)
+//                let competition = Competition(
+//                    title: title!,
+//                    qtyPlayers: playerQty,
+//                    date: Date.now.description,
+//                    players: playersArray,
+//                    accessUserIdArray: playersArray.map {$0.id!}
+//                )
+//
+//                database.sendCompetitionToDatabase(competition: competition)
+//
+//                dismiss(animated: true, completion: nil)
+//            }
+//
+//        } else {
+//            alert.message = "необходимо авторизоваться"
+//            self.present(alert, animated: true)
+//        }
+//
+//    }
     
     private func alertMessage(message: String){
         let alert = UIAlertController(title: "\(message)", message: nil, preferredStyle: .alert)
@@ -299,18 +300,19 @@ class AddCompetitionViewController: UIViewController {
     
     // функция добавления себя сразу в список игроков
     private func addOwnUserToPlayersArray() {
-        if let user = TabBarController.user {
-            self.playersArray.append(user)
-            playersTable.playersArray = self.playersArray
-            playersTable.collectionView.reloadData()
-            cons?.isActive = false
-
-            cons = playersTable.heightAnchor.constraint(equalToConstant: CGFloat(52*playersArray.count))
-
-            cons?.isActive = true
-        } else {
-            print("--- user did not find")
-        }
+#warning("вернуть")
+//        if let user = TabBarController.user {
+//            self.playersArray.append(user)
+//            playersTable.playersArray = self.playersArray
+//            playersTable.collectionView.reloadData()
+//            cons?.isActive = false
+//
+//            cons = playersTable.heightAnchor.constraint(equalToConstant: CGFloat(52*playersArray.count))
+//
+//            cons?.isActive = true
+//        } else {
+//            print("--- user did not find")
+//        }
         
     }
     

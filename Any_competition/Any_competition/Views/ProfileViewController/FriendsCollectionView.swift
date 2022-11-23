@@ -77,7 +77,7 @@ class FriendsCollectionView: UIView {
     private func setupButton() {
         self.addSubview(addFriendButton)
         
-        addFriendButton.backgroundColor = .anyColor
+        addFriendButton.backgroundColor = .anyGreenColor
         addFriendButton.addTarget(self, action: #selector(tapAddFriendButton), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
@@ -119,10 +119,10 @@ extension FriendsCollectionView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.identifire, for: indexPath)
         
         switch indexPath.row % 2 {
-        case 0: cell.contentView.backgroundColor = .anyColor
+        case 0: cell.contentView.backgroundColor = .anyGreenColor
         case 1: cell.contentView.backgroundColor = .anyDarckColor
         default:
-            cell.backgroundColor = .anyColor
+            cell.backgroundColor = .anyGreenColor
         }
         
         return cell

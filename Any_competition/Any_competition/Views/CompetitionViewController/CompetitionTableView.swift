@@ -234,10 +234,10 @@ extension CompetitionTableView: UICollectionViewDataSource {
                 
                 if match!.isWinned {
                     cell.label.text = "1"
-                    cell.backgroundColor = .anyColor
+                    cell.backgroundColor = .anyGreenColor
                 } else {
                     cell.label.text = "0"
-                    cell.backgroundColor = .anyColor1
+                    cell.backgroundColor = .anyPurpleColor
                 }
                 
             }

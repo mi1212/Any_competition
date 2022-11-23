@@ -10,17 +10,17 @@ import Lottie
 
 class CompetitionsViewController: UIViewController {
     
-    var competitions = [Competition]() {
-        didSet{
-            competitionsCollectionView.competitions = competitions
-        }
-    }
+//    var competitions = [Competition]() {
+//        didSet{
+//            competitionsCollectionView.competitions = competitions
+//        }
+//    }
     
-    let database = Database()
+//    let database = Database()
     
-    let userDefaults = UserDefaults.standard
+//    let userDefaults = UserDefaults.standard
     
-    let animationView = AnimationView()
+//    let animationView = AnimationView()
     
     static var isAddedListener = false
     
@@ -35,16 +35,18 @@ class CompetitionsViewController: UIViewController {
     }()
     
     override func viewDidLoad() {
+        self.tabBarController?.tabBar.isHidden = true
         super.viewDidLoad()
-        self.view.backgroundColor = .backgroundColor
-        self.database.delegate = self
-        setupNavigationBar()
-        setupViews()
-        addObserverToCompetitionsDatabase()
+//        self.view.backgroundColor = .backgroundColor
+        view.backgroundColor = .anyPurpleColor
+//        self.database.delegate = self
+//        setupNavigationBar()
+//        setupViews()
+//        addObserverToCompetitionsDatabase()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        setupListenerToCompetitions()
+//        setupListenerToCompetitions()
     }
     
     let loadingAnimationView: AnimationView = {
@@ -57,69 +59,69 @@ class CompetitionsViewController: UIViewController {
         return animationView
     }()
     
-    private func setupNavigationBar() {
-        let plus = UIImage(systemName: "plus")
-        self.navigationController?.navigationBar.tintColor = .anyDarckColor
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: plus, style: .plain, target: self, action: #selector(addCompetition))
-    }
+//    private func setupNavigationBar() {
+//        let plus = UIImage(systemName: "plus")
+//        self.navigationController?.navigationBar.tintColor = .anyDarckColor
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: plus, style: .plain, target: self, action: #selector(addCompetition))
+//    }
     
-    private func setupViews() {
-        self.view.addSubview(competitionsCollectionView)
-        self.competitionsCollectionView.delegate = self
-        
-        NSLayoutConstraint.activate([
-            competitionsCollectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            competitionsCollectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            competitionsCollectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            competitionsCollectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-        ])
-    }
+//    private func setupViews() {
+//        self.view.addSubview(competitionsCollectionView)
+//        self.competitionsCollectionView.delegate = self
+//        
+//        NSLayoutConstraint.activate([
+//            competitionsCollectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+//            competitionsCollectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+//            competitionsCollectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+//            competitionsCollectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+//        ])
+//    }
     
-    private func setupListenerToCompetitions() {
-        if let uid = userDefaults.object(forKey: "uid") {
-            
-            if !CompetitionsViewController.isAddedListener {
-                setupLoading()
-                self.database.addListenerToCompetitionCollection(uid: uid as! String)
-                CompetitionsViewController.isAddedListener = true
-            }
-        } else {
-            competitions = [Competition]()
-            competitionsCollectionView.competitionsCollectionView.reloadData()
-            alert.message = "Сначала нужно авторизоваться, чтобы увидеть свои соревнования"
-            self.present(alert, animated: true)
-        }
-    }
+//    private func setupListenerToCompetitions() {
+//        if let uid = userDefaults.object(forKey: "uid") {
+//
+//            if !CompetitionsViewController.isAddedListener {
+//                setupLoading()
+//                self.database.addListenerToCompetitionCollection(uid: uid as! String)
+//                CompetitionsViewController.isAddedListener = true
+//            }
+//        } else {
+//            competitions = [Competition]()
+//            competitionsCollectionView.competitionsCollectionView.reloadData()
+//            alert.message = "Сначала нужно авторизоваться, чтобы увидеть свои соревнования"
+//            self.present(alert, animated: true)
+//        }
+//    }
     
     // установка анимации загрузки
-    private func setupLoading() {
-        self.view.addSubview(loadingAnimationView)
-        loadingAnimationView.layer.opacity = 1
-        loadingAnimationView.play()
-        NSLayoutConstraint.activate([
-            loadingAnimationView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-            loadingAnimationView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            loadingAnimationView.heightAnchor.constraint(equalToConstant: 40)
-        ])
-    }
+//    private func setupLoading() {
+//        self.view.addSubview(loadingAnimationView)
+//        loadingAnimationView.layer.opacity = 1
+//        loadingAnimationView.play()
+//        NSLayoutConstraint.activate([
+//            loadingAnimationView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+//            loadingAnimationView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+//            loadingAnimationView.heightAnchor.constraint(equalToConstant: 40)
+//        ])
+//    }
     
-    @objc func addCompetition() {
-        if userDefaults.object(forKey: "uid") != nil {
-            let vc = AddCompetitionViewController()
-            self.navigationController?.present(vc, animated: true)
-        } else {
-            alert.message = "Сначала нужно авторизоваться, для добавления соревнования"
-            self.present(alert, animated: true)
-        }
-    }
+//    @objc func addCompetition() {
+//        if userDefaults.object(forKey: "uid") != nil {
+//            let vc = AddCompetitionViewController()
+//            self.navigationController?.present(vc, animated: true)
+//        } else {
+//            alert.message = "Сначала нужно авторизоваться, для добавления соревнования"
+//            self.present(alert, animated: true)
+//        }
+//    }
     
-    func addObserverToCompetitionsDatabase() {
-        database.competitionsDatabase.subscribe { [self] competitionsArray in
-            loadingAnimationView.removeFromSuperview()
-            competitions = competitionsArray.element!
-            reloadCollection()
-        }
-    }
+//    func addObserverToCompetitionsDatabase() {
+//        database.competitionsDatabase.subscribe { [self] competitionsArray in
+//            loadingAnimationView.removeFromSuperview()
+//            competitions = competitionsArray.element!
+//            reloadCollection()
+//        }
+//    }
     
     func reloadCollection() {
         self.competitionsCollectionView.reloadCollection()
@@ -149,14 +151,14 @@ extension CompetitionsViewController: DatabaseDelegate {
 extension CompetitionsViewController: CompetitionsCollectionViewDelegate {
     
     func pressCompetition(index: Int) {
-        let vc = CompetitionViewController()
-        
-        CompetitionViewController.competition = competitions[index]
-        
-        vc.qtyPlayers = competitions[index].players.count
-        
-        vc.navigationItem.title = CompetitionViewController.competition?.title
-        self.navigationController!.pushViewController(vc, animated: true)
+//        let vc = CompetitionViewController()
+//        
+//        CompetitionViewController.competition = competitions[index]
+//        
+//        vc.qtyPlayers = competitions[index].players.count
+//        
+//        vc.navigationItem.title = CompetitionViewController.competition?.title
+//        self.navigationController!.pushViewController(vc, animated: true)
     }
     
 }

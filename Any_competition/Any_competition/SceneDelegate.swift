@@ -11,6 +11,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
+    let userDefaults = UserDefaults.standard
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
@@ -18,9 +19,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let tc = TabBarController()
+        var controller = UINavigationController(rootViewController: LoginViewController())
         
-        window.rootViewController = tc
+        if let uid = userDefaults.object(forKey: "uid") {
+            controller = UINavigationController(rootViewController: CustomTabBarController())
+        }
+        
+        window.rootViewController = controller
         
         self.window = window
         window.makeKeyAndVisible()

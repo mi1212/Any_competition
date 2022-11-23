@@ -9,7 +9,7 @@ import UIKit
 
 func animationTapButton(_ button: UIButton){
     
-    let time = 0.1
+    let time = 0.06
     
     let scale = 0.95
     

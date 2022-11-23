@@ -23,7 +23,7 @@ class LoginView: UIView {
     
     let contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .anyColor1
+        view.backgroundColor = .anyPurpleColor
         view.layer.cornerRadius = 24
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false

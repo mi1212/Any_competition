@@ -83,10 +83,10 @@ extension CompetitionsCollectionView: UICollectionViewDataSource {
         cell.dateLabel.text = dateFormater(competitions[indexPath.row].date)
 
         switch indexPath.row % 2 {
-        case 0: cell.contentView.backgroundColor = .anyColor
-        case 1: cell.contentView.backgroundColor = .anyColor1
+        case 0: cell.contentView.backgroundColor = .anyGreenColor
+        case 1: cell.contentView.backgroundColor = .anyPurpleColor
         default:
-            cell.backgroundColor = .anyColor
+            cell.backgroundColor = .anyGreenColor
         }
 
         return cell
