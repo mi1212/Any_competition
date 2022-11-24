@@ -18,14 +18,10 @@ extension CustomTabItem {
     var viewController: UIViewController {
         switch self {
         case .competitions:
-            let nc = UINavigationController(rootViewController: CompetitionViewController())
-            
-            
+            let nc = UINavigationController(rootViewController: CompetitionsViewController())
             return nc
         case .profile:
             let nc = UINavigationController(rootViewController: ProfileViewController())
-            
-            
             return nc
         }
     }

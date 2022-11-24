@@ -28,7 +28,7 @@ class AnyCompClearUIButton: UIButton {
         self.backgroundColor = .clear
         self.titleLabel?.font =  UIFont.systemFont(ofSize: UIFont.buttonFontSize, weight: .regular)
         self.titleLabel?.textAlignment = .center
-        self.setTitleColor(.anyPurpleColor, for: .normal)
+        self.setTitleColor(.black, for: .normal)
         translatesAutoresizingMaskIntoConstraints = false
     }
 }

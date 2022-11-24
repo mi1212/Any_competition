@@ -7,16 +7,26 @@
 
 import UIKit
 import SnapKit
-//import Lottie
+import Lottie
 //import FirebaseAuth
 
+protocol ProfileViewControllerDelegate: AnyObject {
+    func closeCustomTabBar()
+    func setupCustomTabBar()
+}
+
 class ProfileViewController: UIViewController {
+    
+    var delegate : ProfileViewControllerDelegate?
     
     let userDefaults = UserDefaults.standard
     
     var user: User? {
         didSet {
-            print("--- user setuped")
+            profileView.setupUserData(user: user!)
+            setupViews()
+            
+            loadingAnimationView.removeFromSuperview()
         }
     }
     
@@ -30,16 +40,35 @@ class ProfileViewController: UIViewController {
     
     let profileView = ProfileView()
     
+    let loadingAnimationView: AnimationView = {
+        let animationView = AnimationView()
+        animationView.animation = Animation.named("loading")
+        animationView.backgroundColor = .clear
+        animationView.contentMode = .scaleAspectFill
+        animationView.loopMode = .loop
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        return animationView
+    }()
+    
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         self.tabBarController?.tabBar.isHidden = true
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
-        user = CustomTabBarController.user
+        checkUser()
         setupNavigationBar()
-        profileView.setupUserData(user: CustomTabBarController.user!)
-        setupViews()
+        requestUserData()
+        addObserverToUserDatabase()
 //        self.view.addGestureRecognizer(tap)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
     }
     
     // MARK: - Navigation
@@ -50,13 +79,13 @@ class ProfileViewController: UIViewController {
         let plus = UIImage(systemName: "bell")
         let gear = UIImage(systemName: "gear")
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: plus,
             style: .done,
             target: self,
             action: #selector(presentNotificationController)
         )
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: gear,
             style: .plain,
             target: self,
@@ -76,29 +105,26 @@ class ProfileViewController: UIViewController {
         
     }
     
-//    private func setupAddPlayerView() {
-//        self.view.addSubview(addPlayerView)
-////        addPlayerView.delegate = self
-//
-//        let inset: CGFloat = 16
-//
-//        NSLayoutConstraint.activate([
-//            addPlayerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-//            addPlayerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-//            addPlayerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: inset),
-//            addPlayerView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.7)
-//        ])
-//
-//        addPlayerView.layer.opacity = 0.2
-//        addPlayerView.transform = addPlayerView.transform.scaledBy(x: 0.2, y: 0.2)
-//        UIView.animate(withDuration: 0.2, delay: 0) { [self] in
-//            addPlayerView.layer.opacity = 1
-//            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1/0.2, y: 1/0.2)
-//        } completion: { [self] _ in
-//            addPlayerView.layer.opacity = 1
-//            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1, y: 1)
-//        }
-//    }
+    // установка анимации загрузки
+    private func setupLoading() {
+        self.view.addSubview(loadingAnimationView)
+        loadingAnimationView.layer.opacity = 1
+        loadingAnimationView.play()
+        NSLayoutConstraint.activate([
+            loadingAnimationView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            loadingAnimationView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            loadingAnimationView.heightAnchor.constraint(equalToConstant: 40)
+        ])
+    }
+    
+    private func checkUser() {
+        if user != nil {
+            setupViews()
+            profileView.setupUserData(user: user!)
+        } else {
+            setupLoading()
+        }
+    }
     
     @objc func presentNotificationController() {
             let vc = NotificationViewController()
@@ -120,25 +146,22 @@ class ProfileViewController: UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    // MARK: - user data
+    
+    private func requestUserData() {
+        if let uid = userDefaults.object(forKey: "uid") {
+            database.getUserData(uid: uid as! String)
+        }
+    }
+    
+    func addObserverToUserDatabase() {
+        database.userDatabase.subscribe { [self] userData in
+            self.user = userData
+        }
+    }
+    
 }
-
-//extension ProfileViewController: ProfileViewDelegate {
-//
-//    func exitFromProfileView() {
-//
-//        ProfileViewController.user = nil
-//        database.removeListenerToCompetitionCollection()
-//        userDefaults.set(nil, forKey: "uid")
-//        CompetitionsViewController.isAddedListener = false
-//        UIView.animate(withDuration: 1, delay: 0) { [self] in
-//            loginView.transform = loginView.transform.translatedBy(x: -self.view.layer.bounds.width, y: 0)
-//            profileView.transform = profileView.transform.translatedBy(x: -self.view.layer.bounds.width, y: 0)
-//        } completion: { _ in
-//
-//        }
-//    }
-//
-//}
 //
 //extension ProfileViewController: DatabaseDelegate {
 //    func receivedAllUsers(users: [User]) {

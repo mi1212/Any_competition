@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 protocol FriendsCollectionViewDelegate: AnyObject {
     func tapAddFriendButton()
@@ -25,11 +26,11 @@ class FriendsCollectionView: UIView {
         }
     }
     
-    let label = AnyCompUILabel(title: "Друзья: ", fontSize: .medium)
+    let label = AnyCompUILabel(title: "Друзья", fontSize: .medium)
     
     lazy var followersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         let collection = UICollectionView(frame: .zero , collectionViewLayout: layout)
         collection.backgroundColor = .clear
         
@@ -44,7 +45,7 @@ class FriendsCollectionView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .brown
+//        self.backgroundColor = .anyPurpleColor
         setupViews()
         self.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -56,9 +57,7 @@ class FriendsCollectionView: UIView {
     private func setupViewsWithoutButton() {
         self.addSubview(label)
         self.addSubview(followersCollectionView)
-        
-        
-        
+      
         let inset = CGFloat(8)
         
         NSLayoutConstraint.activate([
@@ -76,32 +75,21 @@ class FriendsCollectionView: UIView {
     
     private func setupButton() {
         self.addSubview(addFriendButton)
-        
-        addFriendButton.backgroundColor = .anyGreenColor
+        addFriendButton.layer.borderColor = UIColor.black.cgColor
+        addFriendButton.layer.borderWidth = 2
+        addFriendButton.layer.cornerRadius = 8
         addFriendButton.addTarget(self, action: #selector(tapAddFriendButton), for: .touchUpInside)
         
-        NSLayoutConstraint.activate([
-            addFriendButton.topAnchor.constraint(equalTo: label.topAnchor),
-            addFriendButton.bottomAnchor.constraint(equalTo: label.bottomAnchor),
-            addFriendButton.trailingAnchor.constraint(equalTo: self.trailingAnchor)
-        ])
+        addFriendButton.snp.makeConstraints { make in
+            make.centerY.equalTo(label)
+            make.width.height.equalTo(24)
+            make.trailing.equalToSuperview()
+        }
     }
     
     private func setupViews() {
-//        if user?.id == userDefaults.object(forKey: "uid") as! String {
             setupViewsWithoutButton()
             setupButton()
-//        } else {
-//            setupViewsWithoutButton()
-//        }
-        
-    }
-    
-    private func setupMainView() {
-        self.backgroundColor = .anyDarckColor
-//        self.backgroundColor = .clear
-        self.layer.cornerRadius = 24
-        self.clipsToBounds = true
     }
     
     @objc func tapAddFriendButton() {
@@ -112,7 +100,7 @@ class FriendsCollectionView: UIView {
 
 extension FriendsCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        user?.friends.count ?? 0
+        user?.friends.count ?? 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -134,8 +122,8 @@ extension FriendsCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let inset = 8
-        let width = (Int(self.bounds.width) - inset*5)/4
-        let height = (Int(self.bounds.height) - inset*2)/1
+        let width = (Int(self.bounds.width) - inset*2)/1
+        let height = (Int(self.bounds.height) - inset*10)/4
         return CGSize(width: width, height: height)
     }
 }

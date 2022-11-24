@@ -1,17 +1,17 @@
 //
-//  Test2ViewController.swift
+//  ViewController.swift
 //  Any_competition
 //
-//  Created by Mikhail Chuparnov on 23.11.2022.
+//  Created by Mikhail Chuparnov on 24.11.2022.
 //
 
 import UIKit
 
-class Test2ViewController: UIViewController {
+class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .anyGreenColor
+
         // Do any additional setup after loading the view.
     }
     

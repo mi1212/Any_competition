@@ -58,7 +58,6 @@ class LoginViewController: UIViewController {
         setupView()
         setupProperts()
         addTargetsToButtons()
-        addObserverToUserDatabase()
     }
     
     private func setupView() {
@@ -153,18 +152,7 @@ class LoginViewController: UIViewController {
             loadingAnimationView.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
-    
-    func addObserverToUserDatabase() {
-        database.userDatabase.subscribe { [self] user in
-            loadingAnimationView.removeFromSuperview()
-            self.mailTextField.text = ""
-            self.passTextField.text = ""
-            let vc = CustomTabBarController(user: user)
-            
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-    }
-    
+       
     @objc func tapLoginButton() {
         setupLoading()
         animationTapButton(loginButton)
@@ -187,16 +175,20 @@ class LoginViewController: UIViewController {
                     print("--- user authorized")
                     
                     if let uid = result?.user.uid {
-#warning("надо разобраться с сохранением в userDefaults")
-//                                            userDefaults.set(uid, forKey: "uid")
-                                            database.getUserData(uid: uid)
+
+                        userDefaults.set(uid, forKey: "uid")
+                        loadingAnimationView.removeFromSuperview()
+                        
+                        self.mailTextField.text = ""
+                        self.passTextField.text = ""
+                        
+                        let vc = CustomTabBarController(uid: uid)
+                        
+                        self.navigationController?.pushViewController(vc, animated: true)
                         
                         print("--- handler was finished with uid = \(uid)")
                     }
-                    
-//                    self.mailTextField.text = ""
-//                    self.passTextField.text = ""
-                    
+  
                 }
             }
         } else {

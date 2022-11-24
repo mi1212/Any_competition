@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 protocol CompetitionsCollectionViewDelegate: AnyObject{
     func pressCompetition(index: Int)
@@ -44,12 +45,10 @@ class CompetitionsCollectionView: UIView {
     private func setupViews() {
         self.addSubview(competitionsCollectionView)
         
-        NSLayoutConstraint.activate([
-            competitionsCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
-            competitionsCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            competitionsCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            competitionsCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-        ])
+        competitionsCollectionView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
     }
     
     func reloadCollection() {

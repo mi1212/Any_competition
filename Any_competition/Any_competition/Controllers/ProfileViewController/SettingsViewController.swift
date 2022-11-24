@@ -6,10 +6,14 @@
 //
 
 import UIKit
+import SnapKit
 
 class SettingsViewController: UIViewController {
+    
+    let userDefaults = UserDefaults.standard
 
     let label = AnyCompLogoUILabel()
+    let exitButton = AnyCompUIButton(title: "Выйти из аккаунта")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +23,8 @@ class SettingsViewController: UIViewController {
     
     private func setupViews() {
         self.view.addSubview(label)
+        self.view.addSubview(exitButton)
+        exitButton.addTarget(self, action: #selector(tapExitButton), for: .touchUpInside)
         label.text = "Настройки"
         
         NSLayoutConstraint.activate([
@@ -26,6 +32,15 @@ class SettingsViewController: UIViewController {
             label.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
             label.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
         ])
+        
+        exitButton.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.equalTo(200)
+            make.height.equalTo(100)
+        }
     }
-
+    @objc func tapExitButton() {
+            userDefaults.set(nil, forKey: "uid")
+            self.navigationController?.pushViewController(LoginViewController(), animated: true)
+    }
 }

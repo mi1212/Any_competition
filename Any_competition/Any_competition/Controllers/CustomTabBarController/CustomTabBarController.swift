@@ -7,23 +7,19 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 import SnapKit
 
 class CustomTabBarController: UITabBarController {
     
     private let customTabBar = CustomTabBar()
-    
-    static var user: User?
- 
-    let database = Database()
-    
+
     let userDefaults = UserDefaults.standard
 
     private let disposeBag = DisposeBag()
     
-    init(user: User) {
+    init(uid: String) {
         super.init(nibName: nil, bundle: nil)
-        CustomTabBarController.user = user
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -53,6 +49,8 @@ class CustomTabBarController: UITabBarController {
     }
     
     private func setupLayout() {
+        self.view.backgroundColor = .backgroundColor
+        
         customTabBar.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview().inset(45)
             $0.height.equalTo(60)
@@ -83,10 +81,17 @@ class CustomTabBarController: UITabBarController {
             }
             .disposed(by: disposeBag)
     }
+}
+
+extension CustomTabBarController: ProfileViewControllerDelegate {
+    func closeCustomTabBar() {
+        customTabBar.removeFromSuperview()
+    }
     
-//    private func getUserData() {
-//        if let uid = userDefaults.object(forKey: "uid") {
-//            database.getUserData(uid: uid as! String, isReloadView: false)
-//        }
-//    }
+    func setupCustomTabBar() {
+        setupHierarchy()
+        setupLayout()
+        setupProperties()
+    }
+    
 }

@@ -54,6 +54,8 @@
 		FD6F05FF28F80ECC00F0F718 /* 73966-confetti.json in Resources */ = {isa = PBXBuildFile; fileRef = FD6F05FE28F80ECC00F0F718 /* 73966-confetti.json */; };
 		FD6F060128F8247F00F0F718 /* MatchIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6F060028F8247F00F0F718 /* MatchIndex.swift */; };
 		FD73A21C28FF254B005FAFCE /* AnyCompClearUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD73A21B28FF254B005FAFCE /* AnyCompClearUIButton.swift */; };
+		FD79CBD1292F813800B9A2A4 /* StatisticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79CBD0292F813800B9A2A4 /* StatisticView.swift */; };
+		FD79CBD3292F9C3100B9A2A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79CBD2292F9C3100B9A2A4 /* ViewController.swift */; };
 		FD7C894A28ED55D100699A7E /* AnyCompLogoUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C894928ED55D100699A7E /* AnyCompLogoUILabel.swift */; };
 		FD7D09822900559400E6CE60 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7D09812900559400E6CE60 /* User.swift */; };
 		FD83DB082920D03400025282 /* FriendsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD83DB072920D03400025282 /* FriendsCollectionView.swift */; };
@@ -68,7 +70,6 @@
 		FD945176292DE86E0006ED7A /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD945171292DE86E0006ED7A /* CustomTabBarController.swift */; };
 		FD945178292E38FE0006ED7A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD945177292E38FE0006ED7A /* LoginViewController.swift */; };
 		FD94517A292E4BE60006ED7A /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD945179292E4BE60006ED7A /* CreateUserViewController.swift */; };
-		FD94517C292E5F1E0006ED7A /* Test2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94517B292E5F1E0006ED7A /* Test2ViewController.swift */; };
 		FD94809328F4697500B31A89 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94809228F4697500B31A89 /* Match.swift */; };
 		FD94809528F46C1700B31A89 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94809428F46C1700B31A89 /* Player.swift */; };
 		FD9604F228ECC38B009C902E /* darts1.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9604F028ECC38A009C902E /* darts1.json */; };
@@ -165,6 +166,8 @@
 		FD6F05FE28F80ECC00F0F718 /* 73966-confetti.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "73966-confetti.json"; sourceTree = "<group>"; };
 		FD6F060028F8247F00F0F718 /* MatchIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchIndex.swift; sourceTree = "<group>"; };
 		FD73A21B28FF254B005FAFCE /* AnyCompClearUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompClearUIButton.swift; sourceTree = "<group>"; };
+		FD79CBD0292F813800B9A2A4 /* StatisticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticView.swift; sourceTree = "<group>"; };
+		FD79CBD2292F9C3100B9A2A4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FD7C894928ED55D100699A7E /* AnyCompLogoUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompLogoUILabel.swift; sourceTree = "<group>"; };
 		FD7D09812900559400E6CE60 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FD83DB072920D03400025282 /* FriendsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionView.swift; sourceTree = "<group>"; };
@@ -181,7 +184,6 @@
 		FD945171292DE86E0006ED7A /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		FD945177292E38FE0006ED7A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Any_competition/Controllers/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
 		FD945179292E4BE60006ED7A /* CreateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
-		FD94517B292E5F1E0006ED7A /* Test2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2ViewController.swift; sourceTree = "<group>"; };
 		FD94809228F4697500B31A89 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		FD94809428F46C1700B31A89 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		FD9604F028ECC38A009C902E /* darts1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = darts1.json; sourceTree = "<group>"; };
@@ -381,10 +383,10 @@
 				FD339E9C28E363C4000DD8F3 /* CompetitionsViewController */,
 				FDB1085828FDAD900020F32C /* ProfileViewController */,
 				FD0FB29628ECBCE6000789CD /* TestViewController.swift */,
-				FD94517B292E5F1E0006ED7A /* Test2ViewController.swift */,
 				FD945177292E38FE0006ED7A /* LoginViewController.swift */,
 				FD945179292E4BE60006ED7A /* CreateUserViewController.swift */,
 				FDCCA29F28DADA7F00709E80 /* TabBarController.swift */,
+				FD79CBD2292F9C3100B9A2A4 /* ViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -423,6 +425,7 @@
 			children = (
 				FDB1085B28FDAF9B0020F32C /* LoginView.swift */,
 				FD85BA6628FE75EE0027468E /* ProfileView.swift */,
+				FD79CBD0292F813800B9A2A4 /* StatisticView.swift */,
 				FDDD6DFD28FFC41300F9A649 /* CreateUserView.swift */,
 				FD83DB072920D03400025282 /* FriendsCollectionView.swift */,
 				FDF151EA292667D700A102A4 /* UserProfileView.swift */,
@@ -722,7 +725,6 @@
 				FD945173292DE86E0006ED7A /* CustomTabItem.swift in Sources */,
 				FDF7EDED28E9EBC900FAE28E /* CompetitionTableCollectionViewCell.swift in Sources */,
 				FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */,
-				FD94517C292E5F1E0006ED7A /* Test2ViewController.swift in Sources */,
 				FD0D008A28DDBF0200C47570 /* PlayersInfoTableViewCell.swift in Sources */,
 				FD94517A292E4BE60006ED7A /* CreateUserViewController.swift in Sources */,
 				FDF151EB292667D700A102A4 /* UserProfileView.swift in Sources */,
@@ -753,6 +755,7 @@
 				FD7C894A28ED55D100699A7E /* AnyCompLogoUILabel.swift in Sources */,
 				FDB1085A28FDADD80020F32C /* ProfileViewController.swift in Sources */,
 				FD5927C829115C5300CF2E7C /* AnimationTapButton.swift in Sources */,
+				FD79CBD3292F9C3100B9A2A4 /* ViewController.swift in Sources */,
 				FD013620291F9CDA002B344C /* SearchTableViewCell.swift in Sources */,
 				FD20D64928DB4FF1007F5F8F /* CompetitionFetch.swift in Sources */,
 				FDDD6DFE28FFC41300F9A649 /* CreateUserView.swift in Sources */,
@@ -773,6 +776,7 @@
 				FDB1085C28FDAF9B0020F32C /* LoginView.swift in Sources */,
 				FDB3FFE828E2180C000D6DDC /* CompetitionTableView.swift in Sources */,
 				FD7D09822900559400E6CE60 /* User.swift in Sources */,
+				FD79CBD1292F813800B9A2A4 /* StatisticView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

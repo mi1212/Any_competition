@@ -44,7 +44,7 @@ class CompetitionViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
         self.view.backgroundColor = .backgroundColor
         self.side = self.view.layer.bounds.width/8
-//        setupController()
+        setupController()
         if let collectionId = CompetitionViewController.competition?.id {
             database.addListenerToCompetition(collectionId)
         } else {
