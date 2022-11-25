@@ -52,7 +52,7 @@ class CustomTabBarController: UITabBarController {
         self.view.backgroundColor = .backgroundColor
         
         customTabBar.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalToSuperview().inset(45)
+            $0.leading.trailing.bottom.equalToSuperview().inset(16)
             $0.height.equalTo(60)
         }
     }

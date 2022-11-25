@@ -13,6 +13,8 @@ class AddCompetitionViewController: UIViewController {
 
     let database = Database()
     
+    var user: User?
+    
     var users = [User]()
     
     var playersArray: [User] = []
@@ -292,18 +294,17 @@ class AddCompetitionViewController: UIViewController {
     
     // функция добавления себя сразу в список игроков
     private func addOwnUserToPlayersArray() {
-//        if let user = CustomTabBarController.user.values.self {
-//            self.playersArray.append(user)
-//            playersTable.playersArray = self.playersArray
-//            playersTable.collectionView.reloadData()
-//            cons?.isActive = false
-//
-//            cons = playersTable.heightAnchor.constraint(equalToConstant: CGFloat(52*playersArray.count))
-//
-//            cons?.isActive = true
-//        } else {
-//            print("--- user did not find")
-//        }
+        if user != nil {
+            self.playersArray.append(user!)
+            playersTable.playersArray = self.playersArray
+            playersTable.collectionView.reloadData()
+            cons?.isActive = false
+            
+            cons = playersTable.heightAnchor.constraint(equalToConstant: CGFloat(52*playersArray.count))
+            
+            cons?.isActive = true
+        }
+
     }
     
 }

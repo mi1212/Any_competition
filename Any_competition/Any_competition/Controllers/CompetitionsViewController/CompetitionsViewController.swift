@@ -23,7 +23,23 @@ class CompetitionsViewController: UIViewController {
         }
     }
     
+    var user: User? {
+        didSet {
+
+        }
+    }
+    
     let competitionsCollectionView = CompetitionsCollectionView()
+    
+    let loadingAnimationView: AnimationView = {
+        let animationView = AnimationView()
+        animationView.animation = Animation.named("98194-loading")
+        animationView.backgroundColor = .clear
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .loop
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        return animationView
+    }()
     
     override func viewDidLoad() {
         self.tabBarController?.tabBar.isHidden = true
@@ -31,6 +47,8 @@ class CompetitionsViewController: UIViewController {
         setupNavigationBar()
         requestCompetitions()
         addObserverToCompetitionsDatabase()
+        requestUserData()
+        addObserverToUserDatabase()
         setupCollection()
     }
     
@@ -46,42 +64,30 @@ class CompetitionsViewController: UIViewController {
         
         competitionsCollectionView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().inset(76)
         }
 
     }
     
-//    private func setupListenerToCompetitions() {
-//        if let uid = userDefaults.object(forKey: "uid") {
-//
-//            if !CompetitionsViewController.isAddedListener {
-//                setupLoading()
-//                self.database.addListenerToCompetitionCollection(uid: uid as! String)
-//                CompetitionsViewController.isAddedListener = true
-//            }
-//        } else {
-//            competitions = [Competition]()
-//            competitionsCollectionView.competitionsCollectionView.reloadData()
-//            alert.message = "Сначала нужно авторизоваться, чтобы увидеть свои соревнования"
-//            self.present(alert, animated: true)
-//        }
-//    }
-    
-    // установка анимации загрузки
-//    private func setupLoading() {
-//        self.view.addSubview(loadingAnimationView)
-//        loadingAnimationView.layer.opacity = 1
-//        loadingAnimationView.play()
-//        NSLayoutConstraint.activate([
-//            loadingAnimationView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-//            loadingAnimationView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-//            loadingAnimationView.heightAnchor.constraint(equalToConstant: 40)
-//        ])
-//    }
+//     установка анимации загрузки
+    private func setupLoading() {
+        self.view.addSubview(loadingAnimationView)
+        loadingAnimationView.layer.opacity = 1
+        loadingAnimationView.play()
+        NSLayoutConstraint.activate([
+            loadingAnimationView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            loadingAnimationView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            loadingAnimationView.heightAnchor.constraint(equalToConstant: 400)
+        ])
+    }
     
     @objc func addCompetition() {
+        
+        if user != nil {
             let vc = AddCompetitionViewController()
+            vc.user = user
             self.navigationController?.present(vc, animated: true)
+        }
     }
     
     func reloadCollection() {
@@ -95,9 +101,28 @@ class CompetitionsViewController: UIViewController {
     }
     
     func addObserverToCompetitionsDatabase() {
-        database.competitionsDatabase.subscribe { competitions in
-            let tempComp = competitions
-            self.competitions = tempComp.sorted { $0.date > $1.date }
+        database.competitionsDatabase.subscribe { [self] competitions in
+            setupLoading()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                let tempComp = competitions
+                self.competitions = tempComp.sorted { $0.date > $1.date }
+                loadingAnimationView.removeFromSuperview()
+            }
+            
+        }
+    }
+    
+    // MARK: - user data
+    
+    private func requestUserData() {
+        if let uid = userDefaults.object(forKey: "uid") {
+            database.getUserData(uid: uid as! String)
+        }
+    }
+    
+    func addObserverToUserDatabase() {
+        database.userDatabase.subscribe { [self] userData in
+            self.user = userData
         }
     }
     

@@ -47,6 +47,7 @@
 		FD5927C629112EBE00CF2E7C /* PlayersTableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5927C529112EBE00CF2E7C /* PlayersTableCollectionViewCell.swift */; };
 		FD5927C829115C5300CF2E7C /* AnimationTapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5927C729115C5300CF2E7C /* AnimationTapButton.swift */; };
 		FD59CC1128EEA2AB008818B1 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = FD59CC1028EEA2AB008818B1 /* loading.json */; };
+		FD669EA12930D2C500329929 /* 98194-loading.json in Resources */ = {isa = PBXBuildFile; fileRef = FD669EA02930D2C500329929 /* 98194-loading.json */; };
 		FD68DC4628E2D61A00FE0E64 /* CompetitionTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD68DC4528E2D61A00FE0E64 /* CompetitionTable.swift */; };
 		FD6F05F928F7F1E500F0F718 /* congratulations.json in Resources */ = {isa = PBXBuildFile; fileRef = FD6F05F828F7F1E500F0F718 /* congratulations.json */; };
 		FD6F05FB28F7F34400F0F718 /* 78540-confetti-congratulation-sparkle.json in Resources */ = {isa = PBXBuildFile; fileRef = FD6F05FA28F7F34400F0F718 /* 78540-confetti-congratulation-sparkle.json */; };
@@ -159,6 +160,7 @@
 		FD5927C529112EBE00CF2E7C /* PlayersTableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTableCollectionViewCell.swift; sourceTree = "<group>"; };
 		FD5927C729115C5300CF2E7C /* AnimationTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTapButton.swift; sourceTree = "<group>"; };
 		FD59CC1028EEA2AB008818B1 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		FD669EA02930D2C500329929 /* 98194-loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "98194-loading.json"; sourceTree = "<group>"; };
 		FD68DC4528E2D61A00FE0E64 /* CompetitionTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionTable.swift; sourceTree = "<group>"; };
 		FD6F05F828F7F1E500F0F718 /* congratulations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = congratulations.json; sourceTree = "<group>"; };
 		FD6F05FA28F7F34400F0F718 /* 78540-confetti-congratulation-sparkle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "78540-confetti-congratulation-sparkle.json"; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 				FDB1085E28FDD8790020F32C /* 35201-rocket-launch.json */,
 				FDB1085D28FDD8790020F32C /* 68087-rocket.json */,
 				FDB1085F28FDD8790020F32C /* 119388-rocket.json */,
+				FD669EA02930D2C500329929 /* 98194-loading.json */,
 				FD1E200128F1A7A5001CF0EA /* shakeTextFieldifEmpty.swift */,
 				FD5927C729115C5300CF2E7C /* AnimationTapButton.swift */,
 				FD85BA6828FE83C80027468E /* 98200-drag.json */,
@@ -634,6 +637,7 @@
 				FD6F05F928F7F1E500F0F718 /* congratulations.json in Resources */,
 				FD27FF3128D9D27100D2A405 /* 04B_30__.TTF in Resources */,
 				FD546BBB28EACFBE006B21B1 /* Hardpixel-nn51.otf in Resources */,
+				FD669EA12930D2C500329929 /* 98194-loading.json in Resources */,
 				FDB1086228FDD8790020F32C /* 119388-rocket.json in Resources */,
 				FD9604F228ECC38B009C902E /* darts1.json in Resources */,
 				FD6F05FD28F80E0900F0F718 /* lf30_editor_tibwdgvt.json in Resources */,
