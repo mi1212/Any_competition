@@ -15,7 +15,7 @@ class CustomTabBarController: UITabBarController {
     private let customTabBar = CustomTabBar()
 
     let userDefaults = UserDefaults.standard
-
+    
     private let disposeBag = DisposeBag()
     
     init(uid: String) {
@@ -47,6 +47,8 @@ class CustomTabBarController: UITabBarController {
     private func setupHierarchy() {
         view.addSubview(customTabBar)
     }
+    
+    
     
     private func setupLayout() {
         self.view.backgroundColor = .backgroundColor

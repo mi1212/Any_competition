@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8A20C85D97005FEA72552B2D /* Pods_Any_competition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEAA58907250BE7DBAF0AA9 /* Pods_Any_competition.framework */; };
 		FD013620291F9CDA002B344C /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01361F291F9CDA002B344C /* SearchTableViewCell.swift */; };
+		FD04B8A72932843600E63D4C /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD04B8A62932843600E63D4C /* Inter-Regular.ttf */; };
 		FD0D008A28DDBF0200C47570 /* PlayersInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0D008928DDBF0200C47570 /* PlayersInfoTableViewCell.swift */; };
 		FD0FB29728ECBCE6000789CD /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0FB29628ECBCE6000789CD /* TestViewController.swift */; };
 		FD1E1FFE28F08ED1001CF0EA /* DateFormater.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1E1FFD28F08ED1001CF0EA /* DateFormater.swift */; };
@@ -120,6 +121,7 @@
 		6BA5A152F1F2D2695D4A89FB /* Pods-Any_competition.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Any_competition.release.xcconfig"; path = "Target Support Files/Pods-Any_competition/Pods-Any_competition.release.xcconfig"; sourceTree = "<group>"; };
 		BD80565C5998C930EBEA977A /* Pods-Any_competition.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Any_competition.debug.xcconfig"; path = "Target Support Files/Pods-Any_competition/Pods-Any_competition.debug.xcconfig"; sourceTree = "<group>"; };
 		FD01361F291F9CDA002B344C /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		FD04B8A62932843600E63D4C /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 		FD0D008928DDBF0200C47570 /* PlayersInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersInfoTableViewCell.swift; sourceTree = "<group>"; };
 		FD0FB29628ECBCE6000789CD /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		FD1E1FFD28F08ED1001CF0EA /* DateFormater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormater.swift; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 				FD27FF2B28D9D27100D2A405 /* Pixel LCD-7.ttf */,
 				FD27FF2A28D9D27100D2A405 /* PressStart2P-vaV7.ttf */,
 				FD27FF2928D9D27100D2A405 /* tight_pixel.ttf */,
+				FD04B8A62932843600E63D4C /* Inter-Regular.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 				FD27FEF728D9A63F00D2A405 /* Assets.xcassets in Resources */,
 				FD27FF2F28D9D27100D2A405 /* PressStart2P-vaV7.ttf in Resources */,
 				FDB1086028FDD8790020F32C /* 68087-rocket.json in Resources */,
+				FD04B8A72932843600E63D4C /* Inter-Regular.ttf in Resources */,
 				FDB1086128FDD8790020F32C /* 35201-rocket-launch.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
