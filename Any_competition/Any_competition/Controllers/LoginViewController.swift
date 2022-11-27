@@ -133,6 +133,10 @@ class LoginViewController: UIViewController {
             make.height.equalTo(50)
         }
         
+        createUserButton.setTitleColor(.anyPurpleColor, for: .normal)
+        resetPassButton.setTitleColor(.anyPurpleColor, for: .normal)
+        createUserButton.setTitleColor(.anyGreenColor, for: .selected)
+        resetPassButton.setTitleColor(.anyDarckColor, for: .selected)
     }
     
     private func addTargetsToButtons() {

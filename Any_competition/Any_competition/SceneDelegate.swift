@@ -19,22 +19,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
+        let vc = StartAnimationViewController()
 //        var controller = UINavigationController(rootViewController: LoginViewController())
 //
 //        if let uid = userDefaults.object(forKey: "uid") {
 //            controller = UINavigationController(rootViewController: CustomTabBarController(uid: uid as! String))
 //        }
 //
-//        window.rootViewController = controller
+        window.rootViewController = vc
  
-        // if user is logged in before
-        if let uid = userDefaults.object(forKey: "uid") {
-            let controller = UINavigationController(rootViewController: CustomTabBarController(uid: uid as! String))
-            window.rootViewController = controller
-        } else {
-            let controller = UINavigationController(rootViewController: LoginViewController())
-            window.rootViewController = controller
-        }
+
         
         self.window = window
         window.makeKeyAndVisible()

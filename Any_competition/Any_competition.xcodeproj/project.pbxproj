@@ -79,6 +79,7 @@
 		FD96E63F290E6CFE00B51FD0 /* CompetitionsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD96E63E290E6CFE00B51FD0 /* CompetitionsCollectionView.swift */; };
 		FD9F36932913DC6F003CE1C6 /* AnyCompLoadinUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9F36922913DC6F003CE1C6 /* AnyCompLoadinUIButton.swift */; };
 		FDA0381E28F983400040A782 /* MatchesOfPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA0381D28F983400040A782 /* MatchesOfPlayer.swift */; };
+		FDAC70BE293371A80001556E /* StartAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAC70BD293371A80001556E /* StartAnimationViewController.swift */; };
 		FDB1085A28FDADD80020F32C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB1085928FDADD80020F32C /* ProfileViewController.swift */; };
 		FDB1085C28FDAF9B0020F32C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB1085B28FDAF9B0020F32C /* LoginView.swift */; };
 		FDB1086028FDD8790020F32C /* 68087-rocket.json in Resources */ = {isa = PBXBuildFile; fileRef = FDB1085D28FDD8790020F32C /* 68087-rocket.json */; };
@@ -195,6 +196,7 @@
 		FD96E63E290E6CFE00B51FD0 /* CompetitionsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsCollectionView.swift; sourceTree = "<group>"; };
 		FD9F36922913DC6F003CE1C6 /* AnyCompLoadinUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompLoadinUIButton.swift; sourceTree = "<group>"; };
 		FDA0381D28F983400040A782 /* MatchesOfPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesOfPlayer.swift; sourceTree = "<group>"; };
+		FDAC70BD293371A80001556E /* StartAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartAnimationViewController.swift; sourceTree = "<group>"; };
 		FDB1085928FDADD80020F32C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FDB1085B28FDAF9B0020F32C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FDB1085D28FDD8790020F32C /* 68087-rocket.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "68087-rocket.json"; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 				FD945179292E4BE60006ED7A /* CreateUserViewController.swift */,
 				FDCCA29F28DADA7F00709E80 /* TabBarController.swift */,
 				FD79CBD2292F9C3100B9A2A4 /* ViewController.swift */,
+				FDAC70BD293371A80001556E /* StartAnimationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -753,6 +756,7 @@
 				FD20D63A28DB0B19007F5F8F /* CompetitionsViewController.swift in Sources */,
 				FD94809328F4697500B31A89 /* Match.swift in Sources */,
 				FD9F36932913DC6F003CE1C6 /* AnyCompLoadinUIButton.swift in Sources */,
+				FDAC70BE293371A80001556E /* StartAnimationViewController.swift in Sources */,
 				FD339E9928E34D6D000DD8F3 /* UIFont+Extention.swift in Sources */,
 				FD83DB0A2920F89000025282 /* FindToAddUserViewController.swift in Sources */,
 				FDF151E72926265500A102A4 /* AddFriendNotification.swift in Sources */,

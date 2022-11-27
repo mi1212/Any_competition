@@ -33,7 +33,7 @@ class CompetitionsViewController: UIViewController {
     
     let loadingAnimationView: AnimationView = {
         let animationView = AnimationView()
-        animationView.animation = Animation.named("98194-loading")
+        animationView.animation = Animation.named("loading")
         animationView.backgroundColor = .clear
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
@@ -101,13 +101,14 @@ class CompetitionsViewController: UIViewController {
     }
     
     func addObserverToCompetitionsDatabase() {
+        setupLoading()
         database.competitionsDatabase.subscribe { [self] competitions in
-            setupLoading()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+//            setupLoading()
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 let tempComp = competitions
                 self.competitions = tempComp.sorted { $0.date > $1.date }
                 loadingAnimationView.removeFromSuperview()
-            }
+//            }
             
         }
     }
