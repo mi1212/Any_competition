@@ -8,11 +8,10 @@
 import UIKit
 import SnapKit
 import Lottie
-//import FirebaseAuth
 
 protocol ProfileViewControllerDelegate: AnyObject {
-    func closeCustomTabBar()
-    func setupCustomTabBar()
+    func hideCustomBarFromProfile()
+    func showCustomBarFromProfile()
 }
 
 class ProfileViewController: UIViewController {
@@ -20,6 +19,8 @@ class ProfileViewController: UIViewController {
     var delegate : ProfileViewControllerDelegate?
     
     let userDefaults = UserDefaults.standard
+    
+    var isCustomBarHiden = false
     
     var user: User? {
         didSet {
@@ -59,12 +60,15 @@ class ProfileViewController: UIViewController {
         setupNavigationBar()
         requestUserData()
         addObserverToUserDatabase()
-//        self.view.addGestureRecognizer(tap)
+        //        self.view.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        if isCustomBarHiden {
+            delegate?.showCustomBarFromProfile()
+            isCustomBarHiden.toggle()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -92,11 +96,11 @@ class ProfileViewController: UIViewController {
             action: #selector(presentSettingsController)
         )
     }
-
+    
     // установка вьюх если не нужно залогиниться
     private func setupViews() {
         view.addSubview(profileView)
-
+        
         profileView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalToSuperview().inset(60)
@@ -127,15 +131,23 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func presentNotificationController() {
+        if !isCustomBarHiden {
+            delegate?.hideCustomBarFromProfile()
+            isCustomBarHiden.toggle()
             let vc = NotificationViewController()
             self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     @objc func presentSettingsController() {
+        if !isCustomBarHiden {
+            delegate?.hideCustomBarFromProfile()
+            isCustomBarHiden.toggle()
             let vc = SettingsViewController()
             self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
-        
+    
     //MARK: - dismissKeyboardTap
     
     private lazy var tap: UITapGestureRecognizer = {

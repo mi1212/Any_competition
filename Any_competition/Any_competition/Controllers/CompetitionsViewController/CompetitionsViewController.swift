@@ -11,11 +11,20 @@ import SnapKit
 import RxCocoa
 import RxSwift
 
+protocol CompetitionsViewControllerDelegate: AnyObject {
+    func hideCustomBarFromCompetitions()
+    func showCustomBarFromCompetitions()
+}
+
 class CompetitionsViewController: UIViewController {
+    
+    var delegate : CompetitionsViewControllerDelegate?
     
     let database = Database()
     
     let userDefaults = UserDefaults.standard
+    
+    var isCustomBarHiden = false
     
     var competitions = [Competition]() {
         didSet{
@@ -52,6 +61,14 @@ class CompetitionsViewController: UIViewController {
         setupCollection()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if isCustomBarHiden {
+            delegate?.showCustomBarFromCompetitions()
+            isCustomBarHiden.toggle()
+        }
+    }
+    
     private func setupNavigationBar() {
         let plus = UIImage(systemName: "plus")
         self.navigationController?.navigationBar.tintColor = .anyDarckColor
@@ -82,7 +99,6 @@ class CompetitionsViewController: UIViewController {
     }
     
     @objc func addCompetition() {
-        
         if user != nil {
             let vc = AddCompetitionViewController()
             vc.user = user
@@ -103,13 +119,9 @@ class CompetitionsViewController: UIViewController {
     func addObserverToCompetitionsDatabase() {
         setupLoading()
         database.competitionsDatabase.subscribe { [self] competitions in
-//            setupLoading()
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 let tempComp = competitions
                 self.competitions = tempComp.sorted { $0.date > $1.date }
                 loadingAnimationView.removeFromSuperview()
-//            }
-            
         }
     }
     
@@ -132,14 +144,18 @@ class CompetitionsViewController: UIViewController {
 extension CompetitionsViewController: CompetitionsCollectionViewDelegate {
     
     func pressCompetition(index: Int) {
-        let vc = CompetitionViewController()
-        
-        CompetitionViewController.competition = competitions[index]
-        
-        vc.qtyPlayers = competitions[index].players.count
-        
-        vc.navigationItem.title = CompetitionViewController.competition?.title
-        self.navigationController!.pushViewController(vc, animated: true)
+        if !isCustomBarHiden {
+            delegate?.hideCustomBarFromCompetitions()
+            isCustomBarHiden.toggle()
+            let vc = CompetitionViewController()
+            
+            CompetitionViewController.competition = competitions[index]
+            
+            vc.qtyPlayers = competitions[index].players.count
+            
+            vc.navigationItem.title = CompetitionViewController.competition?.title
+            self.navigationController!.pushViewController(vc, animated: true)
+        }
     }
     
 }

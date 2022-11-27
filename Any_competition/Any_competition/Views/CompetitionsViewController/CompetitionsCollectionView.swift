@@ -93,7 +93,7 @@ extension CompetitionsCollectionView: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath) as! CompetitionCollectionViewCell
-
+        cell.backgroundColor = .backgroundColor
         if indexPath.row < competitions.count {
             cell.nameLabel.text = competitions[indexPath.row].title
             cell.dateLabel.text = dateFormater(competitions[indexPath.row].date)
@@ -103,13 +103,7 @@ extension CompetitionsCollectionView: UICollectionViewDataSource {
             } else {
                 cell.contentView.backgroundColor = .anyPurpleColor
             }
-            
-        } else {
-            cell.backgroundColor = .backgroundColor
         }
-        
-        
-
         return cell
     }
 }

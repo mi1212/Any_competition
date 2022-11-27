@@ -11,7 +11,7 @@ import SnapKit
 class SettingsViewController: UIViewController {
     
     let userDefaults = UserDefaults.standard
-
+    
     let label = AnyCompLogoUILabel()
     let exitButton = AnyCompUIButton(title: "Выйти из аккаунта")
     
@@ -40,8 +40,9 @@ class SettingsViewController: UIViewController {
         }
     }
     @objc func tapExitButton() {
-            userDefaults.set(nil, forKey: "uid")
+        animationTapButton(exitButton)
+        userDefaults.set(nil, forKey: "uid")
         let vc = UINavigationController(rootViewController: LoginViewController())
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(vc)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(vc)
     }
 }

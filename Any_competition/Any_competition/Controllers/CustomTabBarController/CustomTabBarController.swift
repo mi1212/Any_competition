@@ -64,10 +64,23 @@ class CustomTabBarController: UITabBarController {
         customTabBar.translatesAutoresizingMaskIntoConstraints = false
 
         selectedIndex = 0
-        let controllers = CustomTabItem.allCases.map {
-            $0.viewController
-        }
+//        let controllers = CustomTabItem.allCases.map {
+//            $0.viewController
+//            $0.viewController.delegate = self
+//        }
+        
+        let vc1 = CompetitionsViewController()
+        vc1.delegate = self
+        
+        let nc1 = UINavigationController(rootViewController: vc1)
+        
+        let vc2 = ProfileViewController()
+        vc2.delegate = self
+        
+        let nc2 = UINavigationController(rootViewController: vc2)
 
+        let controllers = [nc1, nc2]
+        
         setViewControllers(controllers, animated: true)
     }
 
@@ -86,14 +99,38 @@ class CustomTabBarController: UITabBarController {
 }
 
 extension CustomTabBarController: ProfileViewControllerDelegate {
-    func closeCustomTabBar() {
-        customTabBar.removeFromSuperview()
+    func hideCustomBarFromProfile() {
+        let originalTransform = self.customTabBar.transform
+        let translatedTransform = originalTransform.translatedBy(x: 0.0, y: 100.0)
+        UIView.animate(withDuration: 0.4, animations: {
+            self.customTabBar.transform = translatedTransform
+        })
+
     }
     
-    func setupCustomTabBar() {
-        setupHierarchy()
-        setupLayout()
-        setupProperties()
+    func showCustomBarFromProfile() {
+        let originalTransform = self.customTabBar.transform
+        let translatedTransform = originalTransform.translatedBy(x: 0.0, y: -100)
+        UIView.animate(withDuration: 0.4, animations: {
+            self.customTabBar.transform = translatedTransform
+        })
+    }
+}
+
+extension CustomTabBarController: CompetitionsViewControllerDelegate {
+    func hideCustomBarFromCompetitions() {
+        let originalTransform = self.customTabBar.transform
+        let translatedTransform = originalTransform.translatedBy(x: 0.0, y: 100.0)
+        UIView.animate(withDuration: 0.4, animations: {
+            self.customTabBar.transform = translatedTransform
+        })
     }
     
+    func showCustomBarFromCompetitions() {
+        let originalTransform = self.customTabBar.transform
+        let translatedTransform = originalTransform.translatedBy(x: 0.0, y: -100)
+        UIView.animate(withDuration: 0.4, animations: {
+            self.customTabBar.transform = translatedTransform
+        })
+    }
 }
