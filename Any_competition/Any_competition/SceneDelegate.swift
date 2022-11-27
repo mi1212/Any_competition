@@ -19,16 +19,41 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        var controller = UINavigationController(rootViewController: LoginViewController())
-        
+//        var controller = UINavigationController(rootViewController: LoginViewController())
+//
+//        if let uid = userDefaults.object(forKey: "uid") {
+//            controller = UINavigationController(rootViewController: CustomTabBarController(uid: uid as! String))
+//        }
+//
+//        window.rootViewController = controller
+ 
+        // if user is logged in before
         if let uid = userDefaults.object(forKey: "uid") {
-            controller = UINavigationController(rootViewController: CustomTabBarController(uid: uid as! String))
+            let controller = UINavigationController(rootViewController: CustomTabBarController(uid: uid as! String))
+            window.rootViewController = controller
+        } else {
+            let controller = UINavigationController(rootViewController: LoginViewController())
+            window.rootViewController = controller
         }
-        
-        window.rootViewController = controller
         
         self.window = window
         window.makeKeyAndVisible()
+    }
+    
+    func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
+        guard let window = self.window else {
+            return
+        }
+        
+        // меняем рутконтроллер
+        window.rootViewController = vc
+        
+        // анимация перехода при смене
+            UIView.transition(with: window,
+                              duration: 0.5,
+                              options: [.transitionCrossDissolve],
+                              animations: nil,
+                              completion: nil)
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

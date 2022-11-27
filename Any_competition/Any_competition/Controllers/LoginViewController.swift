@@ -184,7 +184,7 @@ class LoginViewController: UIViewController {
                         
                         let vc = CustomTabBarController(uid: uid)
                         
-                        self.navigationController?.pushViewController(vc, animated: true)
+                        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(vc)
                         
                         print("--- handler was finished with uid = \(uid)")
                     }

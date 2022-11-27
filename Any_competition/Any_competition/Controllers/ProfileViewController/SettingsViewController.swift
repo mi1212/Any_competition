@@ -41,6 +41,7 @@ class SettingsViewController: UIViewController {
     }
     @objc func tapExitButton() {
             userDefaults.set(nil, forKey: "uid")
-            self.navigationController?.pushViewController(LoginViewController(), animated: true)
+        let vc = UINavigationController(rootViewController: LoginViewController())
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(vc)
     }
 }
