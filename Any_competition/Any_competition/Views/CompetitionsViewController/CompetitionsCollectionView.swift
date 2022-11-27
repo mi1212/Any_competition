@@ -59,34 +59,56 @@ class CompetitionsCollectionView: UIView {
 
 extension CompetitionsCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         let inset = 16
-        let width = (Int(self.bounds.width) - inset*2)/1
-        let height = (Int(self.bounds.height) - inset*6)/5
-        return CGSize(width: width, height: height)
+        
+        var size = CGSize(width: 0, height: 0)
+        
+        if indexPath.row < competitions.count {
+            let width = (Int(self.bounds.width) - inset*2)/1
+            let height = (Int(self.bounds.height) - inset*6)/5
+            return CGSize(width: width, height: height)
+        } else {
+            let width = (Int(self.bounds.width) - inset*2)/1
+            let height = 76
+            return CGSize(width: width, height: height)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.pressCompetition(index: indexPath.row)
+        
+        if indexPath.row < competitions.count {
+            delegate?.pressCompetition(index: indexPath.row)
+        } else {
+        }
+        
+        
     }
 }
 
 extension CompetitionsCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        competitions.count
+        competitions.count + 1
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompetitionCollectionViewCell.identifire, for: indexPath) as! CompetitionCollectionViewCell
 
-        cell.nameLabel.text = competitions[indexPath.row].title
-        cell.dateLabel.text = dateFormater(competitions[indexPath.row].date)
+        if indexPath.row < competitions.count {
+            cell.nameLabel.text = competitions[indexPath.row].title
+            cell.dateLabel.text = dateFormater(competitions[indexPath.row].date)
 
-        switch indexPath.row % 2 {
-        case 0: cell.contentView.backgroundColor = .anyGreenColor
-        case 1: cell.contentView.backgroundColor = .anyPurpleColor
-        default:
-            cell.backgroundColor = .anyGreenColor
+            if ((indexPath.row % 2) != 0) {
+                cell.contentView.backgroundColor = .anyGreenColor
+            } else {
+                cell.contentView.backgroundColor = .anyPurpleColor
+            }
+            
+        } else {
+            cell.backgroundColor = .backgroundColor
         }
+        
+        
 
         return cell
     }

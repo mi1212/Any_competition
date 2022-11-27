@@ -64,7 +64,7 @@ class CompetitionsViewController: UIViewController {
         
         competitionsCollectionView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
-            make.bottom.equalToSuperview().inset(76)
+            make.bottom.equalToSuperview()
         }
 
     }

@@ -23,6 +23,13 @@ class CompetitionCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        nameLabel.text = ""
+        dateLabel.text = ""
+        backgroundColor = .backgroundColor
+    }
+    
     private func setupCell() {
         contentView.addSubview(nameLabel)
         contentView.addSubview(dateLabel)
