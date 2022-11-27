@@ -40,8 +40,8 @@ final class CustomItemView: UIView {
 
         iconImageView.snp.makeConstraints { make in
 #warning("проблемы с констрейтами")
-            make.width.equalTo(40)
-            make.height.equalTo(40)
+            make.width.equalTo(36)
+            make.height.equalTo(36)
             make.bottom.top.equalToSuperview()
             make.centerX.equalToSuperview()
         }

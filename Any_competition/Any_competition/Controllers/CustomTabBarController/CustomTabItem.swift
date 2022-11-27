@@ -29,18 +29,18 @@ extension CustomTabItem {
     var icon: UIImage? {
         switch self {
         case .competitions:
-            return UIImage(named: "competitions")?.withTintColor(.white.withAlphaComponent(0.4))
+            return UIImage(named: "competitions")?.withTintColor(.white)
         case .profile:
-            return UIImage(named: "profile")?.withTintColor(.white.withAlphaComponent(0.4))
+            return UIImage(named: "profile")?.withTintColor(.white)
         }
     }
     
     var selectedIcon: UIImage? {
         switch self {
         case .competitions:
-            return UIImage(named: "competitions")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+            return UIImage(named: "competitions")?.withTintColor(.black)
         case .profile:
-            return UIImage(named: "profile")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+            return UIImage(named: "profile")?.withTintColor(.black)
             
         }
     }

@@ -22,10 +22,12 @@ final class CustomTabBar: UIView {
     private let competitionsItem = CustomItemView(with: .competitions, index: 0)
     private let profileItem = CustomItemView(with: .profile, index: 1)
     
-//    private let movingView = UIView()
+    private let movingView = UIView()
     
     private let itemTappedSubject = PublishSubject<Int>()
     private let disposeBag = DisposeBag()
+    
+    var selectedItemIndex: Int?
     
     init() {
         super.init(frame: .zero)
@@ -44,9 +46,9 @@ final class CustomTabBar: UIView {
     }
     
     private func setupHierarchy() {
-//        addSubview(movingView)
+        addSubview(movingView)
         addSubview(stack)
-
+        
         stack.addArrangedSubviews([competitionsItem, profileItem])
     }
     
@@ -56,12 +58,12 @@ final class CustomTabBar: UIView {
             make.center.equalToSuperview()
             make.height.width.equalToSuperview()
         }
-
-//        movingView.snp.makeConstraints { make in
-//            make.top.leading.bottom.equalToSuperview().inset(6)
-//            make.width.equalToSuperview().multipliedBy(0.5)
-//        }
-
+        
+        movingView.snp.makeConstraints { make in
+            make.top.leading.bottom.equalToSuperview().inset(3)
+            make.width.equalToSuperview().multipliedBy(0.5)
+        }
+        
     }
     
     private func setupProperties() {
@@ -69,10 +71,10 @@ final class CustomTabBar: UIView {
         stack.alignment = .center
         
         backgroundColor = .black
-        setupCornerRadius(32)
+        setupCornerRadius(30)
         
-//        movingView.backgroundColor = .anyColor
-//        movingView.setupCornerRadius(26)
+        movingView.backgroundColor = .anyPurpleColor
+        movingView.setupCornerRadius(26)
         
         customItemViews.forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -83,6 +85,7 @@ final class CustomTabBar: UIView {
     private func selectItem(index: Int) {
         customItemViews.forEach { $0.isSelected = $0.index == index }
         itemTappedSubject.onNext(index)
+        selectedItemIndex = index
     }
     
     //MARK: - Bindings
@@ -93,37 +96,32 @@ final class CustomTabBar: UIView {
             .bind { [weak self] _ in
                 guard let self = self else { return }
                 self.competitionsItem.animateClick {
+                    if self.selectedItemIndex != 0 {
+                        let originalTransform = self.movingView.transform
+                        let translatedTransform = originalTransform.translatedBy(x: -(self.layer.bounds.width/2 - 6), y: 0)
+                        UIView.animate(withDuration: 0.2, animations: {
+                            self.movingView.transform = translatedTransform
+                        })
+                    }
                     self.selectItem(index: self.competitionsItem.index)
                     
-//                    UIView.transition(with: self.movingView,
-//                                      duration: 0.4,
-//                                      options: .transitionCrossDissolve) { [unowned self] in
-//                        self.movingView.snp.remakeConstraints { make in
-//                            make.top.leading.bottom.equalToSuperview().inset(6)
-//                            make.width.equalToSuperview().multipliedBy(0.5)
-//                        }
-//                    }
-  
                 }
             }
             .disposed(by: disposeBag)
-
+        
         profileItem.rx.tapGesture()
             .when(.recognized)
             .bind { [weak self] _ in
                 guard let self = self else { return }
                 self.profileItem.animateClick {
+                    if self.selectedItemIndex != 1 {
+                        let originalTransform = self.movingView.transform
+                        let translatedTransform = originalTransform.translatedBy(x: (self.layer.bounds.width/2 - 6), y: 0)
+                        UIView.animate(withDuration: 0.2, animations: {
+                            self.movingView.transform = translatedTransform
+                        })
+                    }
                     self.selectItem(index: self.profileItem.index)
-                    
-//                    UIView.transition(with: self.movingView,
-//                                      duration: 0.4,
-//                                      options: .transitionCrossDissolve) { [unowned self] in
-//                        self.movingView.snp.remakeConstraints { make in
-//                            make.top.trailing.bottom.equalToSuperview().inset(6)
-//                            make.width.equalToSuperview().multipliedBy(0.5)
-//                        }
-//                    }
- 
                 }
             }
             .disposed(by: disposeBag)
