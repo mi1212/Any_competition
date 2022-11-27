@@ -36,21 +36,24 @@ class StatisticView: UIView {
         addSubview(imageView)
         addSubview(nameLabel)
         addSubview(qtyLabel)
+        imageView.backgroundColor = .green
+        nameLabel.backgroundColor = .blue
+        qtyLabel.backgroundColor = .purple
         
         nameLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
         
         imageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(8)
+//            make.top.equalToSuperview().inset(8)
             make.bottom.equalTo(nameLabel.snp.top).inset(-8)
             make.width.equalTo(imageView.snp.height)
             make.centerX.equalToSuperview()
         }
-        
+
         qtyLabel.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).inset(8)
-            make.bottom.equalToSuperview().inset(8)
+            make.top.equalTo(nameLabel.snp.bottom).inset(-8)
+//            make.bottom.equalToSuperview().inset(8)
             make.centerX.equalToSuperview()
         }
     }
