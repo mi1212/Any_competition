@@ -41,11 +41,14 @@ class FriendsCollectionView: UIView {
         return collection
     }()
     
-    lazy var addFriendButton = AnyCompClearUIButton(title: "+")
+    lazy var addFriendButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "plus"), for: .normal)
+        return button
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        self.backgroundColor = .anyPurpleColor
         setupViews()
         self.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -75,9 +78,6 @@ class FriendsCollectionView: UIView {
     
     private func setupButton() {
         self.addSubview(addFriendButton)
-        addFriendButton.layer.borderColor = UIColor.black.cgColor
-        addFriendButton.layer.borderWidth = 2
-        addFriendButton.layer.cornerRadius = 8
         addFriendButton.addTarget(self, action: #selector(tapAddFriendButton), for: .touchUpInside)
         
         addFriendButton.snp.makeConstraints { make in

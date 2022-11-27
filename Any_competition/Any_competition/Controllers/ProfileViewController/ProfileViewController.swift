@@ -76,8 +76,8 @@ class ProfileViewController: UIViewController {
     private func setupNavigationBar() {
         self.navigationController?.navigationBar.tintColor = .anyDarckColor
         
-        let plus = UIImage(systemName: "bell")
-        let gear = UIImage(systemName: "gear")
+        let plus = UIImage(named: "bell")
+        let gear = UIImage(named: "settings")
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: plus,
