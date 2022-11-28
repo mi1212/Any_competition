@@ -33,10 +33,10 @@ class FriendsCollectionView: UIView {
         layout.scrollDirection = .vertical
         let collection = UICollectionView(frame: .zero , collectionViewLayout: layout)
         collection.backgroundColor = .clear
-        
+        collection.isScrollEnabled = false
         collection.delegate = self
         collection.dataSource = self
-        collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.identifire)
+        collection.register(FriendCollectionViewCell.self, forCellWithReuseIdentifier: FriendCollectionViewCell.identifire)
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
     }()
@@ -60,20 +60,20 @@ class FriendsCollectionView: UIView {
     private func setupViewsWithoutButton() {
         self.addSubview(label)
         self.addSubview(followersCollectionView)
-      
-        let inset = CGFloat(8)
         
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: self.topAnchor),
-            label.leadingAnchor.constraint(equalTo: self.leadingAnchor)
-        ])
+//        label.backgroundColor = .systemMint
         
-        NSLayoutConstraint.activate([
-            followersCollectionView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: inset),
-            followersCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            followersCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            followersCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -inset),
-        ])
+        let inset = CGFloat(16)
+        
+        label.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().inset(inset)
+        }
+        
+        followersCollectionView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(label.snp.bottom).offset(inset)
+        }
     }
     
     private func setupButton() {
@@ -83,7 +83,7 @@ class FriendsCollectionView: UIView {
         addFriendButton.snp.makeConstraints { make in
             make.centerY.equalTo(label)
             make.width.height.equalTo(24)
-            make.trailing.equalToSuperview()
+            make.trailing.equalToSuperview().inset(16)
         }
     }
     
@@ -104,14 +104,15 @@ extension FriendsCollectionView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.identifire, for: indexPath)
-        
-        switch indexPath.row % 2 {
-        case 0: cell.contentView.backgroundColor = .anyGreenColor
-        case 1: cell.contentView.backgroundColor = .anyDarckColor
-        default:
-            cell.backgroundColor = .anyGreenColor
-        }
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.identifire, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FriendCollectionViewCell.identifire, for: indexPath) as! FriendCollectionViewCell
+        cell.backgroundColor = .white
+//        switch indexPath.row % 2 {
+//        case 0: cell.contentView.backgroundColor = .anyGreenColor
+//        case 1: cell.contentView.backgroundColor = .anyDarckColor
+//        default:
+//            cell.backgroundColor = .anyGreenColor
+//        }
         
         return cell
     }
@@ -122,9 +123,13 @@ extension FriendsCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let inset = 8
-        let width = (Int(self.bounds.width) - inset*2)/1
-        let height = (Int(self.bounds.height) - inset*10)/4
+        let width = (Int(self.bounds.width) - inset*4)/1
+        let height = (Int(self.bounds.height) - inset*3-36)/4
         return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        8
     }
 }
 

@@ -55,14 +55,16 @@ class CustomTabBarController: UITabBarController {
         
         customTabBar.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview().inset(16)
-            $0.height.equalTo(60)
+            $0.height.equalTo(64)
         }
     }
     
     private func setupProperties() {
 
-        customTabBar.translatesAutoresizingMaskIntoConstraints = false
+//        customTabBar.translatesAutoresizingMaskIntoConstraints = false
 
+        customTabBar.addShadow()
+        
         selectedIndex = 0
 //        let controllers = CustomTabItem.allCases.map {
 //            $0.viewController

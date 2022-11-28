@@ -59,10 +59,9 @@ class ProfileView: UIView {
     
 //    let exitButton = AnyCompClearUIButton(title: "Выйти из профиля")
     
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
+//        self.backgroundColor = .systemPink
         self.translatesAutoresizingMaskIntoConstraints = false
         setupViews()
         setupProperts()
@@ -81,6 +80,7 @@ class ProfileView: UIView {
         self.addSubview(friendsView)
         
         photoView.snp.makeConstraints { make in
+//            make.height.width.equalTo(self.snp.height).multipliedBy(0.20)
             make.height.width.equalTo(80)
             make.top.equalTo(self)
             make.centerX.equalTo(self)
@@ -94,7 +94,7 @@ class ProfileView: UIView {
         statisticStack.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(nameLabel.snp.bottom).offset(24)
-            make.height.equalTo(100)
+            make.height.equalTo(self.snp.height).multipliedBy(0.13)
         }
         
         let statisticViewsArray = [wonGamesView, lostGamesView, wonCupsView]
@@ -107,83 +107,22 @@ class ProfileView: UIView {
         
         friendsView.snp.makeConstraints { make in
             make.top.equalTo(statisticStack.snp.bottom).inset(-16)
-            make.leading.trailing.bottom.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().inset(16)
         }
+//        friendsView.backgroundColor = .tintColor
     }
     
     private func setupProperts() {
+        print(self.layer.bounds)
+        print(self.layer)
+        print(self.bounds)
+//        photoView.layer.cornerRadius = self.layer.bounds.height/20
         photoView.layer.cornerRadius = 40
         statisticStack.layer.cornerRadius = 16
         
         
     }
-//    private func setupViews() {
-//        self.addSubview(nickLabel)
-//
-//        self.addSubview(photoView)
-//        self.addSubview(nameStackView)
-//        nameStackView.addArrangedSubview(firstNameLabel)
-//        nameStackView.addArrangedSubview(lastNameLabel)
-//
-//        self.addSubview(stackView)
-//        stackView.addArrangedSubview(playedGamesLabel)
-//        stackView.addArrangedSubview(wonGamesLabel)
-//        stackView.addArrangedSubview(lostGamesLabel)
-//        stackView.addArrangedSubview(wonCupsLabel)
-//
-//        self.addSubview(friendsView)
-//
-//        self.addSubview(exitButton)
-//
-//        exitButton.addTarget(self, action: #selector(tapExitButton), for: .touchUpInside)
-//
-//        firstNameLabel.textAlignment = .left
-//        lastNameLabel.textAlignment = .left
-//        nickLabel.textAlignment = .center
-//
-//
-//        let inset: CGFloat = 16
-//
-//        NSLayoutConstraint.activate([
-//            nickLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset*2),
-//            nickLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-//            nickLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: inset*2),
-//        ])
-//
-//        NSLayoutConstraint.activate([
-//            photoView.topAnchor.constraint(equalTo: nickLabel.bottomAnchor, constant: inset),
-//            photoView.bottomAnchor.constraint(equalTo: nameStackView.bottomAnchor),
-//            photoView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
-//            photoView.widthAnchor.constraint(equalTo: photoView.heightAnchor)
-//        ])
-//
-//        NSLayoutConstraint.activate([
-//            nameStackView.topAnchor.constraint(equalTo: nickLabel.bottomAnchor, constant: inset),
-//            nameStackView.leadingAnchor.constraint(equalTo: photoView.trailingAnchor, constant: inset),
-//            nameStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-//            nameStackView.heightAnchor.constraint(equalToConstant: inset*5)
-//        ])
-//
-//        NSLayoutConstraint.activate([
-//            stackView.topAnchor.constraint(equalTo: nameStackView.bottomAnchor, constant: inset),
-//            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
-//            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-//            stackView.heightAnchor.constraint(equalToConstant: inset*6)
-//        ])
-//
-//        NSLayoutConstraint.activate([
-//            friendsView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: inset),
-//            friendsView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
-//            friendsView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-//            friendsView.heightAnchor.constraint(equalToConstant: inset*10)
-//        ])
-//
-//        NSLayoutConstraint.activate([
-//            exitButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: inset),
-//            exitButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -inset),
-//            exitButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -inset*2),
-//        ])
-//    }
     
     func setupUserData(user: User) {
 //        nickLabel.text = user.nick

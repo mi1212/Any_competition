@@ -103,8 +103,8 @@ class ProfileViewController: UIViewController {
         
         profileView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalToSuperview().inset(60)
-            make.top.bottom.equalTo(view.snp.bottom).inset(105)
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(view.snp.bottom).inset(80)
         }
         
     }

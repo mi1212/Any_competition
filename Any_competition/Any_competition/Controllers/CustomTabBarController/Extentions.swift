@@ -46,7 +46,7 @@ extension UIView {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = .zero
         layer.shadowOpacity = 0.2
-        layer.shadowRadius = 7
+        layer.shadowRadius = 6
     }
 }
 

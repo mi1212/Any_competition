@@ -12,9 +12,15 @@ import Lottie
 
 class LoginViewController: UIViewController {
     
+    private let notificationCentre = NotificationCenter.default
+    
     let userDefaults = UserDefaults.standard
     
     let database = Database()
+    
+    private lazy var scrollView = UIScrollView()
+
+    private lazy var contentView = UIView()
     
     let authLabel = AnyCompLogoUILabel()
     
@@ -55,6 +61,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor
+        self.view.addGestureRecognizer(tap)
         setupView()
         setupProperts()
         addTargetsToButtons()
@@ -62,51 +69,71 @@ class LoginViewController: UIViewController {
     
     private func setupView() {
         
-        view.addSubview(textFieldsStack)
+        view.addSubview(scrollView)
+
+        scrollView.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        scrollView.addSubview(contentView)
+        scrollView.backgroundColor = .systemPink
+        
+        contentView.snp.makeConstraints { make in
+            make.top.equalTo(scrollView)
+//            make.centerY.equalTo(scrollView)
+            make.leading.trailing.equalTo(scrollView)
+            make.width.height.equalTo(scrollView)
+//            make.bottom.equalTo(scrollView)
+        }
+        
+        contentView.addSubview(textFieldsStack)
+        contentView.backgroundColor = .blue
         
         textFieldsStack.addArrangedSubviews([mailTextField, passTextField])
-        
+
         textFieldsStack.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(16)
+//            make.centerY.equalTo(contentView)
+            make.centerY.equalToSuperview()
+            make.leading.trailing.equalTo(contentView).inset(16)
         }
         
-        view.addSubview(noteLabel)
-        
+        contentView.addSubview(noteLabel)
+
         noteLabel.snp.makeConstraints { make in
             make.bottom.equalTo(textFieldsStack.snp.top).inset(-48)
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.trailing.equalTo(contentView).inset(16)
         }
         
-        view.addSubview(authLabel)
-        
+        contentView.addSubview(authLabel)
+
         authLabel.snp.makeConstraints { make in
             make.bottom.equalTo(noteLabel.snp.top).inset(-16)
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.trailing.equalTo(contentView).inset(16)
         }
-        
-        view.addSubview(resetPassButton)
-        
+
+        contentView.addSubview(resetPassButton)
+
         resetPassButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(16)
             make.top.equalTo(textFieldsStack.snp.bottom).inset(-16)
         }
-        
-        view.addSubview(loginButton)
-        
+
+        contentView.addSubview(loginButton)
+
         loginButton.snp.makeConstraints { make in
             make.top.equalTo(resetPassButton.snp.bottom).inset(-48)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(60)
         }
-        
-        view.addSubview(createUserStack)
-        
+
+        contentView.addSubview(createUserStack)
+
         createUserStack.addArrangedSubviews([createUserLabel, createUserButton])
-        
+
         createUserStack.snp.makeConstraints { make in
-            make.top.equalTo(loginButton.snp.bottom).inset(-140)
-            make.centerX.equalToSuperview()
+            make.top.equalTo(loginButton.snp.bottom).inset(-50)
+            make.centerX.equalTo(contentView)
+            make.bottom.equalTo(contentView.snp.bottom).inset(16)
         }
         
     }
@@ -158,7 +185,7 @@ class LoginViewController: UIViewController {
     }
        
     @objc func tapLoginButton() {
-        setupLoading()
+        
         animationTapButton(loginButton)
         
         view.endEditing(true)
@@ -169,6 +196,7 @@ class LoginViewController: UIViewController {
         
         let textFieldArray = [mailTextField, passTextField]
         if mail != "" && pass != "" {
+            setupLoading()
             Auth.auth().signIn(withEmail: mail, password: pass) {[self] result, error in
                 if error != nil {
                     loadingAnimationView.removeFromSuperview()
@@ -192,7 +220,6 @@ class LoginViewController: UIViewController {
                         
                         print("--- handler was finished with uid = \(uid)")
                     }
-  
                 }
             }
         } else {
@@ -216,4 +243,43 @@ class LoginViewController: UIViewController {
     @objc func tapResetPassButton() {
         animationTapButton(resetPassButton)
     }
+    
+    //MARK: dismissKeyboardTap
+    private lazy var tap: UITapGestureRecognizer = {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        return tap
+    }()
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
+extension LoginViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        notificationCentre.addObserver(self, selector: #selector(kbdShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        notificationCentre.addObserver(self, selector: #selector(kbdHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        notificationCentre.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        notificationCentre.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func kbdShow(notification: NSNotification) {
+        if let kbdSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            scrollView.contentInset.bottom = kbdSize.height*1.2
+            scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbdSize.height, right: 0)
+            print(scrollView.layer.bounds)
+        }
+    }
+    
+    @objc private func kbdHide() {
+        scrollView.contentInset = .zero
+        scrollView.verticalScrollIndicatorInsets = .zero
+    }
+    
 }

@@ -71,10 +71,10 @@ final class CustomTabBar: UIView {
         stack.alignment = .center
         
         backgroundColor = .black
-        setupCornerRadius(30)
+        setupCornerRadius(32)
         
         movingView.backgroundColor = .anyPurpleColor
-        movingView.setupCornerRadius(26)
+        movingView.setupCornerRadius(28)
         
         customItemViews.forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
