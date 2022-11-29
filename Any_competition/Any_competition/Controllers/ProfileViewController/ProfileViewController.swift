@@ -56,6 +56,7 @@ class ProfileViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
+        self.profileView.friendsView.delegate = self
         checkUser()
         setupNavigationBar()
         requestUserData()
@@ -172,7 +173,6 @@ class ProfileViewController: UIViewController {
             self.user = userData
         }
     }
-    
 }
 //
 //extension ProfileViewController: DatabaseDelegate {
@@ -214,12 +214,12 @@ class ProfileViewController: UIViewController {
 //
 //}
 
-//extension ProfileViewController: FriendsCollectionViewDelegate {
-//    func tapAddFriendButton() {
-//        let vc = FindToAddUserViewController()
-//        self.navigationController?.pushViewController(vc, animated: true)
-//    }
-//}
+extension ProfileViewController: FriendsCollectionViewDelegate {
+    func tapAddFriendButton() {
+        let vc = FindToAddUserViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
 
 //extension ProfileViewController: AddPlayerViewDelegate {
 //    func tapAddButton(player: User) {}

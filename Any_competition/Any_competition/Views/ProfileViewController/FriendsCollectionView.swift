@@ -28,6 +28,14 @@ class FriendsCollectionView: UIView {
     
     let label = AnyCompUILabel(title: "Друзья", fontSize: .medium)
     
+    lazy var labelFriendButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Друзья...", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+//        button.setImage(UIImage(named: "plus"), for: .normal)
+        return button
+    }()
+    
     lazy var followersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -58,21 +66,26 @@ class FriendsCollectionView: UIView {
     }
     
     private func setupViewsWithoutButton() {
-        self.addSubview(label)
+        self.addSubview(labelFriendButton)
+        labelFriendButton.addTarget(self, action: #selector(tapFriendButton), for: .touchUpInside)
         self.addSubview(followersCollectionView)
-        
-//        label.backgroundColor = .systemMint
-        
+ 
         let inset = CGFloat(16)
+//
+//        label.snp.makeConstraints { make in
+//            make.top.equalToSuperview()
+//            make.leading.equalToSuperview().inset(inset)
+//        }
         
-        label.snp.makeConstraints { make in
+        labelFriendButton.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(inset)
+            make.height.equalTo(16)
         }
         
         followersCollectionView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(label.snp.bottom).offset(inset)
+            make.top.equalTo(labelFriendButton.snp.bottom).offset(inset)
         }
     }
     
@@ -81,7 +94,7 @@ class FriendsCollectionView: UIView {
         addFriendButton.addTarget(self, action: #selector(tapAddFriendButton), for: .touchUpInside)
         
         addFriendButton.snp.makeConstraints { make in
-            make.centerY.equalTo(label)
+            make.centerY.equalTo(labelFriendButton)
             make.width.height.equalTo(24)
             make.trailing.equalToSuperview().inset(16)
         }
@@ -95,6 +108,11 @@ class FriendsCollectionView: UIView {
     @objc func tapAddFriendButton() {
         animationTapButton(addFriendButton)
         delegate?.tapAddFriendButton()
+    }
+    
+    @objc func tapFriendButton() {
+        animationTapButton(labelFriendButton)
+        print("tapFriendButton")
     }
 }
 

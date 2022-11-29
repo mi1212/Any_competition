@@ -76,7 +76,7 @@ class LoginViewController: UIViewController {
         }
         
         scrollView.addSubview(contentView)
-        scrollView.backgroundColor = .systemPink
+//        scrollView.backgroundColor = .systemPink
         
         contentView.snp.makeConstraints { make in
             make.top.equalTo(scrollView)
@@ -87,7 +87,7 @@ class LoginViewController: UIViewController {
         }
         
         contentView.addSubview(textFieldsStack)
-        contentView.backgroundColor = .blue
+//        contentView.backgroundColor = .blue
         
         textFieldsStack.addArrangedSubviews([mailTextField, passTextField])
 
@@ -133,7 +133,7 @@ class LoginViewController: UIViewController {
         createUserStack.snp.makeConstraints { make in
             make.top.equalTo(loginButton.snp.bottom).inset(-50)
             make.centerX.equalTo(contentView)
-            make.bottom.equalTo(contentView.snp.bottom).inset(16)
+//            make.bottom.equalTo(contentView.snp.bottom).inset(16)
         }
         
     }
