@@ -28,7 +28,7 @@ class FriendsViewController: UIViewController {
     
         self.view.addSubview(friendsView)
         friendsView.backgroundColor = .blue
-        
+        self.friendsView.delegate = self
         friendsView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -44,4 +44,22 @@ class FriendsViewController: UIViewController {
     }
     */
 
+}
+
+extension FriendsViewController: FriendsCollectionViewDelegate {
+    func tapAddFriendButton() {
+        
+    }
+    
+    func tapFriendButton() {
+        
+    }
+    
+    func tapToCell() {
+        let vc = FriendViewController()
+
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
 }

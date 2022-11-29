@@ -215,6 +215,12 @@ class ProfileViewController: UIViewController {
 //}
 
 extension ProfileViewController: FriendsCollectionViewDelegate {
+    func tapToCell() {
+        let vc = FriendViewController()
+        vc.user = user
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func tapFriendButton() {
         let vc = FriendsViewController()
         self.navigationController?.pushViewController(vc, animated: true)

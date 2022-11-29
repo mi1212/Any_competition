@@ -11,6 +11,7 @@ import SnapKit
 protocol FriendsCollectionViewDelegate: AnyObject {
     func tapAddFriendButton()
     func tapFriendButton()
+    func tapToCell()
 }
 
 class FriendsCollectionView: UIView {
@@ -168,9 +169,7 @@ extension FriendsCollectionView: UICollectionViewDataSource {
 extension FriendsCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        
-        
+ 
         let inset = 8
         let width = (Int(self.bounds.width) - inset*4)/1
         var height = 0
@@ -186,6 +185,10 @@ extension FriendsCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.tapToCell()
     }
 }
 
