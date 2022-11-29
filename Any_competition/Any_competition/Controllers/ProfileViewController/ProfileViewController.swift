@@ -215,6 +215,11 @@ class ProfileViewController: UIViewController {
 //}
 
 extension ProfileViewController: FriendsCollectionViewDelegate {
+    func tapFriendButton() {
+        let vc = FriendsViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func tapAddFriendButton() {
         let vc = FindToAddUserViewController()
         self.navigationController?.pushViewController(vc, animated: true)

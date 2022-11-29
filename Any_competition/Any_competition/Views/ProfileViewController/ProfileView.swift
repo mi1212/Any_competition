@@ -55,13 +55,10 @@ class ProfileView: UIView {
     
     let wonCupsView = StatisticView(imageViewName: "wonCups", name: "Кубков", qty: "2")
 
-    let friendsView = FriendsCollectionView()
-    
-//    let exitButton = AnyCompClearUIButton(title: "Выйти из профиля")
+    let friendsView = FriendsCollectionView(isCollectionViewFull: false, isWithAddFriendButton: true)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        self.backgroundColor = .systemPink
         self.translatesAutoresizingMaskIntoConstraints = false
         setupViews()
         setupProperts()

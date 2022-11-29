@@ -10,6 +10,7 @@ import SnapKit
 
 protocol FriendsCollectionViewDelegate: AnyObject {
     func tapAddFriendButton()
+    func tapFriendButton()
 }
 
 class FriendsCollectionView: UIView {
@@ -17,6 +18,8 @@ class FriendsCollectionView: UIView {
     let userDefaults = UserDefaults.standard
     
     weak var delegate: FriendsCollectionViewDelegate?
+    
+    var isCollectionViewFull: Bool?
     
     // MARK: - UIViews
     
@@ -41,7 +44,7 @@ class FriendsCollectionView: UIView {
         layout.scrollDirection = .vertical
         let collection = UICollectionView(frame: .zero , collectionViewLayout: layout)
         collection.backgroundColor = .clear
-        collection.isScrollEnabled = false
+//        collection.isScrollEnabled = false
         collection.delegate = self
         collection.dataSource = self
         collection.register(FriendCollectionViewCell.self, forCellWithReuseIdentifier: FriendCollectionViewCell.identifire)
@@ -55,41 +58,48 @@ class FriendsCollectionView: UIView {
         return button
     }()
     
+    convenience init(isCollectionViewFull: Bool, isWithAddFriendButton: Bool) {
+        self.init()
+        self.isCollectionViewFull = isCollectionViewFull
+        setupViews(isCollectionViewFull: isCollectionViewFull, isWithAddFriendButton: isWithAddFriendButton)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupViews()
-        self.translatesAutoresizingMaskIntoConstraints = false
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupViewsWithoutButton() {
+    private func setupFriendsButton() {
         self.addSubview(labelFriendButton)
         labelFriendButton.addTarget(self, action: #selector(tapFriendButton), for: .touchUpInside)
-        self.addSubview(followersCollectionView)
- 
-        let inset = CGFloat(16)
-//
-//        label.snp.makeConstraints { make in
-//            make.top.equalToSuperview()
-//            make.leading.equalToSuperview().inset(inset)
-//        }
         
         labelFriendButton.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.leading.equalToSuperview().inset(inset)
+            make.leading.equalToSuperview().inset(16)
             make.height.equalTo(16)
-        }
-        
-        followersCollectionView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(labelFriendButton.snp.bottom).offset(inset)
         }
     }
     
-    private func setupButton() {
+    private func setupFriendsCollection(isWithFriendsButton: Bool) {
+        
+        self.addSubview(followersCollectionView)
+ 
+        followersCollectionView.snp.makeConstraints { make in
+            
+            if isWithFriendsButton {
+                make.edges.equalToSuperview()
+            } else {
+                make.leading.trailing.bottom.equalToSuperview()
+                make.top.equalTo(labelFriendButton.snp.bottom).offset(16)
+            }
+        }
+    }
+    
+    private func setupaddFriendButton() {
         self.addSubview(addFriendButton)
         addFriendButton.addTarget(self, action: #selector(tapAddFriendButton), for: .touchUpInside)
         
@@ -100,9 +110,19 @@ class FriendsCollectionView: UIView {
         }
     }
     
-    private func setupViews() {
-            setupViewsWithoutButton()
-            setupButton()
+    private func setupViews(isCollectionViewFull: Bool, isWithAddFriendButton: Bool) {
+        
+        if isCollectionViewFull {
+            setupFriendsCollection(isWithFriendsButton: isCollectionViewFull)
+        } else {
+            self.followersCollectionView.isScrollEnabled = false
+            setupFriendsButton()
+            setupFriendsCollection(isWithFriendsButton: isCollectionViewFull)
+            
+            if isWithAddFriendButton {
+                setupaddFriendButton()
+            }
+        }
     }
     
     @objc func tapAddFriendButton() {
@@ -112,13 +132,21 @@ class FriendsCollectionView: UIView {
     
     @objc func tapFriendButton() {
         animationTapButton(labelFriendButton)
-        print("tapFriendButton")
+        delegate?.tapFriendButton()
     }
 }
 
 extension FriendsCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        user?.friends.count ?? 4
+        
+        var qtyOfCells = 0
+        
+        if isCollectionViewFull! {
+            qtyOfCells = user?.friends.count ?? 8
+        } else {
+            qtyOfCells = 4
+        }
+        return qtyOfCells
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -140,9 +168,19 @@ extension FriendsCollectionView: UICollectionViewDataSource {
 extension FriendsCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        
+        
         let inset = 8
         let width = (Int(self.bounds.width) - inset*4)/1
-        let height = (Int(self.bounds.height) - inset*3-36)/4
+        var height = 0
+        if isCollectionViewFull! {
+            height = (Int(self.bounds.height) - inset*6-36)/7
+        } else {
+            height = (Int(self.bounds.height) - inset*3-36)/4
+        }
+        
+        
         return CGSize(width: width, height: height)
     }
     
