@@ -382,5 +382,25 @@ class Database {
             
         }
     }
+    
+    func sendNotificationToAddToFriends(requestingUser: User, hostUser: User) {
+        
+        let notificationArray = [AddFriendNotification(date: Date.now, userFriend: requestingUser)]
+        
+        if let docId = requestingUser.docId {
+            
+            let ref = db.collection("users").document(docId)
+            
+            ref.updateData([
+                "notificationArray": notificationArray.map {$0.dictionary}
+            ]) { err in
+                if let err = err {
+                    print("Error updating document: \(err)")
+                } else {
+                    print("Document successfully updated")
+                }
+            }
+        }
+    }
 
 }

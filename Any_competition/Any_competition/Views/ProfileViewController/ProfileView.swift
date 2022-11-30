@@ -8,7 +8,13 @@
 import UIKit
 import SnapKit
 
+protocol ProfileViewDelegate: AnyObject {
+    func tapAddToFriendButton()
+}
+
 class ProfileView: UIView {
+    
+    weak var delegate: ProfileViewDelegate?
     
     let stackView: UIStackView = {
         let stack = UIStackView()
@@ -49,6 +55,8 @@ class ProfileView: UIView {
         return stack
     }()
     
+    let addToFriebdsButton = AnyCompUIButton(title: "Добавить в друзья")
+    
     let wonGamesView = StatisticView(imageViewName: "wonGames", name: "Побед", qty: "8")
     
     let lostGamesView = StatisticView(imageViewName: "lostGames", name: "Поражений", qty: "3")
@@ -62,11 +70,11 @@ class ProfileView: UIView {
         self.friendsView = FriendsCollectionView(isCollectionViewFull: false, isWithAddFriendButton: isWithAddFriendButton)
         setupViews()
         setupProperts()
+        checkUserOrFriend(isViewForFriend: isWithAddFriendButton)
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        self.translatesAutoresizingMaskIntoConstraints = false
         
     }
     
@@ -113,7 +121,7 @@ class ProfileView: UIView {
             make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview().inset(16)
         }
-//        friendsView.backgroundColor = .tintColor
+
     }
     
     private func setupProperts() {
@@ -124,6 +132,22 @@ class ProfileView: UIView {
         
     }
     
+    private func setupAddToFriends() {
+        self.addSubview(addToFriebdsButton)
+        addToFriebdsButton.addTarget(self, action: #selector(tapAddToFriendButton), for: .touchUpInside)
+        addToFriebdsButton.snp.makeConstraints { make in
+            make.top.bottom.equalTo(photoView)
+            make.leading.equalTo(photoView.snp.trailing).inset(-32)
+            make.trailing.equalToSuperview().inset(32)
+        }
+    }
+    
+    private func checkUserOrFriend(isViewForFriend: Bool) {
+        if !isViewForFriend {
+            setupAddToFriends()
+        }
+    }
+    
     func setupUserData(user: User) {
 //        nickLabel.text = user.nick
         nameLabel.text! = user.firstName + " " + user.lastName
@@ -132,6 +156,10 @@ class ProfileView: UIView {
 //        wonGamesLabel.text! = "Победы: \(user.wonGames)"
 //        lostGamesLabel.text! = "Поражения: \(user.lostGames)"
 //        wonCupsLabel.text! = "Кубки: \(user.wonCups)"
+    }
+    
+    @objc func tapAddToFriendButton() {
+        delegate?.tapAddToFriendButton()
     }
     
 }

@@ -11,7 +11,7 @@ import SnapKit
 protocol FriendsCollectionViewDelegate: AnyObject {
     func tapAddFriendButton()
     func tapFriendButton()
-    func tapToCell()
+    func tapToCell(user: User)
 }
 
 class FriendsCollectionView: UIView {
@@ -188,7 +188,7 @@ extension FriendsCollectionView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.tapToCell()
+        delegate?.tapToCell(user: User(firstName: "a", lastName: "sdfsd", nick: "sdfsdf"))
     }
 }
 

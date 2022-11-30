@@ -20,6 +20,8 @@ class FindToAddUserViewController: UIViewController {
     var searchText: String? = nil
     
     let disposeBag = DisposeBag()
+    
+    var hostUser: User?
 
     let label = AnyCompLogoUILabel()
     
@@ -106,11 +108,11 @@ class FindToAddUserViewController: UIViewController {
 
     }
     
-    // подписка на выбранного игрока в searchTable
+    // подписка на выбранного игрока в searchTable, чтобы представить вьюконтроллер с профайлом этого игрока
     private func choosedUserObserver() {
         self.searchTable.choosedUser.subscribe { [self] user in
-            let vc = UserViewController()
-            vc.userProfileView.user = user
+            let vc = FriendViewController(hostUser: hostUser!, choosedUser: user)
+//            vc.choosedUser = user
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

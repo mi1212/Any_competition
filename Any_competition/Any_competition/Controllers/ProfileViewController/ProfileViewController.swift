@@ -22,9 +22,9 @@ class ProfileViewController: UIViewController {
     
     var isCustomBarHiden = false
     
-    var user: User? {
+    var hostUser: User? {
         didSet {
-            profileView.setupUserData(user: user!)
+            profileView.setupUserData(user: hostUser!)
             setupViews()
             
             loadingAnimationView.removeFromSuperview()
@@ -123,9 +123,9 @@ class ProfileViewController: UIViewController {
     }
     
     private func checkUser() {
-        if user != nil {
+        if hostUser != nil {
             setupViews()
-            profileView.setupUserData(user: user!)
+            profileView.setupUserData(user: hostUser!)
         } else {
             setupLoading()
         }
@@ -170,7 +170,7 @@ class ProfileViewController: UIViewController {
     
     func addObserverToUserDatabase() {
         database.userDatabase.subscribe { [self] userData in
-            self.user = userData
+            self.hostUser = userData
         }
     }
 }
@@ -215,19 +215,26 @@ class ProfileViewController: UIViewController {
 //}
 
 extension ProfileViewController: FriendsCollectionViewDelegate {
+    func tapToCell(user: User) {
+        if let hostUser = hostUser {
+            let vc = FriendViewController(hostUser: hostUser, choosedUser: user)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     func tapToCell() {
-        let vc = FriendViewController()
-        vc.user = user
-        self.navigationController?.pushViewController(vc, animated: true)
+
     }
     
     func tapFriendButton() {
         let vc = FriendsViewController()
+        vc.hostUser = hostUser
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func tapAddFriendButton() {
         let vc = FindToAddUserViewController()
+        vc.hostUser = hostUser
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

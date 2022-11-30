@@ -10,12 +10,9 @@ import SnapKit
 
 class FriendViewController: UIViewController {
     
-    var user: User? {
-        didSet {
-            profileView.setupUserData(user: user!)
-            setupViews()
-        }
-    }
+    var hostUser: User?
+    
+    var choosedUser: User?
     
     let database = Database()
     
@@ -28,23 +25,25 @@ class FriendViewController: UIViewController {
     let profileView = ProfileView(isWithAddFriendButton: false)
     
     // MARK: - viewDidLoad
+    
+    convenience init(hostUser: User, choosedUser: User) {
+        self.init()
+        self.hostUser = hostUser
+        self.choosedUser = choosedUser
+        setupViews()
+        profileView.setupUserData(user: choosedUser)
+    }
+    
+    
     override func viewDidLoad() {
         self.tabBarController?.tabBar.isHidden = true
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
-//        checkUser()
-//        setupNavigationBar()
-//        requestUserData()
-//        addObserverToUserDatabase()
-        //        self.view.addGestureRecognizer(tap)
+        self.profileView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        if isCustomBarHiden {
-//            delegate?.showCustomBarFromProfile()
-//            isCustomBarHiden.toggle()
-//        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -52,26 +51,6 @@ class FriendViewController: UIViewController {
     }
     
     // MARK: - Navigation
-    
-//    private func setupNavigationBar() {
-//        self.navigationController?.navigationBar.tintColor = .anyDarckColor
-//        
-//        let plus = UIImage(named: "bell")
-//        let gear = UIImage(named: "settings")
-//        
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-//            image: plus,
-//            style: .done,
-//            target: self,
-//            action: #selector(presentNotificationController)
-//        )
-//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-//            image: gear,
-//            style: .plain,
-//            target: self,
-//            action: #selector(presentSettingsController)
-//        )
-//    }
     
     // установка вьюх если не нужно залогиниться
     private func setupViews() {
@@ -84,70 +63,10 @@ class FriendViewController: UIViewController {
         }
         
     }
-    
-    // установка анимации загрузки
-//    private func setupLoading() {
-//        self.view.addSubview(loadingAnimationView)
-//        loadingAnimationView.layer.opacity = 1
-//        loadingAnimationView.play()
-//        NSLayoutConstraint.activate([
-//            loadingAnimationView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-//            loadingAnimationView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-//            loadingAnimationView.heightAnchor.constraint(equalToConstant: 40)
-//        ])
-//    }
-    
-//    private func checkUser() {
-//        if user != nil {
-//            setupViews()
-//            profileView.setupUserData(user: user!)
-//        } else {
-//            setupLoading()
-//        }
-//    }
-    
-//    @objc func presentNotificationController() {
-//        if !isCustomBarHiden {
-//            delegate?.hideCustomBarFromProfile()
-//            isCustomBarHiden.toggle()
-//            let vc = NotificationViewController()
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }
-//    }
-//
-//    @objc func presentSettingsController() {
-//        if !isCustomBarHiden {
-//            delegate?.hideCustomBarFromProfile()
-//            isCustomBarHiden.toggle()
-//            let vc = SettingsViewController()
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }
-//    }
-    
-    //MARK: - dismissKeyboardTap
-    
-//    private lazy var tap: UITapGestureRecognizer = {
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-//        return tap
-//    }()
-//
-//    @objc func dismissKeyboard() {
-//        view.endEditing(true)
-//    }
-    
-    // MARK: - user data
-    
-//    private func requestUserData() {
-//        if let uid = userDefaults.object(forKey: "uid") {
-//            database.getUserData(uid: uid as! String)
-//        }
-//    }
-//
-//    func addObserverToUserDatabase() {
-//        database.userDatabase.subscribe { [self] userData in
-//            self.user = userData
-//        }
-//    }
-//}
+}
 
+extension FriendViewController: ProfileViewDelegate {
+    func tapAddToFriendButton() {
+        database.sendNotificationToAddToFriends(requestingUser: choosedUser!, hostUser: hostUser!)
+    }
 }

@@ -10,7 +10,7 @@ import SnapKit
 
 class FriendsViewController: UIViewController {
 
-    var user: User? {
+    var hostUser: User? {
         didSet {
             
         }
@@ -47,6 +47,13 @@ class FriendsViewController: UIViewController {
 }
 
 extension FriendsViewController: FriendsCollectionViewDelegate {
+    func tapToCell(user: User) {
+        if let hostUser = hostUser {
+            let vc = FriendViewController(hostUser: hostUser, choosedUser: user)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     func tapAddFriendButton() {
         
     }
@@ -54,12 +61,5 @@ extension FriendsViewController: FriendsCollectionViewDelegate {
     func tapFriendButton() {
         
     }
-    
-    func tapToCell() {
-        let vc = FriendViewController()
-        vc.user = User(firstName: "Mik", lastName: "Nick", nick: "Sic")
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
     
 }
