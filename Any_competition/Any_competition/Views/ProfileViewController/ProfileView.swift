@@ -55,13 +55,19 @@ class ProfileView: UIView {
     
     let wonCupsView = StatisticView(imageViewName: "wonCups", name: "Кубков", qty: "2")
 
-    let friendsView = FriendsCollectionView(isCollectionViewFull: false, isWithAddFriendButton: true)
+    var friendsView  = FriendsCollectionView(isCollectionViewFull: false, isWithAddFriendButton: true)
+    
+    convenience init(isWithAddFriendButton: Bool){
+        self.init()
+        self.friendsView = FriendsCollectionView(isCollectionViewFull: false, isWithAddFriendButton: isWithAddFriendButton)
+        setupViews()
+        setupProperts()
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.translatesAutoresizingMaskIntoConstraints = false
-        setupViews()
-        setupProperts()
+//        self.translatesAutoresizingMaskIntoConstraints = false
+        
     }
     
     required init?(coder: NSCoder) {
@@ -111,9 +117,6 @@ class ProfileView: UIView {
     }
     
     private func setupProperts() {
-        print(self.layer.bounds)
-        print(self.layer)
-        print(self.bounds)
 //        photoView.layer.cornerRadius = self.layer.bounds.height/20
         photoView.layer.cornerRadius = 40
         statisticStack.layer.cornerRadius = 16

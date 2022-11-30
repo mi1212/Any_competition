@@ -39,7 +39,7 @@ class ProfileViewController: UIViewController {
     
     // MARK: - Views
     
-    let profileView = ProfileView()
+    let profileView = ProfileView(isWithAddFriendButton: true)
     
     let loadingAnimationView: AnimationView = {
         let animationView = AnimationView()

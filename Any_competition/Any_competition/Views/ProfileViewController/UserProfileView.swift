@@ -62,7 +62,7 @@ class UserProfileView: UIView {
 
     let wonCupsLabel = AnyCompUILabel(title: "Кубки: ", fontSize: .medium)
     
-    let friendsView = FriendsCollectionView()
+    let friendsView = FriendsCollectionView(isCollectionViewFull: false, isWithAddFriendButton: false)
 
     let addToFriendsButton = AnyCompUIButton(title: "Добавить в друзья")
     

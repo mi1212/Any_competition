@@ -25,7 +25,7 @@ class FriendViewController: UIViewController {
     
     // MARK: - Views
     
-    let profileView = ProfileView()
+    let profileView = ProfileView(isWithAddFriendButton: false)
     
     // MARK: - viewDidLoad
     override func viewDidLoad() {

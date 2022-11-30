@@ -57,7 +57,7 @@ extension FriendsViewController: FriendsCollectionViewDelegate {
     
     func tapToCell() {
         let vc = FriendViewController()
-
+        vc.user = User(firstName: "Mik", lastName: "Nick", nick: "Sic")
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
