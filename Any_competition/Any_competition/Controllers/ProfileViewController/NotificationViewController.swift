@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import SnapKit
 
 class NotificationViewController: UIViewController {
 
     let label = AnyCompLogoUILabel()
+    
+    let notificationCollectionView = NotificationCollectionView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +22,7 @@ class NotificationViewController: UIViewController {
     
     private func setupViews() {
         self.view.addSubview(label)
+        self.view.addSubview(notificationCollectionView)
         label.text = "Уведомления"
         
         NSLayoutConstraint.activate([
@@ -26,6 +30,11 @@ class NotificationViewController: UIViewController {
             label.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
             label.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
         ])
+        
+        notificationCollectionView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(label.snp.bottom).inset(-16)
+        }
     }
 
 }

@@ -12,6 +12,7 @@
 		FD04B8A72932843600E63D4C /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD04B8A62932843600E63D4C /* Inter-Regular.ttf */; };
 		FD0D008A28DDBF0200C47570 /* PlayersInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0D008928DDBF0200C47570 /* PlayersInfoTableViewCell.swift */; };
 		FD0FB29728ECBCE6000789CD /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0FB29628ECBCE6000789CD /* TestViewController.swift */; };
+		FD1B8D482938BCF000F50769 /* NotificationCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1B8D472938BCF000F50769 /* NotificationCollectionView.swift */; };
 		FD1E1FFE28F08ED1001CF0EA /* DateFormater.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1E1FFD28F08ED1001CF0EA /* DateFormater.swift */; };
 		FD1E200028F096C8001CF0EA /* PlayerDataCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1E1FFF28F096C8001CF0EA /* PlayerDataCollectionViewCell.swift */; };
 		FD1E200228F1A7A5001CF0EA /* shakeTextFieldifEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1E200128F1A7A5001CF0EA /* shakeTextFieldifEmpty.swift */; };
@@ -126,6 +127,7 @@
 		FD04B8A62932843600E63D4C /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 		FD0D008928DDBF0200C47570 /* PlayersInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersInfoTableViewCell.swift; sourceTree = "<group>"; };
 		FD0FB29628ECBCE6000789CD /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		FD1B8D472938BCF000F50769 /* NotificationCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCollectionView.swift; sourceTree = "<group>"; };
 		FD1E1FFD28F08ED1001CF0EA /* DateFormater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormater.swift; sourceTree = "<group>"; };
 		FD1E1FFF28F096C8001CF0EA /* PlayerDataCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDataCollectionViewCell.swift; sourceTree = "<group>"; };
 		FD1E200128F1A7A5001CF0EA /* shakeTextFieldifEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shakeTextFieldifEmpty.swift; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 				FD79CBD0292F813800B9A2A4 /* StatisticView.swift */,
 				FDDD6DFD28FFC41300F9A649 /* CreateUserView.swift */,
 				FD83DB072920D03400025282 /* FriendsCollectionView.swift */,
+				FD1B8D472938BCF000F50769 /* NotificationCollectionView.swift */,
 				FDF151EA292667D700A102A4 /* UserProfileView.swift */,
 			);
 			path = ProfileViewController;
@@ -760,6 +763,7 @@
 				FD94809328F4697500B31A89 /* Match.swift in Sources */,
 				FD9F36932913DC6F003CE1C6 /* AnyCompLoadinUIButton.swift in Sources */,
 				FDAC70BE293371A80001556E /* StartAnimationViewController.swift in Sources */,
+				FD1B8D482938BCF000F50769 /* NotificationCollectionView.swift in Sources */,
 				FD339E9928E34D6D000DD8F3 /* UIFont+Extention.swift in Sources */,
 				FD83DB0A2920F89000025282 /* FindToAddUserViewController.swift in Sources */,
 				FDF151E72926265500A102A4 /* AddFriendNotification.swift in Sources */,

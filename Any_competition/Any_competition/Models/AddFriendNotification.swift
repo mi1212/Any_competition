@@ -9,13 +9,13 @@ import Foundation
 
 struct AddFriendNotification: Codable, Hashable {
     
-    let date: Date
+    let date: String
     let userFriend: User // User, который просится в друзья
     
     var dictionary: [String: Any] {
         return [
             
-            "userFriend": userFriend,
+            "userFriend": userFriend.dictionary,
             "date": date,
             
         ]
@@ -29,7 +29,8 @@ struct AddFriendNotification: Codable, Hashable {
     }
     
     public static func == (lhs: AddFriendNotification, rhs: AddFriendNotification) -> Bool {
-        lhs.date == rhs.date && lhs.userFriend == rhs.userFriend
+//        lhs.date == rhs.date && lhs.userFriend == rhs.userFriend
+        lhs.userFriend == rhs.userFriend
     }
     
 }

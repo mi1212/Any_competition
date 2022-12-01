@@ -121,9 +121,6 @@ class Database {
                         }
                     }
                     usersDatabase.accept(usersArray)
-                    
-//                    delegate?.receivedAllUsers(users: usersArray)
-                    
                 } else {
                     print("error - \(error as Any)")
                 }
@@ -383,16 +380,18 @@ class Database {
         }
     }
     
-    func sendNotificationToAddToFriends(requestingUser: User, hostUser: User) {
+    
+    // отправка заявки в друзья
+    func sendNotificationToAddToFriends(requestingUser: User, receivingUser: User) {
         
-        let notificationArray = [AddFriendNotification(date: Date.now, userFriend: requestingUser)]
+        let notification = AddFriendNotification(date: Date.now.description, userFriend: requestingUser).dictionary
         
-        if let docId = requestingUser.docId {
+        if let docId = receivingUser.docId {
             
             let ref = db.collection("users").document(docId)
             
             ref.updateData([
-                "notificationArray": notificationArray.map {$0.dictionary}
+                "notificationArray": FieldValue.arrayUnion([notification])
             ]) { err in
                 if let err = err {
                     print("Error updating document: \(err)")

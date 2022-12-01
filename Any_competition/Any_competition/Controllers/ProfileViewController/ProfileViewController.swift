@@ -24,9 +24,9 @@ class ProfileViewController: UIViewController {
     
     var hostUser: User? {
         didSet {
+            addListenerToUserData()
             profileView.setupUserData(user: hostUser!)
             setupViews()
-            
             loadingAnimationView.removeFromSuperview()
         }
     }
@@ -61,7 +61,6 @@ class ProfileViewController: UIViewController {
         setupNavigationBar()
         requestUserData()
         addObserverToUserDatabase()
-        //        self.view.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -168,51 +167,21 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    private func addListenerToUserData() {
+        if let docId = hostUser?.docId {
+            database.addListenerToUser(docId)
+        }
+    }
+    
     func addObserverToUserDatabase() {
         database.userDatabase.subscribe { [self] userData in
-            self.hostUser = userData
+            print("--- user data was changed ")
+            if userData != hostUser {
+                self.hostUser = userData
+            }
         }
     }
 }
-//
-//extension ProfileViewController: DatabaseDelegate {
-//    func receivedAllUsers(users: [User]) {
-//
-//    }
-//
-//
-//    func reloadViewWithoutAnimate(user: User) {
-//        ProfileViewController.user = user
-//        loadingAnimationView.stop()
-//        loadingAnimationView.layer.opacity = 0
-//        setupViewsWithoutLogin()
-//        profileView.user = user
-////        profileView.setupData(user: ProfileViewController.user!)
-//    }
-//
-//    func animateAndReloadView(user: User) {
-//        ProfileViewController.user = user
-//
-//        profileView.setupData(user: user)
-//
-//        loadingAnimationView.removeFromSuperview()
-//
-//        UIView.animate(withDuration: 1, delay: 0) { [self] in
-//            profileView.transform = profileView.transform.translatedBy(x: self.view.layer.bounds.width, y: 0)
-//        }
-//    }
-//
-//    func alertMessage(alertMessage: String) {
-//        loadingAnimationView.removeFromSuperview()
-//        alert.message = alertMessage
-//        self.present(alert, animated: true, completion: nil)
-//    }
-//
-//    func reloadView(competitions: [Competition]) {}
-//
-//    func reloadTableCollectionView() {}
-//
-//}
 
 extension ProfileViewController: FriendsCollectionViewDelegate {
     func tapToCell(user: User) {
@@ -239,17 +208,3 @@ extension ProfileViewController: FriendsCollectionViewDelegate {
     }
 }
 
-//extension ProfileViewController: AddPlayerViewDelegate {
-//    func tapAddButton(player: User) {}
-//
-//    func tapCancelButtonAddPlayerView() {
-//        UIView.animate(withDuration: 0.2, delay: 0) { [self] in
-//            addPlayerView.layer.opacity = 0.2
-//            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 0.2, y: 0.2)
-//        } completion: { [self] _ in
-//            addPlayerView.removeFromSuperview()
-//            addPlayerView.layer.opacity = 1
-//            addPlayerView.transform = addPlayerView.transform.scaledBy(x: 1/0.2, y: 1/0.2)
-//        }
-//    }
-//}

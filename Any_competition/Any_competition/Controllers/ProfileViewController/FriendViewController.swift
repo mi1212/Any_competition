@@ -67,6 +67,6 @@ class FriendViewController: UIViewController {
 
 extension FriendViewController: ProfileViewDelegate {
     func tapAddToFriendButton() {
-        database.sendNotificationToAddToFriends(requestingUser: choosedUser!, hostUser: hostUser!)
+        database.sendNotificationToAddToFriends(requestingUser: hostUser!, receivingUser: choosedUser!)
     }
 }
