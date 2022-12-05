@@ -83,7 +83,7 @@ struct User: Identifiable, Codable, Hashable {
     }
     
     public static func == (lhs: User, rhs: User) -> Bool {
-        lhs.firstName == rhs.firstName && lhs.lastName == rhs.lastName && lhs.nick == rhs.nick 
+        lhs.firstName == rhs.firstName && lhs.lastName == rhs.lastName && lhs.nick == rhs.nick && lhs.notificationArray == rhs.notificationArray
     }
     
 }

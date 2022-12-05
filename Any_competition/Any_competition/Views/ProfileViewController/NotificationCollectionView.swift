@@ -16,17 +16,11 @@ protocol NotificationCollectionViewDelegate: AnyObject {
 
 class NotificationCollectionView: UIView {
     
-    let userDefaults = UserDefaults.standard
-    
     weak var delegate: NotificationCollectionViewDelegate?
     
-    var isCollectionViewFull: Bool?
-    
-    // MARK: - UIViews
-    
-    var user: User? {
+    var notifications = [AddFriendNotification]() {
         didSet {
-//            self.layoutIfNeeded()
+            self.notificationCollectionView.reloadData()
         }
     }
 
@@ -38,19 +32,20 @@ class NotificationCollectionView: UIView {
 //        collection.isScrollEnabled = false
         collection.delegate = self
         collection.dataSource = self
-        collection.register(FriendCollectionViewCell.self, forCellWithReuseIdentifier: FriendCollectionViewCell.identifire)
+        collection.register(NotificationCollectionViewCell.self, forCellWithReuseIdentifier: NotificationCollectionViewCell.identifire)
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
     }()
     
-//    convenience init() {
-//        self.init()
-//        
-//    }
+    convenience init(notifications: [AddFriendNotification]) {
+        self.init()
+        self.notifications = notifications
+        setupNotificationCollectionView()
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupNotificationCollectionView()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -68,20 +63,13 @@ class NotificationCollectionView: UIView {
 
 extension NotificationCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        self.notifications.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.identifire, for: indexPath)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FriendCollectionViewCell.identifire, for: indexPath) as! FriendCollectionViewCell
-//        cell.backgroundColor = .white
-        switch indexPath.row % 2 {
-        case 0: cell.contentView.backgroundColor = .anyGreenColor
-        case 1: cell.contentView.backgroundColor = .anyDarckColor
-        default:
-            cell.backgroundColor = .anyGreenColor
-        }
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NotificationCollectionViewCell.identifire, for: indexPath) as! NotificationCollectionViewCell
+        let notification = notifications[indexPath.row]
+        cell.setupCellData(notification: notification)
         return cell
     }
  

@@ -9,20 +9,29 @@ import UIKit
 import SnapKit
 
 class NotificationViewController: UIViewController {
+    
+    var hostUser: User?
 
     let label = AnyCompLogoUILabel()
     
-    let notificationCollectionView = NotificationCollectionView()
+    var notificationCollectionView: NotificationCollectionView?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    convenience init(hostUser: User) {
+        self.init()
+        self.hostUser = hostUser
+        notificationCollectionView = NotificationCollectionView(notifications: hostUser.notificationArray)
         self.view.backgroundColor = .backgroundColor
         setupViews()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    
     private func setupViews() {
         self.view.addSubview(label)
-        self.view.addSubview(notificationCollectionView)
+        self.view.addSubview(notificationCollectionView!)
         label.text = "Уведомления"
         
         NSLayoutConstraint.activate([
@@ -31,7 +40,7 @@ class NotificationViewController: UIViewController {
             label.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
         ])
         
-        notificationCollectionView.snp.makeConstraints { make in
+        notificationCollectionView!.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(label.snp.bottom).inset(-16)
         }

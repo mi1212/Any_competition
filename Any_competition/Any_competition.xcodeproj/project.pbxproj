@@ -91,6 +91,7 @@
 		FDCCA2A028DADA7F00709E80 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA29F28DADA7F00709E80 /* TabBarController.swift */; };
 		FDCCA2A228DAF97700709E80 /* AddCompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */; };
 		FDCCA2A428DAFA4600709E80 /* AnyCompUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCA2A328DAFA4600709E80 /* AnyCompUITextField.swift */; };
+		FDD8241C293908CC00DBF4CB /* NotificationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD8241B293908CC00DBF4CB /* NotificationCollectionViewCell.swift */; };
 		FDDD6DFE28FFC41300F9A649 /* CreateUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDD6DFD28FFC41300F9A649 /* CreateUserView.swift */; };
 		FDE14E2228DF15AB00005B51 /* CompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE14E2128DF15AB00005B51 /* CompetitionViewController.swift */; };
 		FDE7036128E412B500FF4F06 /* CompetitionNetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE7036028E412B500FF4F06 /* CompetitionNetView.swift */; };
@@ -210,6 +211,7 @@
 		FDCCA29F28DADA7F00709E80 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		FDCCA2A128DAF97700709E80 /* AddCompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCompetitionViewController.swift; sourceTree = "<group>"; };
 		FDCCA2A328DAFA4600709E80 /* AnyCompUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCompUITextField.swift; sourceTree = "<group>"; };
+		FDD8241B293908CC00DBF4CB /* NotificationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCollectionViewCell.swift; sourceTree = "<group>"; };
 		FDDD6DFD28FFC41300F9A649 /* CreateUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserView.swift; sourceTree = "<group>"; };
 		FDE14E2128DF15AB00005B51 /* CompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionViewController.swift; sourceTree = "<group>"; };
 		FDE7036028E412B500FF4F06 /* CompetitionNetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionNetView.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				FD5927C529112EBE00CF2E7C /* PlayersTableCollectionViewCell.swift */,
 				FD01361F291F9CDA002B344C /* SearchTableViewCell.swift */,
 				FDF1759B2934B0C700652451 /* FriendCollectionViewCell.swift */,
+				FDD8241B293908CC00DBF4CB /* NotificationCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -733,6 +736,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD83DB082920D03400025282 /* FriendsCollectionView.swift in Sources */,
+				FDD8241C293908CC00DBF4CB /* NotificationCollectionViewCell.swift in Sources */,
 				FDCCA2A228DAF97700709E80 /* AddCompetitionViewController.swift in Sources */,
 				FDCCA2A428DAFA4600709E80 /* AnyCompUITextField.swift in Sources */,
 				FD1E200028F096C8001CF0EA /* PlayerDataCollectionViewCell.swift in Sources */,

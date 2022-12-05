@@ -28,6 +28,7 @@ class ProfileViewController: UIViewController {
             profileView.setupUserData(user: hostUser!)
             setupViews()
             loadingAnimationView.removeFromSuperview()
+            setupNavigationBar()
         }
     }
     
@@ -80,15 +81,26 @@ class ProfileViewController: UIViewController {
     private func setupNavigationBar() {
         self.navigationController?.navigationBar.tintColor = .anyDarckColor
         
-        let plus = UIImage(named: "bell")
+        let bell = UIImage(named: "bell")
+        let bellWithNotification = UIImage(named: "bell+")
         let gear = UIImage(named: "settings")
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: plus,
-            style: .done,
-            target: self,
-            action: #selector(presentNotificationController)
-        )
+        if let check = hostUser?.notificationArray.isEmpty {
+            if check {
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                    image: bell,
+                    style: .done,
+                    target: self,
+                    action: #selector(presentNotificationController)
+                )
+            } else {
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                    image: bellWithNotification,
+                    style: .done,
+                    target: self,
+                    action: #selector(presentNotificationController)
+                )
+            }
+        }
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: gear,
             style: .plain,
@@ -134,7 +146,7 @@ class ProfileViewController: UIViewController {
         if !isCustomBarHiden {
             delegate?.hideCustomBarFromProfile()
             isCustomBarHiden.toggle()
-            let vc = NotificationViewController()
+            let vc = NotificationViewController(hostUser: hostUser!)
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -176,8 +188,10 @@ class ProfileViewController: UIViewController {
     func addObserverToUserDatabase() {
         database.userDatabase.subscribe { [self] userData in
             print("--- user data was changed ")
+            print(userData)
             if userData != hostUser {
                 self.hostUser = userData
+                print(self.hostUser?.notificationArray)
             }
         }
     }
