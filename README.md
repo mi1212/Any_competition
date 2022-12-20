@@ -8,3 +8,5 @@
 Посмотрим что из этого получится
 
 [🤔 concept map](https://miro.com/app/board/uXjVPW0SYJU=/) 
+
+![Screenshot](Sources/Screenshot.png)
