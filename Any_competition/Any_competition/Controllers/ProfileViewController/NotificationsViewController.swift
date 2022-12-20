@@ -58,9 +58,11 @@ extension NotificationsViewController: NotificationCollectionViewDelegate {
         
     }
     
-    func tapToCell(user: User) {
-        let vc = NotificationViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+    func tapToCell(requestingUser: User) {
+        if let hostUser = hostUser {
+            let vc = NotificationViewController(hostUser: hostUser, requestingUser: requestingUser)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     

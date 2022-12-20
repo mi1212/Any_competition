@@ -11,7 +11,7 @@ import SnapKit
 protocol NotificationCollectionViewDelegate: AnyObject {
     func tapAddFriendButton()
     func tapFriendButton()
-    func tapToCell(user: User)
+    func tapToCell(requestingUser: User)
 }
 
 class NotificationCollectionView: UIView {
@@ -90,7 +90,8 @@ extension NotificationCollectionView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.tapToCell(user: User(firstName: "a", lastName: "sdfsd", nick: "sdfsdf"))
+        let requestingUser = notifications[indexPath.row].userFriend
+        delegate?.tapToCell(requestingUser: requestingUser)
     }
 }
 

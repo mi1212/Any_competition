@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 //class User: Player {
 //    var docId: String?
@@ -53,7 +54,7 @@ struct User: Identifiable, Codable, Hashable {
     var docId: String?
     var id: String?
     var mail: String = ""
-    var friends = [User]()
+    var friends = [DocumentReference]()
     var playedGames: Int = 0
     var wonGames: Int = 0
     var lostGames: Int = 0
@@ -67,7 +68,7 @@ struct User: Identifiable, Codable, Hashable {
             "nick": nick,
             "id": id,
             "mail": mail,
-            "friends": friends.map{ $0.dictionary },
+            "friends": friends.map{ $0 },
             "playedGames": playedGames,
             "wonGames": wonGames,
             "lostGames": lostGames,

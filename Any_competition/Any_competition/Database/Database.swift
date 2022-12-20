@@ -168,7 +168,7 @@ class Database {
 //        
 //    }
     
-    //      запрос данных пользователя Firebase Database
+//      запрос данных пользователя Firebase Database
     func getUserData(uid: String) {
         print("--- get UserData from Firestore DataBase")
         
@@ -247,7 +247,7 @@ class Database {
              "lastName": tempUser.lastName,
              "nick" : tempUser.nick,
              "mail" : tempUser.mail,
-             "friends": tempUser.friends.map{ $0.dictionary },
+             "friends": tempUser.friends.map{ $0 },
              "playedGames": tempUser.playedGames,
              "wonGames": tempUser.wonGames,
              "lostGames": tempUser.lostGames,
@@ -259,6 +259,52 @@ class Database {
              }
          }
      }
+    
+//      отправка заявки в друзья
+    func sendNotificationToAddToFriends(requestingUser: User, receivingUser: User) {
+        
+        let notification = AddFriendNotification(date: Date.now.description, userFriend: requestingUser)
+        
+        if let docId = receivingUser.docId {
+            
+            let ref = db.collection("users").document(docId)
+            
+            ref.updateData([
+                "notificationArray": FieldValue.arrayUnion([notification.dictionary])
+            ]) { err in
+                if let err = err {
+                    print("Error updating document: \(err)")
+                } else {
+                    print("Document successfully updated")
+                }
+            }
+        }
+    }
+
+    //      ответы на заявку в друзья
+    //      "принять"
+        func acceptFriendRequesr(requestingUser: User, receivingUser: User) {
+
+            var userRef: DocumentReference!
+            
+            if let docId = receivingUser.docId {
+                
+                let ref = db.collection("users").document(docId)
+                
+                userRef = db.document("users/\(docId)")
+                
+                ref.updateData([
+
+                    "friends": userRef
+                ]) { err in
+                    if let err = err {
+                        print("Error updating document: \(err)")
+                    } else {
+                        print("Document successfully updated")
+                    }
+                }
+            }
+        }
 
 //MARK: - listeners
 //      метод добавляет слушателя для всей коллекции соревнований
@@ -300,20 +346,6 @@ class Database {
         })
         
     }
-    
-//      метод удаляет слушателя для всей коллекции соревнований
-//    func removeListenerToCompetitionCollection() {
-//        print("--- remove listener to collection competitions")
-//
-//        let competitions = [Competition]()
-//
-////        let ref = db.collection("competitions").whereField("accessUsersIdArray", arrayContainsAny: [ProfileViewController.user?.id]).addSnapshotListener({ querySnapshot, error in
-//
-////        }).remove()
-//
-//        self.competitionsDatabase.accept(competitions)
-//    }
-    
 //      метод добавляет слушателя для документа
     func addListenerToCompetition(_ competitionId: String) {
         
@@ -346,7 +378,7 @@ class Database {
             }
         }
     }
-    
+//      метод добавляет слушателя для документа
     func addListenerToUser(_ docId: String) {
         print("--- added listener to user")
         
@@ -379,27 +411,4 @@ class Database {
             
         }
     }
-    
-    
-    // отправка заявки в друзья
-    func sendNotificationToAddToFriends(requestingUser: User, receivingUser: User) {
-        
-        let notification = AddFriendNotification(date: Date.now.description, userFriend: requestingUser).dictionary
-        
-        if let docId = receivingUser.docId {
-            
-            let ref = db.collection("users").document(docId)
-            
-            ref.updateData([
-                "notificationArray": FieldValue.arrayUnion([notification])
-            ]) { err in
-                if let err = err {
-                    print("Error updating document: \(err)")
-                } else {
-                    print("Document successfully updated")
-                }
-            }
-        }
-    }
-
 }
