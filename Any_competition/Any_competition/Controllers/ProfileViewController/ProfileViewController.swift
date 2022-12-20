@@ -146,7 +146,7 @@ class ProfileViewController: UIViewController {
         if !isCustomBarHiden {
             delegate?.hideCustomBarFromProfile()
             isCustomBarHiden.toggle()
-            let vc = NotificationViewController(hostUser: hostUser!)
+            let vc = NotificationsViewController(hostUser: hostUser!)
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

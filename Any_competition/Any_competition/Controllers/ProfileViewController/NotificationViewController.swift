@@ -2,48 +2,42 @@
 //  NotificationViewController.swift
 //  Any_competition
 //
-//  Created by Mikhail Chuparnov on 16.11.2022.
+//  Created by Mikhail Chuparnov on 20.12.2022.
 //
 
 import UIKit
 import SnapKit
 
 class NotificationViewController: UIViewController {
-    
-    var hostUser: User?
 
-    let label = AnyCompLogoUILabel()
+    let acceptButton = AnyCompUIButton(title: "принять")
     
-    var notificationCollectionView: NotificationCollectionView?
-    
-    convenience init(hostUser: User) {
-        self.init()
-        self.hostUser = hostUser
-        notificationCollectionView = NotificationCollectionView(notifications: hostUser.notificationArray)
-        self.view.backgroundColor = .backgroundColor
-        setupViews()
-    }
+    let declineButton = AnyCompUIButton(title: "отклонить")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    }
-    
-    private func setupViews() {
-        self.view.addSubview(label)
-        self.view.addSubview(notificationCollectionView!)
-        label.text = "Уведомления"
-        
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            label.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            label.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-        ])
-        
-        notificationCollectionView!.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(label.snp.bottom).inset(-16)
-        }
+        self.view.backgroundColor = .yellow
+        declineButton.backgroundColor = .systemPink
+        setupLayout()
     }
 
+    private func setupLayout() {
+        self.view.addSubview(acceptButton)
+        self.view.addSubview(declineButton)
+        
+        let inset = 16
+        
+        acceptButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(inset)
+            make.height.equalTo(64)
+        }
+        
+        declineButton.snp.makeConstraints { make in
+            make.top.equalTo(acceptButton.snp.bottom).inset(-16)
+            make.leading.trailing.equalToSuperview().inset(inset)
+            make.height.equalTo(64)
+        }
+    }
+    
 }

@@ -90,7 +90,7 @@ extension NotificationCollectionView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        delegate?.tapToCell(user: User(firstName: "a", lastName: "sdfsd", nick: "sdfsdf"))
+        delegate?.tapToCell(user: User(firstName: "a", lastName: "sdfsd", nick: "sdfsdf"))
     }
 }
 
