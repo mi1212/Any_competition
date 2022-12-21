@@ -143,7 +143,7 @@ extension FriendsCollectionView: UICollectionViewDataSource {
         var qtyOfCells = 0
         
         if isCollectionViewFull! {
-            qtyOfCells = user?.friends.count ?? 8
+            qtyOfCells = user?.friends?.count ?? 8
         } else {
             qtyOfCells = 4
         }
