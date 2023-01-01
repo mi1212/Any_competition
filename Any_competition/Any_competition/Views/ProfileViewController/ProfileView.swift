@@ -82,7 +82,6 @@ class ProfileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     private func setupViews() {
         self.addSubview(photoView)
         self.addSubview(nameLabel)
@@ -125,7 +124,6 @@ class ProfileView: UIView {
     }
     
     private func setupProperts() {
-//        photoView.layer.cornerRadius = self.layer.bounds.height/20
         photoView.layer.cornerRadius = 40
         statisticStack.layer.cornerRadius = 16
         
@@ -149,13 +147,12 @@ class ProfileView: UIView {
     }
     
     func setupUserData(user: User) {
-//        nickLabel.text = user.nick
         nameLabel.text! = user.firstName + " " + user.lastName
-//        lastNameLabel.text! = user.lastName
-//        playedGamesLabel.text! = "Игры: \(user.playedGames)"
-//        wonGamesLabel.text! = "Победы: \(user.wonGames)"
-//        lostGamesLabel.text! = "Поражения: \(user.lostGames)"
-//        wonCupsLabel.text! = "Кубки: \(user.wonCups)"
+        wonGamesView.qtyLabel.text! = "\(user.wonGames)"
+        lostGamesView.qtyLabel.text! = "\(user.lostGames)"
+        wonCupsView.qtyLabel.text! = "\(user.wonCups)"
+        friendsView.user = user
+        
     }
     
     @objc func tapAddToFriendButton() {

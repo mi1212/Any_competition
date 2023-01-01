@@ -129,47 +129,7 @@ class Database {
         }
     
 //      запрос данных пользователя Firebase Database
-//    func getUserData(uid: String, isReloadView: Bool) {
-//        print("--- get UserData from Firestore DataBase")
-//        
-//        let docRef = Firestore.firestore().collection("users")
-//        
-//        docRef.getDocuments() { [self] snapshotData, error in
-//            print("--- receive UserData from dataBase")
-//            if snapshotData != nil {
-//                if snapshotData?.documents.count != 0 {
-//                    for i in 0...(snapshotData?.documents.count)!-1 {
-//                        var json = snapshotData?.documents[i].data()
-//                        if json!["id"] as! String == uid {
-//                            
-//                            json?["docId"] = snapshotData?.documents[i].documentID
-//                            
-//                            do {
-//                                let data = try JSONSerialization.data(withJSONObject: json! as Any)
-//                                
-//                                let tempUser = try self.decoder.decode(User.self, from: data)
-//
-//                                if isReloadView {
-//                                    delegate?.animateAndReloadView(user: tempUser)
-//                                } else {
-//                                    delegate?.reloadViewWithoutAnimate(user: tempUser)
-//                                }
-//                                
-//                            } catch {
-//                                print("an error occurred", error)
-//                            }
-//                        }
-//                    }
-//                }
-//            } else {
-//                print("error - \(error as Any)")
-//            }
-//        }
-//        
-//    }
-    
-//      запрос данных пользователя Firebase Database
-    func getUserData(uid: String) {
+    func getUserData(uid: String, completion: @escaping (User) -> Void) {
         print("--- get UserData from Firestore DataBase")
         
         let docRef = Firestore.firestore().collection("users")
@@ -189,7 +149,9 @@ class Database {
                                 
                                 let user = try self.decoder.decode(User.self, from: data)
                                 
-                                userDatabase.accept(user)
+//                                userDatabase.accept(user)
+                                
+                                completion(user)
                                 
                             } catch {
                                 print("an error occurred", error)
@@ -281,29 +243,42 @@ class Database {
         }
     }
 
-    //      ответы на заявку в друзья
-    //      "принять"
+//      ответы на заявку в друзья
+//      "принять"
         func acceptFriendRequesr(requestingUser: User, receivingUser: User) {
-
-            var userRef: DocumentReference!
             
-            if let docId = receivingUser.docId {
-                
-                let ref = db.collection("users").document(docId)
-                
-                userRef = db.document("users/\(docId)")
-                
-                ref.updateData([
+            var friendDocId: String?
+            
+            if let frienduid = requestingUser.id {
+            
+                getUserData(uid: frienduid) { user in
+                    
+                    friendDocId = user.docId
+                    
+                    if let docId = receivingUser.docId, let friendDocId = friendDocId {
+                        
+                        let ref = self.db.collection("users").document(docId)
+                        
+                        var friendArray = receivingUser.friends
+                        
+                        friendArray?.append(friendDocId)
+                        
+                        ref.updateData([
 
-                    "friends": userRef
-                ]) { err in
-                    if let err = err {
-                        print("Error updating document: \(err)")
-                    } else {
-                        print("Document successfully updated")
+                            "friends": friendArray
+                            
+                        ]) { err in
+                            if let err = err {
+                                print("Error updating document: \(err)")
+                            } else {
+                                print("Document successfully updated")
+                            }
+                        }
                     }
                 }
             }
+            
+
         }
 
 //MARK: - listeners

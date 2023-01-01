@@ -145,21 +145,17 @@ extension FriendsCollectionView: UICollectionViewDataSource {
         if isCollectionViewFull! {
             qtyOfCells = user?.friends?.count ?? 8
         } else {
-            qtyOfCells = 4
+            qtyOfCells = user?.friends?.count ?? 4
         }
         return qtyOfCells
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.identifire, for: indexPath)
+        //        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.identifire, for: indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FriendCollectionViewCell.identifire, for: indexPath) as! FriendCollectionViewCell
         cell.backgroundColor = .white
-//        switch indexPath.row % 2 {
-//        case 0: cell.contentView.backgroundColor = .anyGreenColor
-//        case 1: cell.contentView.backgroundColor = .anyDarckColor
-//        default:
-//            cell.backgroundColor = .anyGreenColor
-//        }
+
+        cell.nickLabel.text = user?.friends?[indexPath.row]
         
         return cell
     }

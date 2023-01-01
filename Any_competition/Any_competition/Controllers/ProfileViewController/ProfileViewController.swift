@@ -61,7 +61,7 @@ class ProfileViewController: UIViewController {
         checkUser()
         setupNavigationBar()
         requestUserData()
-        addObserverToUserDatabase()
+//        addObserverToUserDatabase()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -175,7 +175,9 @@ class ProfileViewController: UIViewController {
     
     private func requestUserData() {
         if let uid = userDefaults.object(forKey: "uid") {
-            database.getUserData(uid: uid as! String)
+            database.getUserData(uid: uid as! String) { [self] user in
+                hostUser = user
+            }
         }
     }
     

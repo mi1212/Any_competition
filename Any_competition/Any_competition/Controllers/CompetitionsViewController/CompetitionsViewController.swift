@@ -129,7 +129,9 @@ class CompetitionsViewController: UIViewController {
     
     private func requestUserData() {
         if let uid = userDefaults.object(forKey: "uid") {
-            database.getUserData(uid: uid as! String)
+            database.getUserData(uid: uid as! String) {_ in 
+                
+            }
         }
     }
     

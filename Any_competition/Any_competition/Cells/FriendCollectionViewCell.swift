@@ -20,9 +20,9 @@ class FriendCollectionViewCell: UICollectionViewCell {
         return image
     }()
     
-    let nameLabel = AnyCompUILabel(title: "John Doe", fontSize: .medium)
+    var nameLabel = AnyCompUILabel(title: "John Doe", fontSize: .medium)
     
-    let nickLabel = AnyCompUILabel(title: "Some nick", fontSize: .small)
+    var nickLabel = AnyCompUILabel(title: "Some nick", fontSize: .small)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
